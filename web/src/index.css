@@ -1,0 +1,42 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+html,
+body{
+  background-color: #222222;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+@layer components {
+  .container {
+    @apply flex flex-col w-screen min-h-40p h-[14vh] max-h-[100px]
+          fixed top-[3%] left-0 text-2xl
+  }
+  .navbar {
+    @apply flex flex-row items-center justify-evenly
+            h-1/10 min-h-[40px] w-screen bg-ral-3000 z-10
+  }
+  .navItem {
+    @apply flex flex-row items-center cursor-pointer w-fit
+          border-b-2 border-b-ral-3000 text-silver hover:scale-[1.025]
+          duration-150 active:scale-[0.975]
+  }
+  .navItemActive{
+    @apply navItem border-b-gold text-gold
+  }
+  .logo {
+    @apply h-32 w-[115px] pt-1
+  }
+  .line {
+    @apply bg-gold h-3 w-screen z-[-1] border-y-4 border-y-ral-3000
+  }
+}
