@@ -1,21 +1,23 @@
-import { Link, routes } from '@redwoodjs/router'
+import React, { Component } from 'react'
 import { MetaTags } from '@redwoodjs/web'
 
-const FahrzeugePage = () => {
-  return (
-    <>
-      <MetaTags title="Fahrzeuge" description="Fahrzeuge page" />
+import UnderConstruction from 'src/components/UnderConstruction/UnderConstruction'
 
-      <h1>FahrzeugePage</h1>
-      <p>
-        Find me in <code>./web/src/pages/FahrzeugePage/FahrzeugePage.tsx</code>
-      </p>
-      <p>
-        My default route is named <code>fahrzeuge</code>, link to me with `
-        <Link to={routes.fahrzeuge()}>Fahrzeuge</Link>`
-      </p>
-    </>
-  )
+type Props = {}
+
+type State = {}
+
+export default class FahrzeugePage extends Component<Props, State> {
+  state = {}
+
+  render() {
+    return (
+      <>
+        <MetaTags title="Fahrzeuge" description="Fahrzeuge page" />
+        <div className="page">
+          <UnderConstruction/>
+        </div>
+      </>
+    )
+  }
 }
-
-export default FahrzeugePage

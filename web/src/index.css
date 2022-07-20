@@ -4,8 +4,8 @@
 
 html,
 body{
-  background-color: #222222;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  background-color: #ffffff;
+  font-family: Poppins;
 }
 
 *,
@@ -16,27 +16,41 @@ body{
   padding: 0;
 }
 
+h1{
+  font-size: xx-large;
+}
+
 @layer components {
+  .page {
+    @apply flex flex-col pt-[20vh] overflow-scroll
+  }
   .container {
-    @apply flex flex-col w-screen min-h-40p h-[14vh] max-h-[100px]
-          fixed top-[3%] left-0 text-2xl
+    @apply flex flex-col w-screen max-w-full h-[15vh]
+          fixed top-0 left-0 text-2xl pb-[1vh] pt-[6vh] bg-gray-900
   }
   .navbar {
     @apply flex flex-row items-center justify-evenly
-            h-1/10 min-h-[40px] w-screen bg-ral-3000 z-10
+            h-[10vh] min-h-[40px] pb-[5vh] w-screen
   }
   .navItem {
     @apply flex flex-row items-center cursor-pointer w-fit
-          border-b-2 border-b-ral-3000 text-silver hover:scale-[1.025]
+        text-silver hover:scale-[1.025]
           duration-150 active:scale-[0.975]
+        border-b-ral-3000
   }
   .navItemActive{
-    @apply navItem border-b-gold text-gold
+    @apply navItem  text-ral-3000 border-b-2
   }
   .logo {
-    @apply h-32 w-[115px] pt-1
+    @apply h-[20vh] w-[19vh] mt-[4%]
   }
   .line {
-    @apply bg-gold h-3 w-screen z-[-1] border-y-4 border-y-ral-3000
+    @apply h-10 bg-silver w-screen z-[-1] border-y-8 border-y-ral-3020
+  }
+  .underConstruction{
+    @apply ml-3 mt-0
+  }
+  .dot{
+    @apply rounded-full h-5 w-5 opacity-50 bg-white
   }
 }

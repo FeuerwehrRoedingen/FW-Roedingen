@@ -23,40 +23,39 @@ export default class Header extends Component<Props, State> {
     }
   }
 
-  openMenu = () => {
-    this.setState({showMenu: true});
-  }
-  closeMenu = () => {
-    this.setState({showMenu: false});
+  openInternal = () => {
+    //navigate(routes.internal());
   }
 
   render() {
-    const items = isBrowser ?
-    <nav className="navbar">
-      <NavItem to={routes.home()}           title='Home' icon={IoHomeOutline} exact/>
-      <NavItem to={routes.uebungsdienst()}  title='Übungsdienst' icon={GiFireAxe}/>
-      <NavItem to={routes.einsaetze()}      title='Einsätze' icon={GiFireShield} />
-      <NavItem to={routes.fahrzeuge()}      title='Fahrzeuge' icon={TbFiretruck}/>
-      <NavItem to={routes.about()}          title='Das sind wir' icon={IoIosPeople} />
-      <img
-        src="img/Logo.png"
-        className="logo"
-        onClick={() => navigate(routes.internal())}
-      />
-    </nav> :
-    <nav className="navbarMobile">
-      <IoMenuSharp onClick={this.openMenu} className="" size='40px'/>
-      <div className="">
-        <img src="img/Logo.png"/>
-      </div>
-    </nav>;
+    const navbar =
+      <nav className="navbar">
+        <NavItem to={routes.home()}           title='Home' icon={IoHomeOutline} exact/>
+        <NavItem to={routes.uebungsdienst()}  title='Übungsdienst' icon={GiFireAxe}/>
+        <NavItem to={routes.einsaetze()}      title='Einsätze' icon={GiFireShield} />
+        <NavItem to={routes.fahrzeuge()}      title='Fahrzeuge' icon={TbFiretruck}/>
+        <NavItem to={routes.about()}          title='Das sind wir' icon={IoIosPeople} />
+        <img
+          src="img/Logo.png"
+          className="logo"
+          onClick={this.openInternal}
+        />
+      </nav>
 
 
     return (
       <nav className="container">
-        <div className="line"/>
-          {items}
-        <div className="line"/>
+        {navbar}
+        <div className='bg-ral-3000 z-[-1] ' >
+          <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="45">
+            <defs>
+              <pattern id="pinstripeL" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
+                <line x1="15" y1="30" x2="15" y2="0" stroke="#ff0" stroke-width="15" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#pinstripeL)" />
+          </svg>
+        </div>
       </nav>
     )
   }
@@ -73,8 +72,7 @@ function NavItem(props: InferProps<ItemProps>){
   const isActive = props.exact ? location.pathname === props.to : location.pathname.startsWith(props.to);
   return (
     <div className={ isActive ? "navItemActive": "navItem"} onClick={()=>navigate(props.to)}>
-      {props.title}
-      <props.icon style={{marginLeft: '5px'}} size='30px'/>
+      {isBrowser ? props.title: <props.icon/>}
     </div>
   )
 }

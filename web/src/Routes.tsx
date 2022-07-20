@@ -1,5 +1,7 @@
 import { Router, Route, Set } from '@redwoodjs/router'
+
 import PageLayout from 'src/layouts/PageLayout/PageLayout'
+import NotFoundPage from './pages/NotFoundPage'
 
 const Routes = () => {
   return (
