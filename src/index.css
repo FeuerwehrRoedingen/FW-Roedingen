@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body{
+  background-color: #ffffff;
+  font-family: Poppins;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1{
+  font-size: xx-large;
+}
+
+@layer components {
+  .page {
+    @apply flex flex-col pt-[20vh] overflow-scroll
+  }
+  .container {
+    @apply flex flex-col w-screen max-w-full h-[15vh]
+          fixed top-0 left-0 text-2xl pb-[1vh] pt-[6vh] bg-gray-900
+  }
+  .navbar {
+    @apply flex flex-row items-center justify-evenly
+            h-[10vh] min-h-[40px] pb-[5vh] w-screen
+  }
+  .navItem {
+    @apply flex flex-row items-center cursor-pointer w-fit
+        text-silver hover:scale-[1.025]
+          duration-150 active:scale-[0.975]
+        border-b-ral-3000
+  }
+  .navItemActive{
+    @apply navItem  text-ral-3000 border-b-2
+  }
+  .logo {
+    @apply h-[20vh] w-[19vh] mt-[4%]
+  }
+  .line {
+    @apply h-10 bg-silver w-screen z-[-1] border-y-8 border-y-ral-3020
+  }
+  .underConstruction{
+    @apply ml-3 mt-0
+  }
+  .dot{
+    @apply rounded-full h-5 w-5 opacity-50 bg-white
+  }
+}
