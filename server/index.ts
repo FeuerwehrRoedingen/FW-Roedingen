@@ -2,8 +2,10 @@ import { createServer, IncomingMessage, ServerResponse } from 'http';
 import { parse } from 'url';
 import next from 'next';
 
+import Database from './Database';
+
 const dev = process.env.NODE_ENV !== 'production'
-const hostname = 'localhost'
+const hostname = dev ? 'localhost' : 'feuerwehr-rödingen.de';
 const port = 8433
 // when using middleware `hostname` and `port` must be provided below
 const app = next({ dev, hostname, port })
