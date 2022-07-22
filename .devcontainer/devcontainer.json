@@ -1,0 +1,27 @@
+{
+	"name": "FW-Rödingen",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": { 
+			"VARIANT": "16-bullseye"
+		}
+	},
+	"runArgs": ["--cap-add=NET_ADMIN", "--cap-add=NET_RAW", "--device=/dev/net/tun"],
+	"initializeCommand": "bash .devcontainer/save-config.sh",
+	"postStartCommand": "bash .devcontainer/start-openvpn.sh",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"amazonwebservices.aws-toolkit-vscode",
+				"mgmcdermott.vscode-language-babel",
+				"dbaeumer.vscode-eslint",
+				"IronGeek.vscode-env",
+				"Prisma.prisma",
+				"bradlc.vscode-tailwindcss"
+			]
+		}
+	},
+	"features": {
+		"aws-cli": "latest"
+	}
+}
