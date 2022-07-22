@@ -18,4 +18,4 @@ if [ "$(id -u)" != "0" ]; then
 fi
 
 # Start up the VPN client using the config stored in vpnconfig.ovpn by save-config.sh
-nohup ${sudo_cmd} /bin/sh -c "openvpn --config vpnconfig.ovpn --log openvpn.log &" | tee openvpn-launch.log
+nohup ${sudo_cmd} /bin/sh -c "openvpn --config vpnconfig.ovpn --auth-user-pass <(echo -e "opvn_user\novpn_pass") --log openvpn.log &" | tee openvpn-launch.log
