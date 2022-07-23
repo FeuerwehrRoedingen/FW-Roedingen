@@ -8,7 +8,10 @@ cd "$( dirname "${BASH_SOURCE[0]}" )"
 mkdir -p openvpn-tmp
 cd openvpn-tmp
 
-# Save the configuration from the secret if it is present
+# Save the secrets into files
 if [ ! -z "${OPENVPN_CONFIG}" ]; then 
     echo "${OPENVPN_CONFIG}" > vpnconfig.ovpn
+fi
+if [ ! -z "${OPENVPN_CREDENTIALS}" ]; then
+    echo "${OPENVPN_CREDENTIALS}" > credentials.conf
 fi

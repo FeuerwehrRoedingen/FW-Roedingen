@@ -34,9 +34,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-# OpenVPN
-openvpn-tmp
-
 #amplify-do-not-edit-begin
 amplify/\#current-cloud-backend
 amplify/.config/local-*
