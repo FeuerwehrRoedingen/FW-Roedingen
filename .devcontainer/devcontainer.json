@@ -7,8 +7,7 @@
 		}
 	},
 	"runArgs": ["--cap-add=NET_ADMIN", "--cap-add=NET_RAW", "--device=/dev/net/tun"],
-	"initializeCommand": "bash .devcontainer/save-config.sh",
-	//"postStartCommand": "bash .devcontainer/start-openvpn.sh",
+	"postStartCommand": "bash .devcontainer/tailscaled start && tailscale up --accept-routes --netfilter-mode=nodivert",
 	"customizations": {
 		"vscode": {
 			"extensions": [
