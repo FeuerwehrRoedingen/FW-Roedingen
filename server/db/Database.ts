@@ -1,11 +1,17 @@
 import { PrismaClient } from '@prisma/client'
 import type { User } from '@prisma/client';
 
-export const database = new PrismaClient();
+export let database: PrismaClient;
 
-export async function connect(){
-  return database.$connect();
+if (process.env.NODE_ENV === 'production') {
+  database = new PrismaClient();
+} else {
+  if (!global.database) {
+    global.database = new PrismaClient();
+  }
+  database = global.database;
 }
+
 
 export async function getUser(username: string){
   return new Promise<User|null>(async function(){

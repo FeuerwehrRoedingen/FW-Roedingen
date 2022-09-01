@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon",
+    "dev": "next dev",
     "build": "next build",
-    "start": "NODE_ENV=production ts-node --project tsconfig.server.json server/index.ts",
+    "start": "next start",
     "lint": "next lint"
   },
   "prisma": {
@@ -22,14 +22,17 @@
     "next-auth": "^4.10.2",
     "nodemailer": "^6.7.7",
     "react": "18.2.0",
+    "react-calendar": "^3.7.0",
     "react-device-detect": "^2.2.2",
     "react-dom": "18.2.0",
-    "react-icons": "^4.4.0"
+    "react-icons": "^4.4.0",
+    "react-tooltip": "^4.2.21"
   },
   "devDependencies": {
     "@types/node": "18.0.6",
     "@types/nodemailer": "^6.4.4",
     "@types/react": "18.0.15",
+    "@types/react-calendar": "^3.5.2",
     "@types/react-dom": "18.0.6",
     "autoprefixer": "^10.4.7",
     "eslint": "8.20.0",
