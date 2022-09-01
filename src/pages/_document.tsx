@@ -11,7 +11,7 @@ export default class Doc extends Document {
     return (
       <Html>
         <Head >
-          <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+          <link href="https://fonts.googleapis.com/css?family=Poppins&display=optional" rel='stylesheet' />
         </Head>
         <body>
           <Main />

@@ -20,9 +20,13 @@ h1{
   font-size: xx-large;
 }
 
+.loginForm {
+  box-shadow: 5px 5px 30px 5px rgb(187 30 16), -5px -5px 30px 5px rgb(255 255 0);
+}
+
 @layer components {
   .page {
-    @apply flex flex-col pt-[20vh] overflow-scroll
+    @apply flex flex-col pt-[20vh] overflow-hidden h-screen bg-gray-900
   }
   .container {
     @apply flex flex-col w-screen max-w-full h-[15vh]
@@ -42,7 +46,7 @@ h1{
     @apply navItem  text-ral-3000 border-b-2
   }
   .logo {
-    @apply h-[20vh] w-[19vh] mt-[4%]
+    @apply h-[19vh] w-[18vh] mt-[7vh]
   }
   .line {
     @apply h-10 bg-silver w-screen z-[-1] border-y-8 border-y-ral-3020
@@ -52,5 +56,8 @@ h1{
   }
   .dot{
     @apply rounded-full h-5 w-5 opacity-50 bg-white
+  }
+  .loginForm {
+    @apply w-[60vw] h-[60vh] bg-[#222222] rounded-[30px]
   }
 }

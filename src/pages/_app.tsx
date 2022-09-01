@@ -3,7 +3,10 @@ import Header from '../components/Header'
 
 import '../index.css'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps, ...appProps }: AppProps) {
+  if(appProps.router.pathname.startsWith('/admin')){
+    return <><Component {...pageProps}/></>
+  }
   return (
     <>
       <Header/>

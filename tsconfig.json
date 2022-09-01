@@ -15,7 +15,11 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2015"
+    "target": "es2015",
+    "paths": {
+      "src/*": ["./src/*"],
+      "server/*": ["./server/*"]
+    }
   },
   "include": [
     "src",

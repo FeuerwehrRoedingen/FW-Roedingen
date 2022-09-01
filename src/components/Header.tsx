@@ -7,16 +7,18 @@ import { IoIosPeople } from 'react-icons/io';
 import { isBrowser } from 'react-device-detect';
 import { InferProps } from 'prop-types';
 import type  { IconType } from 'react-icons';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter, withRouter } from 'next/router';
 import Link from 'next/link';
 //Files
 
-type Props = {}
+type Props = {
+  router: NextRouter;
+}
 type State = {
   showMenu: boolean;
 }
 
-export default class Header extends Component<Props, State> {
+class Header extends Component<Props, State> {
   constructor(props: Props){
     super(props);
     this.state = {
@@ -25,7 +27,7 @@ export default class Header extends Component<Props, State> {
   }
 
   openInternal = () => {
-    //navigate(routes.internal());
+    this.props.router.push('/admin')
   }
 
   render() {
@@ -61,6 +63,7 @@ export default class Header extends Component<Props, State> {
     )
   }
 }
+export default withRouter(Header);
 
 type ItemProps = {
   exact: boolean;

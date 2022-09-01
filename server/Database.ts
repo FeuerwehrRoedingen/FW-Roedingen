@@ -1,4 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
+import { User } from './prisma/types';
 
 export default class Database{
   prisma?: PrismaClient;
@@ -18,4 +19,10 @@ export default class Database{
     await this.prisma!.$disconnect();
     return Promise.resolve();
   }
+}
+
+export async function getUser(username: string){
+  return new Promise<User|null>(async function(){
+    
+  })
 }

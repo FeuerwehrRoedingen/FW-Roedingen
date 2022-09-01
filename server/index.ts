@@ -1,6 +1,7 @@
 import { createServer, IncomingMessage, ServerResponse } from 'http';
 import { parse } from 'url';
 import next from 'next';
+import { exec } from 'child_process';
 
 import Database from './Database';
 
@@ -12,6 +13,11 @@ const app = next({ dev, hostname, port })
 const handle = app.getRequestHandler()
 
 async function bootstrap(){
+  //start prisma studio
+  exec("npx prisma studio --browser none", log => console.log(`\x1b[35mchild_process \x1b[0m- ${log}`))
+  //startup DB
+  //TODO
+
   await app.prepare();
   try{
     let server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
@@ -31,6 +37,9 @@ async function bootstrap(){
   }
   catch(error){
     //error creating server
+    if(dev){
+      console.log(error)
+    }
   }
 }
 bootstrap();
