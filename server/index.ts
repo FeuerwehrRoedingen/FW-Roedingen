@@ -3,7 +3,7 @@ import { parse } from 'url';
 import next from 'next';
 import { exec } from 'child_process';
 
-import Database from './Database';
+import { connect, database } from './db/Database';
 
 const dev = process.env.NODE_ENV !== 'production'
 const hostname = dev ? 'localhost' : 'feuerwehr-rödingen.de';
@@ -14,10 +14,16 @@ const handle = app.getRequestHandler()
 
 async function bootstrap(){
   //start prisma studio
-  exec("npx prisma studio --browser none", log => console.log(`\x1b[35mchild_process \x1b[0m- ${log}`))
-  //startup DB
-  //TODO
-
+  exec("npx prisma studio --browser none", (error, stdout, stderr) => {
+    if(error){
+      throw new Error(error.message);
+    }
+    console.log(`\x1b[35mchild_process \x1b[0m- ${stdout}`)
+    console.error(`\x1b[35mchild_process \x1b[31mError \x1b[0m- ${stderr}`)
+  })
+  //start Database
+  await connect();
+  //start app
   await app.prepare();
   try{
     let server = createServer(async (req: IncomingMessage, res: ServerResponse) => {
@@ -32,13 +38,12 @@ async function bootstrap(){
       }
     })
     server.listen(port, ()=>{
-      console.log('\x1b[32mready \x1b[0m- started server on url: https://localhost:' + port);
+      console.log('\x1b[32mready \x1b[0m- started server on url: http://localhost:' + port);
     })
   }
   catch(error){
-    //error creating server
     if(dev){
-      console.log(error)
+      console.log(`\x1b[31mError \x1b[0m- ${error}`)
     }
   }
 }
