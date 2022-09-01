@@ -46,7 +46,7 @@ h1{
     @apply navItem  text-ral-3000 border-b-2
   }
   .logo {
-    @apply h-[19vh] w-[18vh] mt-[7vh]
+    @apply h-[19vh] w-[17vh] mt-[7vh]
   }
   .line {
     @apply h-10 bg-silver w-screen z-[-1] border-y-8 border-y-ral-3020
