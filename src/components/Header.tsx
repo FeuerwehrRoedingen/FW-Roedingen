@@ -33,7 +33,7 @@ class Header extends Component<Props, State> {
   render() {
     const navbar =
       <nav className="navbar">
-        <NavItem to="/"               title='Home' icon={IoHomeOutline} exact/>
+        <NavItem to="/home"               title='Home' icon={IoHomeOutline} exact/>
         <NavItem to="/uebungsdienst"  title='Übungsdienst' icon={GiFireAxe}/>
         <NavItem to="/einsaetze"      title='Einsätze' icon={GiFireShield} />
         <NavItem to="/fahrzeuge"      title='Fahrzeuge' icon={TbFiretruck}/>
