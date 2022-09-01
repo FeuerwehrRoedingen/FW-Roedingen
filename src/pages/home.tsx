@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import EMailComponent from '../components/EMailComponent';
-import UnderConstruction from '../components/UnderConstruction';
 
 type Props = {}
 type State = {}
