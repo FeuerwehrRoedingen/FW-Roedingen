@@ -1,4 +1,0 @@
-.expo/
-*.log
-package.lock.json
-.env*
