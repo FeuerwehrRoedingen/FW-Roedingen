@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": ["dom","dom.iterable","ES2015","esnext"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "es2015",
+    "paths": {
+      "src/*": ["./src/*"],
+      "server/*": ["./server/*"]
+    }
+  },
+  "include": [
+    "src",
+    "next-env.d.ts",
+    "server",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    ".next",
+    "out",
+    "config/next.config.js"
+  ]
+}

@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body{
+  background-color: #ffffff;
+  font-family: Poppins;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1{
+  font-size: xx-large;
+}
+
+.loginForm {
+  box-shadow: 5px 5px 30px 5px rgb(187 30 16), -5px -5px 30px 5px rgb(255 255 0);
+}
+
+@layer components {
+  .page {
+    @apply flex flex-col pt-[20vh] overflow-hidden h-screen bg-gray-900
+  }
+  .container {
+    @apply flex flex-col w-screen max-w-full h-[15vh]
+          fixed top-0 left-0 text-2xl pt-[6vh] bg-gray-900
+  }
+  .navbar {
+    @apply flex flex-row items-center justify-evenly
+            h-[10vh] min-h-[40px] pb-[5vh] w-screen
+  }
+  .navItem {
+    @apply flex flex-row items-center cursor-pointer w-fit
+        text-silver hover:scale-[1.025]
+          duration-150 active:scale-[0.975]
+        border-b-ral-3000
+  }
+  .navItemActive{
+    @apply navItem  text-ral-3000 border-b-2
+  }
+  .underConstruction{
+    @apply ml-3 mt-0 text-silver
+  }
+  .loginForm {
+    @apply w-[60vw] h-[60vh] bg-[#222222] rounded-[30px] flex flex-col justify-evenly items-center
+  }
+  .loginContainer {
+    @apply absolute left-0 top-0 w-screen h-screen flex items-center justify-center
+  }
+  .heading {
+    @apply text-silver pl-4 border-b-4 border-b-ral-3020 w-[60vh] min-w-[800px]
+  }
+}
