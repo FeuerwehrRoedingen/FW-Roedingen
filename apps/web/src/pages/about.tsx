@@ -66,10 +66,10 @@ const Person: React.FC<PersonProps> = (props) => {
         {props.dienstgrad}
       </div>
       <div className={isBrowser? 'flex flex-row': 'flex-flex-col pl-2 text-lg w-full'}>
-        <div className={isBrowser?'w-52':'w-fit'}>
-        {props.name}
+        <div className={isBrowser?'w-52':'w-fit mt-1'}>
+          {props.name}
         </div>
-        <div className='w-fit'>
+        <div className='w-fit mb-1'>
           {isBrowser && '-'}
           {props.funktion}
         </div>
