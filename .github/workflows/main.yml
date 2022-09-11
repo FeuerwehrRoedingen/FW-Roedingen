@@ -15,20 +15,16 @@ jobs:
 
       - name: all
         run: |
-          unset -e 
-          npx turbo-ignore --filter=fw-roedingen-backend
-          if [ $? -eq 0 ]; then
-            echo ignoring build step and safely exiting
+          npx turbo-ignore --filter=fw-roedingen-backend || { 
+            echo going to api directory
+            cd apps/api
+
+            echo installing dependencies
+            npm install
+
+            echo deploying everything to firebase
+            npm run deploy 
+
             exit 0
-          fi
-
-          echo going to api directory
-          cd apps/api
-
-          echo installing dependencies
-          npm install
-
-          echo deploying everything to firebase
-          npm run deploy 
-
+          }
           exit 0
