@@ -15,6 +15,7 @@ jobs:
 
       - name: all
         run: |
+          unset -e 
           npx turbo-ignore --filter=fw-roedingen-backend
           if [ $? -eq 0 ]; then
             echo ignoring build step and safely exiting
