@@ -13,16 +13,21 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: check for ignored build step
+      - name: all
         run: |
           npx turbo-ignore --filter=fw-roedingen-backend
           if [ $? -eq 0 ]; then
+            echo ignoring build step and safely exiting
             exit 0
           fi
-          echo ignoring build step because api Repo is not affected
 
-      - name: build
-        run: cd apps/api && npm install
+          echo going to api directory
+          cd apps/api
 
-      - name: deploy to firebase
-        run: cd apps/api && npm run deploy
+          echo installing dependencies
+          npm install
+
+          echo deploying everything to firebase
+          npm run deploy 
+
+          exit 0
