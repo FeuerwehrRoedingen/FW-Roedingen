@@ -1,4 +1,12 @@
 {
+  "hosting": {
+    "rewrites": [
+      {
+        "source": "/**",
+        "function": "api"
+      }
+    ]
+  },
   "firestore": {
     "rules": "firebase/firestore.rules",
     "indexes": "firebase/firestore.indexes.json"
@@ -10,7 +18,9 @@
       "firebase-debug.log",
       "firebase-debug.*.log"
     ],
-    "predeploy": "npm --prefix \"$RESOURCE_DIR\" run build"
+    "predeploy": "npm --prefix \"$RESOURCE_DIR\" run build",
+    "source": ".",
+    "runtime": "nodejs16"
   },
   "storage": {
     "rules": "firebase/storage.rules"

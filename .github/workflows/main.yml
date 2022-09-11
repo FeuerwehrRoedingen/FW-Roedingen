@@ -1,4 +1,4 @@
-name: CI/CD
+name: CI/CD Api
 
 on:
   push:
@@ -13,8 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name: check for ignored build step
+        run: |
+          npx turbo-ignore --filter=fw-roedingen-backend
+          if [ $? -eq 0 ]; then
+            exit 0
+          fi
+          echo ignoring build step because api Repo is not affected
+
       - name: build
         run: cd apps/api && npm install
 
-      - name: Run a multi-line script
-        run: npm run deploy
+      - name: deploy to firebase
+        run: cd apps/api && npm run deploy
