@@ -47,5 +47,5 @@ jobs:
 
       - name: Deploy
         if: steps.ignore.outcome != 'success' && steps.test.outcome == 'success'
-        run: npx firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
+        run: cd apps/api && npx firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
 
