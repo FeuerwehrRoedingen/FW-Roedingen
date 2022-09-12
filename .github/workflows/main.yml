@@ -25,13 +25,6 @@ jobs:
         run: npx turbo-ignore fw-roedingen-backend
         continue-on-error: true
 
-      - name: Setup Node.js environment
-        if: steps.ignore.outcome != 'success'
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16
-          cache: 'npm'
-
       - name: Install dependencies
         if: steps.ignore.outcome != 'success'
         run: npm install && npm install -g firebase-tools
