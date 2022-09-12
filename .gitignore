@@ -26,5 +26,3 @@ yarn-error.log*
 
 # turbo
 .turbo
-
-package-lock.json
