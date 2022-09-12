@@ -42,5 +42,10 @@ jobs:
 
       - name: Test
         if: steps.ignore.outcome != 'success'
+        id: test
         run: cd apps/api && npm run test
+
+      - name: Deploy
+        if: steps.ignore.outcome != 'success' && steps.test.outcome == 'success'
+        run: npx firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
 
