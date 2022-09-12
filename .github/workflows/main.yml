@@ -22,7 +22,7 @@ jobs:
 
       - name: check ignored build step
         id: ignore
-        run: npx turbo-ignore --filter=fw-roedingen-backend
+        run: npx turbo-ignore fw-roedingen-backend
         continue-on-error: true
 
       - name: Setup Node.js environment
