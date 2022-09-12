@@ -21,20 +21,26 @@ jobs:
           fetch-depth: 2
 
       - name: check ignored build step
+        id: ignore
         run: npx turbo-ignore --filter=fw-roedingen-backend
+        continue-on-error: true
 
       - name: Setup Node.js environment
-        if: ${{ failure() }}
+        if: steps.ignore.outcome != 'success'
         uses: actions/setup-node@v2
         with:
           node-version: 16
           cache: 'npm'
 
       - name: Install dependencies
+        if: steps.ignore.outcome != 'success'
         run: npm install
 
       - name: Build
+        if: steps.ignore.outcome != 'success'
         run: npx turbo run build --filter=fw-roedingen-backend
 
       - name: Test
+        if: steps.ignore.outcome != 'success'
         run: cd apps/api && npm run test
+
