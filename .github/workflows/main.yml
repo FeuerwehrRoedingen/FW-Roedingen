@@ -15,7 +15,11 @@ jobs:
 
       - name: all
         run: |
+          sudo npm install -g turbo-ignore
           npx turbo-ignore --filter=fw-roedingen-backend || { 
+            echo installing firebase build tools 
+            sudo npm install -g firebase-tools
+
             echo going to api directory
             cd apps/api
 
@@ -23,7 +27,7 @@ jobs:
             npm install
 
             echo deploying everything to firebase
-            npm run deploy 
+            npx firebase deploy --token ${{ secrets.FIREBASE_TOKEN }}
 
             exit 0
           }
