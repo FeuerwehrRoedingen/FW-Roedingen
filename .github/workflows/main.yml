@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: all
+      - name: tasks
         run: |
           sudo npm install -g turbo-ignore
           npx turbo-ignore --filter=fw-roedingen-backend || { 
