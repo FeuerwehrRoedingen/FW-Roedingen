@@ -15,7 +15,7 @@ jobs:
 
       - name: tasks
         run: |
-          sudo npm install -g turbo-ignore
+          sudo npm install -g turbo-ignore turbo
           npx turbo-ignore --filter=fw-roedingen-backend || { 
             echo installing firebase build tools 
             sudo npm install -g firebase-tools
