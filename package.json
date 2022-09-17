@@ -4,15 +4,17 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "packages/*"
+    "packages/*",
+    "apps/api/functions"
   ],
   "scripts": {
     "build": "turbo run build",
+    "deploy": "firebase deploy",
     "dev": "turbo run dev --parallel",
-    "lint": "turbo run lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "dev:browser": "concurrently \"cd apps/api && npm run dev\" \"cd apps/web && npm run dev\"",
-    "dev:mobile": "concurrently \"cd apps/api && npm run dev\" \"cd apps/mobile && npm run dev\""
+    "dev:mobile": "concurrently \"cd apps/api && npm run dev\" \"cd apps/mobile && npm run dev\"",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "lint": "turbo run lint"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",
