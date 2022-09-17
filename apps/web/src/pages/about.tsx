@@ -25,14 +25,15 @@ export default class about extends Component<Props, State> {
                 Gerätewarte
               </h1>
               <Person dienstgrad='UBM' funktion='Gerätewart' name='Dennis Braun' tooltip='Unterbrandmeister' id='UBM1'/>
-              <Person dienstgrad='HBM' funktion='Gerätewart' name='Markus Gärtner' tooltip='Hauptbrandmeister'/>
-              <Person dienstgrad='BM' funktion='Gerätewart' name='Markus Weckauf' tooltip='Brandmeister'/>
+              <Person dienstgrad='HBM' funktion='Gerätewart' name='Markus Gärtner' tooltip='Hauptbrandmeister' id='HBM1'/>
+              <Person dienstgrad='HFM' funktion='Gerätewart' name='Alexander Holzportz' tooltip='Hauptfeuerwehrmann' id='HFM1'/>
+              <Person dienstgrad='HBM' funktion='Gerätewart' name='Markus Weckauf' tooltip='Brandmeister' id='HBM2'/>
             </div>
             <div className='text-silver'>
               <h1 className={`heading my-4 ${!isBrowser&&'text-2xl'}`}>
                 Jugendwarte und Betreuer
               </h1>
-              <Person dienstgrad='HFM' funktion='Jugendwart' name='Georg Lutz' tooltip='Hauptfeuerwehrmann'/>
+              <Person dienstgrad='HFM' funktion='Jugendwart' name='Georg Lutz' tooltip='Hauptfeuerwehrmann' id='HFM2'/>
               <Person dienstgrad='FM' funktion='Betreuer' name='Thomas Düren' tooltip='Feuerwehrmann'/>
               <Person dienstgrad='UBM' funktion='Betreuer' name='Dominik Jung' tooltip='Unterbrandmeister' id='UBM2'/>
             </div>
