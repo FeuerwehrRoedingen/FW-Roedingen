@@ -2,11 +2,18 @@
   "name": "fw-roedingen",
   "version": "0.0.0",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*",
-    "apps/api/functions"
-  ],
+  "workspaces": {
+    "packages": [
+      "apps/api",
+      "apps/api/functions",
+      "apps/internal",
+      "apps/web",
+      "packages/*"
+    ],
+    "nohoist": [
+      "apps/mobile"
+    ]
+  },
   "scripts": {
     "build": "turbo run build",
     "deploy": "firebase deploy",

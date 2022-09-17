@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Configuration.swift">
+   </FileRef>
+   <FileRef
       location = "group:mobile.xcodeproj">
    </FileRef>
    <FileRef
