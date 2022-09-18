@@ -15,7 +15,7 @@
     ]
   },
   "scripts": {
-    "build": "turbo run build",
+    "build:all": "turbo run build",
     "build:api": "turbo run build --filter=fw-roedingen-backend",
     "build:internal": "turbo run build --filter=fw-roedingen-internal",
     "build:web": "turbo run build --filter=fw-roedingen-web",
