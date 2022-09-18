@@ -5,3 +5,4 @@ if [ $? -eq 0 ] ; then
 fi
 
 npm run build:api
+exit 0 
