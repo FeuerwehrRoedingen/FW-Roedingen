@@ -1,0 +1,16 @@
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_PROXY")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output = "../../../../node_modules/@prisma/client-api"
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  prename String
+  email String
+}
