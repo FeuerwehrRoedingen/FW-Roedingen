@@ -1,0 +1,28 @@
+{
+  "functions": {
+    "ignore": [
+      "node_modules",
+      ".git",
+      "firebase-debug.log",
+      "firebase-debug.*.log"
+    ],
+    "predeploy": "npm --prefix \"$RESOURCE_DIR\" run build",
+    "source": "./functions"
+  },
+  "firestore": {
+    "rules": "conf/firestore.rules",
+    "indexes": "conf/firestore.indexes.json"
+  },
+  "hosting": {
+    "rewrites": [
+      {
+        "source": "/api",
+        "function": "api"
+      },
+      {
+        "source": "/auth",
+        "function": "auth"
+      }
+    ]
+  }
+}

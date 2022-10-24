@@ -1,0 +1,12 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../../../../node_modules/@prisma/client-api"
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  username String @unique
+  password String
+  name     String
+  prename  String
+}

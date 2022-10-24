@@ -1,19 +1,17 @@
 {
-  "name": "fw-roedingen",
+  "name": "fw-roedingen-monorepo",
   "version": "0.0.0",
   "private": true,
   "workspaces": {
     "packages": [
       "apps/api",
-      "apps/api/functions",
+      "apps/firebase",
       "apps/internal",
       "apps/mail",
+      "apps/mobile",
       "apps/oauth",
       "apps/web",
       "packages/*"
-    ],
-    "nohoist": [
-      "apps/mobile"
     ]
   },
   "scripts": {
@@ -22,21 +20,18 @@
     "build:internal": "turbo run build --filter=fw-roedingen-internal",
     "build:web": "turbo run build --filter=fw-roedingen-web",
     "dev": "turbo run dev --parallel",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "heroku-postbuild": "sh ./heroku.sh",
-    "lint": "turbo run lint"
+    "deploy": "cd apps/firebase && firebase deploy",
+    "lint": "turbo run lint",
+    "postinstall": "cd apps/api && prisma db push && cd ../oauth && prisma db push"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",
-    "eslint-config-custom": "*",
     "prettier": "latest",
-    "turbo": "latest"
+    "turbo": "latest",
+    "turbo-ignore": "^0.1.0"
+
   },
   "engines": {
     "node": ">=14.0.0"
-  },
-  "packageManager": "npm@8.11.0",
-  "dependencies": {
-    "turbo-ignore": "^0.1.0"
   }
 }

@@ -1,0 +1,111 @@
+
+html, body {
+  padding: 0;
+  margin: 0;
+  font-family: poppins;
+}
+
+.page{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(17 24 39);
+  height: 100vh;
+  width: 100vw;
+}
+
+.container{
+  height: 60vh;
+  width: 60vw;
+  max-height: 500px;
+  max-width: 600px;
+  background-color: #222222;
+  color: silver;
+  border-top: 2px solid #ff0000;
+}
+
+.heading{
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
+.top{
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.inputs{
+  height: 30%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.bottom{
+  height: 20%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.passwordContainer{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+input{
+  width: 60%;
+  height: 30px;
+  margin-top: 10px;
+  font-size: large;
+  padding-left: 10px;
+  padding-right: 30px;
+  background-color: #333333;
+  color: white;
+  border: none
+}
+a{
+  font-size: large;
+}
+.icon{
+  height: 25px;
+  width: 25x;
+  margin-left: -35px;
+  margin-right: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+.submitButton{
+  width: 100px;
+  height: 40px;
+  cursor: pointer;
+  background-color: #333333;
+  border: none;
+  border-bottom: 2px solid red;
+  color: silver;
+  transition: 500ms;
+  font-size: medium;
+}
+.submitButton:hover{
+  scale: 1.05;
+  border-bottom: 2px solid yellow
+}
+.submitButton:active{
+  transition: 200ms;
+  scale: 0.975;
+  border-bottom: 2px solid #55ff55;
+}
+.logo{
+  height: 90%;
+  width: auto;
+  margin-top: 20px;
+}

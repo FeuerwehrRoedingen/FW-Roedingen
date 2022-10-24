@@ -1,1 +1,8 @@
 dist
+.cert
+
+public/js/*
+src/login.html
+
+.env
+dev.db
