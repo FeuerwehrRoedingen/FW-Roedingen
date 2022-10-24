@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "incremental": true,
+    "inlineSourceMap": true,
+    "isolatedModules": false,
+    "jsx": "preserve",
+    "lib": [
+      
+    ],
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "outDir": "dist",
+    "strict": true
+  },
+  "include": [
+    "src",
+    ".cert"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

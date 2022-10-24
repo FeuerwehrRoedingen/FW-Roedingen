@@ -7,6 +7,8 @@
       "apps/api",
       "apps/api/functions",
       "apps/internal",
+      "apps/mail",
+      "apps/oauth",
       "apps/web",
       "packages/*"
     ],
