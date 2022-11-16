@@ -1,0 +1,34 @@
+.page {
+  background-color: #22222f;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  height: 100vh;
+  width: 95vw;
+}
+
+.entry{
+  background-color: #333333;
+  border-top: 6px solid #ff0000;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 200px;
+  width: 200px;
+  transition: 500ms;
+}
+.entry:hover{
+  border-top: 5px solid #ffaa00;
+  scale: 1.05;
+}
+.entry:active {
+  border-top: 5px solid #00ff22;
+  scale: 0.95;
+}
+
+.name {
+  font-size: 30px;
+  font-weight: 600;
+}

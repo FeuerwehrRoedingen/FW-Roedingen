@@ -5,11 +5,11 @@
   "workspaces": {
     "packages": [
       "apps/api",
-      "apps/firebase",
+      "apps/blockchain",
       "apps/internal",
       "apps/mail",
       "apps/mobile",
-      "apps/oauth",
+      "apps/vehicle",
       "apps/web",
       "packages/*"
     ]
@@ -21,8 +21,7 @@
     "build:web": "turbo run build --filter=fw-roedingen-web",
     "dev": "turbo run dev --parallel",
     "deploy": "cd apps/firebase && firebase deploy",
-    "lint": "turbo run lint",
-    "postinstall": "cd apps/api && prisma db push && cd ../oauth && prisma db push"
+    "lint": "turbo run lint"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",

@@ -1,0 +1,8 @@
+{
+  "exec": "TS_NODE_PROJECT=tsconfig.json node --loader ts-node/esm --es-module-specifier-resolution=node index.ts",
+  "ext": "ts",
+  "watch":[ 
+    "src",
+    "index.ts"
+  ] 
+}

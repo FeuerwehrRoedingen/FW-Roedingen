@@ -1,20 +1,29 @@
 {
   "compilerOptions": {
-    "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "allowJs": false,
-    "esModuleInterop": false,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "ES2022",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "declaration": true,
     "target": "ES2022",
-    "outDir": "dist"
+    "module": "ES2022",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "Node",
+    "strict": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "noEmit": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "noImplicitReturns": false,
+    "declaration": true,
+    "outDir": "dist",
+
+    "useDefineForClassFields": true,
+    "importsNotUsedAsValues": "preserve"
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src",
+    "index.ts",
+    "run.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

@@ -1,9 +1,0 @@
-{
-  "name": "fw-roedingen-firebase",
-  "private": true,
-  "type": "module",
-  "scripts": {},
-  "dependencies": {
-    "firebase-admin": "^11.2.0"
-  }
-}
