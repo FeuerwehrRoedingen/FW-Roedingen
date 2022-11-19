@@ -18,7 +18,11 @@ https.listen(PORT, HOSTNAME, () => {
   console.log(chalk.cyan('[ready]'),`server listening on port ${PORT} as ${HOSTNAME}`);
   console.log(chalk.green('[info]'),`access over network on https://${ADDRESS}:${PORT}`)
 });
-http.listen(3025, 'localhost', () => {
+http.listen(3025, ADDRESS, () => {
+  console.log(chalk.cyan('[ready]'),`server listening on port 3025 as ${ADDRESS}`);
+  console.log(chalk.green('[info]'),`access over network on http://${ADDRESS}:3025`)
+})
+.listen(3025, 'localhost', () => {
   console.log(chalk.cyan('[ready]'),`server listening on port 3025 as localhost`);
   console.log(chalk.green('[info]'),`access over network on http://localhost:3025`)
-});
+})

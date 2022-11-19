@@ -5,8 +5,13 @@ import './server.css'
 
 async function getData(): Promise<string[]> {
   //@ts-ignore
-  const res = await fetch('http://localhost:3025/servers');
-  return res.json();
+  try{
+    const res = await fetch('http://10.21.21.22:3025/servers');
+    return res.json();
+  } catch(error){
+    console.error(error);
+    return []
+  }
 }
 
 type Props = {}

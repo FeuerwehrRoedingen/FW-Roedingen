@@ -9,7 +9,7 @@ h1 {
 }
 
 .page {
-  background-color: #222222;
+  background-color: #111118;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -18,6 +18,10 @@ h1 {
   width: 95vw;
 }
 .terminal {
-  height: 100vh;
-  width: 95vw;
+  height: 99vh;
+  width: 94vw;
+}
+
+#terminal{
+  font-family: Hack, monospace;
 }

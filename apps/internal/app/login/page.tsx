@@ -1,12 +1,13 @@
 "use client";
 
 import { Agent } from 'https'
+import { useRouter } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import React, { SyntheticEvent } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
 import './login.css'
 import 'react-toastify/dist/ReactToastify.css'
-import { useRouter } from 'next/navigation';
 
 type Props = {}
 
@@ -51,19 +52,13 @@ async function fetchLogin(username: string, password: string){
         resolve(false);
       }, 10_000);
 
-      const response = await fetch('https://10.21.21.22:3024/login/', {
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify({
-          username,
-          password
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-        }
-      })
+      const response = await signIn('credentials', {
+        redirect: false,
+        username,
+        password
+      });
 
-      if(response.status === 401){
+      if(response!.status === 401){
         toast.update(toastID, {
           type: 'error',
           render: 'invalid username/password',
@@ -72,7 +67,7 @@ async function fetchLogin(username: string, password: string){
         })
         resolve(false);
       }
-      if(response.status === 200){
+      if(response!.status === 200){
         toast.update(toastID, {
           type: 'success',
           render: 'welcome',
@@ -101,7 +96,7 @@ function Login(props: Props) {
     <div className='page'>
       <form className='container' onSubmit={(event) => submit(event, () => router.push('/home'))}>
         <div className='top'>
-          <img src='/logo.png' height='100%'/>
+          <img src='/img/logo.png' height='100%'/>
         </div>
         <div className='inputs'>
           <input type='text'     placeholder='username' name='username'/>

@@ -8,7 +8,8 @@ import body from 'body-parser'
 import cors from 'cors'
 import cookies from 'cookie-parser'
 import express, { Request, response } from 'express'
-import session from 'express-session'
+import session, { MemoryStore } from 'express-session'
+import { User } from 'pocketbase'
 import { WebSocketServer } from 'ws'
 
 import { router } from './routes.js'
@@ -16,7 +17,9 @@ import { handle } from './socket.js'
 
 declare module "express-session" {
   interface SessionData {
-    userId: string
+    userId: string;
+    token: string;
+    user: User;
   }
 }
 export function configureServer(): {https: HttpsServer, http: HttpServer}{
@@ -33,10 +36,12 @@ export function configureServer(): {https: HttpsServer, http: HttpServer}{
     key : readFileSync(join(__dirname, '..', '.cert', 'api.feuerwehr-roedingen.de.key'))
   }
   const sessionParser = session({
-    secret: process.env.SESSION_SECRET,
+    secret: process.env.SESSION_SECRET!,
     saveUninitialized:true,
     cookie: { maxAge: 1000 * 60 * 5 },
-    resave: false
+    resave: false,
+    name: 'frontend',
+    store: new MemoryStore({})
   });
   const cookieParser = cookies(process.env.SESSION_SECRET, {});
   
@@ -46,28 +51,36 @@ export function configureServer(): {https: HttpsServer, http: HttpServer}{
   const WS_server = new WebSocketServer({noServer: true});
   
   HTTPS_server.on('upgrade', (request: Request, socket, head) => {
-    sessionParser(request, response, () => {
-      if(!request.session.id){
-        socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-        socket.destroy();
-        return;
-      }
-      WS_server.handleUpgrade(request, socket, head, (client) => {
-        WS_server.emit('connection', client, request);
-      });
-    })
+    try{
+      sessionParser(request, response, () => {
+      if(!request.session){
+          socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+          socket.destroy();
+          return;
+        }
+        WS_server.handleUpgrade(request, socket, head, (client) => {
+          WS_server.emit('connection', client, request);
+        });
+      })
+    } catch(error){
+      console.error(error);
+    }
   })
   HTTP_server.on('upgrade', (request: Request, socket, head) => {
-    sessionParser(request, response, () => {
-      if(!request.session.id){
-        socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-        socket.destroy();
-        return;
-      }
-      WS_server.handleUpgrade(request, socket, head, (client) => {
-        WS_server.emit('connection', client, request);
-      });
-    })
+    try{
+      sessionParser(request, response, () => {
+      if(!request.session){
+          socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
+          socket.destroy();
+          return;
+        }
+        WS_server.handleUpgrade(request, socket, head, (client) => {
+          WS_server.emit('connection', client, request);
+        });
+      })
+    } catch(error){
+      console.error(error);
+    }
   })
   
   express_server.use(cors());

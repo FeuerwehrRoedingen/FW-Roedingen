@@ -1,8 +1,8 @@
 import { Router } from 'express'
 import { v4 } from 'uuid'
 
-import { authenticateUser, getHost, getHosts } from './pocketbase'
-import { destroy } from './socket'
+import { authenticateUser, getHost, getHosts } from './pocketbase.js'
+import { destroy } from './socket.js'
 
 export const router = Router();
 
@@ -21,10 +21,14 @@ router.post('/login', async (req, res) => {
   }
   try{
     const data = await authenticateUser(username, password);
-    //TODO save data.token in sessin store
-
     req.session.userId = v4();
-    return res.status(200).end();
+    req.session.token = data.token;
+    req.session.user = data.user;
+    req.session.save( err => {
+      if(err)
+        console.error(err);
+    });
+    return res.status(200).send(data);
   }
   catch(error:any){
     console.log(error);
@@ -38,7 +42,7 @@ router.delete('/logout', (req, res) => {
       console.error(err);
       return res.status(500).end();
     }
-    destroy(req.session.id);
+    //destroy(req.session.id);
     return res.status(201).end();
   });
 })

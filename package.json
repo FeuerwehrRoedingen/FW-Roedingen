@@ -28,9 +28,12 @@
     "prettier": "latest",
     "turbo": "latest",
     "turbo-ignore": "^0.1.0"
-
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "fw-roedingen-internal": "^0.1.0",
+    "react-menu": "^0.0.10"
   }
 }

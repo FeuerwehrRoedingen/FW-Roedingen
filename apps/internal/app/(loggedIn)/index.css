@@ -2,8 +2,6 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 a {
@@ -25,14 +23,24 @@ a {
   }
 }
 
+iframe {
+  border: none;
+  margin: none;
+  padding: none;
+  resize: both;
+  aspect-ratio: auto;
+  overflow: hidden;
+}
+
 nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
   width: 5vw;
   height: 100vh;
-  background-color: #333333;
+  background-color: #111118;
+  border-right: 0.5px solid silver;
+  overflow: hidden;
 }
 .main{
   display: flex;
@@ -41,7 +49,78 @@ nav {
   width: 100vw;
 }
 .mainPage {
-  background-color: #222222;
+  background-color: #111118;
   height: 100vh;
   width: 95vw;
+}
+
+.navItem{
+  cursor: pointer;
+  height: 2vw;
+  width: 2vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  border-bottom: 1px solid #111118;
+  transition: 200ms;
+}
+.navItem:active, .navItemActive:active {
+  scale: 0.975;
+}
+.navItemActive{
+  height: 2vw;
+  width: 2vw;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  transition: 200ms;
+  border-bottom: 3px solid '#5ac8ff';
+}
+
+.gaLogo {
+  height: 3.5vw;
+  width: 3.5vw;
+  margin-top: 1.5vh;
+  transition: 400ms;
+}
+.gaLogo:active {
+  scale: 0.975;
+}
+.pbLogo {
+  height: 5vw;
+  width: 5vw;
+  transition: 400ms;
+}
+.pbLogo:active {
+  scale: 0.975;
+}
+.ptLogo {
+  height: 2.5vw;
+  width: 2.5vw;
+  transition: 400ms;
+  cursor: pointer;
+  margin-top: 2vh;
+}
+.ptLogo:active {
+  scale: 0.975;
+}
+.userLogo {
+  height: 3vw;
+  width: 3vw;
+  margin-top: auto;
+  margin-bottom: 2vh;
+  cursor: pointer;
+  transition: 400ms;
+}
+.userLogo:active {
+  scale: 0.975;
+}
+
+.frameContainer {
+  height: 100vh;
+  width: 95vw;
+  overflow: hidden;
+}
+
+.screen {
+  height: 100%;
+  width: 100%;
 }
