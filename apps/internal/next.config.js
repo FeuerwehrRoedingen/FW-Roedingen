@@ -41,7 +41,8 @@ const nextConfig = {
         },
       ],
       afterFiles: [],
-      fallback: []
+      fallback: [],
+      output: 'standalone'
     }
   }
 }
