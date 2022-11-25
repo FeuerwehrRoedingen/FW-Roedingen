@@ -35,3 +35,48 @@
 # Monorepo
 
 Everything is written in Typescriptt, because TS is the best programming language, dont @ me. Turborepo allows interconnected Repos to be developed alongside each other and speeds up the build process.
+
+# GH
+
+Inside the Firehouse are 2 Raspberry pis. 
+- Alarmmonitor  @ 192.168.2.201
+- Alarmmonitor2 @ 192.168.2.202
+
+Both have a static etho interface and a dynamic wlan0 interface connected to the router for redundancy.
+
+## Alarmmonitor
+
+Hangs above the entrance door.
+
+Services: 
+- Docker (master)
+- NGINX
+- Groupalarm Monitor connected to HDMI0
+
+Containers:
+- NGINX
+- Internal Website
+- LocalInteractions (WIP)
+
+Ports: 
+
+- NGINX 8080
+- Internal Website 3000
+
+## Alarmmonitor2
+
+Hangs between the HLF-20 and the GW-L2.
+
+Services: 
+- Docker (slave)
+- Groupalarm Monitor connected to HDMI0
+
+Containers:
+- API 
+- Pocketbase
+
+Ports: 
+
+- API 3025
+- API HTTPS 3024
+- Pocketbase 8090

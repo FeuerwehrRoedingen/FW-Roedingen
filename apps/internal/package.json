@@ -6,8 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "nginx": "sudo cp nginx.conf /etc/nginx/nginx.conf && sudo service nginx reload"
+    "lint": "next lint"
   },
   "dependencies": {
     "@types/node": "18.11.9",

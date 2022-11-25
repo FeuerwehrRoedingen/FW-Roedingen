@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req): Promise<User|null>{
         try{
-          const response = await fetch('http://10.21.21.22:3025/login/', {
+          const response = await fetch('http://api.localhost:8080/api/login/', {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify({

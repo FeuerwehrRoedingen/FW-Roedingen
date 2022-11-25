@@ -21,8 +21,9 @@
     "build:internal": "turbo run build --filter=fw-roedingen-internal",
     "build:web": "turbo run build --filter=fw-roedingen-web",
     "dev": "turbo run dev --parallel",
-    "deploy": "cd apps/firebase && firebase deploy",
-    "lint": "turbo run lint"
+    "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-internal",
+    "lint": "turbo run lint",
+    "nginx": "sudo cp nginx.conf /etc/nginx/nginx.conf && sudo service nginx reload"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",
