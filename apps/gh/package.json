@@ -1,0 +1,15 @@
+{
+  "name": "fw-roedingen-gh",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon",
+    "start": "node dist/indx.js"
+  },
+  "keywords": [],
+  "license": "MIT",
+  "dependencies": {
+    "serialport": "^10.5.0"
+  }
+}

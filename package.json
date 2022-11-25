@@ -6,6 +6,7 @@
     "packages": [
       "apps/api",
       "apps/blockchain",
+      "apps/gh",
       "apps/internal",
       "apps/mobile",
       "apps/tablet",
