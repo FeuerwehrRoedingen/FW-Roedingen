@@ -2,9 +2,11 @@
   "name": "fw-roedingen-gh",
   "version": "1.0.0",
   "main": "index.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "dev": "nodemon",
+    "dev:single": "DEBUG=* node --loader ts-node/esm index.ts",
     "start": "node dist/indx.js"
   },
   "keywords": [],

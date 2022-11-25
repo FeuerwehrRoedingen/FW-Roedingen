@@ -1,14 +1,23 @@
-import { createInterface } from 'node:readline'
-
 import { SerialPort } from 'serialport'
 import { ReadlineParser } from '@serialport/parser-readline'
+import type { PortInfo } from '@serialport/bindings-cpp'
 
-const device = '/dev/tty.usbmodem142201'
+let device: PortInfo;
 
-const port = new SerialPort({ baudRate: 9600, path: device, autoOpen: false});
+const devices = await SerialPort.list();
+devices.forEach(elem => {
+  if(elem.manufacturer === 'Arduino LLC'){
+    device = elem;
+  }
+})
+
+if(!device){
+  console.error('no arduino Device Connected');
+  process.exit(1);
+}
+
+const port = new SerialPort({ baudRate: 9600, path: device.path, autoOpen: false});
 const parser = port.pipe(new ReadlineParser({ delimiter: '\n' }));
-
-port.open();
 
 port.on('open', (error) => {
   if(error){
@@ -23,26 +32,6 @@ parser.on('data', (data) => {
   console.log('received: '+data);
 })
 
-const rl = createInterface({
-  input: process.stdin,
-  output: process.stdout,
-  terminal: false
-});
+port.open();
 
-let flag = true;
-
-while(flag){
-  rl.on('line', (line) => {
-    port.write(line, (error) => {
-      if(error){
-        console.error('error Writing to '+device);
-        console.error(error.message);
-      }
-    })
-  })
-
-  rl.once('exit', () => {
-    flag = false;
-  })
-}
-
+port.write('on');
