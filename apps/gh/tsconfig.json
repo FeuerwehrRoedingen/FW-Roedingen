@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "declaration": true,
+    "declarationMap": true,
     "module": "ES2022",
     "moduleResolution": "node",
-    "target": "ES2022",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "target": "ES2022"
   }
 }
