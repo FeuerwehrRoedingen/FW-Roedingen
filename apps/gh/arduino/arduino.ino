@@ -1,8 +1,12 @@
 
-#define LED 13
+#define UP   2 
+#define STOP 3 
+#define DOWN 4 
 
 void setup() {
-  pinMode(LED, OUTPUT);
+  pinMode(UP, OUTPUT);
+  pinMode(STOP, OUTPUT);
+  pinMode(DOWN, OUTPUT);
   Serial.begin(9600);
 }
 
@@ -14,18 +18,19 @@ void loop() {
     Serial.print("received: ");
     Serial.println(res);
 
-    if(res == "on"){
-      digitalWrite(LED, HIGH);
-    } else if(res == "off"){
-      digitalWrite(LED, LOW);
-    } else {
-      digitalWrite(LED, HIGH);
-      delay(200);
-      digitalWrite(LED, LOW);
-      delay(200);
-      digitalWrite(LED, HIGH);
-      delay(200);
-      digitalWrite(LED, LOW);
+    if(res == "UP"){
+      digitalWrite(UP, HIGH);
+      delay(1000);
+      digitalWrite(UP, LOW);
+
+    } else if(res == "DOWN"){
+      digitalWrite(DOWN, HIGH);
+      delay(1000);
+      digitalWrite(DOWN, LOW);
+    } else if(res == "STOP"){
+      digitalWrite(STOP, HIGH);
+      delay(1000);
+      digitalWrite(STOP, LOW);
     }
   }
 }
