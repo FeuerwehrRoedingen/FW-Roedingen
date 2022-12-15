@@ -1,4 +1,4 @@
-import { Arduino } from "./arduino.js";
+import { Gate, State } from './gate'
 
 //**********************************************************************************
 // Edit names array to add Gates, everything is typed according to this array --+  *
@@ -17,79 +17,11 @@ type StateResponse =
   { status: 200, state: State }|
   { status: 404, state: undefined }
 
-enum State{
-  Open = 'Open',
-  Opening = 'Opening',
-  Closing = 'Closing',
-  Closed = 'Closed',
-  Halted = 'Halted',
-  Error = 'Error',
-}
 
-class Gate {
-  #state: State;
-  #device: Arduino;
-
-  constructor(
-    public name: string,
-    device: Arduino
-  ){
-    this.#device = device;
-    this.#state = State.Halted
-  }
-
-  get getState(){
-    return this.#state;
-  }
-
-  set setState(state:State){
-    this.#state = state;
-  }
-
-  open(){
-    if(
-      this.#state === State.Error ||
-      this.#state === State.Open ||
-      this.#state === State.Opening 
-    ){
-      return;
-    }
-    this.#state = State.Opening;
-    this.#device.open(this.name);
-  }
-  close(){
-    if(
-      this.#state === State.Error ||
-      this.#state === State.Closed ||
-      this.#state === State.Closing 
-    ){
-      return;
-    }
-    this.#state = State.Closing;
-    this.#device.close(this.name);
-  }
-  stop(){
-    if(this.#state === State.Error){
-      return;
-    }
-    this.#state = State.Halted;
-    this.#device.stop(this.name);
-  }
-
-  state(){
-    return this.#state;
-  }
-}
 
 export class System {
   #gates: {
     [x in Names]: Gate
-  }
-
-  constructor(
-    private device: Arduino = new Arduino()
-  ){
-    this.device.attachCallback(this.#setState);
   }
 
   static instance: System = new System;

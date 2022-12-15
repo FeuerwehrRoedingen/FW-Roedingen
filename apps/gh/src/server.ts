@@ -40,7 +40,7 @@ export class Server {
       res.status(status).end();
     });
     router.get('/status/:name', (req, res) => {
-      res.status(200).send(req.params.name);
+      res.status(200).send('WIP');
     })
 
     this.#expressServer.use(router);
