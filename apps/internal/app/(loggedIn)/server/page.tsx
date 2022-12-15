@@ -6,7 +6,7 @@ import './server.css'
 async function getData(): Promise<string[]> {
   //@ts-ignore
   try{
-    const res = await fetch('http://10.21.21.22:3025/servers');
+    const res = await fetch('https://api.feuerwehr-roedingen.de/servers');
     return res.json();
   } catch(error){
     console.error(error);

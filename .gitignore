@@ -22,3 +22,6 @@ coverage
 .turbo
 
 .vscode/
+.cert/*
+
+!.cert/localhost*

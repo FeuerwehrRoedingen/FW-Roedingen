@@ -2,7 +2,7 @@
   "exec": "TS_NODE_PROJECT=tsconfig.json node --loader ts-node/esm --es-module-specifier-resolution=node run.ts",
   "ext": "ts, tsx",
   "watch": [
-    "server",
-    "src"
+    "src",
+    "run.ts"
   ]
 }

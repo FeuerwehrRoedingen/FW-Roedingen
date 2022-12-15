@@ -1,7 +1,5 @@
-import { readFileSync } from 'node:fs'
 import { createServer as createHttpServer, Server as HttpServer} from 'node:http'
-import { createServer as createHttpsServer, Server as HttpsServer, ServerOptions } from 'node:https'
-import { dirname, join } from 'node:path'
+import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import body from 'body-parser'
@@ -22,7 +20,7 @@ declare module "express-session" {
     user: User;
   }
 }
-export function configureServer(): {https: HttpsServer, http: HttpServer}{
+export function configureServer(): HttpServer{
   if(!process.env.SESSION_SECRET){
     console.error('no session secret provided')
     process.exit(1);
@@ -31,10 +29,6 @@ export function configureServer(): {https: HttpsServer, http: HttpServer}{
   global.__filename = fileURLToPath(import.meta.url);
   global.__dirname = dirname(__filename);
   
-  const serverOptions: ServerOptions = {
-    cert: readFileSync(join(__dirname, '..', '.cert', 'api.feuerwehr-roedingen.de.pem')),
-    key : readFileSync(join(__dirname, '..', '.cert', 'api.feuerwehr-roedingen.de.key'))
-  }
   const sessionParser = session({
     secret: process.env.SESSION_SECRET!,
     saveUninitialized:true,
@@ -46,26 +40,9 @@ export function configureServer(): {https: HttpsServer, http: HttpServer}{
   const cookieParser = cookies(process.env.SESSION_SECRET, {});
   
   const express_server = express();
-  const HTTPS_server = createHttpsServer(serverOptions, express_server);
   const HTTP_server = createHttpServer(express_server);
   const WS_server = new WebSocketServer({noServer: true});
-  
-  HTTPS_server.on('upgrade', (request: Request, socket, head) => {
-    try{
-      sessionParser(request, response, () => {
-      if(!request.session){
-          socket.write('HTTP/1.1 401 Unauthorized\r\n\r\n');
-          socket.destroy();
-          return;
-        }
-        WS_server.handleUpgrade(request, socket, head, (client) => {
-          WS_server.emit('connection', client, request);
-        });
-      })
-    } catch(error){
-      console.error(error);
-    }
-  })
+
   HTTP_server.on('upgrade', (request: Request, socket, head) => {
     try{
       sessionParser(request, response, () => {
@@ -91,8 +68,5 @@ export function configureServer(): {https: HttpsServer, http: HttpServer}{
   
   WS_server.on('connection', handle)
 
-  return {
-    https: HTTPS_server,
-    http: HTTP_server
-  };
+  return HTTP_server
 }

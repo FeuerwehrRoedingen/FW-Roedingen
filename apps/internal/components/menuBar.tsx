@@ -5,6 +5,7 @@ import { signOut } from 'next-auth/react';
 import React, { useRef, useState } from 'react'
 import type { IconType } from 'react-icons'
 import { HiOutlineUserCircle } from 'react-icons/hi'
+import { IoIosChatbubbles } from 'react-icons/io'
 import { VscHome, VscSettingsGear } from 'react-icons/vsc'
 import { FaServer } from 'react-icons/fa'
 
@@ -25,6 +26,7 @@ function menuBar(props: Props) {
   return (
     <nav>
       <NavItem to='/home' icon={VscHome} exact />
+      <NavItem to='/chat' icon={IoIosChatbubbles} />
       <NavItem to='/settings' icon={VscSettingsGear} />
       <NavItem to='/server' icon={FaServer} />
       <NavLogo to='/groupAlarm' img='/img/groupalarm.png' activeImg='/img/groupalarm_cyan.png' classname='gaLogo' />

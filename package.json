@@ -23,7 +23,7 @@
     "dev": "turbo run dev --parallel",
     "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-internal",
     "lint": "turbo run lint",
-    "nginx": "sudo cp nginx.conf /etc/nginx/nginx.conf && sudo service nginx reload"
+    "nginx": "sh nginx.sh"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",

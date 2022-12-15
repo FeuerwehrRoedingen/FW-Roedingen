@@ -6,7 +6,7 @@
   "types": "dist/src/index.d.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc && cp -R .cert dist/.cert",
+    "build": "tsc",
     "dev": "(cd pocketbase && go run main.go serve & ) && nodemon ",
     "prebuild": "rimraf dist",
     "start": "node dist/server/run.js"

@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req): Promise<User|null>{
         try{
-          const response = await fetch('http://api.localhost:8080/api/login/', {
+          const response = await fetch('https://api.feuerwehr-roedingen.de/login/', {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify({
@@ -62,6 +62,9 @@ export const authOptions: NextAuthOptions = {
       session.user = token.user;
       return session;
     }
+  },
+  session: {
+    strategy: 'jwt'
   }
 }
 
