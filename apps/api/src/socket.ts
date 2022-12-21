@@ -11,7 +11,12 @@ export async function handle(socket: WebSocket, request: Request){
   if(request.url.split('/')[1] === 'term'){
     return handleTerminal(socket, request);
   }
-  return handleMessages(socket, request);
+
+  if(request.url.split('/')[1] === 'chat'){
+    return handleMessages(socket, request);
+  }
+
+  socket.close();
 }
 
 export function destroy(userID: string){
@@ -50,6 +55,8 @@ async function handleTerminal(socket: WebSocket, request: Request){
   })
   child.write('ssh -l admin -i .cert/id_rsa '+host+'\n')
 }
-function handleMessages(_socket: WebSocket, _request: Request){
+function handleMessages(socket: WebSocket, request: Request){
+  console.log(request.session);
 
+  socket.send('test 123')
 }

@@ -1,12 +1,13 @@
 import Link from 'next/link'
 import React from 'react'
+import { API } from '../../../components/api';
 
 import './server.css'
 
 async function getData(): Promise<string[]> {
   //@ts-ignore
   try{
-    const res = await fetch('https://api.feuerwehr-roedingen.de/servers');
+    const res = await fetch(API+'/servers');
     return res.json();
   } catch(error){
     console.error(error);
@@ -17,9 +18,9 @@ async function getData(): Promise<string[]> {
 type Props = {}
 async function page(props: Props) {
 
-  const pis = await getData();
+  const servers = await getData();
 
-  const links = pis.map(element => {
+  const links = servers.map(element => {
     return (
       <Link href={`/server/${element}`} key={element+'link'}>
         <div className='entry' key={element}>

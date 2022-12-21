@@ -3,19 +3,22 @@ import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import body from 'body-parser'
+import connectRedis from 'connect-redis'
 import cors from 'cors'
-import cookies from 'cookie-parser'
 import express, { Request, response } from 'express'
-import session, { MemoryStore } from 'express-session'
+import session from 'express-session'
 import { User } from 'pocketbase'
+import redis from 'redis'
 import { WebSocketServer } from 'ws'
 
 import { router } from './routes.js'
 import { handle } from './socket.js'
 
+//
+// Merging SessionData interface to add values to req.session
+//
 declare module "express-session" {
   interface SessionData {
-    userId: string;
     token: string;
     user: User;
   }
@@ -26,22 +29,55 @@ export function configureServer(): HttpServer{
     process.exit(1);
   }
   
+  // dirname and filename are not supported by default in es6
   global.__filename = fileURLToPath(import.meta.url);
   global.__dirname = dirname(__filename);
-  
-  const sessionParser = session({
-    secret: process.env.SESSION_SECRET!,
-    saveUninitialized:true,
-    cookie: { maxAge: 1000 * 60 * 5 },
-    resave: false,
-    name: 'frontend',
-    store: new MemoryStore({})
-  });
-  const cookieParser = cookies(process.env.SESSION_SECRET, {});
-  
+
+  // The three Servers
   const express_server = express();
   const HTTP_server = createHttpServer(express_server);
   const WS_server = new WebSocketServer({noServer: true});
+
+  // Create Redis session store and connect it to session parser
+  const RedisStore = connectRedis(session);
+  const redisClient = redis.createClient({
+    socket: {
+      host: 'localhost',
+      port: 6379
+    },
+    legacyMode: true,
+    //password: process.env.REDIS_PASSWORD
+  })
+  redisClient.on('error', err => {
+    console.error('[Redis]',err);
+    process.exit(1);
+  })
+  redisClient.on('connect', () => {
+    console.log('[Redis] Connected to Redis')
+  })
+
+  redisClient.connect();
+
+  const sessionParser = session({
+    secret: process.env.SESSION_SECRET!,
+    proxy: true,
+    saveUninitialized:true,
+    cookie: { 
+      httpOnly: true,
+      maxAge: 1000 * 60 * 5, 
+      path: '/',
+      sameSite: 'none',
+      secure: false
+    },
+    resave: false,
+    store: new RedisStore({client: redisClient})
+  });
+
+  express_server.set('trust proxy', 1)
+  express_server.use(cors());
+  express_server.use(sessionParser);
+  express_server.use(body.json());
+  express_server.use(router);
 
   HTTP_server.on('upgrade', (request: Request, socket, head) => {
     try{
@@ -60,11 +96,7 @@ export function configureServer(): HttpServer{
     }
   })
   
-  express_server.use(cors());
-  express_server.use(sessionParser);
-  express_server.use(cookieParser);
-  express_server.use(body.json());
-  express_server.use(router);
+
   
   WS_server.on('connection', handle)
 

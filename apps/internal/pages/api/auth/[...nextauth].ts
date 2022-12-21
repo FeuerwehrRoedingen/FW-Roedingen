@@ -3,6 +3,8 @@ import CredentialsProvicer from 'next-auth/providers/credentials';
 
 import type { NextAuthOptions, User } from 'next-auth'
 
+import { API } from '../../../components/api';
+
 declare module 'next-auth'{
   interface User {
     id: string;
@@ -29,7 +31,7 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials, req): Promise<User|null>{
         try{
-          const response = await fetch('https://api.feuerwehr-roedingen.de/login/', {
+          const response = await fetch(API + '/login', {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify({
@@ -38,10 +40,12 @@ export const authOptions: NextAuthOptions = {
             }),
             headers: {
               'Content-Type': 'application/json'
-            }
+            },
+            credentials: 'include'
           })
 
           const data = await response.json();
+          console.log(response);
           return Promise.resolve(data.user);
         } catch(error){
           console.error(error);

@@ -6,7 +6,8 @@ import { destroy } from './socket.js'
 
 export const router = Router();
 
-router.get('/', (_req, res) => {
+router.get('/', (req, res) => {
+  console.log(req.session);
   res.status(200).send('under construction').end();
 })
 
@@ -21,7 +22,6 @@ router.post('/login', async (req, res) => {
   }
   try{
     const data = await authenticateUser(username, password);
-    req.session.userId = v4();
     req.session.token = data.token;
     req.session.user = data.user;
     req.session.save( err => {
@@ -37,14 +37,18 @@ router.post('/login', async (req, res) => {
 })
 
 router.delete('/logout', (req, res) => {
-  req.session.destroy(err => {
-    if(err){
-      console.error(err);
-      return res.status(500).end();
-    }
-    //destroy(req.session.id);
-    return res.status(201).end();
-  });
+  try{
+    req.session.destroy(err => {
+      if(err){
+        console.error(err);
+        return res.status(500).end();
+      }
+      //destroy(req.session.id);
+      return res.status(201).end();
+    });
+  } catch(error){
+    return res.status(500).end();
+  }
 })
 
 router.get('/servers', async (_req, res) => {

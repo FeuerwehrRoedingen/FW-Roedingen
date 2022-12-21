@@ -1,5 +1,5 @@
 {
-  "exec": "TS_NODE_PROJECT=tsconfig.json node --loader ts-node/esm --es-module-specifier-resolution=node run.ts",
+  "exec": "TS_NODE_PROJECT=tsconfig.json DEBUG=* node --loader ts-node/esm --es-module-specifier-resolution=node run.ts",
   "ext": "ts, tsx",
   "watch": [
     "src",

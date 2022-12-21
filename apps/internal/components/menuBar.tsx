@@ -14,7 +14,7 @@ type Props = {}
 function menuBar(props: Props) {
   const logout = () => {
     console.log('logging out')
-    fetch('https://10.21.21.22:3024/logout', {
+    fetch('https://api.feuerwehr-roedingen.de/logout', {
       method: 'DELETE'
     })
     signOut();
@@ -32,7 +32,7 @@ function menuBar(props: Props) {
       <NavLogo to='/groupAlarm' img='/img/groupalarm.png' activeImg='/img/groupalarm_cyan.png' classname='gaLogo' />
       <NavLogo to='/pocketbase' img='/img/pocketbase.png' activeImg='/img/pocketbase_cyan.png' classname='pbLogo' />
       <NavLogo to='/portainer' img='/img/portainer.png' activeImg='/img/portainer_cyan.png' classname='ptLogo' />
-      <div className='userLogo' ref={ref} onPointerEnter={() => setOpen(true)}>
+      <div className='userLogo' ref={ref} onClick={logout}>
         <HiOutlineUserCircle size='full' />
       </div>
     </nav>
