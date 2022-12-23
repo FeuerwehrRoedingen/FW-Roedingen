@@ -7,9 +7,10 @@
   "type": "module",
   "scripts": {
     "build": "tsc",
-    "dev": "(cd pocketbase && go run main.go serve & ) && nodemon ",
+    "dev": "(cd pocketbase && go run main.go serve & ) && (redis-server & ) && nodemon ",
     "prebuild": "rimraf dist",
-    "start": "node dist/server/run.js"
+    "start": "node dist/server/run.js",
+    "types": "npx pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./pocketbase/pocketbase-types.d.ts"
   },
   "dependencies": {
     "body-parser": "^1.20.1",
@@ -26,7 +27,7 @@
     "ip": "^1.1.8",
     "node-pty": "^0.10.1",
     "node-ssh": "^13.0.0",
-    "pocketbase": "^0.7.4",
+    "pocketbase": "^0.9.0",
     "redis": "^4.5.1",
     "rimraf": "^3.0.2",
     "uuid": "^9.0.0",

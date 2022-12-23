@@ -7,7 +7,7 @@ import connectRedis from 'connect-redis'
 import cors from 'cors'
 import express, { Request, response } from 'express'
 import session from 'express-session'
-import { User } from 'pocketbase'
+import { AuthSystemFields } from '../pocketbase/pocketbase-types'
 import redis from 'redis'
 import { WebSocketServer } from 'ws'
 
@@ -20,7 +20,7 @@ import { handle } from './socket.js'
 declare module "express-session" {
   interface SessionData {
     token: string;
-    user: User;
+    user: AuthSystemFields;
   }
 }
 export function configureServer(): HttpServer{

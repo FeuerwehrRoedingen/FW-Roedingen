@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { API } from '../../../components/api';
+import { API } from '../../../src/api';
 
 import './server.css'
 

@@ -6,8 +6,8 @@ import './terminal.css'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 
-import Terminal from '../../../../components/terminal'
-import { WS_API } from '../../../../components/api'
+import Terminal from '../../../../src/components/terminal'
+import { WS_API } from '../../../../src/api'
 
 type Props = {}
 

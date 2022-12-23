@@ -2,14 +2,6 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-  },
-  output: 'standalone',
-  async rewrites() {
-    return {
-      beforeFiles: [],
-      afterFiles: [],
-      fallback: []
-    }
   }
 }
 

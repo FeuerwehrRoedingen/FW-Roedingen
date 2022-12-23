@@ -12,8 +12,8 @@
     "@types/node": "18.11.9",
     "@types/react": "18.0.24",
     "@types/react-dom": "18.0.8",
-    "next": "^13.0.3",
-    "next-auth": "^4.16.4",
+    "next": "^13.1.0",
+    "next-auth": "^4.18.7",
     "node-pty": "^0.10.1",
     "pocketbase": "^0.9.0",
     "react": "18.2.0",
@@ -30,5 +30,8 @@
     "xterm-addon-serialize": "^0.8.0",
     "xterm-addon-unicode11": "^0.4.0",
     "xterm-addon-webgl": "^0.13.0"
+  },
+  "devDependencies": {
+    "pocketbase-typegen": "^1.1.2"
   }
 }

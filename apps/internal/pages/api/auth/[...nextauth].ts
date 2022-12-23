@@ -3,7 +3,7 @@ import CredentialsProvicer from 'next-auth/providers/credentials';
 
 import type { NextAuthOptions, User } from 'next-auth'
 
-import { API } from '../../../components/api';
+import { API } from '../../../src/api';
 
 declare module 'next-auth'{
   interface User {

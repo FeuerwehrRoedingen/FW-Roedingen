@@ -9,3 +9,5 @@ node_modules
 !localhost.pem
 
 pocketbase/pb_data/
+
+*.rdb
