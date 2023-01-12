@@ -2,7 +2,7 @@ import { Request } from 'express'
 import { spawn } from 'node-pty'
 import { WebSocket } from 'ws'
 
-import { getHostFromName } from './pocketbase'
+import { getHost } from './pocketbase'
 
 const map = new Map<string, WebSocket>()
 
@@ -24,7 +24,7 @@ export function destroy(userID: string){
 }
 
 async function handleTerminal(socket: WebSocket, request: Request){
-  const host = await getHostFromName(request.url.split('/').at(-1)!);
+  const host = await getHost(request.url.split('/').at(-1)!);
   const child = spawn('zsh', [], {
     name: 'XTerm',
     cwd: process.cwd(),

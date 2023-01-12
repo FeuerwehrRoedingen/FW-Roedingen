@@ -1,16 +1,18 @@
-import { Awaitable, User } from "next-auth";
-import type { OAuthConfig, Provider } from "next-auth/providers";
-import { AuthSystemFields } from '../../api/pocketbase/pocketbase-types'
+import type { OAuthConfig } from "next-auth/providers";
+import type { AuthSystemFields } from '../../api/pocketbase/pocketbase-types'
+
+import { API } from './api'
 
 const FWRProvider: OAuthConfig<AuthSystemFields> = {
   id: 'feuerwehr-roedingen',
   name: 'Feuerwehr-Roedingen',
   type: 'oauth',
-  authorization: '',
-  token: '',
-  userinfo: '',
+  authorization: API+'/oauth/authorize',
+  token: API+'/ouath/access_token',
+  userinfo: API+'/ouath/userinfo',
+  clientId: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
   profile(profile){
-    
     return new Promise((resolve, reject) => {
       resolve({
         id: profile.id,

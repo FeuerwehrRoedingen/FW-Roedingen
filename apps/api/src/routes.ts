@@ -1,54 +1,11 @@
 import { Router } from 'express'
-import { v4 } from 'uuid'
 
-import { authenticateUser, getHost, getHosts } from './pocketbase.js'
-import { destroy } from './socket.js'
+import { getHost, getHosts } from './pocketbase.js'
 
 export const router = Router();
 
-router.get('/', (req, res) => {
-  console.log(req.session);
+router.get('/', (_req, res) => {
   res.status(200).send('under construction').end();
-})
-
-router.post('/login', async (req, res) => {
-  if(!req.body){
-    return res.status(401).end();
-  }
-  const { username, password } = req.body;
-
-  if(!username || !password){
-    return res.status(401).end();
-  }
-  try{
-    const data = await authenticateUser(username, password);
-    req.session.token = data.token;
-    req.session.user = data.user;
-    req.session.save( err => {
-      if(err)
-        console.error(err);
-    });
-    return res.status(200).send(data);
-  }
-  catch(error:any){
-    console.log(error);
-    return res.status(401).end();
-  }
-})
-
-router.delete('/logout', (req, res) => {
-  try{
-    req.session.destroy(err => {
-      if(err){
-        console.error(err);
-        return res.status(500).end();
-      }
-      //destroy(req.session.id);
-      return res.status(201).end();
-    });
-  } catch(error){
-    return res.status(500).end();
-  }
 })
 
 router.get('/servers', async (_req, res) => {

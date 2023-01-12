@@ -5,7 +5,7 @@ import 'reactjs-popup/dist/index.css'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
-import MenuBar from '../../src/menuBar'
+import MenuBar from '../../src/components/menuBar'
 import React from 'react'
 
 export default function RootLayout({

@@ -1,5 +1,5 @@
 import { createServer as createHttpServer, Server as HttpServer} from 'node:http'
-import { dirname } from 'node:path'
+import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import body from 'body-parser'
@@ -7,12 +7,14 @@ import connectRedis from 'connect-redis'
 import cors from 'cors'
 import express, { Request, response } from 'express'
 import session from 'express-session'
-import { AuthSystemFields } from '../pocketbase/pocketbase-types'
 import redis from 'redis'
 import { WebSocketServer } from 'ws'
 
+import { oAuthRouter } from './oauth.js'
 import { router } from './routes.js'
 import { handle } from './socket.js'
+
+import type { AuthSystemFields } from '../pocketbase/pocketbase-types'
 
 //
 // Merging SessionData interface to add values to req.session
@@ -78,6 +80,8 @@ export function configureServer(): HttpServer{
   express_server.use(sessionParser);
   express_server.use(body.json());
   express_server.use(router);
+  express_server.use(oAuthRouter);
+  express_server.use(express.static(join(__dirname, '..', 'public')));
 
   HTTP_server.on('upgrade', (request: Request, socket, head) => {
     try{
@@ -95,8 +99,6 @@ export function configureServer(): HttpServer{
       console.error(error);
     }
   })
-  
-
   
   WS_server.on('connection', handle)
 

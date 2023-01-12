@@ -1,9 +1,9 @@
 import NextAuth from 'next-auth'
-import CredentialsProvicer from 'next-auth/providers/credentials';
 
-import type { NextAuthOptions, User } from 'next-auth'
+import type { NextAuthOptions } from 'next-auth'
 
-import { API } from '../../../src/api';
+import FWRProvider from '../../../src/FwrProvider';
+
 
 declare module 'next-auth'{
   interface User {
@@ -23,36 +23,7 @@ declare module 'next-auth'{
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    CredentialsProvicer({
-      name: 'credentials',
-      credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'Username'},
-        password: { label: 'Password', type: 'password'},
-      },
-      async authorize(credentials, req): Promise<User|null>{
-        try{
-          const response = await fetch(API + '/login', {
-            method: 'POST',
-            mode: 'cors',
-            body: JSON.stringify({
-              username: credentials?.username,
-              password: credentials?.password
-            }),
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            credentials: 'include'
-          })
-
-          const data = await response.json();
-          console.log(response);
-          return Promise.resolve(data.user);
-        } catch(error){
-          console.error(error);
-          return Promise.resolve(null);
-        }
-      }
-    })
+    FWRProvider
   ],
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser}){

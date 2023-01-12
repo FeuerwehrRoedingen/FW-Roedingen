@@ -6,11 +6,11 @@ global.EventSource = Eventsource;
 global.fetch = fetch;
 //---------------------------------------------------------------
 
-import PocketBase, { Record } from 'pocketbase'
+import PocketBase, { Record, RecordAuthResponse } from 'pocketbase'
 
 const client = new PocketBase('http://127.0.0.1:8090');
 
-export async function authenticateUser(username: string, password:string){
+export async function authenticateUser(username: string, password:string): Promise<RecordAuthResponse<Record>>{
   const data = await client.collection('users').authWithPassword(username, password);
   return Promise.resolve(data);
 }
@@ -40,6 +40,25 @@ export async function getHosts(): Promise<string[]>{
     }
     catch(error){
       console.error(error);
+      resolve([])
     }
+  })
+}
+
+export async function getFahrzeuge(): Promise<string[]> {
+  return new Promise<string[]>(async (resolve) => {
+    try{
+
+    }
+    catch(error){
+      console.error(error);
+      resolve([])
+    }
+  })
+}
+
+export async function getFahrzeug(): Promise<string> {
+  return new Promise<string>(async (resolve) => {
+    
   })
 }

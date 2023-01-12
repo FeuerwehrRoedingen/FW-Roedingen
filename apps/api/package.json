@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "body-parser": "^1.20.1",
+    "browserify": "^17.0.0",
     "chalk": "^5.1.2",
     "concurrently": "^7.5.0",
     "connect-redis": "^6.1.3",
@@ -27,9 +28,10 @@
     "ip": "^1.1.8",
     "node-pty": "^0.10.1",
     "node-ssh": "^13.0.0",
-    "pocketbase": "^0.9.0",
+    "pocketbase": "^0.9.1",
     "redis": "^4.5.1",
     "rimraf": "^3.0.2",
+    "tsify": "^5.0.4",
     "uuid": "^9.0.0",
     "ws": "^8.10.0"
   },

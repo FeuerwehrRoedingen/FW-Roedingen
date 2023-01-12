@@ -1,22 +1,13 @@
-"use client";
-
-import { Agent } from 'https'
-import { useRouter } from 'next/navigation'
-import { signIn } from 'next-auth/react'
-import React, { SyntheticEvent } from 'react'
+import React, { useState } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 
-import './login.css'
-import 'react-toastify/dist/ReactToastify.css'
+import type { SyntheticEvent } from 'react'
 
 type Props = {}
 
 var lock: boolean = false;
-const agent = new Agent({
-  rejectUnauthorized: false
-});
 
-async function submit(event: SyntheticEvent, redirect: ()=>void){
+async function submit(event: SyntheticEvent, redirect: string){
   event.preventDefault();
 
   if(lock){
@@ -30,7 +21,7 @@ async function submit(event: SyntheticEvent, redirect: ()=>void){
   const success = await fetchLogin(target.username.value, target.password.value);
   lock = false;
   if(success){
-    redirect();
+    window.location.replace(redirect)
   }
 }
 
@@ -40,7 +31,6 @@ async function fetchLogin(username: string, password: string){
       closeOnClick: false,
     })  
     try{
-
       setTimeout(() => {
         lock = false;
         toast.update(toastID, {
@@ -52,11 +42,18 @@ async function fetchLogin(username: string, password: string){
         resolve(false);
       }, 10_000);
 
-      const response = await signIn('credentials', {
-        redirect: false,
-        username,
-        password
+      const response = await fetch('/oauth/authorize',{
+        body: JSON.stringify({
+          username,
+          password
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        method: 'POST',
       });
+
+      console.log(response);
 
       if(response!.status === 401){
         toast.update(toastID, {
@@ -89,12 +86,20 @@ async function fetchLogin(username: string, password: string){
   });
 }
 
-function Login(props: Props) {
-  const version = '0.0.0'
-  const router = useRouter();
+function Login(_props: Props) {
+
+  let redirect = '';
+
+  if(typeof window !== 'undefined'){
+    //@ts-ignore
+    redirect = window.redirect_uri;
+    //@ts-ignore
+    delete window.redirect_uri;
+  }
+
   return (
     <div className='page'>
-      <form className='container' onSubmit={(event) => submit(event, () => router.push('/home'))}>
+      <form className='container' onSubmit={event => submit(event, redirect)}>
         <div className='top'>
           <img src='/img/logo.png' height='100%'/>
         </div>
@@ -103,7 +108,7 @@ function Login(props: Props) {
           <input type='password' placeholder='password' name='password'/>
         </div>
         <div className='bottom'>
-          <a id='version_number'>Version {version}</a>
+          <div id='version_number'>Version 0.0.1</div>
           <button type='submit' className='submitButton'>
             login
           </button>
