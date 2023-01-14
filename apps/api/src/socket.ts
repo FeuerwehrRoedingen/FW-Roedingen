@@ -2,7 +2,7 @@ import { Request } from 'express'
 import { spawn } from 'node-pty'
 import { WebSocket } from 'ws'
 
-import { getHost } from './pocketbase'
+import { getHost } from './pocketbase.js'
 
 const map = new Map<string, WebSocket>()
 

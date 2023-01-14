@@ -6,10 +6,10 @@
   "types": "dist/src/index.d.ts",
   "type": "module",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig.json && cp .env dist/.env",
     "dev": "(cd pocketbase && go run main.go serve & ) && (redis-server & ) && nodemon ",
     "prebuild": "rimraf dist",
-    "start": "node dist/server/run.js",
+    "start": "NODE_ENV=production node  dist/run.js",
     "types": "npx pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./pocketbase/pocketbase-types.d.ts"
   },
   "dependencies": {

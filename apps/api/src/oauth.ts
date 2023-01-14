@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { authenticateUser } from './pocketbase'
 
-import { renderLogin } from "./components/renderer";
+import { authenticateUser } from './pocketbase.js'
+import { renderLogin } from "./components/renderer.js";
 
 export const oAuthRouter = Router();
 

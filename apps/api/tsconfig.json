@@ -15,16 +15,21 @@
     "noImplicitReturns": false,
     "declaration": true,
     "outDir": "dist",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
+    "allowJs": false,
 
     "useDefineForClassFields": true,
-    "importsNotUsedAsValues": "preserve"
+    "importsNotUsedAsValues": "preserve",
+
+    "types": []
   },
   "include": [
     "src",
-    "index.ts",
     "run.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "../../node_modules"
   ]
 }

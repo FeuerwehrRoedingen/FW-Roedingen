@@ -1,22 +1,23 @@
 import { Router } from "express";
 
-/**
- * @Note Router starts at /public
- */
+import { getFahrzeug, getFahrzeuge } from './pocketbase.js'
+
 export const public_router = Router();
 
-public_router.get('/', (_req, res) => {
-  res
+public_router.get('/website/fahrzeuge', async (_req, res) => {
+  const fahrzeuge = await getFahrzeuge();
+
+  res.status(200).send(fahrzeuge).end();
 });
 
-public_router.get('/website/fahrzeuge', (_req, res) => {
+public_router.get('/website/fahrzeug/:id', (req, res) => {
+  const fahrzeug = getFahrzeug(req.params.id);
 
+  res.status(200).send(fahrzeug).end();
 });
 
-public_router.get('/website/fahrzeug/:id', (_req, res) => {
-  
-});
-
+/*
 public_router.get('/website/', (_req, res) => {
 
 });
+*/

@@ -57,8 +57,14 @@ export async function getFahrzeuge(): Promise<string[]> {
   })
 }
 
-export async function getFahrzeug(): Promise<string> {
+export async function getFahrzeug(name: string): Promise<string> {
   return new Promise<string>(async (resolve) => {
-    
+    try {
+      name;
+    }
+    catch(error){
+      console.error(error);
+      resolve('');
+    }
   })
 }

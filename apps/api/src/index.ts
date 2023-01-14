@@ -14,7 +14,7 @@ import { oAuthRouter } from './oauth.js'
 import { router } from './routes.js'
 import { handle } from './socket.js'
 
-import type { AuthSystemFields } from '../pocketbase/pocketbase-types'
+import type { AuthSystemFields } from '../pocketbase/pocketbase-types.js'
 
 //
 // Merging SessionData interface to add values to req.session
@@ -25,15 +25,15 @@ declare module "express-session" {
     user: AuthSystemFields;
   }
 }
+
+global.__filename = fileURLToPath(import.meta.url);
+global.__dirname = dirname(__filename);
+
 export function configureServer(): HttpServer{
   if(!process.env.SESSION_SECRET){
     console.error('no session secret provided')
     process.exit(1);
   }
-  
-  // dirname and filename are not supported by default in es6
-  global.__filename = fileURLToPath(import.meta.url);
-  global.__dirname = dirname(__filename);
 
   // The three Servers
   const express_server = express();

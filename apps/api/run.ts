@@ -10,7 +10,6 @@ const ADDRESS = ip.address();
 
 const http = configureServer();
 
-
 http.listen(3025, ADDRESS, () => {
   console.log(chalk.cyan('[ready]'),`server listening on port 3025 as ${ADDRESS}`);
   console.log(chalk.green('[info]'),`access over network on http://${ADDRESS}:3025`)

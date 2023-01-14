@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 
-import Login from './login'
+import Login from './login.js'
 
 export function renderLogin(
   _query : {
