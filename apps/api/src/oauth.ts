@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { v4 } from "uuid";
 
 import { authenticateUser } from './pocketbase.js'
 import { renderLogin } from "./components/renderer.js";
@@ -16,9 +17,13 @@ oAuthRouter.get('/oauth/authorize', (req, res) => {
 
   const query = req.query as {
     client_id: string;
+    scope: string;
     redirect_uri: string;
     response_type: string;
+    state: string;  
   }
+
+  console.log(req.query);
 
   res
     .status(200)
@@ -41,13 +46,10 @@ oAuthRouter.post('/oauth/authorize', async (req, res) => {
         resolve(); //bricht nicht ab
       })
 
-    //generate Code
-    //get callback URL from client_id
-    //send code to app
-    return res.status(200).end();
+    const code = v4();
+    return res.status(200).send(JSON.stringify({code: code})).end();
   })
 })
-
 
 oAuthRouter.post('/oauth/access_token', (req, res) => {
   const {code} = req.body;

@@ -18,15 +18,15 @@ async function submit(event: SyntheticEvent, redirect: string){
     username: { value: string },
     password: { value: string }
   }
-  const success = await fetchLogin(target.username.value, target.password.value);
+  const code = await fetchLogin(target.username.value, target.password.value);
   lock = false;
-  if(success){
-    window.location.replace(redirect)
+  if(code !==''){
+    window.location.replace(`${redirect}?code=${code}`)
   }
 }
 
-async function fetchLogin(username: string, password: string){
-  return new Promise<boolean>(async (resolve, _reject) => {
+async function fetchLogin(username: string, password: string): Promise<string>{
+  return new Promise<string>(async (resolve, _reject) => {
     const toastID = toast.loading('attempting login', {
       closeOnClick: false,
     })  
@@ -39,7 +39,7 @@ async function fetchLogin(username: string, password: string){
           isLoading: false,
           autoClose: 2000
         })
-        resolve(false);
+        resolve('');
       }, 10_000);
 
       const response = await fetch('/oauth/authorize',{
@@ -53,8 +53,6 @@ async function fetchLogin(username: string, password: string){
         method: 'POST',
       });
 
-      console.log(response);
-
       if(response!.status === 401){
         toast.update(toastID, {
           type: 'error',
@@ -62,7 +60,7 @@ async function fetchLogin(username: string, password: string){
           isLoading: false,
           autoClose: 2000
         })
-        resolve(false);
+        resolve('');
       }
       if(response!.status === 200){
         toast.update(toastID, {
@@ -71,7 +69,7 @@ async function fetchLogin(username: string, password: string){
           isLoading: false,
           autoClose: 2000
         })
-        resolve(true);
+        resolve((await response.json()).code);
       }
     }
     catch(error: any){
@@ -81,7 +79,7 @@ async function fetchLogin(username: string, password: string){
         isLoading: false,
         autoClose: 2000
       })
-      resolve(false);
+      resolve('');
     }
   });
 }

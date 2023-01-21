@@ -8,8 +8,8 @@ const FWRProvider: OAuthConfig<AuthSystemFields> = {
   name: 'Feuerwehr-Roedingen',
   type: 'oauth',
   authorization: API+'/oauth/authorize',
-  token: API+'/ouath/access_token',
-  userinfo: API+'/ouath/userinfo',
+  token: API+'/oauth/access_token',
+  userinfo: API+'/oauth/userinfo',
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
   profile(profile){
