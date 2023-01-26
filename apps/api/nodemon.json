@@ -3,6 +3,8 @@
   "ext": "ts, tsx",
   "watch": [
     "src",
-    "run.ts"
+    "run.ts",
+    "pocketbase/pocketbase.ts",
+    "pocketbase/pocketbase-types.d.ts"
   ]
 }

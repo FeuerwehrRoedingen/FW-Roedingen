@@ -7,7 +7,7 @@ type Props = {}
 
 var lock: boolean = false;
 
-async function submit(event: SyntheticEvent, redirect: string){
+async function submit(event: SyntheticEvent, redirect: string, state:string){
   event.preventDefault();
 
   if(lock){
@@ -21,7 +21,7 @@ async function submit(event: SyntheticEvent, redirect: string){
   const code = await fetchLogin(target.username.value, target.password.value);
   lock = false;
   if(code !==''){
-    window.location.replace(`${redirect}?code=${code}`)
+    window.location.replace(`${redirect}?code=${code}&state=${state}`)
   }
 }
 
@@ -87,23 +87,29 @@ async function fetchLogin(username: string, password: string): Promise<string>{
 function Login(_props: Props) {
 
   let redirect = '';
+  let state = '';
 
   if(typeof window !== 'undefined'){
     //@ts-ignore
     redirect = window.redirect_uri;
     //@ts-ignore
     delete window.redirect_uri;
+
+    //@ts-ignore
+    state = window.state;
+    //@ts-ignore
+    delete window.state;
   }
 
   return (
     <div className='page'>
-      <form className='container' onSubmit={event => submit(event, redirect)}>
+      <form className='container' onSubmit={event => submit(event, redirect, state)}>
         <div className='top'>
           <img src='/img/logo.png' height='100%'/>
         </div>
         <div className='inputs'>
-          <input type='text'     placeholder='username' name='username'/>
-          <input type='password' placeholder='password' name='password'/>
+          <input type='text'     placeholder='username' name='username' required/>
+          <input type='password' placeholder='password' name='password' required/>
         </div>
         <div className='bottom'>
           <div id='version_number'>Version 0.0.1</div>

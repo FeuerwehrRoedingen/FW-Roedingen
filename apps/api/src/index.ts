@@ -7,7 +7,6 @@ import connectRedis from 'connect-redis'
 import cors from 'cors'
 import express, { Request, response } from 'express'
 import session from 'express-session'
-import redis from 'redis'
 import { WebSocketServer } from 'ws'
 
 import { oAuthRouter } from './oauth.js'
@@ -40,26 +39,6 @@ export function configureServer(): HttpServer{
   const HTTP_server = createHttpServer(express_server);
   const WS_server = new WebSocketServer({noServer: true});
 
-  // Create Redis session store and connect it to session parser
-  const RedisStore = connectRedis(session);
-  const redisClient = redis.createClient({
-    socket: {
-      host: 'localhost',
-      port: 6379
-    },
-    legacyMode: true,
-    //password: process.env.REDIS_PASSWORD
-  })
-  redisClient.on('error', err => {
-    console.error('[Redis]',err);
-    process.exit(1);
-  })
-  redisClient.on('connect', () => {
-    console.log('[Redis] Connected to Redis')
-  })
-
-  redisClient.connect();
-
   const sessionParser = session({
     secret: process.env.SESSION_SECRET!,
     proxy: true,
@@ -72,13 +51,13 @@ export function configureServer(): HttpServer{
       secure: false
     },
     resave: false,
-    store: new RedisStore({client: redisClient})
   });
 
   express_server.set('trust proxy', 1)
   express_server.use(cors());
   express_server.use(sessionParser);
   express_server.use(body.json());
+  express_server.use(body.urlencoded());
   express_server.use(router);
   express_server.use(oAuthRouter);
   express_server.use(express.static(join(__dirname, '..', 'public')));

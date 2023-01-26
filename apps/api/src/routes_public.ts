@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { getFahrzeug, getFahrzeuge } from './pocketbase.js'
+import { getFahrzeug, getFahrzeuge } from '../pocketbase/pocketbase.js'
 
 export const public_router = Router();
 

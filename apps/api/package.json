@@ -7,10 +7,10 @@
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json && cp .env dist/.env",
-    "dev": "(cd pocketbase && go run main.go serve & ) && (redis-server & ) && nodemon ",
+    "dev": "(cd pocketbase && go run main.go serve & ) && nodemon ",
     "prebuild": "rimraf dist",
     "start": "NODE_ENV=production node  dist/run.js",
-    "types": "npx pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./pocketbase/pocketbase-types.d.ts"
+    "types": "npx pocketbase-typegen --db ./pocketbase/pb_data/data.db --out ./pocketbase/pocketbase-types.ts"
   },
   "dependencies": {
     "body-parser": "^1.20.1",

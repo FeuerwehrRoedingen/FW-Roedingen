@@ -7,7 +7,9 @@ export function renderLogin(
   query: {
     client_id: string,
     redirect_uri: string,
-    response_type: string
+    response_type: string,
+    scope: string,
+    state: string
   }
 ): string {
 
@@ -31,6 +33,6 @@ export function renderLogin(
   }
 
   const html = renderToString(<Wrapper />)
-  const withScript = html.replace('<script>a</script>',`<script>window.redirect_uri = "${query.redirect_uri}"; </script>`)
+  const withScript = html.replace('<script>a</script>',`<script>window.redirect_uri = "${query.redirect_uri}"; window.state = "${query.state}" </script>`)
   return withScript
 }
