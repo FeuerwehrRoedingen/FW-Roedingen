@@ -13,3 +13,4 @@ pocketbase/pb_data/
 *.rdb
 
 public/js/*.js
+firebase_admin.json

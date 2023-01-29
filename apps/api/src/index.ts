@@ -8,9 +8,11 @@ import express, { Request, response } from 'express'
 import session from 'express-session'
 import { WebSocketServer } from 'ws'
 
-import { oAuthRouter } from './routes_oauth.js'
-import { router } from './routes.js'
+import { oAuthRouter } from './routers/routes_oauth.js'
+import { publicRouter } from './routers/routes_public.js'
+import { router } from './routers/routes.js'
 import { handle } from './socket.js'
+import { usersRouter } from './routers/routes_users.js'
 
 import type { AuthSystemFields } from '../pocketbase/pocketbase-types.js'
 
@@ -58,7 +60,9 @@ export function configureServer(): HttpServer{
   express_server.use(body.json());
   express_server.use(body.urlencoded({ extended: false }));
   express_server.use(router);
-  express_server.use(oAuthRouter);
+  express_server.use('/oauth',  oAuthRouter);
+  express_server.use('/public', publicRouter);
+  express_server.use('/users',  usersRouter);
   express_server.use(express.static(join(__dirname, '..', 'public')));
 
   HTTP_server.on('upgrade', (request: Request, socket, head) => {

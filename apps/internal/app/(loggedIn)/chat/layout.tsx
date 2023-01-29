@@ -12,7 +12,6 @@ export default function RootLayout({
   return (
     <div className='cContainer'>
       <div className='cLeft'>
-        <Chats />
       </div>
       <div className='cRight'>
         {children}

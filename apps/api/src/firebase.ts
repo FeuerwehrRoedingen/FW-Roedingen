@@ -1,17 +1,25 @@
-import { initializeApp } from 'firebase-admin'
+import admin from 'firebase-admin'
 import { getMessaging, Message } from 'firebase-admin/messaging';
 
-const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: "fw-roedingen.firebaseapp.com",
-  projectId: "fw-roedingen",
-  storageBucket: "fw-roedingen.appspot.com",
-  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.FIREBASE_APP_ID,
-  measurementId: process.env.FIREBASE_MEASUREMENT_ID
-};
+import serviceAccount from '../firebase_admin.json' assert { type: "json"}
 
-const app = initializeApp(firebaseConfig);
+const app = admin.initializeApp({
+  //@ts-ignore
+  credential: admin.credential.cert(serviceAccount)
+});
 const messaging = getMessaging(app);
 
-export const sendMessage = (message: Message) => messaging.send(message)
+export const sendMessage = (token: string, data: {[key: string]: string}) => {
+
+  let message:Message = {
+    token,
+    data,
+    notification: {
+      body: 'body',
+      title: 'title',
+      imageUrl: 'http://localhost:3000/img/logo.png'
+    }
+  }
+
+  return messaging.send(message);
+}

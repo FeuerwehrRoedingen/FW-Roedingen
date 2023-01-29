@@ -1,5 +1,5 @@
 import { client } from './pocketbase.js'
-import { AuthRequestRecord, AuthRequestResponse, Collections, TokenRecord, TokenResponse, UsersResponse } from './pocketbase-types.js'
+import { AuthRequestRecord, AuthRequestResponse, Collections, TokenRecord, TokenResponse, UsersRecord, UsersResponse } from './pocketbase-types.js'
 
 /**
  * listener Callback that does not do anything, but porevents unhandled rejection errors
@@ -162,4 +162,14 @@ export async function getUserFromToken(accesToken: string){
           .then(resolve, reject);
       }, reject)
   })
+}
+export async function addMessageToken(userID: string, token:string){
+  let data: UsersRecord = {
+    messageToken: token
+  }
+
+  return client.collection(Collections.Users).update<UsersResponse>(userID, data)
+}
+export async function getUser(userID: string){
+  return client.collection(Collections.Users).getOne<UsersResponse>(userID);
 }

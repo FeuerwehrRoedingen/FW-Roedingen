@@ -2,13 +2,13 @@
 import './index.css'
 import 'react-toastify/dist/ReactToastify.css'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
 
 import MenuBar from '../../src/components/menuBar'
-import { onMessage } from '../../src/firebase'
+import { initMessaging, onMessage } from '../../src/firebase'
 
 export default function RootLayout({
   children,
@@ -17,12 +17,21 @@ export default function RootLayout({
 }) {
   const { data, status } = useSession();
   if(status === 'authenticated'){
-
-    onMessage(message => {
-      console.log(message);
-      toast.info(message.from);
-    })
-
+    useEffect(() => {
+      initMessaging(data.user.id)
+        .then(() => {
+          onMessage(message => {
+            new Notification(
+              message.data!['title'], {
+                body: message.data!['body'],
+                image: message.notification?.image
+              })
+            toast.info(message.from);
+          })
+        }, reason => {
+          console.error(reason);
+        });
+    });
     return (
       <div className='main'>
         <MenuBar />
@@ -45,6 +54,7 @@ export default function RootLayout({
     )
   }
   if(status === 'loading'){
+    useEffect(()=>{});
     return <p>Loading...</p>
   }
   const router = useRouter();

@@ -48,7 +48,7 @@ export type TokenRecord = {
 export type UsersRecord = {
 	name?: string
 	avatar?: string
-	access_token?: string
+	messageToken?: string
 }
 
 // Response types include system fields and match responses from the PocketBase API

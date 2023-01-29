@@ -3,10 +3,9 @@ import { randomBytes } from 'node:crypto'
 import { Router } from "express";
 import { v4 } from "uuid";
 
-import { authenticateUser } from '../pocketbase/pocketbase.js'
-import { createAuthrequest, createToken, getAuthRequest, getUserFromToken } from '../pocketbase/pb_oauth.js'
-import { renderLogin } from "./components/login.js";
-import { renderSignUp } from './components/signUp.js';
+import { authenticateUser } from '../../pocketbase/pocketbase.js'
+import { createAuthrequest, createToken, getAuthRequest, getUserFromToken } from '../../pocketbase/pb_oauth.js'
+import { renderLogin } from "../components/login.js";
 
 export const oAuthRouter = Router();
 
@@ -22,21 +21,7 @@ async function generateToken(){
   })
 }
 
-oAuthRouter.get('/signup', (req, res) => {
-  const query = {
-    redirect: req.query.redirect as string || ''
-  };
-
-  res
-    .status(200)
-    .send(renderSignUp(query));
-})
-
-oAuthRouter.delete('/logout', (req, _res) => {
-  console.log(req);
-})
-
-oAuthRouter.get('/oauth/authorize', (req, res) => {
+oAuthRouter.get('/authorize', (req, res) => {
   if(
     typeof req.query.client_id !== 'string' ||
     typeof req.query.redirect_uri !== 'string' ||
@@ -59,7 +44,7 @@ oAuthRouter.get('/oauth/authorize', (req, res) => {
     .status(200)
     .send(renderLogin(query));
 })
-oAuthRouter.post('/oauth/authorize', async (req, res) => {
+oAuthRouter.post('/authorize', async (req, res) => {
   return new Promise<void>(async (resolve, _reject) => {
     const { email, password } = req.body;
   
@@ -94,7 +79,7 @@ oAuthRouter.post('/oauth/authorize', async (req, res) => {
   })
 })
 
-oAuthRouter.post('/oauth/token', async (req, res) => {
+oAuthRouter.post('/token', async (req, res) => {
   const { code, grant_type, redirect_uri } = req.body;
 
   getAuthRequest(code)
@@ -115,7 +100,7 @@ oAuthRouter.post('/oauth/token', async (req, res) => {
     });
 })
 
-oAuthRouter.get('/oauth/userinfo', async (req, res) => {
+oAuthRouter.get('/userinfo', async (req, res) => {
 
   const token = req.headers.authorization?.split(' ');
 
@@ -130,4 +115,12 @@ oAuthRouter.get('/oauth/userinfo', async (req, res) => {
       res.status(404).end();
     })
 
+})
+
+oAuthRouter.delete('/logout', (req, _res) => {
+  console.log(req);
+
+  //TODO 
+
+  
 })
