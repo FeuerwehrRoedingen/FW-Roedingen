@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { renderToString } from 'react-dom/server'
 import { toast, ToastContainer } from 'react-toastify'
 
 import type { SyntheticEvent } from 'react'
@@ -25,7 +26,7 @@ async function submit(event: SyntheticEvent, redirect: string, state:string){
   }
 }
 
-async function fetchLogin(username: string, password: string): Promise<string>{
+async function fetchLogin(email: string, password: string): Promise<string>{
   return new Promise<string>(async (resolve, _reject) => {
     const toastID = toast.loading('attempting login', {
       closeOnClick: false,
@@ -44,7 +45,7 @@ async function fetchLogin(username: string, password: string): Promise<string>{
 
       const response = await fetch('/oauth/authorize',{
         body: JSON.stringify({
-          username,
+          email,
           password
         }),
         headers: {
@@ -56,7 +57,7 @@ async function fetchLogin(username: string, password: string): Promise<string>{
       if(response!.status === 401){
         toast.update(toastID, {
           type: 'error',
-          render: 'invalid username/password',
+          render: 'invalid email/password',
           isLoading: false,
           autoClose: 2000
         })
@@ -84,7 +85,7 @@ async function fetchLogin(username: string, password: string): Promise<string>{
   });
 }
 
-function Login(_props: Props) {
+export function Login(_props: Props) {
 
   let redirect = '';
   let state = '';
@@ -123,4 +124,36 @@ function Login(_props: Props) {
   )
 }
 
-export default Login
+export function renderLogin(
+  query: {
+    client_id: string,
+    redirect_uri: string,
+    response_type: string,
+    scope: string,
+    state: string
+  }
+): string {
+
+  function Wrapper() {
+
+    return (
+      <html>
+        <head>
+          <link rel='stylesheet' href='/css/login.css'></link>
+          <link rel='stylesheet' href='/css/ReactToastify.css'></link>
+          <script defer src='/js/bundle_login.js' />
+          <script>a</script>
+        </head>
+        <body>
+          <div id='root'>
+            <Login />
+          </div>
+        </body>
+      </html>
+    )
+  }
+
+  const html = renderToString(<Wrapper />)
+  const withScript = html.replace('<script>a</script>',`<script>window.redirect_uri = "${query.redirect_uri}"; window.state = "${query.state}" </script>`)
+  return withScript
+}

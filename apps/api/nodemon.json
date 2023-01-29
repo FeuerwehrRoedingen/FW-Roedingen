@@ -1,10 +1,9 @@
 {
-  "exec": "(npx browserify src/components/hydrate.ts -p [ tsify -p tsconfig.build.json ] > public/js/bundle.js &) && TS_NODE_PROJECT=tsconfig.json node --loader ts-node/esm --es-module-specifier-resolution=node run.ts",
+  "exec": "(src/components/bundle.sh &) && TS_NODE_PROJECT=tsconfig.json node --loader ts-node/esm --es-module-specifier-resolution=node run.ts",
   "ext": "ts, tsx",
   "watch": [
     "src",
     "run.ts",
-    "pocketbase/pocketbase.ts",
-    "pocketbase/pocketbase-types.d.ts"
+    "pocketbase/**/*.ts"
   ]
 }

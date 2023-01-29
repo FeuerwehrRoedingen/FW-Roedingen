@@ -1,10 +1,10 @@
 import React, { createElement } from 'react'
 import { hydrateRoot } from 'react-dom/client'
 
-import Login from './login'
+import { SignUp } from './signUp'
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root') as HTMLElement;
 
-  hydrateRoot(root, createElement(Login));
+  hydrateRoot(root, createElement(SignUp));
 });

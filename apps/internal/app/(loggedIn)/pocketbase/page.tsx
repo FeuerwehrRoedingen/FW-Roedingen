@@ -2,7 +2,6 @@
 
 import React from 'react'
 
-
 type Props = {}
 
 function pocketbase(props: Props) {

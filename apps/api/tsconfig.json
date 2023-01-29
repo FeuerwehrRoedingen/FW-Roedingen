@@ -25,10 +25,11 @@
   "include": [
     "src",
     "run.ts", 
-    "pocketbase/pocketbase.ts"
+    "pocketbase/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "../../node_modules"
+    "../../node_modules",
+    "src/components/*"
   ]
 }
