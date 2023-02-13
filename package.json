@@ -4,12 +4,7 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "apps/api",
-      "apps/blockchain",
-      "apps/gh",
-      "apps/internal",
-      "apps/vehicle",
-      "apps/web"
+      "apps/server/*"
     ]
   },
   "scripts": {
