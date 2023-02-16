@@ -1,5 +1,5 @@
 import type { OAuthConfig } from "next-auth/providers";
-import type { AuthSystemFields } from '../apps/server/pocketbase/pocketbase-types'
+import type { AuthSystemFields } from './pocketbase-types'
 
 import { API } from './api.js'
 
@@ -19,7 +19,7 @@ declare module 'next-auth'{
   }
 }
 
-const FWRProvider: OAuthConfig<AuthSystemFields> = {
+export const FWRProvider: OAuthConfig<AuthSystemFields> = {
   id: 'feuerwehr-roedingen',
   name: 'Feuerwehr-Roedingen',
   type: 'oauth',
@@ -29,7 +29,7 @@ const FWRProvider: OAuthConfig<AuthSystemFields> = {
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
   profile(profile){
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       resolve({
         id: profile.id,
         name: profile.username,
@@ -45,5 +45,3 @@ const FWRProvider: OAuthConfig<AuthSystemFields> = {
     })
   }
 }
-
-export default FWRProvider;

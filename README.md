@@ -6,10 +6,6 @@
 > - Databases
 > - servers
 
-## Blockchain
-> Blockchain that manages all kind of transactions  
-> FireCoin is WIP
-
 ## Internal
 > Internal Website for stuff like
 > - Managing servers

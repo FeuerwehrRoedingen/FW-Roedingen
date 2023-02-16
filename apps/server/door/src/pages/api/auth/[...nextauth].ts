@@ -2,11 +2,14 @@ import NextAuth from 'next-auth'
 
 import type { NextAuthOptions } from 'next-auth'
 
-import FWRProvider from '../../../../../../../shared/FwrProvider';
+import { FWRProvider, FWREmailProvider } from 'fw-roedingen-shared'
+
+import { adapter } from '../../../db/database'
 
 export const authOptions: NextAuthOptions = {
   providers: [
-    FWRProvider
+    FWRProvider,
+    FWREmailProvider({})
   ],
   callbacks: {
     async jwt({ token, user, account, profile, isNewUser}){
@@ -23,7 +26,8 @@ export const authOptions: NextAuthOptions = {
   },
   session: {
     strategy: 'jwt'
-  }
+  },
+  adapter
 }
 
 export default NextAuth(authOptions);

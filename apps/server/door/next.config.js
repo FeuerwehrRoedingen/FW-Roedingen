@@ -2,7 +2,7 @@
 const nextConfig = {
   experimental: {
     appDir: true,
-  },
+    esmExternals: true
+  }
 }
-
-module.exports = nextConfig
+export default nextConfig;

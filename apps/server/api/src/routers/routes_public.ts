@@ -21,3 +21,12 @@ public_router.get('/website/', (_req, res) => {
 
 });
 */
+
+publicRouter.get('/status', (_req, res) => {
+
+  //TODO get Status of every service and server
+  //Save values
+  //Make them accesible here
+
+  res.status(200).send('ok');
+})
