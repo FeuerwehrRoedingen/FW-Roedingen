@@ -1,6 +1,6 @@
 import { Router } from 'express'
 
-import { getHost, getHosts } from '../../../pocketbase/pocketbase.js'
+import { getHost, getHosts } from 'fw-roedingen-pocketbase'
 
 export const router = Router();
 

@@ -1,5 +1,5 @@
 import { client } from './pocketbase.js'
-import { AuthRequestRecord, AuthRequestResponse, Collections, TokenRecord, TokenResponse, UsersRecord, UsersResponse } from './pocketbase-types.js'
+import { AuthRequestRecord, AuthRequestResponse, Collections, TokenRecord, TokenResponse, UsersRecord, UsersResponse } from 'fw-roedingen-shared/dist/src/pocketbase-types'
 
 /**
  * listener Callback that does not do anything, but porevents unhandled rejection errors

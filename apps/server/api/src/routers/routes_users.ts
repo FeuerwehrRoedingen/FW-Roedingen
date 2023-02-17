@@ -1,7 +1,7 @@
 import { Router } from 'express'
 
 import { renderSignUp } from '../components/signUp.js'
-import { addMessageToken, getUser } from '../../../pocketbase/pb_oauth.js'
+import { addMessageToken, getUser } from 'fw-roedingen-pocketbase'
 import { sendMessage } from '../firebase.js'
 
 export const usersRouter = Router();

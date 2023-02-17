@@ -3,9 +3,8 @@ import { randomBytes } from 'node:crypto'
 import { Router } from "express";
 import { v4 } from "uuid";
 
-import { authenticateUser } from '../../../pocketbase/pocketbase.js'
-import { createAuthrequest, createToken, getAuthRequest, getUserFromToken } from '../../../pocketbase/pb_oauth.js'
-import { renderLogin } from "../components/login.js";
+import { authenticateUser, createAuthrequest, createToken, getAuthRequest, getUserFromToken } from 'fw-roedingen-pocketbase'
+import { renderLogin } from "../components/login";
 
 export const oAuthRouter = Router();
 

@@ -45,6 +45,13 @@ export default function page(props: Props) {
     }
   });
 
+  const inputClick: React.MouseEventHandler<HTMLDivElement | HTMLButtonElement> = event => {
+    if(!API_Alive){
+      event.preventDefault();
+      toast.warning('API Server is currently offline', { toastId: 'API_WARN' });
+    }
+  }
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -53,12 +60,29 @@ export default function page(props: Props) {
 
   const credentialsSubmit: React.FormEventHandler<HTMLFormElement> = async event => {
     event.preventDefault();
-
     let id = toast.loading('Attempting login');
 
     let submit = async () => {
       return new Promise<boolean>(async (resolve, reject) => {
-        setTimeout(reject, 10_000);
+        setTimeout(() => resolve(false), 10_000);
+
+        fetch(API + '/oauth//authorize', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email: username, password })
+        })
+          .then(async res => {
+            if(res.status !== 200){
+              resolve(false);
+            }
+            // TODO exchange code for token
+
+            alert(await res.json());
+            
+          },reject)
+          .catch(reject);
       })
     }
 
@@ -125,6 +149,13 @@ export default function page(props: Props) {
       .catch(() => setAPI_Alive(false));
   }, []);
 
+  React.useEffect(() => {
+    let url = new URLSearchParams(window.location.search);
+    if(url.get('error') === 'Callback'){
+      toast.error('something went wrong, please try again', { toastId: 'CALLBACK_ERROR'});
+    }
+  })
+
   return (
     <div className='page'>
       <ThemeProvider theme={theme}>
@@ -146,6 +177,7 @@ export default function page(props: Props) {
                       label='Email'
                       value={username}
                       onChange={event => setUsername(event.target.value)}
+                      onClick={inputClick}
                       disabled={!API_Alive}
                     />
                   </FormControl>
@@ -157,6 +189,7 @@ export default function page(props: Props) {
                       label="Password"
                       value={password}
                       onChange={event => setPassword(event.target.value)}
+                      onClick={inputClick}
                       disabled={!API_Alive}
                       endAdornment={
                         <InputAdornment position='end' >
@@ -178,7 +211,7 @@ export default function page(props: Props) {
                     <Button
                       variant='contained'
                       type='submit'
-                      disabled={!API_Alive}
+                      onClick={inputClick}
                     >
                       login
                     </Button>

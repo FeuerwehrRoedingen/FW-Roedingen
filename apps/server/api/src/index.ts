@@ -8,13 +8,13 @@ import express, { Request, response } from 'express'
 import session from 'express-session'
 import { WebSocketServer } from 'ws'
 
-import { oAuthRouter } from './routers/routes_oauth.js'
-import { publicRouter } from './routers/routes_public.js'
-import { router } from './routers/routes.js'
-import { handle } from './socket.js'
-import { usersRouter } from './routers/routes_users.js'
+import { oAuthRouter } from './routers/routes_oauth'
+import { publicRouter } from './routers/routes_public'
+import { router } from './routers/routes'
+import { handle } from './socket'
+import { usersRouter } from './routers/routes_users'
 
-import type { AuthSystemFields } from '../../pocketbase/pocketbase-types.js'
+import type { AuthSystemFields } from 'fw-roedingen-shared/dist/src/pocketbase-types'
 
 //
 // Merging SessionData interface to add values to req.session

@@ -2,9 +2,12 @@ import chalk from 'chalk'
 import { config } from 'dotenv'
 import ip from 'ip'
 
-import { configureServer } from "./src/index.js";
+import { configureServer } from "./src/index.js"
+import { startPB } from 'fw-roedingen-pocketbase'
 
 config();
+
+startPB();
 
 const ADDRESS = ip.address();
 

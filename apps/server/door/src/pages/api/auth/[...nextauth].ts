@@ -1,12 +1,12 @@
 import NextAuth from 'next-auth'
-
-import type { NextAuthOptions } from 'next-auth'
-
 import { FWRProvider, FWREmailProvider } from 'fw-roedingen-shared'
 
 import { adapter } from '../../../db/database'
 
+import type { NextAuthOptions } from 'next-auth'
+
 export const authOptions: NextAuthOptions = {
+  adapter,
   providers: [
     FWRProvider,
     FWREmailProvider({})
@@ -27,7 +27,11 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt'
   },
-  adapter
+  pages: {
+    error: '/',
+    signIn: '/',
+    signOut: '/'
+  }
 }
 
 export default NextAuth(authOptions);

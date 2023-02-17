@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "jsx": "react",
-    "target": "ES2022",
-    "module": "NodeNext",
+    "target": "ESNext",
+    "module": "ESNext",
     "lib": ["ESNext", "DOM"],
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "node",
     "strict": true,
     "sourceMap": true,
     "resolveJsonModule": true,

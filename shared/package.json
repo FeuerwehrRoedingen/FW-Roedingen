@@ -2,10 +2,11 @@
   "name": "fw-roedingen-shared",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "type": "module",
   "scripts": {
     "build": "tsc",
     "prebuild": "rimraf dist",
-    "types": "npx pocketbase-typegen --db ../apps/server/pocketbase/pb_data/data.db --out ./src/pocketbase-types.ts"
+    "types": "npx pocketbase-typegen --db ../apps/server/pocketbase/src/pb_data/data.db --out ./src/pocketbase-types.ts"
   },
   "dependencies": {
     "next-auth": "^4.19.2",

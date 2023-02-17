@@ -7,15 +7,24 @@ global.fetch = fetch;
 //---------------------------------------------------------------
 
 import PocketBase, { Record, RecordAuthResponse } from 'pocketbase'
+import { spawn } from 'child_process'
+import { dirname } from 'path'
+import { fileURLToPath } from 'url'
 
-import { AuthRequestRecord, AuthRequestResponse, Collections, TokenResponse } from './pocketbase-types.js'
+import { AuthRequestRecord, AuthRequestResponse, Collections, TokenResponse } from 'fw-roedingen-shared'
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export const client = new PocketBase('http://127.0.0.1:8090');
+
+export async function startPB(stdin = process.stdin, stdout = process.stdout, stderr = process.stderr){
+  return spawn('go', ['run', 'main.go', 'serve'], { stdio: [stdin, stdout, stderr], cwd: __dirname});
+}
 
 export async function authenticateUser(username: string, password: string): Promise<RecordAuthResponse<Record>> {
   const data = await client.collection(Collections.Users).authWithPassword(username, password);
   return Promise.resolve(data);
-}
+} 
 
 export async function getHost(name: string): Promise<string | undefined> {
   return new Promise(async (resolve, reject) => {
