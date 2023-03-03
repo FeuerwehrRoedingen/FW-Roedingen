@@ -1,0 +1,14 @@
+{
+  "name": "jupyter",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "configurable-http-proxy": "^4.5.4"
+  }
+}

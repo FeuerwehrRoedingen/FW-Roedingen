@@ -14,3 +14,4 @@ pocketbase/pb_data/
 
 public/js/*.js
 firebase_admin.json
+hash_config.json
