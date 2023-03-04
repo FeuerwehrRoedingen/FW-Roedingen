@@ -3,7 +3,7 @@ import { randomBytes } from 'node:crypto'
 import { Router } from "express";
 import { v4 } from "uuid";
 
-import { renderLogin } from "../components/login";
+import { renderLogin, renderSignUp } from "../components/bundle";
 import { authenticateUser, createAuthRequest, createToken, getAuthRequest, getUserFromToken } from '../firebase'
 
 export const oAuthRouter = Router();
@@ -39,9 +39,8 @@ oAuthRouter.get('/authorize', (req, res) => {
     state: string;  
   }
 
-  res
-    .status(200)
-    .send(renderLogin(query));
+  res.status(200);
+  renderLogin(res, query);
 })
 oAuthRouter.post('/authorize', async (req, res) => {
   return new Promise<void>(async (resolve, _reject) => {
@@ -90,7 +89,7 @@ oAuthRouter.post('/token', async (req, res) => {
       const accessToken  = await generateToken();
       const refreshToken = await generateToken();
 
-      createToken(authRequest.user, accessToken, refreshToken)
+      createToken(authRequest.uid, accessToken, refreshToken)
         .then(token => {
           res.status(200).send(JSON.stringify({ access_token: token.access_token, refresh_token: refreshToken })).end();
         }, reason => {

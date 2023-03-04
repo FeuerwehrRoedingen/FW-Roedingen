@@ -4,6 +4,6 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "target": "ESNext",
+    "target": "ESNext"
   }
 }

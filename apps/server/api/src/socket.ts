@@ -2,8 +2,6 @@ import { Request } from 'express'
 import { spawn } from 'node-pty'
 import { WebSocket } from 'ws'
 
-import { getHost } from 'fw-roedingen-pocketbase'
-
 const map = new Map<string, WebSocket>()
 
 export async function handle(socket: WebSocket, request: Request){
@@ -23,8 +21,8 @@ export function destroy(userID: string){
   map.get(userID)?.close();
 }
 
-async function handleTerminal(socket: WebSocket, request: Request){
-  const host = await getHost(request.url.split('/').at(-1)!);
+async function handleTerminal(socket: WebSocket, _request: Request){
+  const host = '?';
   const child = spawn('zsh', [], {
     name: 'XTerm',
     cwd: process.cwd(),

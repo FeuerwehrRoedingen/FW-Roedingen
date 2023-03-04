@@ -2,13 +2,11 @@
   "compilerOptions": {
     "declaration": true,
     "declarationMap": true,
-    "module": "ESNEXT",
     "moduleResolution": "node",
     "noEmit": false,
     "outDir": "dist",
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "sourceMap": true,
-    "target": "ESNEXT"
   }
 }

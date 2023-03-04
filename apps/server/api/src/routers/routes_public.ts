@@ -1,6 +1,7 @@
 import { Router } from "express";
 
-import { getFahrzeug, getFahrzeuge } from 'fw-roedingen-pocketbase'
+import { getFahrzeug, getFahrzeuge } from "../database";
+
 
 export const publicRouter = Router();
 

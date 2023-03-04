@@ -2,7 +2,7 @@ import NextAuth from 'next-auth'
 
 import type { NextAuthOptions } from 'next-auth'
 
-import FWRProvider from '../../../../../../shared/FwrProvider';
+import { FWRProvider } from 'fw-roedingen-shared';
 
 export const authOptions: NextAuthOptions = {
   providers: [

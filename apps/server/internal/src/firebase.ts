@@ -4,7 +4,7 @@ import { getMessaging, getToken, onMessage as _onMessage } from 'firebase/messag
 
 import type { MessagePayload, Messaging, NextFn, Observer } from 'firebase/messaging'
 
-import { API } from '../../../../shared/api'
+import { API } from 'fw-roedingen-shared/dist/src/api'
 import firebaseConfig from './firebaseConfig.json'
 
 const app = initializeApp(firebaseConfig);

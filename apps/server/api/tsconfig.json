@@ -20,7 +20,7 @@
     "allowJs": false,
 
     "useDefineForClassFields": true,
-    "importsNotUsedAsValues": "preserve",
+    "importsNotUsedAsValues": "preserve"
   },
   "include": [
     "src",
@@ -29,7 +29,6 @@
   ],
   "exclude": [
     "node_modules",
-    "../../node_modules",
-    "src/components/*"
+    "../../node_modules"
   ]
 }

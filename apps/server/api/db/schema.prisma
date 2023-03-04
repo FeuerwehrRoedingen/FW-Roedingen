@@ -11,13 +11,13 @@ datasource db {
 }
 
 model AuthRequest {
-  uid     String   @unique
+  uid     String   @unique @id
   code    String   @unique
   expires DateTime
 }
 
 model Token {
-	uid             String    @unique
+	uid             String    @unique @id
   access_token    String    @unique
 	access_expires  DateTime
 	refresh_token   String

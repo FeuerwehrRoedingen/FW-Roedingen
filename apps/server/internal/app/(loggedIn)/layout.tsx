@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
 
 import MenuBar from '../../src/components/menuBar'
-import { initMessaging, onMessage } from '../../src/firebase'
+// import { initMessaging, onMessage } from '../../src/firebase'
 
 export default function RootLayout({
   children,
@@ -17,6 +17,7 @@ export default function RootLayout({
 }) {
   const { data, status } = useSession();
   if(status === 'authenticated'){
+    /*
     useEffect(() => {
       initMessaging(data.user.id)
         .then(() => {
@@ -32,6 +33,7 @@ export default function RootLayout({
           console.error(reason);
         });
     });
+    */
     return (
       <div className='main'>
         <MenuBar />
