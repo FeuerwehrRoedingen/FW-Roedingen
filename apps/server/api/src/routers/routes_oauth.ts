@@ -3,8 +3,8 @@ import { randomBytes } from 'node:crypto'
 import { Router } from "express";
 import { v4 } from "uuid";
 
-import { authenticateUser, createAuthrequest, createToken, getAuthRequest, getUserFromToken } from 'fw-roedingen-pocketbase'
 import { renderLogin } from "../components/login";
+import { authenticateUser, createAuthRequest, createToken, getAuthRequest, getUserFromToken } from '../firebase'
 
 export const oAuthRouter = Router();
 
@@ -58,6 +58,9 @@ oAuthRouter.post('/authorize', async (req, res) => {
           console.error(error);
           throw new Error(error);
         });
+      if(!authResponse){
+        throw new Error('Unauthorized');
+      }
     }
     catch(error: any){
       res.status(401).send(error.message).end();
@@ -65,7 +68,7 @@ oAuthRouter.post('/authorize', async (req, res) => {
     }
 
     const code = v4();
-    createAuthrequest(email, code)
+    createAuthRequest(email, code)
       .then(_authRequest => {
         res.status(200).send(JSON.stringify({code: code})).end();
       }, _reason => {

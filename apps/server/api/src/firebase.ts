@@ -48,12 +48,17 @@ export const sendMessage = (token: string, data: {[key: string]: string}) => {
 
   return messaging.send(message);
 }
+
+//
+// User Function
+//
+
 export const authenticateUser = async (email: string, password: string) => {
   return new Promise<boolean>(async (resolve, reject) => {
   
     auth.listUsers()
-      .then(users => {
-        users.users.forEach(user => {
+      .then(res => {
+        res.users.forEach(user => {
           if(user.email === email){
             
             let hash = user.passwordHash;
@@ -75,17 +80,33 @@ export const authenticateUser = async (email: string, password: string) => {
       });
   });
 }
-export const createTestUser = (
+export const createTestUser = async (
   password: string = 'test123',
   email: string = 'test@feuerwehr-roedingen.de',
   uid: string = 'test123',
   displayName: string = 'test123'
-  ) => {
+) => {
 
-  setTimeout(() => deleteUser(uid).catch(), 60_000);
   deleteUser(uid).catch();
+
   return auth.createUser({uid, password, displayName, email});
 }
-export const deleteUser = (uid: string) => {
+export const deleteUser = async (uid: string) => {
   return auth.deleteUser(uid);
+}
+export const getUserFromToken = async (token: string) => {
+
+}
+export const createToken = async (uid: string, access_token: string, refresh_token: string) => {
+
+}
+
+//
+// Auth Request
+//
+export const createAuthRequest = async (email:string, code:string) => {
+
+}
+export const getAuthRequest = async (code: string) => {
+
 }

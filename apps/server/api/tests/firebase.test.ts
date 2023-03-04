@@ -18,7 +18,7 @@ describe(
       let user = await createTestUser(password, email);  
       
       if(!user)
-      throw new Error('error creating testUser');
+        throw new Error('error creating testUser');
       
       let res = await authenticateUser(email, password);
       
