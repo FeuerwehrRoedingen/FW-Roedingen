@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-import { API } from '../../../src/api';
+import { API } from 'fw-roedingen-shared';
 
 import './server.css'
 

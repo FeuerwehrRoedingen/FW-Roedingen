@@ -8,11 +8,12 @@ import express, { Request, response } from 'express'
 import session from 'express-session'
 import { WebSocketServer } from 'ws'
 
-import { oAuthRouter } from './routers/routes_oauth'
+import { init }         from './firebase'
+import { router }       from './routers/routes'
+import { oAuthRouter }  from './routers/routes_oauth'
 import { publicRouter } from './routers/routes_public'
-import { router } from './routers/routes'
-import { handle } from './socket'
-import { usersRouter } from './routers/routes_users'
+import { usersRouter }  from './routers/routes_users'
+import { handle }       from './socket'
 
 import type { AuthSystemFields } from 'fw-roedingen-shared/dist/src/pocketbase-types'
 
@@ -34,6 +35,9 @@ export function configureServer(): HttpServer{
     console.error('no session secret provided')
     process.exit(1);
   }
+
+  // initialize firebase
+  init();
 
   // The three Servers
   const express_server = express();

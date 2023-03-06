@@ -17,13 +17,14 @@
     "dev": "turbo run dev --parallel",
     "dev:door": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-door",
     "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-internal",
+    "dev:jupyter": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-jupyter",
     "lint": "turbo run lint",
     "nginx": "sh nginx.sh"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",
     "prettier": "latest",
-    "turbo": "latest",
+    "turbo": "^1.8.3",
     "turbo-ignore": "^0.1.0"
   },
   "engines": {

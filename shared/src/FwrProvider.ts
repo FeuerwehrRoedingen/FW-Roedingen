@@ -1,25 +1,33 @@
 import type { OAuthConfig } from "next-auth/providers";
-import type { AuthSystemFields } from './pocketbase-types'
+import type { User } from 'next-auth'
 
 import { API } from './api.js'
 
 declare module 'next-auth'{
   interface User {
-    id: string;
-    created: string;
-    updated: string;
-    email: string;
-    verified: boolean;
-    lastResetSentAt: string;
-    lastVerificationSentAt: string;
-    profile: Object;
+    email: string,
+    emailVerified: boolean,
+    displayName: string|undefined,
+    photoURL: string|undefined,
+    profile: {
+      id: string,
+      email: string,
+      displayName: string,
+      creationTime: string,
+      lastSignInTime: string | undefined,
+      lastRefreshTime: string | undefined,
+      phoneNumber: string|undefined,
+      tokensValidAfterTime: string,
+      tenantId: string|undefined
+    }
   }
+
   interface Session {
     user: User
   }
 }
 
-export const FWRProvider: OAuthConfig<AuthSystemFields> = {
+export const FWRProvider: OAuthConfig<User> = {
   id: 'feuerwehr-roedingen',
   name: 'Feuerwehr-Roedingen',
   type: 'oauth',
@@ -30,18 +38,7 @@ export const FWRProvider: OAuthConfig<AuthSystemFields> = {
   clientSecret: process.env.CLIENT_SECRET,
   profile(profile){
     return new Promise((resolve) => {
-      resolve({
-        id: profile.id,
-        name: profile.username,
-        email: profile.email,
-        image: profile.username,
-        created: profile.created,
-        updated: profile.updated,
-        verified: profile.verified,
-        lastResetSentAt: '',
-        lastVerificationSentAt: '',
-        profile
-      })
+      resolve(profile)
     })
   }
 }

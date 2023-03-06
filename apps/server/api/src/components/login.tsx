@@ -7,7 +7,7 @@ type Props = {}
 
 var lock: boolean = false;
 
-async function submit(event: SyntheticEvent, redirect: string, state:string){
+async function submit(event: SyntheticEvent){
   event.preventDefault();
 
   if(lock){
@@ -18,10 +18,13 @@ async function submit(event: SyntheticEvent, redirect: string, state:string){
     username: { value: string },
     password: { value: string }
   }
+
+  let query = new URLSearchParams(window.location.search);
+
   const code = await fetchLogin(target.username.value, target.password.value);
   lock = false;
   if(code !==''){
-    window.location.replace(`${redirect}?code=${code}&state=${state}`)
+    window.location.replace(`${query.get('redirect_uri')}?code=${code}&state=${query.get('state')}`)
   }
 }
 
@@ -86,24 +89,9 @@ async function fetchLogin(email: string, password: string): Promise<string>{
 
 export function Login(_props: Props) {
 
-  let redirect = '';
-  let state = '';
-
-  if(typeof window !== 'undefined'){
-    //@ts-ignore
-    redirect = window.redirect_uri;
-    //@ts-ignore
-    delete window.redirect_uri;
-
-    //@ts-ignore
-    state = window.state;
-    //@ts-ignore
-    delete window.state;
-  }
-
   return (
     <div className='page'>
-      <form className='container' onSubmit={event => submit(event, redirect, state)}>
+      <form className='container' onSubmit={submit}>
         <div className='top'>
           <img src='/img/logo.png' height='100%'/>
         </div>

@@ -2,7 +2,7 @@
 import React, { createRef } from 'react'
 import { useSession } from 'next-auth/react'
 
-import { API } from '../../../src/api'
+import { API } from 'fw-roedingen-shared/dist/src/api'
 
 type Props = {}
 

@@ -1,5 +1,7 @@
 # Configuration file for jupyterhub.
 
+from oauthenticator.generic import GenericOAuthenticator
+
 c = get_config()  #noqa
 
 ## Whether to shutdown the proxy when the Hub shuts down.
@@ -28,9 +30,10 @@ c.ConfigurableHTTPProxy.api_url = 'http://localhost:8001'
 
 ## Oauth
 #
-c.JupyterHub.authenticator_class = "generic"
+c.JupyterHub.authenticator_class = GenericOAuthenticator
 
-Api_url = ''
+Api_url = 'http://localhost:3025'
+host = 'localhost:8080'
 
 c.GenericOAuthenticator.oauth_callback_url = 'https://{host}/hub/oauth_callback'
 c.GenericOAuthenticator.client_id = 'OAUTH-CLIENT-ID'

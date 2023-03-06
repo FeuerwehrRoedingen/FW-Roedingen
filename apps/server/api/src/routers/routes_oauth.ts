@@ -40,7 +40,7 @@ oAuthRouter.get('/authorize', (req, res) => {
   }
 
   res.status(200);
-  renderLogin(res, query);
+  renderLogin(res);
 })
 oAuthRouter.post('/authorize', async (req, res) => {
   return new Promise<void>(async (resolve, _reject) => {
@@ -54,7 +54,7 @@ oAuthRouter.post('/authorize', async (req, res) => {
     try{
       const authResponse = await authenticateUser(email as string, password as string)
         .catch(error => {
-          console.error(error);
+          console.error('error:',error);
           throw new Error(error);
         });
       if(!authResponse){
@@ -111,12 +111,30 @@ oAuthRouter.get('/userinfo', async (req, res) => {
 
   getUserFromToken(token[1])
     .then(user => {
-      res.status(200).send(JSON.stringify(user)).end();
+      let parsedUser = {
+        id: user.uid,
+        email: user.email,
+        emailVerified: user.emailVerified,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        profile: {
+          id: user.uid,
+          email: user.email,
+          displayName: user.displayName,
+          creationTime: user.metadata.creationTime,
+          lastSignInTime: user.metadata.lastSignInTime,
+          lastRefreshTime: user.metadata.lastRefreshTime,
+          phoneNumber: user.phoneNumber,
+          tokensValidAfterTime: user.tokensValidAfterTime,
+          tenantId: user.tenantId
+        }
+      }
+      res.status(200).send(JSON.stringify(parsedUser)).end();
     }, _reason => {
       res.status(404).end();
-    })
-
+    });
 })
+
 
 oAuthRouter.delete('/logout', (req, _res) => {
   console.log(req);

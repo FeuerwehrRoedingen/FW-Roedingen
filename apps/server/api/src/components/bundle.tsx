@@ -14,16 +14,7 @@ import { Response } from 'express'
 let cwd = dirname(fileURLToPath(import.meta.url));
 let jsFolder = join(cwd, '..', '..', 'public', 'js');
 
-export const renderLogin = async (
-  res: Response,
-  query: {
-    client_id: string,
-    redirect_uri: string,
-    response_type: string,
-    scope: string,
-    state: string
-  }
-) => {
+export const renderLogin = async (res: Response) => {
   let { pipe } = renderToPipeableStream(
     <Wrapper>
       <Login />
@@ -33,7 +24,6 @@ export const renderLogin = async (
         pipe(res);
       },
       bootstrapScripts: ['/js/bundle_login.js'],
-      bootstrapScriptContent: `window.redirect_uri = "${query.redirect_uri}"; window.state = "${query.state}"`
     }
   )
 }
@@ -43,8 +33,8 @@ export const renderSignUp = async () => {
 
 export const bundleLogin = () => {
   return new Promise<void>(async (resolve, reject) => {
-    browserify()
-      .add(join(cwd, 'hydrateLogin.ts'))
+    browserify({extensions: ['.ts', '.tsx']})
+      .add(join(cwd, 'hydrateLogin.tsx'))
       .plugin(tsify, { p: 'tsconfig.build.json'})
       .on('error', reject)
       .bundle()
@@ -55,11 +45,11 @@ export const bundleLogin = () => {
 export const bundleSignUp = async () => {
   return new Promise<void>(async (resolve, reject) => {
     browserify()
-      .add(join(cwd, 'hydrateSignUp.ts'))
+      .add(join(cwd, 'hydrateSignUp.tsx'))
       .plugin(tsify, { p: 'tsconfig.build.json'})
       .on('error', reject)
       .bundle()
-      .pipe(createWriteStream(join(jsFolder, 'bundle_login.js')))
+      .pipe(createWriteStream(join(jsFolder, 'bundle_signUp.js')))
       .on('finish', resolve);
   })
 }
