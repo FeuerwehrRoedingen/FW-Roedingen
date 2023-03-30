@@ -9,8 +9,15 @@ cmake_minimum_required(VERSION 3.20)
 #
 # Vulkan
 #
-include_directories("C:/VulkanSDK/1.3.239.0/Include")
-link_directories("C:/VulkanSDK/1.3.239.0/lib")
+if(UNIX AND APPLE)
+  set(VULKAN_DIR "/Users/thomas/VulkanSDK/1.3.243.0/macOS/")
+  set(VULKAN_LIB ${VULKAN_DIR}/lib/libvulkan.1.dylib)
+elseif()
+  set(VULKAN_DIR "C:/VulkanSDK/1.3.239.0")
+  set(VULKAN_LIB ${VULKAN_DIR}/lib/vulkan-1.lib)
+  endif()
+include_directories(${VULKAN_DIR}/Include)
+link_directories(${VULKAN_DIR}/lib)
 
 #
 # GLFW
@@ -20,5 +27,5 @@ add_subdirectory(${CMAKE_SOURCE_DIR}/lib/glfw)
 #
 # MAIN
 #
-add_executable(main Main.cpp src/window.cpp src/system.cpp)
-target_link_libraries(main PRIVATE glfw "C:/VulkanSDK/1.3.239.0/lib/vulkan-1.lib")
+add_executable(main Main.cpp src/window.cpp src/hardware.cpp)
+target_link_libraries(main PRIVATE glfw ${VULKAN_LIB})

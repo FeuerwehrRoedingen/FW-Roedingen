@@ -2,14 +2,14 @@
 #include <vulkan/vulkan.hpp>
 
 #include "src/include/window.h"
-#include "src/include/system.h"
+#include "src/include/hardware.h"
 
 int main(int argc, char** argv)
 {
   Window window{};
-  System::GPU gpu{};
-
   window.createWindow();
+
+  Hardware::initVulkan();
 
   while(!window.shouldClose())
   {
@@ -17,4 +17,5 @@ int main(int argc, char** argv)
   }
 
   window.cleanup();
+  Hardware::cleanup();
 }
