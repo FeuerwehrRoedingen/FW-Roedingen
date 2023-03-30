@@ -1,0 +1,3 @@
+[submodule "apps/games/fireverse/lib/glfw"]
+	path = apps/games/fireverse/lib/glfw
+	url = https://github.com/glfw/glfw.git
