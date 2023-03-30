@@ -1,8 +1,20 @@
 #include <iostream>
+#include <vulkan/vulkan.hpp>
+
+#include "src/include/window.h"
+#include "src/include/system.h"
 
 int main(int argc, char** argv)
 {
-  std::cout << "Hello World" << std::endl;
+  Window window{};
+  System::GPU gpu{};
 
-  return EXIT_SUCCESS;
+  window.createWindow();
+
+  while(!window.shouldClose())
+  {
+    glfwPollEvents();
+  }
+
+  window.cleanup();
 }
