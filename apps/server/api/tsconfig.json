@@ -19,8 +19,7 @@
     "skipLibCheck": true,
     "allowJs": false,
 
-    "useDefineForClassFields": true,
-    "importsNotUsedAsValues": "preserve"
+    "useDefineForClassFields": true
   },
   "include": [
     "src",

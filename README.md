@@ -1,78 +1,52 @@
 # Feuerwehr Rödingen Monorepo
 
-## API
-> Endpoints for :
-> - web functions
-> - Databases
-> - servers
+## Client
+> ### **Applications that users need to install**
+> **Currently on Hold !!**
+> ### Mobile
+> - Mobile version of internal website
+> - without Server and Database monitoring
+> ### Tablet
+> - Application to be installed on a Tablet
+> - TODO when everything else is done
 
-## Internal
-> Internal Website for stuff like
-> - Managing servers
-> - Chat
-> - Orga stuff
-> - Editing the contents of the public website
-> - Access to Prisma Studio and Pocketbase admin UI
+## Games
+> ### **Firefighting inspired games for the Website**
+> ### Fireverse
+> - Firefighting clone of the Metaverse (C++)
+> ### Fireverse Web
+> - Web version of the Fireverse (WebAssembly)
 
-## Mobile
-> Mobile app to access (some) functionality of the internal website  
-> (WIP)
+## Server
+> ### **Applications that need Hosting on a Server**
+> ### API
+> - Access Point for all our Data.
+> - Provides a Proxy for the Database
+> - functions to retrieve data 
+> - endpoints for authentication
+> ### Door
+> - WIP 
+> - signUp function 
+> - edit account and forgot password logic
+> ### Internal
+> - Internal Website
+> - Contains sensitive private Data, strong authentication required
+> - Messaging ?
+> - Allows Monitoring of servers and Databases
+> ### Web
+> - Public Website
+> - Contains all Public information, no need for authentication
 
-## Tablet
-> (iOS) App for using with a vehicle equipped with a rPI running the vehicle software
+# Hosting
 
-## Vehicle
-> Service that monitors vehicle specific data and allows connecting to it  
-> should run on a Raspberry Pi
-
-## Web
-> Public web Page at www.feuerwehr-roedingen.de
-
-# Monorepo
-
-Everything is written in Typescriptt, because TS is the best programming language, dont @ me. Turborepo allows interconnected Repos to be developed alongside each other and speeds up the build process.
-
-# GH
-
-Inside the Firehouse are 2 Raspberry pis. 
-- Alarmmonitor  @ 192.168.2.201
-- Alarmmonitor2 @ 192.168.2.202
-
-Both have a static etho interface and a dynamic wlan0 interface connected to the router for redundancy.
-
-## Alarmmonitor
-
-Hangs above the entrance door.
-
-Services: 
-- Docker (master)
-- NGINX
-- Groupalarm Monitor connected to HDMI0
-
-Containers:
-- NGINX
-- Internal Website
-- LocalInteractions (WIP)
-
-Ports: 
-
-- NGINX 8080
-- Internal Website 3000
-
-## Alarmmonitor2
-
-Hangs between the HLF-20 and the GW-L2.
-
-Services: 
-- Docker (slave)
-- Groupalarm Monitor connected to HDMI0
-
-Containers:
-- API 
-- Pocketbase
-
-Ports: 
-
-- API 3025
-- API HTTPS 3024
-- Pocketbase 8090
+## Email
+- AWS Workmail
+- AWS SES (Smtp service)
+## Applications
+- API      : AWS EC2
+- Door     : Vercel
+- Internal : Vercel
+- Web      : Vercel
+## Database
+- AWS RDS
+- AWS RDS Proxy

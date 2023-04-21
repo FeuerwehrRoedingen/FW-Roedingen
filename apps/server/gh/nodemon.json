@@ -1,8 +1,0 @@
-{
-  "exec": "DEBUG=* node --loader ts-node/esm index.ts",
-  "ext": "ts",
-  "watch": [
-    "src",
-    "index.ts"
-  ]
-}
