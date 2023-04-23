@@ -1,8 +1,9 @@
 "use client";
+
 import React, { createRef } from 'react'
 import { useSession } from 'next-auth/react'
 
-import { API } from 'fw-roedingen-shared/dist/src/api'
+import { API } from 'fw-roedingen-shared/api'
 
 type Props = {}
 

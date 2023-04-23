@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from 'react'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -18,8 +18,6 @@ export default function menuBar(props: Props) {
       <NavItem to='/settings' icon={VscSettingsGear} />
       <NavItem to='/server' icon={FaServer} />
       <NavLogo to='/groupAlarm' img='/img/groupalarm.png' activeImg='/img/groupalarm_cyan.png' classname='gaLogo' />
-      <NavLogo to='/pocketbase' img='/img/pocketbase.png' activeImg='/img/pocketbase_cyan.png' classname='pbLogo' />
-      <NavLogo to='/portainer' img='/img/portainer.png' activeImg='/img/portainer_cyan.png' classname='ptLogo' />
       <NavItem to='/profile' icon={HiOutlineUserCircle} className='userLogo'/>
     </nav>
   )

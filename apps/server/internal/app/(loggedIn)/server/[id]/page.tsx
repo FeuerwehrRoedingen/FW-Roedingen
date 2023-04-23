@@ -1,5 +1,3 @@
-"use client"
-
 import 'xterm/css/xterm.css'
 import './terminal.css'
 

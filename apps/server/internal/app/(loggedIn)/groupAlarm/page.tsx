@@ -1,13 +1,10 @@
 "use client"
 
-import React, { useRef } from 'react'
-import { VncScreen, VncScreenHandle } from 'react-vnc'
+import React from 'react'
 
 type Props = {}
 
 function Home(props: Props) {
-
-  const ref = useRef<VncScreenHandle>(null);
 
   return (
     <div className='frameContainer'>

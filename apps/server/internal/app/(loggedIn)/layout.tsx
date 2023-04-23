@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import './index.css'
 import 'react-toastify/dist/ReactToastify.css'
 

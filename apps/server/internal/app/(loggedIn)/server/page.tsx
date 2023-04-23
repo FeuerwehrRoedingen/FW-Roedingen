@@ -1,18 +1,22 @@
 import Link from 'next/link'
 import React from 'react'
-import { API } from 'fw-roedingen-shared';
+import { API } from 'fw-roedingen-shared/api';
 
 import './server.css'
 
 async function getData(): Promise<string[]> {
-  //@ts-ignore
-  try{
-    const res = await fetch(API+'/servers');
-    return res.json();
-  } catch(error){
-    console.error(error);
-    return []
-  }
+  return new Promise<string[]>(async function(resolve){
+    try{
+      fetch(API+'/servers')
+        .then(
+          response => response.json().then(resolve, ()=>resolve([])),
+          reason => resolve([])
+        )
+    } catch(error){
+      console.error(error);
+      resolve([]);
+    }
+  });
 }
 
 type Props = {}

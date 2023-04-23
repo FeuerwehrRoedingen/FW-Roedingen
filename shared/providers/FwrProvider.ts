@@ -1,7 +1,7 @@
 import type { OAuthConfig } from "next-auth/providers";
 import type { User } from 'next-auth'
 
-import { API } from './api.js'
+import { API } from '../api/index.js'
 
 declare module 'next-auth'{
   interface User {

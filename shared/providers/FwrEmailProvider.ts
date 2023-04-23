@@ -1,7 +1,7 @@
 import { Theme } from 'next-auth';
 import { EmailProvider } from 'next-auth/providers'
 
-import { transporter } from './email'
+import { transporter } from '../email'
 
 export const FWREmailProvider: EmailProvider = options =>{
   return {

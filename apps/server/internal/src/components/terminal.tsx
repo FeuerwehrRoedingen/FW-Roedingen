@@ -159,13 +159,6 @@ function Xterm({
     }
   }, [sendMessage, lastMessage])
 
-  const readyStateText = {
-    [WebSocket.CONNECTING]: "Connecting",
-    [WebSocket.OPEN]: "Open",
-    [WebSocket.CLOSING]: "Closing",
-    [WebSocket.CLOSED]: "Closed"
-  }[readyState];
-
   return (
     <div  {...props}>
       <div id='terminal' ref={divRef}></div>

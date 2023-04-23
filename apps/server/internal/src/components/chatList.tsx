@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react'
 import React, { useEffect, useState } from 'react'
 import { VscClose } from 'react-icons/vsc';
-import { WS_API } from '../api';
+import { WS_API } from 'fw-roedingen-shared/api';
 
 type ChatsProps = {}
 

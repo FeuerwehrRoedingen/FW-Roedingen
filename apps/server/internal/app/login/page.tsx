@@ -7,7 +7,7 @@ type Props = {}
 
 async function page({}: Props) {
 
-  signIn('feuerwehr-roedingen');
+  //signIn('feuerwehr-roedingen');
   return (
     <div>...loading</div>
   )

@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-export default async function(props: Props) {
+export default function(props: Props) {
 
   return (
     <div>
