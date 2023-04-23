@@ -37,5 +37,4 @@ yarn-error.log*
 next-env.d.ts
 
 .vscode/
-firebaseConfig.json
-public/firebase-messaging-sw.js
+.turbo/

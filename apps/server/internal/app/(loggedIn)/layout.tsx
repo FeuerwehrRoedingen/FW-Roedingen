@@ -3,13 +3,12 @@
 import './index.css'
 import 'react-toastify/dist/ReactToastify.css'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
 
-import MenuBar from '../../src/components/menuBar'
-// import { initMessaging, onMessage } from '../../src/firebase'
+import MenuBar from '../../components/menuBar'
 
 export default function RootLayout({
   children,
