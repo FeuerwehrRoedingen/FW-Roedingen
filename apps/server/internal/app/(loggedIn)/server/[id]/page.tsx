@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation'
 import React from 'react'
 
 import Terminal from '../../../../src/components/terminal'
-import { WS_API } from '../../../../src/api'
+import { WS_API } from 'fw-roedingen-shared'
 
 type Props = {}
 

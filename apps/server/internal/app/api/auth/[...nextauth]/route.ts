@@ -2,7 +2,7 @@ import NextAuth from 'next-auth'
 
 import type { NextAuthOptions } from 'next-auth'
 
-import { FWRProvider } from 'fw-roedingen-shared';
+import { FWRProvider } from 'fw-roedingen-shared'
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -24,6 +24,8 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt'
   }
-}
+};
 
-export default NextAuth(authOptions);
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
