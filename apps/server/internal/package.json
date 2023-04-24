@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "next build",
+    "postBuild": "./scripts/postBuild.sh",
     "start": "next start",
-    "lint": "next lint"
+    "standalone": "node ./.next/standalone/server.js"
   },
   "dependencies": {
     "@types/node": "18.11.9",
