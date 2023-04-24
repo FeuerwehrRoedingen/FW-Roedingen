@@ -4,8 +4,10 @@
   "private": true,
   "workspaces": {
     "packages": [
-      "apps/server/*",
-      "apps/games/*",
+      "apps/api",
+      "apps/door",
+      "apps/internal",
+      "apps/web",
       "shared"
     ]
   },
@@ -18,9 +20,7 @@
     "dev": "turbo run dev --parallel",
     "dev:door": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-door",
     "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-internal",
-    "dev:jupyter": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-jupyter",
-    "lint": "turbo run lint",
-    "nginx": "sh nginx.sh"
+    "lint": "turbo run lint"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",

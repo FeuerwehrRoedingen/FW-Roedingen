@@ -5,7 +5,7 @@ const nextConfig = {
   basePath: '',
   experimental: {
     appDir: true,
-    outputFileTracingRoot: path.join(__dirname, '../../..')
+    outputFileTracingRoot: path.join(__dirname, '../../')
   },
   output: 'standalone'
 }
