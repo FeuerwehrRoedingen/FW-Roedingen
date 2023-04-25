@@ -15,15 +15,13 @@ import { publicRouter } from './routers/routes_public'
 import { usersRouter }  from './routers/routes_users'
 import { handle }       from './socket'
 
-import type { AuthSystemFields } from 'fw-roedingen-shared/dist/src/pocketbase-types'
-
 //
 // Merging SessionData interface to add values to req.session
 //
 declare module "express-session" {
   interface SessionData {
     token: string;
-    user: AuthSystemFields;
+    user: any;
   }
 }
 

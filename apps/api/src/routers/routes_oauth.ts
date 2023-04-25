@@ -135,7 +135,6 @@ oAuthRouter.get('/userinfo', async (req, res) => {
     });
 })
 
-
 oAuthRouter.delete('/logout', (req, _res) => {
   console.log(req);
 

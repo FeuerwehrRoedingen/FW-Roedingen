@@ -4,10 +4,8 @@ const path = require('path');
 const nextConfig = {
   basePath: '',
   experimental: {
-    appDir: true,
-    outputFileTracingRoot: path.join(__dirname, '../../')
+    appDir: true
   },
-  output: 'standalone'
 }
 
 module.exports = nextConfig

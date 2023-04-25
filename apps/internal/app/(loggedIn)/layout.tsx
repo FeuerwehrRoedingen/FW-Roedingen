@@ -1,11 +1,11 @@
-"use client";
+"use client"
 
 import './index.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 import React from 'react'
 import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { redirect } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
 
 import MenuBar from '../../components/menuBar'
@@ -16,6 +16,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const { data, status } = useSession();
+
   if(status === 'authenticated'){
     return (
       <div className='main'>
@@ -41,6 +42,6 @@ export default function RootLayout({
   if(status === 'loading'){
     return <p>Loading...</p>
   }
-  const router = useRouter();
-  router.push('/login');
+
+  redirect('/login');
 }
