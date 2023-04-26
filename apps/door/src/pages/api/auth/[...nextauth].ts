@@ -1,5 +1,5 @@
 import NextAuth from 'next-auth'
-import { FWRProvider, FWREmailProvider } from 'fw-roedingen-shared'
+import { FWRProvider, FWREmailProvider } from 'fw-roedingen-shared/providers'
 
 import { adapter } from '../../../db/database'
 

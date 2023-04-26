@@ -5,19 +5,23 @@ import { signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { toast, ToastContainer } from 'react-toastify'
 
-import Button from '@mui/material/Button'
-import { createTheme, ThemeProvider } from '@mui/material/styles'
-import FormControl from '@mui/material/FormControl'
-import OutlinedInput from '@mui/material/OutlinedInput'
-import InputLabel from '@mui/material/InputLabel'
-import InputAdornment from '@mui/material/InputAdornment'
-import IconButton from '@mui/material/IconButton'
+import { 
+  Box, 
+  Button, 
+  createTheme, 
+  FormControl, 
+  IconButton, 
+  InputAdornment, 
+  InputLabel, 
+  OutlinedInput, 
+  ThemeProvider
+} from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import Box from '@mui/material/Box'
+import { useRouter } from 'next/navigation'
+import { API } from 'fw-roedingen-shared/api'
 
 import './index.css'
 import 'react-toastify/dist/ReactToastify.css'
-import { API } from 'fw-roedingen-shared/src/api'
 
 type Props = {}
 export default function page(props: Props) {
@@ -26,6 +30,8 @@ export default function page(props: Props) {
   if (status === 'authenticated') {
     window.location.href = '/home';
   }
+
+  const { push } = useRouter();
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [password, setPassword] = React.useState('');
@@ -207,7 +213,7 @@ export default function page(props: Props) {
                     />
                   </FormControl>
                   <div className='button'>
-                    <a onClick={() => signIn('feuerwehr-roedingen')}>use oauth?</a>
+                    <a onClick={() => {push('/forgot')}}>Passwort vergessen?</a>
                     <Button
                       variant='contained'
                       type='submit'
