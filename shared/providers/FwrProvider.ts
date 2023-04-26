@@ -1,7 +1,7 @@
 import type { OAuthConfig } from "next-auth/providers";
 import type { User } from 'next-auth'
 
-import { API } from '../api/index.js'
+import { DOOR } from '../api/index.js'
 
 declare module 'next-auth'{
   interface User {
@@ -27,13 +27,15 @@ declare module 'next-auth'{
   }
 }
 
+export const FWR_PROVIDER_ID = 'feuerwehr-roedingen';
+
 export const FWRProvider: OAuthConfig<User> = {
-  id: 'feuerwehr-roedingen',
+  id: FWR_PROVIDER_ID,
   name: 'Feuerwehr-Roedingen',
   type: 'oauth',
-  authorization: API+'/oauth/authorize',
-  token: API+'/oauth/token',
-  userinfo: API+'/oauth/userinfo',
+  authorization: DOOR+'/login',
+  token: DOOR+'/oauth/token',
+  userinfo: DOOR+'/oauth/userinfo',
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
   profile(profile){

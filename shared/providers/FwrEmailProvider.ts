@@ -3,10 +3,11 @@ import { EmailProvider } from 'next-auth/providers'
 
 import { transporter } from '../email'
 
+export const FWR_EMAIL_PROVIDER_ID = 'feuerwehr-roedingen-email';
 export const FWREmailProvider: EmailProvider = options =>{
   return {
     from: process.env.EMAIL_FROM,
-    id: "feuerwehr-roedingen-email",
+    id: FWR_EMAIL_PROVIDER_ID,
     name: "Feuerwehr-Roedingen-Email",
     options: {},
     sendVerificationRequest: async params => {
