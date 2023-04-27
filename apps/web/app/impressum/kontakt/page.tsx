@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HomeButton from '../../components/HomeButton';
+import HomeButton from '../../../components/HomeButton';
 
 type Props = {}
 type State = {}

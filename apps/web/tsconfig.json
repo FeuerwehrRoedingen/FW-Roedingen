@@ -27,7 +27,7 @@
     "server",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components"  ],
   "exclude": [
     "node_modules",
     "dist",

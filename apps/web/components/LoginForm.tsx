@@ -2,7 +2,7 @@ import { NextRouter } from 'next/router'
 import React, { Component } from 'react'
 import { toast } from 'react-toastify'
 
-import { withRouter } from '../wrapper'
+import { withRouter } from '../src/wrapper'
 
 type Props = {
   router: NextRouter;
