@@ -1,5 +1,10 @@
 # Public Website
 
+## ENV
+Inside some projects are **.env.example** files, these contain dummy variables for every required enviromental variable for the project.
+If you dont have other information, copy this file and rename it to **.env** this will make all the variables inside the file accessible inside JS via process.env.
+Inside the env file are secrets for api/database connections and other confidential information, these values should **nerver** be accessible, always make sure you do not push them to git!
+
 ## Node
 NodeJS is a runtime for server side Javascript code (code that is never going to be sent to the client).
 **BUT** only the invisible backend code is NodeJS, the code we write **WILL** be sent to a client, so do not use ther NodeJS Docs for Javascript code, but the V8 JS docs. And pay attention, that no secrets or other confidential data get sent to the client.
