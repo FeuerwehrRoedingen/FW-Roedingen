@@ -58,3 +58,24 @@
   color: #A72920;
   border-bottom: 2px solid #A72920;
 }
+
+.post {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 33vw;
+  height: 100%;
+
+  background-color: #c4c4c4;
+}
+.post img {
+  width: 50%;
+}
+
+.postDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}

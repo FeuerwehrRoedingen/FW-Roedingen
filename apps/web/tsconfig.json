@@ -17,8 +17,7 @@
     "strict": true,
     "target": "es2015",
     "paths": {
-      "src/*": ["./src/*"],
-      "server/*": ["./server/*"]
+      "components/*": ["./components/*"],
     }
   },
   "include": [
