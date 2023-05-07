@@ -3,10 +3,9 @@ import KontaktFormular from '../../../components/Kontaktformular';
 
 import './kontakt.css'
 
-type Props = {}
-type State = {}
+interface IProps {}
 
-export default function(props: Props){
+export default function(props: IProps){
 
   const to='info@feuerwehr-roedingen.de';
   const subject='Webseite'
