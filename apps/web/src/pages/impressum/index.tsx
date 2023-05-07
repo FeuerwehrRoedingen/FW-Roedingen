@@ -14,16 +14,16 @@ export default class Impressum extends Component<Props, State> {
         <div className='max-w-[1000px]'>
           <h1 className='text-3xl border-b-2 border-b-ral-3020'>Impressum</h1>
           <div className='pl-2'>
-            Thomas Lessenich<br/>
-            Platz 10<br/>
+            Thomas Düren<br/>
+            Ehrenstraße 10<br/>
             52445 Titz<br/>
-            Telefon: 02463-8168<br/>
+            Telefon: 0171-5653667<br/>
             E-Mail: info@feuerwehr-roedingen.de
           </div>
           <h1 className='text-xl border-b-2 border-b-ral-3020'>Verantwortlich für den Inhalt (gem. § 55 Abs. 2 RStV):</h1>
           <div className='pl-2'>
-            Thomas Lessenich<br/>
-            Platz 10<br/>
+            Thomas Düren<br/>
+            Ehrenstraße 10<br/>
             52445 Titz<br/>
           </div>
           <h1 className='text-xl border-b-2 border-b-ral-3020'>Disclaimer – rechtliche Hinweise</h1>

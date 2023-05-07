@@ -18,7 +18,7 @@ export default class Kontakt extends Component<Props, State> {
           Sie können uns per Email erreichen unter {to}<br/>
         </div>
         <a 
-          className='text-ral-3020'
+          className='text-ral-3020 ml-2'
           href={`mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
         >
           Email senden
