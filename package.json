@@ -13,13 +13,17 @@
   },
   "scripts": {
     "build:all": "turbo run build",
-    "build:api": "turbo run build --filter=fw-roedingen-backend",
+    "build:api": "turbo run build --filter=fw-roedingen-api",
     "build:internal": "turbo run build --filter=fw-roedingen-internal",
     "build:shared": "turbo run build --filter=fw-roedingen-shared",
     "build:web": "turbo run build --filter=fw-roedingen-web",
+
+    "ci:api": "(turbo-ignore && exit 0) || (npm install && npm run build:api)",
+
     "dev": "turbo run dev --parallel",
     "dev:door": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-door",
     "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-internal",
+
     "lint": "turbo run lint"
   },
   "devDependencies": {
