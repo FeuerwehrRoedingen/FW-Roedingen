@@ -18,7 +18,8 @@
     "build:shared": "turbo run build --filter=fw-roedingen-shared",
     "build:web": "turbo run build --filter=fw-roedingen-web",
 
-    "ci:api": "(npx turbo-ignore fw-roedingen-api && exit 0) || (npm install && npm run build:api)",
+    "ci:api": "npx turbo-ignore fw-roedingen-api || (cd apps/api && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-api)",
+    "ci:door": "npx turbo-ignore fw-roedingen-door || (cd apps/door && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-door)",
 
     "dev": "turbo run dev --parallel",
     "dev:door": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-door",
