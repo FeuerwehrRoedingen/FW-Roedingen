@@ -20,17 +20,16 @@
 
     "ci:api": "npx turbo-ignore fw-roedingen-api || (cd apps/api && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-api)",
     "ci:door": "npx turbo-ignore fw-roedingen-door || (cd apps/door && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-door)",
-
+    
     "dev": "turbo run dev --parallel",
     "dev:door": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-door",
     "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-internal",
-
     "lint": "turbo run lint"
   },
   "devDependencies": {
     "concurrently": "^7.4.0",
     "prettier": "latest",
-    "turbo": "^1.8.3",
+    "turbo": "^1.9.3",
     "turbo-ignore": "^0.1.0",
     "typescript": "^5.0.2"
   },
