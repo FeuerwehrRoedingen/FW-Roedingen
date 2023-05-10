@@ -1,0 +1,51 @@
+app: fw-roedingen
+org: thomasd01
+frameworkVersion: '3'
+service: api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: eu-central-1
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+
+plugins:
+  - serverless-esbuild
+  - serverless-plugin-monorepo
+  - serverless-offline
+
+custom:
+  esbuild:
+    banner:
+      js: import { createRequire } from 'module';const require = createRequire(import.meta.url); 
+    bundle: true
+    external:
+      - amqp-connection-manager
+      - amqplib
+      - cache-manager
+      - class-transformer
+      - class-validator
+      - kafkajs
+      - ioredis
+      - mqtt
+      - nats
+      - stream
+      - '@nestjs/websockets/socket-module'
+    format: "esm"
+    minify: false
+    outputFileExtension: ".mjs"
+    packager: npm
+    platform: "node"
+    plugins: plugin.js
+    sourcemap: true
+    target: "esnext"
+    watch:
+      pattern: ['./index.ts', 'src/**/*.ts']
+      ignore: ['.serverless/**/*', '.build']

@@ -1,17 +1,21 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
+    "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es2017",
+    "emitDecoratorMetadata": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "lib": ["es2015"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "noEmit": false,
+    "outDir": "dist",
+    "preserveConstEnums": true,
+    "rootDir": "./",
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
     "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true
-  },
-  "include": ["src/**/*"]
+    "strictNullChecks": true,
+    "target": "ESNext",
+  }
 }

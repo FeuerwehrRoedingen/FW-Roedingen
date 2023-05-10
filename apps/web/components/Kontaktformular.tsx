@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {}
 
-export default function Kontaktformular(propsa: Props) {
+export default function Kontaktformular(props: Props) {
   return (
     <div style={{marginLeft: '10px', height: 'fit-content', width: '60vw'}}>
       <form action="" method="POST">
