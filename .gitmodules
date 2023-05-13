@@ -1,3 +1,0 @@
-[submodule "apps/fireverse/lib/fireverse"]
-	path = apps/fireverse/lib/fireverse
-	url = git@github.com:thomasD01/fireverse.git

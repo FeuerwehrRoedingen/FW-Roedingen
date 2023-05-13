@@ -7,6 +7,12 @@ provider:
   name: aws
   runtime: nodejs18.x
   region: eu-central-1
+  vpc:
+    securityGroupIds:
+      - sg-03c202ea633717c31
+    subnetIds:
+      - subnet-059b25101065b207a
+      - subnet-0273ddbe93d37bc83
 
 functions:
   api:
@@ -29,6 +35,7 @@ custom:
     external:
       - amqp-connection-manager
       - amqplib
+      - aws-sdk
       - cache-manager
       - class-transformer
       - class-validator
@@ -43,7 +50,7 @@ custom:
     outputFileExtension: ".mjs"
     packager: npm
     platform: "node"
-    plugins: plugin.js
+    plugins: plugin.cjs
     sourcemap: true
     target: "esnext"
     watch:

@@ -6,6 +6,7 @@
     "packages": [
       "apps/api",
       "apps/door",
+      "apps/fireverse",
       "apps/internal",
       "apps/web",
       "shared"
