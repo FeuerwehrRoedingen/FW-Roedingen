@@ -5,6 +5,7 @@
   "workspaces": {
     "packages": [
       "apps/api",
+      "apps/api/microservices",
       "apps/door",
       "apps/fireverse",
       "apps/internal",
