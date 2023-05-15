@@ -3,6 +3,9 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { GraphqlModule } from './graphql/graphql.module';
+import { Graphql } from './graphql/graphql';
+import { GraphqlModule } from './graphql/graphql.module';
 
 @Module({
   imports: [
@@ -55,9 +58,10 @@ import { AppService } from './app.service';
           port: parseInt(process.env.REST_PORT, 10),
         }
       }
-    ])
+    ]),
+    GraphqlModule
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, Graphql],
 })
 export class AppModule {}
