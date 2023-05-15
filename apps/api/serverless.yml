@@ -13,14 +13,37 @@ provider:
     subnetIds:
       - subnet-059b25101065b207a
       - subnet-0273ddbe93d37bc83
+  ecr:
+    images:
+      analytics:
+        path: ./microservices/analytics
+      auth:
+        path: ./microservices/auth
+      graphql:
+        path: ./microservices/graphql-api
+      messaging:
+        path: ./microservices/messaging
+      notifications:
+        path: ./microservices/notifications
+      rest:
+        path: ./microservices/rest-api
+
 
 functions:
-  api:
+  apiGateway:
     handler: index.handler
     events:
       - httpApi:
           path: /
           method: get
+  restApi:
+    image:
+      name: rest
+    events:
+      - httpApi:
+          path: /
+          method: get
+  
 
 plugins:
   - serverless-esbuild
