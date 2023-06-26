@@ -7,7 +7,7 @@
       "apps/api",
       "apps/api/microservices/*",
       "apps/door",
-      "apps/fireverse",
+      "apps/management",
       "apps/internal",
       "apps/web",
       "shared"

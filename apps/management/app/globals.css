@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  overscroll-behavior: none;
+}
+
+@layer components {
+  .page {
+    min-height: 100vh;
+    width: 100%;
+
+    padding-top: 76px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    overscroll-behavior-y: none;
+    overflow: scroll;
+
+    background-repeat: no-repeat;
+
+    background: rgb(0,27,50) fixed;
+    background: linear-gradient(
+        60deg,
+        rgba(0,27,50,1) 0%,
+        rgba(0,0,0,1) 50%,
+        rgba(33,0,40,1) 100%
+      )
+      fixed;
+  }
+}
