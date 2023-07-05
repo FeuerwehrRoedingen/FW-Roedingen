@@ -1,10 +1,12 @@
 "use client"
+import * as React from "react"
 import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Image, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/react"
 import { usePathname } from "next/navigation"
 import type { Session } from 'next-auth'
 import { useSession, signOut, signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
-import { icons } from "./icons"
+import type { Server } from '../prisma/client'
 
 type IProps = {
 
@@ -12,46 +14,77 @@ type IProps = {
 
 export function Nav(props: IProps) {
 
+  const { push } = useRouter();
   const pathname = usePathname();
   const { data: session } = useSession();
+  const [servers, setServers] = React.useState<Server[]>([]);
+
+  React.useEffect(() => {
+    fetch('/api/servers')
+      .then((res) => res.json())
+      .then((data) => setServers(data))
+  }, []);
+
+  const handleAction = (item: string|number) => {
+    console.log(item);
+    push(`/server/${item}`);
+  }
 
   const userContent = session ? UserContent(session) : SignInButton();
+  const serverContent = servers.map((server) => {
+    return (
+      <DropdownItem
+        key={server.id}
+        description={`ip:${server.ip} ssh:${server.sshPort} vnc:${server.vncPort}`}
+      >
+        {server.name}
+      </DropdownItem>
+    )
+  });
 
   return (
     <Navbar
       isBordered
+      isBlurred
+      maxWidth="xl"
     >
-      <NavbarBrand>
-        <Image src='/favicon.ico' height={50}/>
+      <NavbarBrand >
+        <Image src='/favicon.ico' width={50} />
         <h1>Management</h1>
       </NavbarBrand>
       <NavbarContent
+        className="hidden md:flex"
       >
-        <Link href="/dashboard">
+        <NavbarItem 
+          isActive={pathname==='/dashboard'} 
+          as={Link} 
+          href="/dashboard"
+          color={pathname==='/dashboard' ? 'primary' : 'foreground'}
+        >
           Dashboard
-        </Link>
+        </NavbarItem>
         <Dropdown>
-          <NavbarItem>
-            <DropdownTrigger
-            >
+          <NavbarItem className='cursor-pointer' as={Link} color='foreground'>
+            <DropdownTrigger>
               Servers
             </DropdownTrigger>
           </NavbarItem>
           <DropdownMenu
             aria-label="Servers"
+            onAction={handleAction}
           >
-            <DropdownItem
-              key="autoscaling"
-              description="ACME scales apps to meet user demand, automagically, based on load."
-            >
-              Autoscaling
-            </DropdownItem>
+            {serverContent}
           </DropdownMenu>
         </Dropdown>
-        <Link href='/settings'>
+        <NavbarItem 
+          isActive={pathname==='/settings'} 
+          as={Link} 
+          href='/settings'
+          color={pathname==='/settings' ? 'primary' : 'foreground'}
+        >
           Settings
-        </Link>
-      </NavbarContent>
+        </NavbarItem>
+      </NavbarContent >
       {userContent}
     </Navbar>
   )
@@ -66,7 +99,7 @@ function UserContent(data: Session) {
   }
 
   return (
-    <NavbarContent>
+    <NavbarContent justify="end">
       <Dropdown 
         placement="bottom"
       >
@@ -100,7 +133,7 @@ function UserContent(data: Session) {
 
 function SignInButton() {
   return (
-    <NavbarContent>
+    <NavbarContent justify="end">
       <NavbarItem as='button' onClick={() => signIn('auth0')}>
         Login
       </NavbarItem>

@@ -7,24 +7,22 @@ class Database extends PrismaClient {
   }
 
   async getServers(): Promise<Server[]> {
-    let servers = await this.server.findMany();
-
-    return servers;
+    return this.server.findMany();
   }
   async getServer(id: number): Promise<Server|null> {
     return this.server.findUnique({ where: { id } });
   }
 
-  async addServer(name: string, ip: string, port: number): Promise<number> {
+  async addServer(name: string, ip: string, sshPort: number, vncPort: number): Promise<number> {
     const server = await this.server.create({
       data: {
         name,
         ip,
-        port,
+        sshPort,
+        vncPort,
         status: 'offline',
       }
     });
-
     return server.id;
   }
 
@@ -33,6 +31,10 @@ class Database extends PrismaClient {
       where: { id },
       data: params,
     });
+  }
+
+  async deleteServer(id: number): Promise<Server> {
+    return this.server.delete({ where: { id } });
   }
 }
 export const database = new Database();

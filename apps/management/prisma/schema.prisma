@@ -10,9 +10,10 @@ datasource db {
 }
 
 model Server {
-  id     Int     @id @default(autoincrement())
-  name   String
-  ip     String
-  port   Int
-  status String
+  id      Int     @id @default(autoincrement())
+  name    String
+  ip      String
+  sshPort Int
+  vncPort Int
+  status  String
 }
