@@ -1,8 +1,12 @@
 "use client"
 import React from 'react'
 import { Table as _Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/table'
-import type { Server } from '../../../prisma/client'
 import { toast } from 'react-toastify'
+import { BiRefresh } from 'react-icons/bi'
+// @ts-ignore
+import { ping } from 'web-pingjs'
+
+import type { Server } from '../../../prisma/client'
 
 type IProps = {
   servers: Server[];
@@ -11,6 +15,8 @@ type IProps = {
 
 export function Table(props: IProps) {
   
+  const [servers, setServers] = React.useState<Server[]>(props.servers);
+
   async function deleteServer(id: number, name: string) {
 
     if(!confirm(`Are you sure you want to delete ${name}?`))
@@ -32,9 +38,29 @@ export function Table(props: IProps) {
       })
 
   }
+  async function updateServer(address: string) {
+    function _ping(): Promise<'offline'|'slow'|'online'>{
+      return new Promise<'offline'|'slow'|'online'>((resolve, reject) => {
+      ping(`http://${address}`, 0.3)
+        .then((res: number) => {
+          if(res > 5_000) {
+            resolve('slow');
+          }
+          resolve('online');
+        })
+        .catch((err: string) => {
+          resolve('offline');
+        });
+      });
+    }
 
-  const [servers, setServers] = React.useState<Server[]>(props.servers);
+    const res = await _ping();
 
+    const server = servers.find((server) => server.ip === address);
+
+    if(server?.status === res)
+      return;
+  }
 
   const serverRows: any = servers.map((server) => {
     return (
@@ -43,7 +69,10 @@ export function Table(props: IProps) {
         <TableCell>{server.ip}</TableCell>
         <TableCell>{server.sshPort}</TableCell>
         <TableCell>{server.vncPort}</TableCell>
-        <TableCell>{server.status}</TableCell>
+        <TableCell className='flex flex-row'>
+          {server.status}
+          <BiRefresh size='41px' onClick={() => updateServer(server.ip)}/>
+        </TableCell>
         <TableCell>
           <button onClick={() => deleteServer(server.id, server.name)}>Delete</button>
         </TableCell>
