@@ -2,12 +2,12 @@ import React from 'react'
 
 import { Inputs } from './inputs'
 import { Table } from './table'
-import { Server } from '../../../prisma/client';
+import { Server } from '../Server';
 
 export const revalidate = 0;
 
 async function fetchServers() : Promise<Server[]>{
-  return fetch(`${process.env.NEXTAUTH_URL}/api/servers`, { next: {revalidate: 0}}).then((res) => res.json());
+  return fetch(`${process.env.NEXTAUTH_URL}/api/v1/servers`, { next: {revalidate: 0}}).then((res) => res.json());
 }
 
 type IProps = {}

@@ -128,7 +128,7 @@ async function addServer(name: string, ip: string, sshPort: string, vncPort: str
   return new Promise<void>(async (resolve, reject) => {
     setTimeout(() => reject('Server did not respond in time.'), 10_000);
 
-    const response = await fetch('/api/servers', {
+    const response = await fetch('/api/v1/servers', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -153,4 +153,5 @@ async function checkSSHServer(ip: string, port: string) {
 
 }
 async function checkVNCServer(ip: string, port: string) {
+  
 }

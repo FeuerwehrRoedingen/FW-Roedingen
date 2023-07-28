@@ -6,7 +6,7 @@ import type { Session } from 'next-auth'
 import { useSession, signOut, signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 
-import type { Server } from '../prisma/client'
+import type { Server } from './Server'
 
 type IProps = {
 
@@ -20,7 +20,7 @@ export function Nav(props: IProps) {
   const [servers, setServers] = React.useState<Server[]>([]);
 
   React.useEffect(() => {
-    fetch('/api/servers')
+    fetch('/api/v1/servers')
       .then((res) => res.json())
       .then((data) => setServers(data))
   }, []);

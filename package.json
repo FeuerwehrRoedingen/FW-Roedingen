@@ -8,6 +8,7 @@
       "apps/api/microservices/*",
       "apps/door",
       "apps/management",
+      "apps/management-api",
       "apps/internal",
       "apps/web",
       "shared"
@@ -19,10 +20,8 @@
     "build:internal": "turbo run build --filter=fw-roedingen-internal",
     "build:shared": "turbo run build --filter=fw-roedingen-shared",
     "build:web": "turbo run build --filter=fw-roedingen-web",
-
     "ci:api": "npx turbo-ignore fw-roedingen-api || (cd apps/api && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-api)",
     "ci:door": "npx turbo-ignore fw-roedingen-door || (cd apps/door && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-door)",
-    
     "dev": "turbo run dev --parallel",
     "dev:door": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-door",
     "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-internal",
@@ -40,5 +39,11 @@
   },
   "overrides": {
     "ws": "7.4.4"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "next-auth": "^4.22.3",
+    "nodemon": "^3.0.1",
+    "prisma": "^5.0.0"
   }
 }

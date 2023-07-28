@@ -1,4 +1,3 @@
-import 'server-only'
 import { PrismaClient, Server } from '../prisma/client'
 
 class Database extends PrismaClient {

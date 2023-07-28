@@ -6,7 +6,7 @@ import { BiRefresh } from 'react-icons/bi'
 // @ts-ignore
 import { ping } from 'web-pingjs'
 
-import type { Server } from '../../../prisma/client'
+import type { Server } from '../Server'
 
 type IProps = {
   servers: Server[];
@@ -24,7 +24,7 @@ export function Table(props: IProps) {
 
     toast.loading('Deleting server...', { toastId: 'deleteToast' });
 
-    const res = await fetch(`/api/servers/${id}`, {
+    const res = await fetch(`/api/v1/servers/${id}`, {
       method: 'DELETE',
     });
 

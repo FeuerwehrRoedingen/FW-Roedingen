@@ -2,7 +2,7 @@
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
 
-import { Nav } from '../../components'
+import { Nav } from './nav'
 
 type IProps = {
   children: any;
