@@ -1,5 +1,5 @@
 {
-  "exec": "node --loader ts-node/esm --experimental-specifier-resolution=node --experimental-json-modules --no-warnings --unhandled-rejections=strict index.ts",
+  "exec": "node --loader ts-node/esm --experimental-specifier-resolution=node --experimental-json-modules --no-warnings --unhandled-rejections=strict src/index.ts",
   "ext": "ts",
   "watch": [
     "src",

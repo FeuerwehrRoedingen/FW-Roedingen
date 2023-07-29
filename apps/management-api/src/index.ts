@@ -4,7 +4,10 @@ import { Server } from 'socket.io';
 import { createServer } from 'http';
 import * as Sentry from '@sentry/node';
 
-import { serversRouter } from './src/routes';
+import { serversRouter } from './routes';
+import { database } from './DB';
+import { createSsh } from './server/ssh';
+import { createVnc } from './server/vnc';
 
 config();
 
@@ -40,11 +43,38 @@ app.use(Sentry.Handlers.errorHandler());
 
 app.use('/servers', serversRouter);
 
+app.get('/', (req, res) => {
+  //TODO implememnt OAPI docs
+  res.send('FWR Management API!');
+});
+
 //-----------------------------------------------
 // Socket.io
 //-----------------------------------------------
-io.on('connection', (socket) => {
-  console.log('Socket connected');
+io.on('connection', async (socket) => {
+  const { id, type } = socket.handshake.query;
+
+  if(typeof id !== 'string' || typeof type !== 'string') {
+    socket.write('Invalid query parameters\n');
+    socket.disconnect();
+    return;
+  }
+
+  const server = await database.getServer(parseInt(id, 10));
+  if(!server) {
+    socket.write('Server not found\n');
+    socket.disconnect();
+    return;
+  }
+
+  if(type === 'ssh') {
+    return createSsh(socket, server);
+  }
+  if(type === 'vnc') {
+    return createVnc(socket, server);
+  }
+    
+  socket.disconnect();
 });
 
 //-----------------------------------------------

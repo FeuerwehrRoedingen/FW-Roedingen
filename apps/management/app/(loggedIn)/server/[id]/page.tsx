@@ -18,8 +18,8 @@ export default function page(props: IProps) {
 
   return (
     <div className='page pl-0 pr-0'>
-      <VNC url={url} />
-      <SSH url={url} />
+      <VNC url={url} id={props.params.id}/>
+      <SSH url={url} id={props.params.id}/>
     </div>
   )
 }

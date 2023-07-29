@@ -7,6 +7,7 @@ import 'xterm/css/xterm.css'
 
 type Props = {
   url: string;
+  id: string;
 }
 
 export default function ssh(props: Props) {
@@ -14,7 +15,8 @@ export default function ssh(props: Props) {
 
   const termRef = React.useRef<HTMLDivElement>(null);
 
-  const { sendMessage, lastMessage, readyState } = useWebsocket(`${props.url}/ssh`)
+  const { sendMessage, lastMessage, readyState } = useWebsocket(`${props.url}/?id=${props.id}&type=ssh`)
+  console.log(readyState)
 
   React.useEffect(() => {
     if (!termRef.current) {

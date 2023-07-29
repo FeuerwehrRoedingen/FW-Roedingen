@@ -4,6 +4,7 @@ import { VncScreen, VncScreenHandle } from 'react-vnc'
 
 type Props = {
   url: string;
+  id: string;
 }
 
 export default function Vnc(props: Props) {
@@ -13,7 +14,7 @@ export default function Vnc(props: Props) {
     <div className='h-screen w-screen px-4 py-4'>
       <VncScreen
         ref={vncRef}
-        url={props.url + '/vnc'}
+        url={`${props.url}?id=${props.id}&type=vnc`}
         scaleViewport
       />
     </div>
