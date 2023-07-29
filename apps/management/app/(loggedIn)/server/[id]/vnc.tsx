@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import { VncScreen, VncScreenHandle } from 'react-vnc'
 

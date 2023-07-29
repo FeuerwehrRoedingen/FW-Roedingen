@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import useWebsocket from 'react-use-websocket'
 import { Terminal } from 'xterm'
@@ -22,16 +23,16 @@ export default function ssh(props: Props) {
     term = new Terminal();
     term.open(termRef.current);
     term.onData((data) => {
-      sendMessage(data)
+      sendMessage(JSON.stringify({ type: 'data', data }));
     })
     term.onResize((size) => {
-      sendMessage(JSON.stringify({ type: 'resize', cols: size.cols, rows: size.rows }))
+      sendMessage(JSON.stringify({ type: 'resize', cols: size.cols, rows: size.rows }));
     })
     term.onBinary((data) => {
-      console.log(data)
+      console.log(data);
     })
     term.onTitleChange((title) => {
-      console.log(title)
+      console.log(title);
     })
     term.onCursorMove((data) => {
     })
@@ -42,18 +43,21 @@ export default function ssh(props: Props) {
     term.onScroll(() => {
     })
     term.onKey((data) => {
+
     })
     term.onRender(() => {
     })
 
-  }, [termRef.current])
+  }, [])
   React.useEffect(() => {
     if (!lastMessage) {
       return
     }
     const data = JSON.parse(lastMessage.data)
     if (data.type === 'data') {
-      term.write(data.data);
+      if(data.data === '\n')
+        return term.writeln(''); // xterm.js doesn't like \n
+      return term.write(data.data);
     }
     if (data.type === 'resize') {
       term.resize(data.cols, data.rows)

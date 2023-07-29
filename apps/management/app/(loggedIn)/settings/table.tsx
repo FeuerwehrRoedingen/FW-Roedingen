@@ -4,9 +4,25 @@ import { Table as _Table, TableBody, TableCell, TableColumn, TableHeader, TableR
 import { toast } from 'react-toastify'
 import { BiRefresh } from 'react-icons/bi'
 // @ts-ignore
-import { ping } from 'web-pingjs'
+import ping from 'web-pingjs'
 
 import type { Server } from '../Server'
+import 'status-indicator/styles.css'
+import { Spacer } from '@nextui-org/react'
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'status-indicator': { 
+        active?:       boolean;
+        positive?:     boolean;
+        intermediary?: boolean; 
+        negative?:     boolean;
+        pulse?:        boolean;
+      }
+    }
+  }
+}
 
 type IProps = {
   servers: Server[];
@@ -69,9 +85,12 @@ export function Table(props: IProps) {
         <TableCell>{server.ip}</TableCell>
         <TableCell>{server.sshPort}</TableCell>
         <TableCell>{server.vncPort}</TableCell>
-        <TableCell className='flex flex-row'>
+        <TableCell className='flex flex-row h-full items-center'>
+          <StatusIndicator status={server.status}/>    
+          <Spacer x={2}/>  
           {server.status}
-          <BiRefresh size='41px' onClick={() => updateServer(server.ip)}/>
+          <Spacer x={1}/>  
+          <BiRefresh size='30px' onClick={() => updateServer(server.ip)} className='cursor-pointer duration-500 hover:scale-110 active:rotate-180 active:scale-95'/>
         </TableCell>
         <TableCell>
           <button onClick={() => deleteServer(server.id, server.name)}>Delete</button>
@@ -97,4 +116,20 @@ export function Table(props: IProps) {
       </TableBody>
     </_Table>
   )
+}
+
+type IStatusIndicatorProps = {
+  status: string;
+}
+function StatusIndicator(props: IStatusIndicatorProps){
+  if(props.status === 'online')
+    return <status-indicator intermediary pulse></status-indicator>
+  
+  if(props.status === 'slow')
+    return <status-indicator intermediary pulse></status-indicator>
+  
+  if(props.status === 'offline')
+    return <status-indicator negative pulse></status-indicator>
+
+  return <status-indicator active></status-indicator>
 }

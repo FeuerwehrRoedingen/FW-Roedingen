@@ -8,7 +8,7 @@ type Props = {}
 export default function page({}: Props) {
   return (
     <div className='flex items-center justify-center w-screen h-screen'>
-        <Button onClick={() => signIn('auth0', {callbackUrl: '/'})} shadow color="error" auto flat bordered>
+        <Button onPress={() => signIn('auth0', {callbackUrl: '/'})} color="danger">
           Sign in with Auth0
         </Button>
     </div>
