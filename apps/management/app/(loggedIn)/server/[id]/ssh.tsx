@@ -1,7 +1,8 @@
 "use client"
 import React from 'react'
-import useWebsocket from 'react-use-websocket'
 import { Terminal } from 'xterm'
+import Link from 'next/link'
+import { io, Socket } from 'socket.io-client'
 
 import 'xterm/css/xterm.css'
 
@@ -12,23 +13,43 @@ type Props = {
 
 export default function ssh(props: Props) {
   let term: Terminal;
+  let socket: Socket;
 
   const termRef = React.useRef<HTMLDivElement>(null);
-
-  const { sendMessage, lastMessage, readyState } = useWebsocket(`${props.url}/?id=${props.id}&type=ssh`)
-  console.log(readyState)
+  const [line, setLine] = React.useState('');
 
   React.useEffect(() => {
     if (!termRef.current) {
       return
     };
+
+    socket = io(props.url, {
+      query: {
+        id: props.id,
+        type: 'ssh'
+      }
+    });
+    socket.connect();
+
     term = new Terminal();
     term.open(termRef.current);
+
+    socket.on('connect', () => {
+      console.log('connected');
+    });
+    socket.on('error', (err) => {
+      console.error(err);
+    });
+    socket.on('message', (data) => {
+      term.write(data);
+    });
+
     term.onData((data) => {
-      sendMessage(JSON.stringify({ type: 'data', data }));
+      term.write(data);
+      setLine(line + data);
     })
     term.onResize((size) => {
-      sendMessage(JSON.stringify({ type: 'resize', cols: size.cols, rows: size.rows }));
+      socket.emit('resize', size);
     })
     term.onBinary((data) => {
       console.log(data);
@@ -39,6 +60,9 @@ export default function ssh(props: Props) {
     term.onCursorMove((data) => {
     })
     term.onLineFeed(() => {
+      term.writeln('');
+      socket.send(line);
+      setLine('');
     })
     term.onSelectionChange(() => {
     })
@@ -50,24 +74,16 @@ export default function ssh(props: Props) {
     term.onRender(() => {
     })
 
+    return () => {
+      socket.disconnect();
+      term.dispose();
+    }
   }, [])
-  React.useEffect(() => {
-    if (!lastMessage) {
-      return
-    }
-    const data = JSON.parse(lastMessage.data)
-    if (data.type === 'data') {
-      if(data.data === '\n')
-        return term.writeln(''); // xterm.js doesn't like \n
-      return term.write(data.data);
-    }
-    if (data.type === 'resize') {
-      term.resize(data.cols, data.rows)
-    }
-  }, [lastMessage])
+
   return (
     <>
-      <div ref={termRef} className='p-2 border-2 border-slate-700' />
+      <Link href='https://www.nerdfonts.com/assets/css/hack.css' rel='stylesheet' type='text/css'/>
+      <div ref={termRef} className='p-2 border-2 border-slate-700 font-[hack]'/>
     </>
   )
 }

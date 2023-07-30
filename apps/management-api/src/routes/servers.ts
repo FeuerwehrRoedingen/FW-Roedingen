@@ -1,8 +1,10 @@
-import { Router } from "express";
+import express, { Router } from "express";
 
 import { database } from '../DB'
 
 export const serversRouter = Router();
+
+serversRouter.use(express.json())
 
 serversRouter.get('/', async (req, res) => {
   const servers = await database.getServers()

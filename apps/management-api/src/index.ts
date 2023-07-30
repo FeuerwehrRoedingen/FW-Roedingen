@@ -16,7 +16,11 @@ config();
 //-----------------------------------------------
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
+const io = new Server(server, {
+  cors: {
+    origin: '*',
+  }
+});
 
 //-----------------------------------------------
 // Sentry
@@ -80,6 +84,6 @@ io.on('connection', async (socket) => {
 //-----------------------------------------------
 // HTTP Server
 //-----------------------------------------------
-server.listen(3001, () => {
+server.listen(3001, '0.0.0.0', () => {
   console.log('API listening on port 3001');
 })

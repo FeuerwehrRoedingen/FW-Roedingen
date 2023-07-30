@@ -1,3 +1,6 @@
+const { withSentryConfig } = require("@sentry/nextjs");
+const nodeExternals = require("webpack-node-externals");
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   async rewrites() {
@@ -7,13 +10,17 @@ const nextConfig = {
         destination: 'http://localhost:3001/:path*',
       },
     ]
+  },
+  webpack: (config, { isServer }) => {
+    if(!isServer) {
+      config.externals = nodeExternals();
+    }
+
+    return config;
   }
 }
 
-module.exports = nextConfig
-
-
-const { withSentryConfig } = require("@sentry/nextjs");
+module.exports = nextConfig;
 
 module.exports = withSentryConfig(
   module.exports,
