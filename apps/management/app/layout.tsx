@@ -20,6 +20,7 @@ export default function RootLayout({children, session }: IProps) {
       <head>
         <meta charSet="utf-8" />
         <link rel="icon" href="/favicon.ico" />
+        <title>FWR Management</title>
       </head>
       <body className={inter.className}>
         <Providers session={session}>

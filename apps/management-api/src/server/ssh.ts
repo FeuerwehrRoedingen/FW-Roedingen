@@ -3,29 +3,59 @@ import { IPty, spawn } from 'node-pty'
 
 import type { Server } from '../../prisma/client'
 
+//TODO implement arrow keys
+
 export function createSsh(socket: Socket, server: Server) {
-	socket.write('enter username: ');
-	socket.on('username', (username) => {
-		connect(username);
+
+	let _username: string = '';
+
+	const messageListener = (data: string) => {
+		socket.send(data);
+		_username += data;
+	};
+	const backspaceListener = () => {
+		_username = _username.slice(0, -1);
+		socket.emit('backspace');
+	};
+
+	socket.send('enter username: ');
+	socket.on('message', messageListener);
+	socket.on('backspace', backspaceListener);
+	socket.once('enter', () => {
+		attach(_username);
+		socket.emit('enter');
 	});
-	function connect(username: string) {
-		const pty: IPty = spawn('ssh', [ '-p', server.sshPort.toString(), username + '@' + server.ip ], {});
-		
-		pty.onData((data) => {
-			process.stdout.write(data);
-			socket.write(data);
-		});
+
+	function attach(username: string) {
+
+		socket.off('message', messageListener);
+		socket.off('backspace', backspaceListener);
+
+		const pty = spawn('ssh', ['-p', server.sshPort.toString(), username + '@' + server.ip], {});
+
 		pty.onExit((exitCode) => {
+			console.log('pty exited with code: ' + exitCode);
+			socket.send('pty exited with code: ' + exitCode);
 			socket.disconnect();
 		});
-		
+		pty.onData((data) => {
+			socket.write(data);
+		});
+
 		socket.on('message', (data) => {
 			pty.write(data);
 		});
-		
-		
+		socket.on('backspace', () => {
+			pty.write('\b');
+		});
+		socket.on('enter', () => {
+			pty.write('\r');
+		});
 		socket.on('disconnect', () => {
 			pty.kill();
+		});
+		socket.on('resize', (data) => {
+			pty.resize(data.cols, data.rows);
 		});
 	}
 }

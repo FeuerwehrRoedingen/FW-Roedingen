@@ -7,7 +7,6 @@ import { io, Socket } from 'socket.io-client'
 import 'xterm/css/xterm.css'
 
 type Props = {
-  url: string;
   id: string;
 }
 
@@ -16,37 +15,11 @@ export default function ssh(props: Props) {
   let socket: Socket;
 
   const termRef = React.useRef<HTMLDivElement>(null);
-  const [line, setLine] = React.useState('');
 
-  React.useEffect(() => {
-    if (!termRef.current) {
-      return
-    };
-
-    socket = io(props.url, {
-      query: {
-        id: props.id,
-        type: 'ssh'
-      }
-    });
-    socket.connect();
-
-    term = new Terminal();
-    term.open(termRef.current);
-
-    socket.on('connect', () => {
-      console.log('connected');
-    });
-    socket.on('error', (err) => {
-      console.error(err);
-    });
-    socket.on('message', (data) => {
-      term.write(data);
-    });
-
+  function attachTerm() {
     term.onData((data) => {
-      term.write(data);
-      setLine(line + data);
+      if(data >= ' ' && data <= '~')
+        socket.send(data);
     })
     term.onResize((size) => {
       socket.emit('resize', size);
@@ -55,24 +28,75 @@ export default function ssh(props: Props) {
       console.log(data);
     })
     term.onTitleChange((title) => {
-      console.log(title);
+
     })
     term.onCursorMove((data) => {
     })
     term.onLineFeed(() => {
-      term.writeln('');
-      socket.send(line);
-      setLine('');
+
     })
     term.onSelectionChange(() => {
     })
     term.onScroll(() => {
     })
     term.onKey((data) => {
-
+      if(data.domEvent.key === 'Backspace') {
+        socket.emit('backspace', '');
+      }
+      else if(data.domEvent.key === 'Enter') {
+        socket.emit('enter', '');
+      }
     })
     term.onRender(() => {
     })
+  }
+  function attachSocket() {
+    socket.on('connect', () => {
+      term.clear();
+    })
+    socket.on('message', (data) => {
+      term.write(data);
+    })
+    socket.on('disconnect', (reason) => {
+      console.log(reason);
+      term.write('\r\n\r\n[Disconnected]\r\n');
+    })
+    socket.on('error', (err) => {
+      console.error(err);
+    })
+    socket.on('resize', (size) => {
+      term.resize(size.cols, size.rows);
+    });
+    socket.on('backspace', (data) => {
+      term.write('\b \b');
+    });
+    socket.on('enter', (data) => {
+      term.write('\r\n');
+    });
+  }
+
+  React.useEffect(() => {
+    if (!termRef.current) {
+      return
+    };
+
+    const protocol = process.env.NODE_ENV === 'production' ? 'wss' : 'ws'
+    const url = `${protocol}://${process.env.NEXT_PUBLIC_WS_HOST}`
+
+    socket = io(url, {
+      query: {
+        id: props.id,
+        type: 'ssh'
+      }
+    });
+
+    term = new Terminal();
+    term.open(termRef.current);
+
+    attachSocket();
+    attachTerm();
+
+    socket.connect();
 
     return () => {
       socket.disconnect();
