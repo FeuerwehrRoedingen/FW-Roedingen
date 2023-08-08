@@ -1,20 +1,18 @@
 "use client"
 
 import {NextUIProvider} from '@nextui-org/react'
-import { Session } from 'next-auth';
-import { SessionProvider } from 'next-auth/react'
+import { UserProvider } from '@auth0/nextjs-auth0/client';
 
 type IProps = {
   children: React.ReactNode;
-  session: Session|null|undefined;
 }
 
-export function Providers({children, session}: IProps) {
+export function Providers({children}: IProps) {
   return (
-    <SessionProvider session={session}>
+    <UserProvider>
       <NextUIProvider>
         {children}
       </NextUIProvider>
-    </SessionProvider>
+    </UserProvider>
   )
 }

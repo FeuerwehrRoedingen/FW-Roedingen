@@ -2,3 +2,5 @@
 dist/
 # Sentry Auth Token
 .sentryclirc
+
+*.log

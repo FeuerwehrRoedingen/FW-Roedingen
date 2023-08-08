@@ -1,14 +1,14 @@
-import React from 'react'
-import { getServerSession } from 'next-auth/next'
 import { redirect } from 'next/navigation'
+
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
 
 type IProps = {}
 
-export default async function page({}: IProps) {
-  const session = await getServerSession();
-
-  if(!session) {
-    redirect('/login');
-  }
+async function page({}: IProps) {
   redirect('/dashboard');
+  return <></>;
 }
+
+export default withPageAuthRequired(page, {
+  returnTo: '/dashboard',
+});

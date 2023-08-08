@@ -1,16 +1,10 @@
 const { withSentryConfig } = require("@sentry/nextjs");
 const nodeExternals = require("webpack-node-externals");
 
+const config = require("dotenv").config();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: '/api/v1/:path*',
-        destination: 'http://localhost:3001/:path*',
-      },
-    ]
-  },
   webpack: (config, { isServer }) => {
     if(!isServer) {
       config.externals = nodeExternals();

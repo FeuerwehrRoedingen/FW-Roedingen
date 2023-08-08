@@ -2,6 +2,7 @@ import { Socket } from 'socket.io'
 import { IPty, spawn } from 'node-pty'
 
 import type { Server } from '../../prisma/client'
+import { logger } from '../Logger';
 
 //TODO implement arrow keys
 
@@ -22,6 +23,7 @@ export function createSsh(socket: Socket, server: Server) {
 	socket.on('message', messageListener);
 	socket.on('backspace', backspaceListener);
 	socket.once('enter', () => {
+		logger.log(`SSH: ${_username} connected to ${server.name}`)
 		attach(_username);
 		socket.emit('enter');
 	});
@@ -33,9 +35,9 @@ export function createSsh(socket: Socket, server: Server) {
 
 		const pty = spawn('ssh', ['-p', server.sshPort.toString(), username + '@' + server.ip], {});
 
-		pty.onExit((exitCode) => {
-			console.log('pty exited with code: ' + exitCode);
-			socket.send('pty exited with code: ' + exitCode);
+		pty.onExit((exit) => {
+			logger.log('pty exited with code: ' + exit.exitCode);
+			socket.send('pty exited with code: ' + exit.exitCode);
 			socket.disconnect();
 		});
 		pty.onData((data) => {
@@ -52,6 +54,7 @@ export function createSsh(socket: Socket, server: Server) {
 			pty.write('\r');
 		});
 		socket.on('disconnect', () => {
+			logger.log(`SSH: ${_username} disconnected from ${server.name}`)
 			pty.kill();
 		});
 		socket.on('resize', (data) => {

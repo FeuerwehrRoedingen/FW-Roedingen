@@ -1,41 +1,34 @@
 "use client"
 import React from 'react'
 import { Table as _Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/table'
+import { Tooltip } from '@nextui-org/tooltip'
 import { toast } from 'react-toastify'
 import { BiRefresh } from 'react-icons/bi'
+import { Spacer } from '@nextui-org/spacer'
+import { useSelector } from 'react-redux'
+
 // @ts-ignore
 import ping from 'web-pingjs'
 
-import type { Server } from '../Server'
+import type { Server } from '@/utils/Server'
+import { AppState, useAppDispatch } from '@/store'
+import { setSelectedServer, setServers } from '@/store/reducer'
+import { StatusIndicator } from './statusIndicator'
+import { DeleteIcon, EditIcon } from './icons'
 import 'status-indicator/styles.css'
-import { Spacer } from '@nextui-org/react'
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'status-indicator': { 
-        active?:       boolean;
-        positive?:     boolean;
-        intermediary?: boolean; 
-        negative?:     boolean;
-        pulse?:        boolean;
-      }
-    }
-  }
+async function fetchServers(): Promise<Server[]> {
+  return fetch(`/api/v1/servers`, { next: { revalidate: 0 } }).then((res) => res.json());
 }
 
-type IProps = {
-  servers: Server[];
-}
-
-
+type IProps = {}
 export function Table(props: IProps) {
-  
-  const [servers, setServers] = React.useState<Server[]>(props.servers);
+  const { servers } = useSelector((state: AppState) => state.serversState);
+  const dispatch = useAppDispatch();
 
   async function deleteServer(id: number, name: string) {
 
-    if(!confirm(`Are you sure you want to delete ${name}?`))
+    if (!confirm(`Are you sure you want to delete ${name}?`))
       return;
 
     toast.loading('Deleting server...', { toastId: 'deleteToast' });
@@ -44,7 +37,7 @@ export function Table(props: IProps) {
       method: 'DELETE',
     });
 
-    if(!res.ok)
+    if (!res.ok)
       return toast.update('deleteToast', { render: await res.text(), type: 'error', isLoading: false, autoClose: 3000 });
 
     res.json()
@@ -54,19 +47,19 @@ export function Table(props: IProps) {
       })
 
   }
-  async function updateServer(address: string) {
-    function _ping(): Promise<'offline'|'slow'|'online'>{
-      return new Promise<'offline'|'slow'|'online'>((resolve, reject) => {
-      ping(`http://${address}`, 0.3)
-        .then((res: number) => {
-          if(res > 5_000) {
-            resolve('slow');
-          }
-          resolve('online');
-        })
-        .catch((err: string) => {
-          resolve('offline');
-        });
+  async function updateServerStatus(address: string) {
+    function _ping(): Promise<'offline' | 'slow' | 'online'> {
+      return new Promise<'offline' | 'slow' | 'online'>((resolve, reject) => {
+        ping(`http://${address}`, 0.3)
+          .then((res: number) => {
+            if (res > 5_000) {
+              resolve('slow');
+            }
+            resolve('online');
+          })
+          .catch((err: string) => {
+            resolve('offline');
+          });
       });
     }
 
@@ -74,26 +67,64 @@ export function Table(props: IProps) {
 
     const server = servers.find((server) => server.ip === address);
 
-    if(server?.status === res)
+    if (server?.status === res)
       return;
   }
+
+  React.useEffect(() => {
+    fetchServers()
+      .then((data) => {
+        dispatch(setServers(data));
+      });
+  }, []);
 
   const serverRows: any = servers.map((server) => {
     return (
       <TableRow key={server.id}>
-        <TableCell>{server.name}</TableCell>
-        <TableCell>{server.ip}</TableCell>
-        <TableCell>{server.sshPort}</TableCell>
-        <TableCell>{server.vncPort}</TableCell>
-        <TableCell className='flex flex-row h-full items-center'>
-          <StatusIndicator status={server.status}/>    
-          <Spacer x={2}/>  
-          {server.status}
-          <Spacer x={1}/>  
-          <BiRefresh size='30px' onClick={() => updateServer(server.ip)} className='cursor-pointer duration-500 hover:scale-110 active:rotate-180 active:scale-95'/>
+        <TableCell>
+          <p className="text-bold text-sm capitalize">{server.name}</p>
         </TableCell>
         <TableCell>
-          <button onClick={() => deleteServer(server.id, server.name)}>Delete</button>
+          <p className="text-bold text-sm capitalize">{server.ip}</p>
+        </TableCell>
+        <TableCell>
+          <p className="text-bold text-sm capitalize">{server.sshPort}</p>
+        </TableCell>
+        <TableCell>
+          <p className="text-bold text-sm capitalize">{server.vncPort}</p>
+        </TableCell>
+        <TableCell >
+          <div className='flex flex-row h-full items-center'>
+            <StatusIndicator status={server.status} />
+            <Spacer x={2} />
+            <p className="text-bold text-sm capitalize">{server.status}</p>
+            <Spacer x={1} />
+            <BiRefresh
+              size='25px'
+              onClick={() => updateServerStatus(server.ip)}
+              className='cursor-pointer duration-500 hover:scale-110 active:rotate-180 active:scale-95'
+            />
+          </div>
+        </TableCell>
+        <TableCell>
+          <div className="relative flex items-center gap-2">
+            <Tooltip content={`Edit ${server.name}`}>
+              <span
+                className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                onClick={() => dispatch(setSelectedServer(server))}
+              >
+                <EditIcon />
+              </span>
+            </Tooltip>
+            <Tooltip color="danger" content={`delete ${server.name}`}>
+              <span
+                className="text-lg text-danger cursor-pointer active:opacity-50"
+                onClick={() => deleteServer(server.id, server.name)}
+              >
+                <DeleteIcon />
+              </span>
+            </Tooltip>
+          </div>
         </TableCell>
       </TableRow>
     );
@@ -102,6 +133,7 @@ export function Table(props: IProps) {
   return (
     <_Table
       aria-label="Servers"
+      isCompact
     >
       <TableHeader>
         <TableColumn>Name</TableColumn>
@@ -116,20 +148,4 @@ export function Table(props: IProps) {
       </TableBody>
     </_Table>
   )
-}
-
-type IStatusIndicatorProps = {
-  status: string;
-}
-function StatusIndicator(props: IStatusIndicatorProps){
-  if(props.status === 'online')
-    return <status-indicator intermediary pulse></status-indicator>
-  
-  if(props.status === 'slow')
-    return <status-indicator intermediary pulse></status-indicator>
-  
-  if(props.status === 'offline')
-    return <status-indicator negative pulse></status-indicator>
-
-  return <status-indicator active></status-indicator>
 }

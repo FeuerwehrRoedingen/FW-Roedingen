@@ -1,23 +1,19 @@
 "use client"
 import * as React from "react"
 import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Image, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/react"
-import { usePathname } from "next/navigation"
-import type { Session } from 'next-auth'
-import { useSession, signOut, signIn } from "next-auth/react"
-import { useRouter } from "next/navigation"
+import { redirect, usePathname, useRouter } from "next/navigation"
+import { useUser, type UserProfile } from '@auth0/nextjs-auth0/client'
 
-import type { Server } from './Server'
+import type { Server } from '@/utils/Server'
 
-type IProps = {
-
-}
+type IProps = {}
 
 export function Nav(props: IProps) {
 
   const { push } = useRouter();
   const pathname = usePathname();
-  const { data: session } = useSession();
   const [servers, setServers] = React.useState<Server[]>([]);
+  const { user } = useUser();
 
   React.useEffect(() => {
     fetch('/api/v1/servers')
@@ -25,12 +21,12 @@ export function Nav(props: IProps) {
       .then((data) => setServers(data))
   }, []);
 
+
   const handleAction = (item: string|number) => {
-    console.log(item);
     push(`/server/${item}`);
   }
 
-  const userContent = session ? UserContent(session) : SignInButton();
+  const userContent = user ? UserContent(user) : SignInButton();
   const serverContent = servers.map((server) => {
     return (
       <DropdownItem
@@ -55,19 +51,18 @@ export function Nav(props: IProps) {
       <NavbarContent
         className="hidden md:flex"
       >
-        <NavbarItem 
-          isActive={pathname==='/dashboard'} 
-          as={Link} 
-          href="/dashboard"
-          color={pathname==='/dashboard' ? 'primary' : 'foreground'}
-        >
-          Dashboard
+        <NavbarItem isActive={pathname==='/dashboard'}>
+          <Link href="/dashboard" color={pathname==='/dashboard'?'primary':'foreground'}>
+            Dashboard
+          </Link>
         </NavbarItem>
         <Dropdown>
-          <NavbarItem className='cursor-pointer' as={Link} color='foreground'>
-            <DropdownTrigger>
-              Servers
-            </DropdownTrigger>
+          <NavbarItem className='cursor-pointer'>
+            <Link color='foreground'>
+              <DropdownTrigger>
+                Servers
+              </DropdownTrigger>
+            </Link>
           </NavbarItem>
           <DropdownMenu
             aria-label="Servers"
@@ -76,13 +71,10 @@ export function Nav(props: IProps) {
             {serverContent}
           </DropdownMenu>
         </Dropdown>
-        <NavbarItem 
-          isActive={pathname==='/settings'} 
-          as={Link} 
-          href='/settings'
-          color={pathname==='/settings' ? 'primary' : 'foreground'}
-        >
-          Settings
+        <NavbarItem isActive={pathname==='/settings'} >
+          <Link href='/settings' color={pathname==='/settings'?'primary':'foreground'}>
+            Settings
+          </Link>
         </NavbarItem>
       </NavbarContent >
       {userContent}
@@ -90,11 +82,11 @@ export function Nav(props: IProps) {
   )
 }
 
-function UserContent(data: Session) {
+function UserContent(user: UserProfile) {
 
   const handleAction = (item: string|number) => {
     if (item === 'logout') {
-      signOut()
+      redirect('/api/auth/logout');
     }
   }
 
@@ -109,7 +101,7 @@ function UserContent(data: Session) {
               as="button"
               color="secondary"
               size="md"
-              src={data.user!.image!}
+              src={user.picture!}
             />
           </DropdownTrigger>
         </NavbarItem>
@@ -120,7 +112,7 @@ function UserContent(data: Session) {
         >
           <DropdownItem key="profile">
               <p>Signed in as</p>
-              <p>{data.user!.name!.split('.').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
+              <p>{(user!.name || '').split('.').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
           </DropdownItem>
           <DropdownItem key="logout">
               Logout
@@ -134,11 +126,13 @@ function UserContent(data: Session) {
 function SignInButton() {
   return (
     <NavbarContent justify="end">
-      <NavbarItem as='button' onClick={() => signIn('auth0')}>
-        Login
+      <NavbarItem as='button'>
+        <Link href="/api/auth/login">
+          Login
+        </Link>
       </NavbarItem>
       <NavbarItem>
-        <Button auto flat as={Link} href="#">
+        <Button as={Link} href="#">
           Sign Up
         </Button>
       </NavbarItem>

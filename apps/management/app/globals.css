@@ -13,12 +13,10 @@
 
 @layer components {
   .page {
-    min-height: 100vh;
+    height: calc(100vh - 65px);
     width: 100%;
 
-    padding-top: 65px;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 10px;
 
     overscroll-behavior-y: none;
     overflow: scroll;

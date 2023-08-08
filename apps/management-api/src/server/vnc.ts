@@ -6,6 +6,7 @@ import httpProxy from 'http-proxy';
 
 import { database } from '../DB';
 import type { Server } from '../../prisma/client';
+import { logger } from '../Logger';
 
 //-----------------------------------------------
 // VNC Servers
@@ -27,7 +28,7 @@ async function startVnc(req: Request, res: Response) {
   const destPort = 6000 + id;
 
   const data = {
-    host: process.env.NODE_ENV === 'production' ? 'management.feuerwehr-roedingen.de' : 'localhost',
+    host: process.env.NODE_ENV === 'production' ? 'management.feuerwehr-roedingen.de' : '127.0.0.1',
     port: process.env.NODE_ENV === 'production' ? 443 : 3002,
   }
   if (servers.has(id)) {
@@ -36,14 +37,9 @@ async function startVnc(req: Request, res: Response) {
 
   const vncServer = spawn(
     'websockify',
-    [destPort.toString(), `${server.ip}:5900`],
-    { stdio: ['ignore', 'inherit', 'inherit'] }
+    [destPort.toString(), `${server.ip}:${server.vncPort}`],
+    { stdio: ['ignore', 'pipe', 'pipe'] }
   );
-  const proxy = httpProxy.createProxyServer({
-    target: `http://localhost:${destPort}`,
-    ws: true,
-    changeOrigin: true,
-  });
 
   servers.set(id, {
     server,
@@ -51,14 +47,18 @@ async function startVnc(req: Request, res: Response) {
     process: vncServer,
   });
 
+  vncServer.stdout.on('data', (data) => logger.log(`vncServer ${id}: ${data}`));
+  vncServer.stderr.on('data', (data) => logger.error(`vncServer ${id}: ${data}`));
+
   vncServer.on('close', (code) => {
-    console.log(`child process exited with code ${code}`);
+    logger.log(`child process exited with code ${code}`);
   });
   vncServer.on('error', (err) => {
-    console.log(`child process exited with error ${err}`);
+    logger.error(`child process exited with error ${err}`);
   });
-
-  res.status(201).send(data);
+  setTimeout(() => {
+    res.status(201).send(data);
+  }, 2_000);
 }
 
 //-----------------------------------------------
@@ -69,9 +69,21 @@ export const vncProxy = (id: string) => {
   if (!server)
     return null;
 
-  return (req: IncomingMessage, socket: any, head: any) =>
-    proxyServer.ws(req, socket, head, { target: `ws://localhost:${server.destPort}` });
-
+  return (req: IncomingMessage, socket: any, head: any) => {
+    proxyServer.ws(
+      req, socket, head, { 
+        target: `ws://127.0.0.1:${server.destPort}` ,
+        headers: {
+          host: req.headers.host,
+          Connection: 'Upgrade',
+          upgrade: req.headers.upgrade,
+        }
+      }, 
+      (_err) => {
+        logger.error(`Error while proxying websocket: ${_err}`);
+      },
+    );
+  }
 }
 
 //-----------------------------------------------

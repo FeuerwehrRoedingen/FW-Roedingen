@@ -1,28 +1,44 @@
 import { createServer } from 'node:http';
 import { parse } from 'node:url'
-import express from 'express';
+import express, { ErrorRequestHandler} from 'express';
 import { config } from 'dotenv';
 import { Server } from 'socket.io';
 import * as Sentry from '@sentry/node';
+import { auth } from 'express-oauth2-jwt-bearer';
+import cors from 'cors';
+import httpProxy from 'http-proxy';
 
-import { serversRouter } from './routes';
+import { serversRouter, statusRouter } from './routes';
 import { database } from './DB';
 import { createSsh } from './server/ssh';
 import { vncCleanup, vncProxy, vncRouter } from './server/vnc';
+import { logger } from './Logger';
 
 try {
 
 config();
 
 //-----------------------------------------------
+// Authentication
+//-----------------------------------------------
+const jwtCheck = auth({
+  audience: 'https://management.feuerwehr-roedingen.de/api/v1',
+  issuerBaseURL: 'https://fw-roedingen.eu.auth0.com/',
+  tokenSigningAlg: 'RS256'
+});
+
+//-----------------------------------------------
 // Servers
 //-----------------------------------------------
 const app = express();
 const server = createServer(app);
-const vncServer = createServer();
-const io = new Server(server, {
+const ioServer = createServer();
+const ioProxy = httpProxy.createProxyServer({
+  target: 'http://127.0.0.1:3002/socket.io'
+});
+const io = new Server(ioServer, {
   cors: {
-    origin: '*',
+    origin: process.env.NODE_ENV === 'production' ? 'https://management.feuerwehr-roedingen.de' : '*',
   }
 });
 
@@ -43,16 +59,42 @@ Sentry.init({
 });
 
 //-----------------------------------------------
+// Error handling
+//-----------------------------------------------
+const errorHandler: ErrorRequestHandler = (error, request, response, next) => {
+
+  if(error.name === 'UnauthorizedError') {
+    logger.warn(`Unauthorized request: ${request.url}\n -> from ${request.socket.remoteAddress}`);
+    response.status(401);
+    response.json({
+      error: error.message || 'Unauthorized'
+    });
+    return;
+  }
+
+  logger.error(error);
+  response.status(500);
+  response.json({
+    error: error.message || 'Internal server error'
+  });
+}
+
+//-----------------------------------------------
 // Express
 //-----------------------------------------------
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 app.use(Sentry.Handlers.errorHandler());
+app.use(cors({origin: process.env.NODE_ENV === 'production' ? 'https://management.feuerwehr-roedingen.de' : '*'}));
 
-app.use('/servers', serversRouter);
-app.use('/vnc', vncRouter);
+app.use('/servers', jwtCheck, serversRouter);
+app.use('/status', jwtCheck, statusRouter);
+app.use('/vnc', jwtCheck, vncRouter);
+app.use('/socket.io', (req, res) => {
+  ioProxy.web(req, res);
+});
 
-app.get('/', (req, res) => {
+app.get('/', jwtCheck, (req, res) => {
   //TODO implememnt OAPI docs
   res.send('FWR Management API!');
 });
@@ -61,33 +103,39 @@ app.get('/', (req, res) => {
 // Socket.io
 //-----------------------------------------------
 io.on('connection', async (socket) => {
-  const { id, type } = socket.handshake.query;
 
-  if(typeof id !== 'string' || typeof type !== 'string') {
-    socket.write('Invalid query parameters\n');
-    socket.disconnect();
-    return;
-  }
+  logger.addListener('all', (message) => {
+    socket.emit('log', message);
+  });
 
-  const server = await database.getServer(parseInt(id, 10));
-  if(!server) {
-    socket.write('Server not found\n');
-    socket.disconnect();
-    return;
-  }
+  socket.on('ssh', async (id: string) => {
+  
+    const server = await database.getServer(parseInt(id, 10));
+    if(!server) {
+      socket.write('Server not found\n');
+      socket.disconnect();
+      return;
+    }
 
-  if(type === 'ssh') {
-    return createSsh(socket, server);
-  }
-    
-  socket.disconnect();
+    createSsh(socket, server);
+  });
 });
+
+app.use(errorHandler)
 
 //-----------------------------------------------
 // HTTP Server
 //-----------------------------------------------
-vncServer.on('upgrade', (req, socket, head) => {
+server.on('upgrade', (req, socket, head) => {
   try {
+
+    logger.info(`Upgrade request: ${req.url} -> from ${req.headers.origin}`);
+
+    if(req.url.split('?')[0] === '/socket.io'){
+      ioServer.emit('upgrade', req, socket, head);
+      return;
+    }
+
     const {id} = parse(req.url!, true).query;
 
     if(typeof id !== 'string') {
@@ -105,25 +153,35 @@ vncServer.on('upgrade', (req, socket, head) => {
     proxy(req, socket, head);
   }
   catch(err) {
-    console.error(err);
+    logger.error(err);
   }
 });
 
 server.listen(3001, '0.0.0.0', () => {
+  logger.log('API listening on port 3001');
   console.log('API listening on port 3001');
 });
-vncServer.listen(3002, '0.0.0.0', () => {
-  console.log('VNC listening on port 3002');
+ioServer.listen(3002, '0.0.0.0', () => {
+  logger.log('Socket.io listening on port 3002');
+  console.log('Socket.io listening on port 3002');
 });
 
 //-----------------------------------------------
 // Cleanup
 //-----------------------------------------------
-process.on('exit', () => {
-  vncCleanup()
+process.on('exit', (code) => {
+  vncCleanup();
+  logger.info(`Exiting with code ${code}`);
+});
+process.on('uncaughtException', (err) => {
+  logger.error('[CRITICAL] uncaught exception:', err);
+}); 
+process.on('error', (err) => {
+  logger.error(err);
 });
 
 }
 catch(err) {
   console.error(err);
+  vncCleanup();
 }
