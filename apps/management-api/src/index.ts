@@ -131,7 +131,7 @@ server.on('upgrade', (req, socket, head) => {
 
     logger.info(`Upgrade request: ${req.url} -> from ${req.headers.origin}`);
 
-    if(req.url.split('?')[0] === '/socket.io'){
+    if(req.url.split('?')[0] === '/socket.io' || req.url.split('?')[0] === '/socket.io/'){
       ioServer.emit('upgrade', req, socket, head);
       return;
     }
@@ -182,6 +182,6 @@ process.on('error', (err) => {
 
 }
 catch(err) {
-  console.error(err);
+  logger.error(err);
   vncCleanup();
 }

@@ -1,19 +1,25 @@
 "use client"
 import React from "react"
 import { Input } from '@nextui-org/input'
+import { Button } from "@nextui-org/button";
 import {Modal as _Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure} from "@nextui-org/modal"
+import { Spacer } from "@nextui-org/spacer";
 import { useSelector } from "react-redux";
 
 import { AppState, useAppDispatch } from "@/store";
-import { setSelectedServer } from "@/store/reducer";
-import { Server } from "@/utils/Server";
+import { setSelectedServer, updateServer } from "@/store/reducer";
+import type { Server } from "@/utils/Server";
 
 export function Modal(){
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const selectedServerID = useSelector((state: AppState) => state.serversState.selectedServerID);
-  const servers = useSelector((state: AppState) => state.serversState.servers);
+  const {servers, selectedServerID} = useSelector((state: AppState) => state.serversState);
   const dispatch = useAppDispatch();
+
+  const nameRef = React.useRef<HTMLInputElement>(null);
+  const ipRef = React.useRef<HTMLInputElement>(null);
+  const sshPortRef = React.useRef<HTMLInputElement>(null);
+  const vncPortRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
     if (selectedServerID !== null) {
@@ -27,8 +33,26 @@ export function Modal(){
     dispatch(setSelectedServer(undefined));
   }
 
-  function updateServer(server: Server) {
+  function _updateServer(onClose: () => void) {
+    let newServer: Partial<Omit<Server, 'id'>> = {}
+
+    if(nameRef.current?.value && nameRef.current?.value !== server.name)
+      newServer.name = nameRef.current?.value;
+    if(ipRef.current?.value && ipRef.current?.value !== server.ip)
+      newServer.ip = ipRef.current?.value;
+    if(sshPortRef.current?.value && sshPortRef.current?.value !== server.sshPort.toString())
+      newServer.sshPort = parseInt(sshPortRef.current?.value);
+    if(vncPortRef.current?.value && vncPortRef.current?.value !== server.vncPort.toString())
+      newServer.vncPort = parseInt(vncPortRef.current?.value);
     
+    if(Object.keys(newServer).length === 0){
+      onClose();
+      return;
+    }
+
+    console.log('new server', newServer)
+    dispatch(updateServer({id: server.id, server: newServer}));
+    onClose();
   }
 
   return (
@@ -36,6 +60,7 @@ export function Modal(){
     isOpen={isOpen}
     onOpenChange={onOpenChange}
     onClose={close}
+    hideCloseButton
   >
     <ModalContent>
       {(onClose) => (
@@ -43,14 +68,18 @@ export function Modal(){
           <ModalHeader>Edit {server.name}</ModalHeader>
           <ModalBody>
             <form>
-              <Input label={`${server.name} Name`}     placeholder={server.name} />
-              <Input label={`${server.name} IP`}       placeholder={server.ip} />
-              <Input label={`${server.name} SSH Port`} placeholder={server.sshPort.toString()} type='number'/>
-              <Input label={`${server.name} VNC Port`} placeholder={server.vncPort.toString()} type='number'/>
+              <Input ref={nameRef} label='Name' placeholder={server.name}/>
+              <Spacer y={1} />
+              <Input ref={ipRef} label='IP' placeholder={server.ip}/>
+              <Spacer y={1} />
+              <Input ref={sshPortRef} label='SSH Port' placeholder={server.sshPort.toString()} type='number'/>
+              <Spacer y={1} />
+              <Input ref={vncPortRef} label='VNC Port' placeholder={server.vncPort.toString()} type='number'/>
             </form>
           </ModalBody>
           <ModalFooter>
-            <button onClick={onClose}>Close</button>
+            <Button onClick={onClose}>Close</Button>
+            <Button onClick={() => _updateServer(onClose)}>Update</Button>
           </ModalFooter>
         </>
       )}

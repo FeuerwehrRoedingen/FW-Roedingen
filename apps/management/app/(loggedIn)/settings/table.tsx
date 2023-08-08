@@ -12,13 +12,13 @@ import ping from 'web-pingjs'
 
 import type { Server } from '@/utils/Server'
 import { AppState, useAppDispatch } from '@/store'
-import { setSelectedServer, setServers } from '@/store/reducer'
+import { refreshServers, setSelectedServer, setServers } from '@/store/reducer'
 import { StatusIndicator } from './statusIndicator'
 import { DeleteIcon, EditIcon } from './icons'
 import 'status-indicator/styles.css'
 
 async function fetchServers(): Promise<Server[]> {
-  return fetch(`/api/v1/servers`, { next: { revalidate: 0 } }).then((res) => res.json());
+  return fetch(`/api/v1/servers`).then((res) => res.json());
 }
 
 type IProps = {}
@@ -72,32 +72,29 @@ export function Table(props: IProps) {
   }
 
   React.useEffect(() => {
-    fetchServers()
-      .then((data) => {
-        dispatch(setServers(data));
-      });
+    dispatch(refreshServers());
   }, []);
 
   const serverRows: any = servers.map((server) => {
     return (
       <TableRow key={server.id}>
         <TableCell>
-          <p className="text-bold text-sm capitalize">{server.name}</p>
+          <p className="text-bold text-sm">{server.name}</p>
         </TableCell>
         <TableCell>
-          <p className="text-bold text-sm capitalize">{server.ip}</p>
+          <p className="text-bold text-sm">{server.ip}</p>
         </TableCell>
         <TableCell>
-          <p className="text-bold text-sm capitalize">{server.sshPort}</p>
+          <p className="text-bold text-sm">{server.sshPort}</p>
         </TableCell>
         <TableCell>
-          <p className="text-bold text-sm capitalize">{server.vncPort}</p>
+          <p className="text-bold text-sm">{server.vncPort}</p>
         </TableCell>
         <TableCell >
           <div className='flex flex-row h-full items-center'>
             <StatusIndicator status={server.status} />
             <Spacer x={2} />
-            <p className="text-bold text-sm capitalize">{server.status}</p>
+            <p className="text-bold text-sm">{server.status}</p>
             <Spacer x={1} />
             <BiRefresh
               size='25px'

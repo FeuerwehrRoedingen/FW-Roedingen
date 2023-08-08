@@ -36,9 +36,6 @@ const calcUsage = (cpus: any[]) => {
     const total = user + nice + sys + idle + irq;
     return parseInt(((1 - (idle / total)) * 100).toFixed(2), 10);
   });
-
-  console.log(usages);
-
   const usage = parseInt((usages.reduce((acc, cur) => acc + cur) / usages.length).toFixed(2), 10);
 
   return usage;

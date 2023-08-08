@@ -3,8 +3,10 @@ import * as React from "react"
 import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Image, Link, Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/react"
 import { redirect, usePathname, useRouter } from "next/navigation"
 import { useUser, type UserProfile } from '@auth0/nextjs-auth0/client'
+import { useSelector } from "react-redux"
 
-import type { Server } from '@/utils/Server'
+import { AppState, useAppDispatch } from "@/store"
+import { refreshServers } from "@/store/reducer"
 
 type IProps = {}
 
@@ -12,15 +14,14 @@ export function Nav(props: IProps) {
 
   const { push } = useRouter();
   const pathname = usePathname();
-  const [servers, setServers] = React.useState<Server[]>([]);
   const { user } = useUser();
 
-  React.useEffect(() => {
-    fetch('/api/v1/servers')
-      .then((res) => res.json())
-      .then((data) => setServers(data))
-  }, []);
+  const {servers} = useSelector((state: AppState) => state.serversState);
+  const dispatch = useAppDispatch();
 
+  React.useEffect(() => {
+    dispatch(refreshServers());
+  }, []);
 
   const handleAction = (item: string|number) => {
     push(`/server/${item}`);

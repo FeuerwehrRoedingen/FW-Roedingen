@@ -15,7 +15,7 @@
     "@types/react-dom": "18.0.8",
     "eslint-config-next": "^13.4.1",
     "firebase": "^9.16.0",
-    "fw-roedingen-shared": "*",
+    "fw-roedingen-shared": "1.0.0",
     "next": "^13.4.1",
     "next-auth": "^4.22.1",
     "node-pty": "^0.10.1",

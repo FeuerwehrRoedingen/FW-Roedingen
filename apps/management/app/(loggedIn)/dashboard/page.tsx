@@ -19,14 +19,16 @@ function page({}: Props) {
 
   const dispatch = useAppDispatch();
 
-  React.useEffect(() => {
-    const interval = setInterval(() => {
-      fetchStatus()
-      .then((data) =>{
-        dispatch(updateStatus(data));
-      });
-    }, 1_000);
+  const refresh = () => {
+    fetchStatus()
+    .then((data) =>{
+      dispatch(updateStatus(data));
+    });
+  }
 
+  React.useEffect(() => {
+    refresh();
+    const interval = setInterval(refresh, 10_000);
     return () => clearInterval(interval);
   }, []);
 

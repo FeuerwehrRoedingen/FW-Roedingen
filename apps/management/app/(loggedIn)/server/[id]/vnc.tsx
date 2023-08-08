@@ -17,14 +17,22 @@ export default function Vnc(props: Props) {
   const [credentials, setCredentials] = React.useState<{username: string, password: string} | null>(null);
 
   React.useEffect(() => {
-    const protocol = process.env.NODE_ENV === 'production' ? 'wss' : 'ws'
-    const host = process.env.NODE_ENV === 'production' ? `${window.location.host}` : '127.0.0.1:3001'
-
-    fetch(`/api/v1/vnc/${props.id}`, {method: 'POST'})
-      .then(data => {
-        setWsUrl(`${protocol}://${host}/vnc?id=${props.id}`)
-      });
-  }, [props.id]);
+    try{
+      const protocol = process.env.NODE_ENV === 'production' ? 'wss' : 'ws'
+      const host = process.env.NODE_ENV === 'production' ? `${window.location.host}` : '127.0.0.1:3001'
+  
+      fetch(`/api/v1/vnc/${props.id}`, {method: 'POST'})
+        .then(data => {
+          setWsUrl(`${protocol}://${host}/vnc?id=${props.id}`)
+        })
+        .catch(err => {
+          console.error('Error starting VNC server',err);
+        });
+    }
+    catch(err){
+      console.error('Error starting VNC server',err);
+    }
+  }, []);
 
   function CredentialInput() {
     const userRef = React.createRef<HTMLInputElement>();

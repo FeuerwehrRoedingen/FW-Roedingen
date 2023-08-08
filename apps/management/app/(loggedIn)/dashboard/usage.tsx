@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import ApexChart from 'react-apexcharts'
 import { useSelector } from 'react-redux'
@@ -16,7 +17,7 @@ export function Usage({}: Props) {
       <ApexChart
         type='radialBar'
         series={[cpuUsage]}
-        height='110%'
+        height='100%'
         width='100%'
         options={{
           plotOptions: {
@@ -49,7 +50,7 @@ export function Usage({}: Props) {
       <ApexChart
         type='radialBar'
         series={[memoryUsage]}
-        height='110%'
+        height='100%'
         width='100%'
         options={{
           plotOptions: {

@@ -12,7 +12,8 @@ type Props = {}
 
 async function fetchLogs(){
   const res = await fetch('/api/v1/status/logs');
-  return res.text();
+  const logs = await res.text();
+  return logs;
 }
 
 export function Logs({}: Props) {
@@ -48,6 +49,7 @@ export function Logs({}: Props) {
         base: "max-h-[70%] overflow-scroll",
         table: "min-h-[400px]",
       }}
+      aria-label='Logs'
     >
       <TableHeader>
         <TableColumn>Logs</TableColumn>

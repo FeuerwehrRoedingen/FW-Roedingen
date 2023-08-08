@@ -1,6 +1,7 @@
 import express, { Router } from "express";
 
 import { database } from '../DB'
+import type { Server } from "@prisma/client";
 
 export const serversRouter = Router();
 
@@ -27,8 +28,6 @@ serversRouter.post('/', async (req, res) => {
 serversRouter.get('/:id', async (req, res) => {
   const server = await database.getServer(parseInt(req.params.id, 10))
 
-  console.log(req.params.id, server);
-
   if(!server)
     return res.status(404).json({ error: 'Server not found' });
     
@@ -42,7 +41,13 @@ serversRouter.delete('/:id', async (req, res) => {
 
   res.json(server);
 });
+serversRouter.patch('/:id', async (req, res) => {
+  req.body satisfies Partial<Omit<Server, 'id'>>;
+  
+  const server = await database.updateServer(parseInt(req.params.id, 10), req.body)
 
-serversRouter.get('/:id/update', (req, res) => {
+  if(!server)
+    return res.status(404).json({ error: 'Server not found' });
 
+  res.json(server);
 });
