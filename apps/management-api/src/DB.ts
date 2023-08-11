@@ -25,10 +25,13 @@ class Database extends PrismaClient {
     return server.id;
   }
 
-  async updateServer(id: number, params: Partial<Omit<Server, "id">>): Promise<Server> {
+  async updateServer(id: number, params: Partial<Omit<Server, "id">>): Promise<Server|void> {
     return this.server.update({
       where: { id },
       data: params,
+    })
+    .catch(e => {
+      console.error(e);
     });
   }
 

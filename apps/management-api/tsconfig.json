@@ -10,7 +10,7 @@
       "ESNext",
       "DOM"
     ],
-    "module": "CommonJS",
+    "module": "ES6",
     "moduleResolution": "node",
     "noEmit": false,
     "noImplicitAny": true,

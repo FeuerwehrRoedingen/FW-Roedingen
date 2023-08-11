@@ -2,14 +2,14 @@
 import React from 'react'
 import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from '@nextui-org/table'
 import { useSelector } from 'react-redux'
+import dynamic from 'next/dynamic'
 
-import { Usage } from './usage'
 import { AppState } from '@/store'
 
+const Usage = dynamic(() => import('./usage'), { ssr: false });
+
 type Props = {}
-
 export function HostInfo({ }: Props) {
-
   const status = useSelector((state: AppState) => state.statusState);
 
   const StatusItems = () => {

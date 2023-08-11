@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "feuerwehr-roedingen-mobile",
+    "slug": "feuerwehr-roedingen-mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,25 +11,28 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "de.fwroedingen.mobile"
+      "bundleIdentifier": "de.feuerwehrroedingen.mobile"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#ffffff"
       },
-      "package": "de.fwroedingen.mobile"
+      "package": "de.feuerwehrroedingen.mobile"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
+    "plugins": [
+      [
+        "react-native-auth0",
+        {
+          "domain": "fw-roedingen.eu.auth0.com",
+          "customScheme": "fwr"
+        }
+      ]
+    ]
   }
 }

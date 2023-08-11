@@ -7,19 +7,11 @@ import { BiRefresh } from 'react-icons/bi'
 import { Spacer } from '@nextui-org/spacer'
 import { useSelector } from 'react-redux'
 
-// @ts-ignore
-import ping from 'web-pingjs'
-
-import type { Server } from '@/utils/Server'
 import { AppState, useAppDispatch } from '@/store'
 import { refreshServers, setSelectedServer, setServers } from '@/store/reducer'
 import { StatusIndicator } from './statusIndicator'
 import { DeleteIcon, EditIcon } from './icons'
 import 'status-indicator/styles.css'
-
-async function fetchServers(): Promise<Server[]> {
-  return fetch(`/api/v1/servers`).then((res) => res.json());
-}
 
 type IProps = {}
 export function Table(props: IProps) {
@@ -47,28 +39,15 @@ export function Table(props: IProps) {
       })
 
   }
-  async function updateServerStatus(address: string) {
-    function _ping(): Promise<'offline' | 'slow' | 'online'> {
-      return new Promise<'offline' | 'slow' | 'online'>((resolve, reject) => {
-        ping(`http://${address}`, 0.3)
-          .then((res: number) => {
-            if (res > 5_000) {
-              resolve('slow');
-            }
-            resolve('online');
-          })
-          .catch((err: string) => {
-            resolve('offline');
-          });
+  async function updateServerStatus(id: number) {
+    const response: Response|void = await fetch(`/api/v1/servers/${id}/update`)
+      .catch((err) => {
+        toast.error(err);
       });
+
+    if(response && response.ok){
+      dispatch(refreshServers());
     }
-
-    const res = await _ping();
-
-    const server = servers.find((server) => server.ip === address);
-
-    if (server?.status === res)
-      return;
   }
 
   React.useEffect(() => {
@@ -94,11 +73,9 @@ export function Table(props: IProps) {
           <div className='flex flex-row h-full items-center'>
             <StatusIndicator status={server.status} />
             <Spacer x={2} />
-            <p className="text-bold text-sm">{server.status}</p>
-            <Spacer x={1} />
             <BiRefresh
               size='25px'
-              onClick={() => updateServerStatus(server.ip)}
+              onClick={() => updateServerStatus(server.id)}
               className='cursor-pointer duration-500 hover:scale-110 active:rotate-180 active:scale-95'
             />
           </div>

@@ -9,7 +9,6 @@ import { getSocket } from '@/utils/socket';
 
 type Props = {}
 
-
 async function fetchLogs(){
   const res = await fetch('/api/v1/status/logs');
   const logs = await res.text();

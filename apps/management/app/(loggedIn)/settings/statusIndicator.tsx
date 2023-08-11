@@ -1,3 +1,5 @@
+import { Tooltip } from "@nextui-org/tooltip";
+
 
 declare global {
   namespace JSX {
@@ -17,14 +19,21 @@ type IStatusIndicatorProps = {
   status: string;
 }
 export function StatusIndicator(props: IStatusIndicatorProps){
-  if(props.status === 'online')
-    return <status-indicator intermediary pulse></status-indicator>
-  
-  if(props.status === 'slow')
-    return <status-indicator intermediary pulse></status-indicator>
-  
-  if(props.status === 'offline')
-    return <status-indicator negative pulse></status-indicator>
 
-  return <status-indicator active></status-indicator>
+  let statuselement = <status-indicator active></status-indicator>
+
+  if(props.status === 'online')
+    statuselement = <status-indicator positive pulse></status-indicator>
+  
+  else if(props.status === 'slow')
+    statuselement =  <status-indicator intermediary pulse></status-indicator>
+  
+  else if(props.status === 'offline')
+    statuselement =  <status-indicator negative pulse></status-indicator>
+
+  return (
+    <Tooltip content={props.status}  placement="top">
+      {statuselement}
+    </Tooltip>
+  )
 }

@@ -39,7 +39,6 @@
     "tunnel-ssh": "^5.0.8",
     "typescript": "5.1.3",
     "utf-8-validate": "^5.0.10",
-    "web-pingjs": "^1.0.1",
     "webpack-node-externals": "^3.0.0",
     "ws": "^8.13.0",
     "xterm": "^5.2.1"

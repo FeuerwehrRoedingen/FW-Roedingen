@@ -6,12 +6,11 @@ import { useSelector } from 'react-redux'
 import { AppState } from '@/store'
 
 type Props = {}
-
-export function Usage({}: Props) {
+export default function({}: Props) {
 
   const cpuUsage = useSelector((state: AppState) => state.statusState.cpuUsage);
   const memoryUsage = useSelector((state: AppState) => state.statusState.memoryUsage);
-
+  
   return (
     <div className='h-full w-[40%] flex flex-row items-center justify-evenly'>
       <ApexChart

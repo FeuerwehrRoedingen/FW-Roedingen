@@ -9,13 +9,19 @@
       "apps/door",
       "apps/management",
       "apps/management-api",
+      "apps/mobile",
       "apps/internal",
       "apps/web",
       "shared"
     ],
     "nohoist": [
       "**/@prisma/client",
-      "**/@nextui-org/**"
+      "**/@nextui-org/**",
+      "**/expo",
+      "**/@expo/**",
+      "**/react",
+      "**/react-dom",
+      "**/react-native-codegen"
     ]
   },
   "scripts": {

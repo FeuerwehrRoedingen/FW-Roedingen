@@ -50,7 +50,6 @@ export function Modal(){
       return;
     }
 
-    console.log('new server', newServer)
     dispatch(updateServer({id: server.id, server: newServer}));
     onClose();
   }
