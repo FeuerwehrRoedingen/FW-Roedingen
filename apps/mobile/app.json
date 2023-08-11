@@ -46,6 +46,11 @@
       "@react-native-firebase/app",
       "@react-native-firebase/perf",
       "@react-native-firebase/crashlytics"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "6c2087ed-df80-4642-b05a-342f15f5ca9e"
+      }
+    }
   }
 }

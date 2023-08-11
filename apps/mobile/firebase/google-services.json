@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "639345913732",
+    "project_id": "fw-roedingen",
+    "storage_bucket": "fw-roedingen.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:639345913732:android:2cb1003764bff906f237d1",
+        "android_client_info": {
+          "package_name": "de.feuerwehrroedingen.mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "639345913732-cu4oi92ujpjjuc2lv6gc1l56451obb50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcAVa1PtY7Hs1J87aR6Q3AUPCTjPfMBDU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "639345913732-cu4oi92ujpjjuc2lv6gc1l56451obb50.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "639345913732-s13nc2n37frmi434knprf9p8nfsmr925.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "de.fwroedingen.mobile"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
