@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { Auth0Provider } from 'react-native-auth0';
 
-import { LoginButton, LogoutButton } from './app/components/authButton';
+import { LoginButton, LogoutButton } from './components/authButton';
 
 export default function App() {
   return (

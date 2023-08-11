@@ -17,7 +17,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "de.feuerwehrroedingen.mobile",
-      "googleServicesFile": "./firebase/GoogleService-Info.plist"
+      "googleServicesFile": "./app/firebase/GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,7 +25,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "de.feuerwehrroedingen.mobile",
-      "googleServicesFile": "./firebase/google-services.json"
+      "googleServicesFile": "./app/firebase/google-services.json"
     },
     "plugins": [
       [
