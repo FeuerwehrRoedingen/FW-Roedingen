@@ -5,7 +5,6 @@
   "workspaces": {
     "packages": [
       "apps/api",
-      "apps/api/microservices/*",
       "apps/door",
       "apps/management",
       "apps/management-api",
