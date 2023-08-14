@@ -33,8 +33,8 @@
     "ci:api": "npx turbo-ignore fw-roedingen-api || (cd apps/api && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-api)",
     "ci:door": "npx turbo-ignore fw-roedingen-door || (cd apps/door && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-door)",
     "dev": "turbo run dev --parallel",
-    "dev:door": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-door",
-    "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-backend --filter=fw-roedingen-internal",
+    "dev:door": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-door",
+    "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-internal",
     "dev:management": "turbo run dev --parallel --filter=fw-roedingen-management-api --filter=fw-roedingen-management",
     "lint": "turbo run lint",
     "clean": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules"

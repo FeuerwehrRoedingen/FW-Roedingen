@@ -1,7 +1,10 @@
 import { Button } from 'react-native'
 import { useAuth0 } from 'react-native-auth0'
 
+import { navigate } from '../router'
+
 type IButtonProps = {
+  returnTo: string;
 }
 export const LoginButton = (props: IButtonProps) => {
   const { authorize } = useAuth0();
@@ -9,6 +12,7 @@ export const LoginButton = (props: IButtonProps) => {
   const onPress = async () => {
     try{
       await authorize({scope: 'openid profile email'}, {customScheme: 'fwr'});
+      navigate(props.returnTo);
     }
     catch(error){
       console.log(error);
@@ -24,6 +28,7 @@ export const LogoutButton = (props: IButtonProps) => {
   const onPress = async () => {
     try{
       await clearSession({customScheme: 'fwr'});
+      navigate(props.returnTo);
     }
     catch(error){
       console.log(error);
