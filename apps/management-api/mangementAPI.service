@@ -1,0 +1,18 @@
+[Unit]
+Description=Feuerwehr Rödingen Management API
+Documentation=https://feuerwehr-roedingen.de/docs/management/api
+After=network.target
+
+[Service]
+Environment="API_PORT=3001"
+Environment="SOCKET_PORT=3002"
+Environment="NODE_ENV=production"
+Environment="DATABASE_URL="
+Environment="Sentry_auth_token="
+Type=simple
+User=
+ExecStart=/usr/bin/node /etc/fwr/management-api/index.js
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
