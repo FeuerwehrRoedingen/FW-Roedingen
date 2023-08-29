@@ -1,30 +1,33 @@
 "use client"
 
 import React from 'react'
-import { signOut, useSession } from 'next-auth/react'
+import { useUser } from '@auth0/nextjs-auth0/client'
+import { redirect } from 'next/navigation';
 
 type Props = {}
 
 export default function page({}: Props) {
 
-  const { data, status } = useSession();
+  const { user, error, isLoading } = useUser();
 
-  if(status === 'unauthenticated'){
-    window.location.href = '/'
-    return;
-  }
-
-  if(status === 'loading'){
+  if(isLoading) {
     return <div>Loading...</div>
   }
+
+  if(error) {
+    return <div>{error.message}</div>
+  }
+
+  if(!user)
+    redirect('/')
 
   return (
     <div className='page'>
       <h1>Home</h1>
       <div>
-        {data!.user.email}
+        {user.email}
       </div>
-      <button onClick={() => signOut({ callbackUrl: '/', redirect: true})} >sign out</button>
+      <a href="/api/auth/logout">sign out</a>
     </div>
   )
 }

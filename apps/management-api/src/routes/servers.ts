@@ -62,6 +62,10 @@ serversRouter.get('/:id', async (req, res) => {
 });
 serversRouter.delete('/:id', async (req, res) => {
   const server = await database.deleteServer(parseInt(req.params.id, 10))
+    .catch(e => {
+      logger.error(e);
+      return res.status(500).json({ error: 'Failed to delete server' });
+    });
 
   if(!server)
     return res.status(404).json({ error: 'Server not found' });

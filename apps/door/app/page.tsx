@@ -16,12 +16,12 @@ export default function(props: Props) {
   }
 
   if(user) {
-    redirect('/app')
+    redirect('/home')
   }
   
   return (
     <div className='h-screen w-screen flex items-center justify-center'>
-      <a href="/api/login">login with Auth0</a>
+      <a href="/api/auth/login">login with Auth0</a>
     </div>
   )
 }
