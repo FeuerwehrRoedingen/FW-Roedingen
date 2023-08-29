@@ -32,6 +32,7 @@
     "ci:api": "npx turbo-ignore fw-roedingen-api || (cd apps/api && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-api)",
     "ci:door": "npx turbo-ignore fw-roedingen-door || (cd apps/door && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-door)",
     "dev": "turbo run dev --parallel",
+    "dev:all": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-door --filter=fw-roedingen-internal --filter=fw-roedingen-management-api --filter=fw-roedingen-management --filter=fw-roedingen-web",
     "dev:door": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-door",
     "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-internal",
     "dev:management": "turbo run dev --parallel --filter=fw-roedingen-management-api --filter=fw-roedingen-management",

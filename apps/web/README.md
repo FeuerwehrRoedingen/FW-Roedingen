@@ -178,7 +178,7 @@ example:
 The layout.tsx file gets wrapped around every page.tsx files thats below it inside the app directory, things that appear on every page should be placed here  (i.e. Header).
 
 #### Loading.tsx
-If a user has as bad of an internet connection as our firehouse, the loading of all HTML, CSS and JS files will probably not be instant, so instead the loading.tsx file will be displayed, while page.tsx is loading.a
+If a user has as bad of an internet connection as our firehouse, the loading of all HTML, CSS and JS files will probably not be instant, so instead the loading.tsx file will be displayed, while page.tsx is loading.
 
 #### Page.tsx
 A page.tsx file should have a renderable default export, renderable means a HTML or React Element. Because NextJS 13 can handle both server and client components, you need to indicate if a component **HAS** to be a client component. These components cannot be prebuild on the server and sent as static HTML with some JS Code, but have to be built by the client. To indicate a client component add

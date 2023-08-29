@@ -1,6 +1,6 @@
 [Unit]
 Description=Feuerwehr Rödingen Management System
-Documentation=https://feuerwehr-roedingen.de/docs/management
+Documentation=https://docs.feuerwehr-roedingen.de/management
 After=network.target
 
 [Service]

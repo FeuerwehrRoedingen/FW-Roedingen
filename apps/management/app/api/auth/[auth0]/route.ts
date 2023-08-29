@@ -1,5 +1,6 @@
-import { handleAuth } from '@auth0/nextjs-auth0';
+import { handleAuth, handleLogin } from '@auth0/nextjs-auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { NextRequest } from 'next/server';
 
 type env = {
   AUTH0_BASE_URL:        string;
@@ -17,8 +18,13 @@ declare global {
 }
 
 const handler = handleAuth({
-  onError(req: NextApiRequest, res: NextApiResponse, error: Error) {
+  onError(req: NextRequest, error: Error) {
     console.error(error);
+  },
+  login: async (req: NextApiRequest, res: NextApiResponse) => {
+    await handleLogin(req, res, {
+      returnTo: '/dashboard'
+    });
   }
 });
 

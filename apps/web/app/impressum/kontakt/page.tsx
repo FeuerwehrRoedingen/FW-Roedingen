@@ -1,31 +1,73 @@
-import React, { Component } from 'react'
-import KontaktFormular from '../../../components/Kontaktformular';
+import React from 'react'
 
-import './kontakt.css'
+import HomeButton from 'components/HomeButton';
 
 interface IProps {}
 
 export default function(props: IProps){
 
-  const to='info@feuerwehr-roedingen.de';
-  const subject='Webseite'
-  const body='\n\n\n Gesendet durch den Email Link der Webseite'
-
   return (
-    <div className='kontakt_container'>
-      <div style={{marginTop: '10px'}}>
-        Sie können uns per Email erreichen unter {to}<br/>
-      </div>
-      <a 
-        style={{color: '#ff0000', marginLeft: '10px '}}
-        href={`mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
-      >
-        Email senden
-      </a>
-      <div>
-        Oder das Kontakformular verwenden
-      </div>
-      <KontaktFormular />
+    <div className='page pt-4 pl-4'>
+      <HomeButton />
+      <p className='pt-4'>
+        Sie können uns per Email erreichen unter 
+        <Mail 
+          to='info@feuerwehr-roedingen.de' 
+          subject=''
+          body=''
+        />
+      </p>
+      <p className='pt-4'> 
+        Für spezielle Anfragen benutzen sie bitte folgende Email Adressen:
+      </p>
+      <ul className='pt-4'>
+        <li>
+          <Mail 
+            to='einheitsführung@feuerwehr-roedingen.de'
+            subject=''
+            body=''
+          />
+        </li>
+        <li>
+          <Mail 
+            to='geraetewart@feuerwehr-roedingen.de'
+            subject=''
+            body='' 
+          />
+        </li>
+        <li>
+          <Mail 
+            to='jugendfeuerwehr@feuerwehr-roedingen.de'
+            subject=''
+            body='' 
+          />
+        </li>
+        <li>
+          <Mail 
+            to='it@feuerwehr-roedingen.de'
+            subject=''
+            body=''
+          />
+        </li>
+      </ul>
     </div>
+  )
+}
+
+type IMailProps = {
+  to: string,
+  subject: string,
+  body: string
+}
+
+function Mail(props: IMailProps){
+  const {to, subject, body} = props;
+  return (
+    <a 
+      className='text-ral-3001 ml-4 w-fit'
+      href={`mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`}
+      >
+        {to}
+    </a>
   )
 }

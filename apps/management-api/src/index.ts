@@ -157,16 +157,16 @@ server.on('upgrade', (req, socket, head) => {
   }
 });
 
-const API_PORT = parseInt(process.env.port || '3001');
-const SOCKET_PORT = parseInt(process.env.socket_port || '3002');
+const API_PORT = parseInt(process.env.port || '3010');
+const SOCKET_PORT = parseInt(process.env.socket_port || '3011');
 
 server.listen(API_PORT, '0.0.0.0', () => {
-  logger.log(`API listening on port ${API_PORT}}`);
-  console.log(`API listening on port ${API_PORT}}`);
+  logger.log(`API listening on port ${API_PORT}`);
+  console.log(`API listening on port ${API_PORT}`);
 });
 ioServer.listen(SOCKET_PORT, '0.0.0.0', () => {
-  logger.log(`Socket.io listening on port ${SOCKET_PORT}}`);
-  console.log(`Socket.io listening on port ${SOCKET_PORT}}`);
+  logger.log(`Socket.io listening on port ${SOCKET_PORT}`);
+  console.log(`Socket.io listening on port ${SOCKET_PORT}`);
 });
 
 //-----------------------------------------------

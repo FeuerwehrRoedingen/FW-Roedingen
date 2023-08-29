@@ -4,7 +4,7 @@ import { IoIosArrowBack } from 'react-icons/io'
 
 export default function HomeButton() {
   return (
-      <Link href='/home'>
+      <Link href='/'>
         <div className='flex-row flex text-lg items-center cursor-pointer text-ral-1026'>
           <IoIosArrowBack size={20}/>
           Home

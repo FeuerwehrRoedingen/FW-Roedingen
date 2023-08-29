@@ -1,13 +1,13 @@
 "use client"
+import { UserProvider } from '@auth0/nextjs-auth0/client'
+import { Poppins } from 'next/font/google'
+
 import './globals.css'
 
-import '@fontsource/roboto/300.css'
-import '@fontsource/roboto/400.css'
-import '@fontsource/roboto/500.css'
-import '@fontsource/roboto/700.css'
-
-import { SessionProvider } from 'next-auth/react'
-
+const font = Poppins({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export default function RootLayout({
   children,
@@ -18,9 +18,9 @@ export default function RootLayout({
     <html lang="en">
       <head/>
       <body>
-          <SessionProvider>
-            {children}
-          </SessionProvider>
+        <UserProvider>
+          {children}
+        </UserProvider>
       </body>
     </html>
   )

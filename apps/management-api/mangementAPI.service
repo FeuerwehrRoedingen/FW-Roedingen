@@ -1,6 +1,6 @@
 [Unit]
 Description=Feuerwehr Rödingen Management API
-Documentation=https://feuerwehr-roedingen.de/docs/management/api
+Documentation=https://docs.feuerwehr-roedingen.de/management/api
 After=network.target
 
 [Service]

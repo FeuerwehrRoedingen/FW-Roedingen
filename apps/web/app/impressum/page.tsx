@@ -5,7 +5,7 @@ interface IProps {}
 
 export default function (props: IProps) {
   return (
-    <div className='bg-gray-900 h-screen text-silver text-xs pl-4 pt-4'>
+    <div className='bg-gray-900 h-full text-silver text-xs pl-4 pt-4 pb-4'>
       <HomeButton />
       <div className='max-w-[1000px]'>
         <h1 className='text-3xl border-b-2 border-b-ral-3020'>Impressum</h1>

@@ -17,13 +17,14 @@ export function Header(){
   return(
     <div className="container">
       <nav className="navbar">
-        <NavItem to="/"      title='Home'            icon={IoHomeOutline} exact/>
-        <NavItem to="/about" title='Das sind wir'    icon={IoIosPeople} />
-        <NavItem to="/jf"    title='Jugendfeuerwehr'/>
-        <NavItem to='http://internal.feuerwehr-roedingen.de' title='Login'/>
+        <NavItem to="/"          title='Home'            icon={IoHomeOutline} exact/>
+        <NavItem to="/about"     title='Das sind wir'    icon={IoIosPeople} />
+        <NavItem to="/jf"        title='Jugendfeuerwehr'/>
+        <NavItem to="/fahrzeuge" title='Fahrzeuge'/>
+        <NavItem to='/login'     title='Login'/>
       </nav>
       <div className='header_inner'>
-        <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="5vh">
+        <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="5vh">
           <defs>
             <pattern id="pinstripeL" patternUnits="userSpaceOnUse" width="30" height="30" patternTransform="rotate(45)">
               <line x1="15" y1="30" x2="15" y2="0" stroke="#ff0" strokeWidth="15" />
