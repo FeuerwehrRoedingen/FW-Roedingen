@@ -1,25 +1,23 @@
 {
   "name": "fw-roedingen-shared",
   "version": "1.0.0",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "./index.ts",
+  "module": "./index.ts",
+  "types": "./index.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./api": "./dist/api/index.js",
-    "./email": "./dist/email/index.js",
-    "./providers": "./dist/providers/index.js"
+    ".": "./index.ts",
+    "./components": "./components/index.ts",
+    "./api": "./api/index.ts"
   },
-  "scripts": {
-    "build": "tsc",
-    "prebuild": "rimraf dist",
-    "types": "npx pocketbase-typegen --db ../apps/server/pocketbase/src/pb_data/data.db --out ./src/pocketbase-types.ts"
-  },
+  "scripts": {},
   "dependencies": {
-    "next-auth": "^4.19.2",
-    "nodemailer": "^6.9.1"
-  }, 
+    "@auth0/nextjs-auth0": "^3.1.0",
+    "axios": "^1.5.0",
+    "next": "^13.4.19",
+    "react": "^18.2.0"
+  },
   "devDependencies": {
-    "@types/nodemailer": "^6.4.7"
+    "@types/nodemailer": "^6.4.7",
+    "@types/react": "^18.2.21"
   }
 }

@@ -43,6 +43,8 @@ export default function () {
           </td>
         </tr>
         <Person dienstgrad='FM' funktion='IT Admin/ Social Media verantworlicher' name='Thomas Düren' tooltip='Feuerwehrmann' />
+        <Person dienstgrad='HBM' funktion='IT Admin' name='Daniel Schnabel' tooltip='Hauptbrandmeister' />
+        <Person dienstgrad='OFM' funktion='IT Admin' name='Thomas Peredery' tooltip='Oberfeuerwehrmann' />
       </table>
     </div>
   )
@@ -77,7 +79,7 @@ const Person: React.FC<PersonProps> = (props) => {
       <td className=''>
         {props.funktion}
       </td>
-      {tooltip && <ReactTooltip id={id} delayHide={1000} effect='solid'>
+      {tooltip && <ReactTooltip id={id} delayHide={1000} effect='solid' place='right'>
         <span>{props.tooltip}</span>
       </ReactTooltip>}
     </tr>

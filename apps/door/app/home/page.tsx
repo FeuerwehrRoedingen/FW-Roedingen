@@ -22,7 +22,7 @@ export default function page({}: Props) {
     redirect('/')
 
   return (
-    <div className='page'>
+    <div className=''>
       <h1>Home</h1>
       <div>
         {user.email}

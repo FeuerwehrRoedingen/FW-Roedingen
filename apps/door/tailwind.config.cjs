@@ -8,6 +8,9 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: ['var(--font-poppins)']
+      },
+      colors: {
+        silver: "#C4C4C4",
       }
     },
   },

@@ -13,7 +13,6 @@ export default function (props: IProps) {
           Thomas Düren<br />
           Ehrenstraße 10<br />
           52445 Titz<br />
-          Telefon: 0171-5653667<br />
           E-Mail: info@feuerwehr-roedingen.de
         </div>
         <h1 className='text-xl border-b-2 border-b-ral-3020'>Verantwortlich für den Inhalt (gem. § 55 Abs. 2 RStV):</h1>

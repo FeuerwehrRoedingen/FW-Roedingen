@@ -27,7 +27,10 @@ export default function ({}: Props) {
           Für uns sind Kameradschaft und Teamgeist sehr wichtig. 
           Natürlich solltest du auch Interesse an der Feuerwehrarbeit und ehrenamtliches Engagement mitbringen und mindestens 10 Jahre alt sein.
           Wir treffen uns jeden Donnerstag (außerhalb der Ferien) um 18.00 Uhr am Gerätehaus Rödingen.
-          Für weitere Fragen nutzt gerne unser Kontaktformular oder unsere Facebookseite.
+          Für weitere Fragen nutzt gerne unser 
+          <a href='/impressum/kontakt' className='text-ral-3000 px-2'>Kontaktformular</a> 
+          oder unsere 
+          <a href='https://www.facebook.com/FreiwilligeFeuerwehrTitzLGRoedingen/' className='text-ral-3000 px-2'>Facebookseite</a>.
         </p>
         <div className='w-1/2 flex flex-col pr-4'>
           <img src='/img/jf/IMG_0679.png' className='h-1/2 w-full object-cover mb-4'/>

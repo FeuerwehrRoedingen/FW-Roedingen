@@ -36,6 +36,7 @@
     "dev:door": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-door",
     "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-internal",
     "dev:management": "turbo run dev --parallel --filter=fw-roedingen-management-api --filter=fw-roedingen-management",
+    "dev:web": "turbo run dev --filter=fw-roedingen-web",
     "lint": "turbo run lint",
     "clean": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules"
   },

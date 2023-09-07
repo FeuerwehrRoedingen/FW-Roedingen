@@ -20,8 +20,6 @@ export function Header(){
         <NavItem to="/"          title='Home'            icon={IoHomeOutline} exact/>
         <NavItem to="/about"     title='Das sind wir'    icon={IoIosPeople} />
         <NavItem to="/jf"        title='Jugendfeuerwehr'/>
-        <NavItem to="/fahrzeuge" title='Fahrzeuge'/>
-        <NavItem to='/login'     title='Login'/>
       </nav>
       <div className='header_inner'>
         <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="5vh">

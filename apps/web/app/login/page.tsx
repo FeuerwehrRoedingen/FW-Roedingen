@@ -2,7 +2,7 @@ import React from 'react'
 
 
 type Props = {}
-export default function page({}: Props) {
+export default function({}: Props) {
 
   const doorLink = process.env.NODE_ENV === 'production' ? 'https://door.feuerwehr-roedingen.de': 'http://localhost:3003'; 
   const internalLink = process.env.NODE_ENV === 'production' ? 'https://internal.feuerwehr-roedingen.de/api/auth/login': 'http://localhost:3002/api/auth/login'; 

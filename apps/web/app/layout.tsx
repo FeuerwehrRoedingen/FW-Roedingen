@@ -21,7 +21,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={font.className}>
-        <main>
+        <main className='w-screen h-screen'>
           <Header></Header>
           {children}
         </main>
