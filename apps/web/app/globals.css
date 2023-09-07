@@ -34,7 +34,7 @@ h1{
 
   .jf_header {
     width: 100%;
-    height: 100%;
+    height: aut0;
   
     object-fit: cover;
     object-position: 0 60%;

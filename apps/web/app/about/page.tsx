@@ -42,7 +42,7 @@ export default function () {
             </h1>
           </td>
         </tr>
-        <Person dienstgrad='FM' funktion='IT Admin/ Social Media verantworlicher' name='Thomas Düren' tooltip='Feuerwehrmann' />
+        <Person dienstgrad='FM' funktion='IT Admin/ Social Media Verantworlicher' name='Thomas Düren' tooltip='Feuerwehrmann' />
         <Person dienstgrad='HBM' funktion='IT Admin' name='Daniel Schnabel' tooltip='Hauptbrandmeister' />
         <Person dienstgrad='OFM' funktion='IT Admin' name='Thomas Peredery' tooltip='Oberfeuerwehrmann' />
       </table>
