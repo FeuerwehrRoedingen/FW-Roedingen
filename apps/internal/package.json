@@ -5,34 +5,22 @@
   "scripts": {
     "dev": "next dev -p 3002",
     "build": "next build",
-    "postBuild": "./scripts/postBuild.sh",
-    "start": "next start",
-    "standalone": "node ./.next/standalone/server.js"
+    "start": "next start"
   },
   "dependencies": {
-    "@types/node": "18.11.9",
-    "@types/react": "18.0.24",
-    "@types/react-dom": "18.0.8",
     "eslint-config-next": "^13.4.1",
-    "firebase": "^9.16.0",
     "fw-roedingen-shared": "1.0.0",
     "next": "^13.4.1",
-    "next-auth": "^4.22.1",
-    "node-pty": "^0.10.1",
-    "pocketbase": "^0.9.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-toastify": "^9.1.1",
-    "react-use-websocket": "^4.2.0",
     "reactjs-popup": "^2.0.5",
-    "typescript": "4.8.4",
-    "xterm": "^5.0.0",
-    "xterm-addon-canvas": "^0.2.0",
-    "xterm-addon-fit": "^0.6.0",
-    "xterm-addon-search": "^0.10.0",
-    "xterm-addon-serialize": "^0.8.0",
-    "xterm-addon-unicode11": "^0.4.0",
-    "xterm-addon-webgl": "^0.13.0"
+    "typescript": "4.8.4"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.24",
+    "@types/react-dom": "18.0.8"
   }
 }
