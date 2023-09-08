@@ -1,36 +1,58 @@
 {
-  "name": "fw-roedingen",
+  "name": "fw-roedingen-monorepo",
   "version": "0.0.0",
   "private": true,
   "workspaces": {
     "packages": [
       "apps/api",
-      "apps/api/functions",
+      "apps/door",
+      "apps/management",
+      "apps/management-api",
+      "apps/mobile",
       "apps/internal",
       "apps/web",
-      "packages/*"
+      "shared"
     ],
     "nohoist": [
-      "apps/mobile"
+      "**/@prisma/client",
+      "**/@nextui-org/**",
+      "**/expo",
+      "**/@expo/**",
+      "**/react",
+      "**/react-dom",
+      "**/react-native-codegen"
     ]
   },
   "scripts": {
-    "build": "turbo run build",
-    "deploy": "firebase deploy",
+    "build:all": "turbo run build",
+    "build:api": "turbo run build --filter=fw-roedingen-api",
+    "build:internal": "turbo run build --filter=fw-roedingen-internal",
+    "build:shared": "turbo run build --filter=fw-roedingen-shared",
+    "build:web": "turbo run build --filter=fw-roedingen-web",
+    "ci:api": "npx turbo-ignore fw-roedingen-api || (cd apps/api && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-api)",
+    "ci:door": "npx turbo-ignore fw-roedingen-door || (cd apps/door && npm install --prefix=../.. && turbo run build --filter=fw-roedingen-door)",
     "dev": "turbo run dev --parallel",
-    "dev:browser": "concurrently \"cd apps/api && npm run dev\" \"cd apps/web && npm run dev\"",
-    "dev:mobile": "concurrently \"cd apps/api && npm run dev\" \"cd apps/mobile && npm run dev\"",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "lint": "turbo run lint"
+    "dev:all": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-door --filter=fw-roedingen-internal --filter=fw-roedingen-management-api --filter=fw-roedingen-management --filter=fw-roedingen-web",
+    "dev:door": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-door",
+    "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-internal",
+    "dev:management": "turbo run dev --parallel --filter=fw-roedingen-management-api --filter=fw-roedingen-management",
+    "dev:web": "turbo run dev --filter=fw-roedingen-web",
+    "lint": "turbo run lint",
+    "clean": "npm exec --workspaces -- npx rimraf node_modules && npx rimraf node_modules"
   },
   "devDependencies": {
+    "@sentry/cli": "^2.20.4",
     "concurrently": "^7.4.0",
-    "eslint-config-custom": "*",
     "prettier": "latest",
-    "turbo": "latest"
+    "rimraf": "^5.0.1",
+    "turbo": "^1.9.3",
+    "turbo-ignore": "^0.1.0",
+    "typescript": "^5.1.6"
   },
   "engines": {
     "node": ">=14.0.0"
   },
-  "packageManager": "npm@8.11.0"
+  "dependencies": {
+    "@prisma/client": "^5.2.0"
+  }
 }

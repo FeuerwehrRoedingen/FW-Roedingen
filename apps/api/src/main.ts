@@ -1,8 +1,17 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
+import { NestFactory } from '@nestjs/core'
+
+import { AppModule } from './app.module'
+
+const PORT = process.env.PORT || 3024;
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3030);
+
+  await app.listen(PORT);
 }
-bootstrap();
+bootstrap()
+  .then(() => {
+    console.log(`API listening on port ${PORT}`);
+    console.log(`Access over http://localhost:${PORT}`);
+  })
+  

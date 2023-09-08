@@ -1,26 +1,21 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  mode: 'jit',
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
-  darkMode: 'class',
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       colors: {
         ral: {
-          1026: '#ffff00',
-          3000: '#a72920',
-          3020: '#bb1e10'
+          1026: "#FFFF00",
+          3000: "#A72920",
+          3001: "#9B2423"
         },
-        gold: '#daa520',
-        silver: '#c0c0c0'
-      },
-      backgroundImage: {
-        'home': "url('../public/img/Home.jpeg')"
+        silver: "#C0C0C0",
       }
-    }
-  },
-  variants: {
-    extends: {}
+    },
   },
   plugins: [],
 }
+

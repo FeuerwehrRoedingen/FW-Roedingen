@@ -1,0 +1,15 @@
+.cContainer {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 95vw;
+}
+
+.cLeft {
+  height: 100vh;
+  width: 30%;
+}
+.cRight {
+  height: 100vh;
+  width: 70%;
+}

@@ -7,7 +7,12 @@
     "incremental": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": ["dom","dom.iterable","ES2015","esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ES2015",
+      "esnext"
+    ],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -17,22 +22,25 @@
     "strict": true,
     "target": "es2015",
     "paths": {
-      "src/*": ["./src/*"],
-      "server/*": ["./server/*"]
-    }
+      "components/*": [
+        "./components/*"
+      ]
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
-    "src",
+    "app",
+    "components",
     "next-env.d.ts",
-    "server",
-    "**/*.ts",
-    "**/*.tsx"
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
-    "dist",
     ".next",
-    "out",
-    "config/next.config.js"
+    "next.config.js"
   ]
 }
