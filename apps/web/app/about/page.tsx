@@ -6,7 +6,7 @@ import ReactTooltip from 'react-tooltip'
 export default function () {
 
   return (
-    <div className='page p-4 text-xl'>
+    <div className='page p-4 text-xl overflow-scroll'>
       <table>
         <tr className='w-fit'>
           <td colSpan={3}>

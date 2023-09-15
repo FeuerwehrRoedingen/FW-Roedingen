@@ -1,49 +1,35 @@
 import Link from 'next/link';
 import React from 'react'
+import { FaFacebook, FaInstagram } from 'react-icons/fa';
 
-import { Indicator } from 'components/indicator';
-
-export default function(){
+export default function () {
 
   return (
-    <>
-      <div className="page">
-        <div className='middle'>
-          <Indicator top="50px" left="50px"/>
-          <div className="image-container"></div>
+    <div className='page flex' >
+      <div className='h-[80%]'>
+        <div className="image-container"></div>
+      </div>
+      <div className="h-[20%] w-full border-t-4 border-ral-3000 flex flex-row justify-between pl-6">
+        <div className='h-full w-fit flex flex-col items-start justify-center'>
+          <Link href="/impressum" className='hover:underline active:text-ral-3000'>
+            Impressum
+          </Link>
+          <Link href="/impressum/datenschutz" className='hover:underline active:text-ral-3000'>
+            Datenschutz
+          </Link>
+          <Link href="/impressum/kontakt" className='hover:underline active:text-ral-3000'>
+            Kontakt
+          </Link>
         </div>
-        <div className="h-[15vh] w-screen sticky border-t-4 border-ral-3000 flex flex-row pl-6">
-          <div className='h-full w-fit flex flex-col items-start justify-center'>
-              <Link href="/impressum">
-                Impressum
-              </Link>
-              <Link href="/impressum/datenschutz">
-                Datenschutz
-              </Link>
-              <Link href="/impressum/kontakt">
-                Kontakt
-              </Link>
-          </div>
-          <div className='h-full w-full flex flex-row justify-end'>
-            <div className='h-full w-[15%] self-end flex flex-row items-center'>
-              <a 
-                href="https://www.facebook.com/FreiwilligeFeuerwehrTitzLGRoedingen/" 
-                className='h-[60%] w-full'
-                target="_blank"
-              >
-                <img src="/img/facebook.webp" alt="Facebook" className='h-full'/>
-              </a>
-              <a 
-                href="https://www.instagram.com/feuerwehr_roedingen" 
-                className='h-[60%] w-full'
-                target="_blank"
-              >
-                <img src="/img/instagram.png" alt="Instagram" className='h-full'/>
-              </a>
-            </div>
-          </div>
+        <div className='h-full w-[40%] max-w-[200px] flex flex-row items-center justify-end'>
+          <a href="https://www.facebook.com/FreiwilligeFeuerwehrTitzLGRoedingen/" className='m-2'>
+            <FaFacebook color='silver' size="100%"/>
+          </a>
+          <a href="https://www.instagram.com/feuerwehr_roedingen" className='m-2 mr-4'>
+            <FaInstagram color='silver' size='100%'/>
+          </a>
         </div>
       </div>
-    </>
+    </div>
   )
 }

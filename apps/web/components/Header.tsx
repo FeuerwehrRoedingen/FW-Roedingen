@@ -17,9 +17,9 @@ export function Header(){
   return(
     <div className="container">
       <nav className="navbar">
-        <NavItem to="/"          title='Home'            icon={IoHomeOutline} exact/>
-        <NavItem to="/about"     title='Das sind wir'    icon={IoIosPeople} />
-        <NavItem to="/jf"        title='Jugendfeuerwehr'/>
+        <NavItem to="/"          title='Home'   exact><IoHomeOutline/></NavItem>
+        <NavItem to="/about"     title='Das sind wir'><IoIosPeople/></NavItem>
+        <NavItem to="/jf"        title='Jugendfeuerwehr' short='JF'/>
       </nav>
       <div className='header_inner'>
         <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="5vh">
@@ -37,9 +37,10 @@ export function Header(){
 
 type ItemProps = {
   exact: boolean;
-  icon: IconType;
   to: string;
   title: string;
+  short?: string;
+  children?: React.ReactNode;
 }
 function NavItem(props: InferProps<ItemProps>){
   const pathname = usePathname();
@@ -47,7 +48,7 @@ function NavItem(props: InferProps<ItemProps>){
   return (
     <div className={ isActive ? "navItemActive": "navItem"}>
       <Link href={props.to}>
-        {isBrowser ? props.title: <props.icon color={isActive ? 'bb1e10':'c0c0c0'}/>}
+        {isBrowser ? props.title: props.short? props.short: props.children}
       </Link>
     </div>
   )

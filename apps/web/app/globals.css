@@ -44,12 +44,7 @@ h1{
     @apply px-4 py-2 rounded-md shadow-md;
   }
   .page {
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    height: 85vh;
-    background-color: #111827;
-    color: silver;
+    @apply w-full h-[85svh] flex flex-col overflow-hidden bg-[#111827] text-silver;
   }
 }
 

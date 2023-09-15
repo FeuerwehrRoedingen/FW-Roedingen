@@ -20,8 +20,8 @@ export default function RootLayout({
         <meta name="description" content="Webseite der Löschgruppe Rödingen der Freiwilligen Feuerwehr Titz" />
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={font.className}>
-        <main className='w-screen h-screen'>
+      <body className={`w-screen h-[100svh] overflow-hidden ${font.className}`}>
+        <main className='w-full h-full'>
           <Header></Header>
           {children}
         </main>

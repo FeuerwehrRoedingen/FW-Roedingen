@@ -1,8 +1,11 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  reactStrictMode: true,
-  swcMinify: false,
-  experimental: {
-    appDir: true,
-  },
+  async rewrites() {
+    return [
+      {
+        source: '/home',
+        destination: '/'
+      }
+    ]
+  }
 }
