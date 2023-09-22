@@ -2,7 +2,7 @@ import { Socket } from 'socket.io'
 import { IPty, spawn } from 'node-pty'
 
 import type { Server } from '@prisma/client'
-import { logger } from '../Logger';
+import { logger } from '../Logger.js';
 
 //TODO implement arrow keys
 

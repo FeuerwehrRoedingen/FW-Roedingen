@@ -1,9 +1,9 @@
 import express, { Router } from "express";
 import ping from 'ping';
 
-import { database } from '../DB'
+import { database } from '../DB.js'
 import type { Server } from "@prisma/client";
-import { logger } from "../Logger";
+import { logger } from "../Logger.js";
 
 async function updateServerStatus(server: Server){
   try{

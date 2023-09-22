@@ -4,9 +4,9 @@ import type { IncomingMessage } from 'node:http';
 import { Request, Response, Router } from 'express';
 import httpProxy from 'http-proxy';
 
-import { database } from '../DB';
+import { database } from '../DB.js';
 import type { Server } from '@prisma/client';
-import { logger } from '../Logger';
+import { logger } from '../Logger.js';
 
 //-----------------------------------------------
 // VNC Servers

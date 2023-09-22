@@ -8,22 +8,46 @@ import { auth } from 'express-oauth2-jwt-bearer';
 import cors from 'cors';
 import httpProxy from 'http-proxy';
 
-import { serversRouter, statusRouter } from './routes';
-import { database } from './DB';
-import { createSsh } from './server/ssh';
-import { vncCleanup, vncProxy, vncRouter } from './server/vnc';
-import { logger } from './Logger';
+import { serversRouter, statusRouter } from './routes/index.js';
+import { database } from './DB.js';
+import { createSsh } from './server/ssh.js';
+import { vncCleanup, vncProxy, vncRouter } from './server/vnc.js';
+import { logger } from './Logger.js';
+
+// add env variables to process.env type
+declare global {
+  namespace NodeJS {
+    interface ProcessEnv {
+      AUTH0_AUDIENCE: string;
+      AUTH0_ISSUER_BASE_URL: string;
+      PORT: string;
+      SOCKET_PORT: string;
+    }
+  }
+}
 
 try {
 
 config();
 
+if(!process.env.AUTH0_AUDIENCE || !process.env.AUTH0_ISSUER_BASE_URL) {
+  logger.error('Missing AUTH0_AUDIENCE or AUTH0_ISSUER_BASE_URL');
+  process.exit(1);
+}
+
+if(!process.env.PORT){
+  logger.warn('Missing PORT, using default 3010');
+}
+if(!process.env.SOCKET_PORT){
+  logger.warn('Missing SOCKET_PORT, using default 3011');
+}
+
 //-----------------------------------------------
 // Authentication
 //-----------------------------------------------
 const jwtCheck = auth({
-  audience: 'https://management.feuerwehr-roedingen.de/api/v1',
-  issuerBaseURL: 'https://fw-roedingen.eu.auth0.com/',
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: process.env.AUTH0_ISSUER_BASE_URL,
   tokenSigningAlg: 'RS256'
 });
 
@@ -157,8 +181,8 @@ server.on('upgrade', (req, socket, head) => {
   }
 });
 
-const API_PORT = parseInt(process.env.port || '3010');
-const SOCKET_PORT = parseInt(process.env.socket_port || '3011');
+const API_PORT = parseInt(process.env.PORT || '3010');
+const SOCKET_PORT = parseInt(process.env.SOCKET_PORT || '3011');
 
 server.listen(API_PORT, '0.0.0.0', () => {
   logger.log(`API listening on port ${API_PORT}`);

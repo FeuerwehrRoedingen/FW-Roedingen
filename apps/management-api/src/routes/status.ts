@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { cpus, freemem, hostname, totalmem } from 'os';
-import { logger } from '../Logger';
+import { logger } from '../Logger.js';
 
 export const statusRouter = Router();
 

@@ -1,0 +1,53 @@
+FROM node:18 AS base 
+
+#----------------------
+# Dependencies
+#----------------------
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+COPY package.json ./
+RUN npm install --production
+
+#----------------------
+# Build
+#----------------------
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN npm run build
+
+#----------------------
+# Run
+#----------------------
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOST="0.0.0.0"
+ENV AUTH0_BASE_URL='http://localhost:3000'
+ENV AUTH0_CLIENT_ID=""
+ENV AUTH0_CLIENT_SECRET=""
+ENV AUTH0_ISSUER_BASE_URL='https://<tenant-id>.auth0.com'
+ENV AUTH0_SECRET=""
+ENV AUTH0_AUDIENCE=""
+ENV AUTH0_SCOPE=""
+ENV API_URL="http://localhost:3001"
+ENV SENTRY_AUTH_TOKEN=""
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+ 
+USER nextjs
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]

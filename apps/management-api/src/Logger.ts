@@ -11,6 +11,7 @@ import {
   WriteStream 
 } from 'fs'
 import { Transform } from 'stream';
+import { mkdirSync } from 'fs';
 
 type LogMessage = string | number | boolean | object | Error;
 type LogLevel = 'log' | 'error' | 'warn' | 'info' | 'all';
@@ -148,4 +149,7 @@ class Logger {
 }
 
 const defaultLogLocation = process.env.NODE_ENV === 'production' ? '/var/log/management-api/management.log' : 'management.log';
+if(!process.env.LOG_FILE && process.env.NODE_ENV === 'production'){
+  mkdirSync('/var/log/management-api');
+}
 export const logger = new Logger(process.env.LOG_FILE || defaultLogLocation);

@@ -1,2 +1,2 @@
-export * from './servers'
-export * from './status'
+export * from './servers.js'
+export * from './status.js'

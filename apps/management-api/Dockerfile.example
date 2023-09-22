@@ -1,0 +1,15 @@
+FROM node:18 as builder
+WORKDIR /src
+ENV SENTRY_AUTH_TOKEN=""
+COPY package.json ./
+RUN npm install
+RUN npm run build 
+
+FROM node:18
+WORKDIR /app
+COPY --from=builder /src/dist ./
+ENV NODE_ENV="production"
+ENV DATABASE_URL=""
+ENV LOG_FILE=""
+CMD ["node", "src/index.js"]
+EXPOSE 8080

@@ -10,3 +10,6 @@ dist/
 
 # Sentry Auth Token
 .sentryclirc
+
+# Dockerfile containing ENV variables
+Dockerfile
