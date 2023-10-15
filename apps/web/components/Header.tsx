@@ -6,10 +6,9 @@ import { IoHomeOutline } from 'react-icons/io5';
 import { IoIosPeople } from 'react-icons/io';
 import { isBrowser } from 'react-device-detect';
 import { InferProps } from 'prop-types';
-import type  { IconType } from 'react-icons';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-
+import { GrGamepad } from 'react-icons/gr';
 import "./components.css"
 
 export function Header(){
@@ -19,6 +18,8 @@ export function Header(){
       <nav className="navbar">
         <NavItem to="/"          title='Home'   exact><IoHomeOutline/></NavItem>
         <NavItem to="/about"     title='Das sind wir'><IoIosPeople/></NavItem>
+        <NavItem to="/fahrzeuge" title='Fahrzeuge' short='FZ'/>
+        <NavItem to ="/games"    title="Spiele"><GrGamepad/></NavItem>  
         <NavItem to="/jf"        title='Jugendfeuerwehr' short='JF'/>
       </nav>
       <div className='header_inner'>

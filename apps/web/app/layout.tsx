@@ -1,6 +1,7 @@
 import { Poppins } from 'next/font/google'
 
-import { Header } from '../components/Header'
+import { Provider } from './provider';
+import { Header } from 'components/Header'
 import './globals.css'
 
 const font = Poppins({
@@ -22,8 +23,10 @@ export default function RootLayout({
       </head>
       <body className={`w-screen h-[100svh] overflow-hidden ${font.className}`}>
         <main className='w-full h-full'>
-          <Header></Header>
-          {children}
+          <Provider>
+            <Header />
+            {children}
+          </Provider>
         </main>
       </body>
     </html>

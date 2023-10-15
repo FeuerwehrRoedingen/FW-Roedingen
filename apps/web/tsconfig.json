@@ -22,9 +22,11 @@
     "strict": true,
     "target": "es2015",
     "paths": {
-      "components/*": [
-        "./components/*"
-      ]
+      "components/*": [ "./components/*" ],
+      "textures":     [ "./textures/index.ts" ],
+      "textures/*":   [ "./textures/*" ],
+      "store":        [ "./store/index.ts" ],
+      "store/*":      [ "./store/*" ]
     },
     "plugins": [
       {
