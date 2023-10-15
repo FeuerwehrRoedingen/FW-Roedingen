@@ -1,9 +1,11 @@
 
+export type IValueType = {
+  id: number;
+  name: string;
+}
+
 export type MatrixEntry = {
-  value: {
-    id: number;
-    name: string;
-  };
+  value: IValueType;
   marked: boolean;
 }
 

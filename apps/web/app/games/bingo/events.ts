@@ -1,4 +1,4 @@
-import { EventEmitter } from "stream";
+import { IValueType } from "./bingo";
 
 const events = [
   "BMA bei HG-Frischgemüse",
@@ -9,10 +9,10 @@ const events = [
   "Atemschutzgeräteträger Lehrgang abgeschlossen",
   "Stiefel geputzt",
   "Kamerad hat Geburtstag und muss die Getränke zahlen",
-  "Bewohner fragen, ob die \"richtige\" Feuerwehr kommt",
+  "Bewohner fragen, ob die \"richtige\" Feuerwehr auch noch kommt",
   "Akku vom Funkgerät leer",
   "Niemand hat ein Funkgerät dabei",
-  "Falsche Adresse",
+  "Falsche Adresse angefahren",
   "TH-0 ÖLSPUR",
   "TH-0 Wasser im Keller",
   "TH-0 Baum auf Straße",
@@ -38,7 +38,7 @@ const events = [
   "Der Melder geht während du auf der Arbeit bist",
   "Der Melder geht während du im Urlaub bist",
   "Feuerwehrfest der Nachbarwehr -> viel trinken ist wichtig",
-  "Feuerwehrfest de der eigenen Wehr",
+  "Feuerwehrfest der eigenen Wehr",
   "Die Gerätewarte haben das Fahrzeug wieder umgeräumt",
   "Der neue Maschinist bekommt das Fahrzeug nicht in die Garage",
   "Der neue Maschinist hat das Fahrzeug in die Garage bekommen, aber die Tür nicht mehr auf",
@@ -63,9 +63,57 @@ export function get25randomEvents(){
   return shuffled.slice(0, 25);
 }
 
-class EventSource extends EventEmitter {
+type ICallbackType = ((entry: IValueType) => void);
 
+class EventEmitter {
+
+  #Callbacks: ICallbackType[] = [];
+
+  on(callback: ICallbackType) {
+    this.#Callbacks.push(callback);
+  }
+
+  off(callback: ICallbackType) {
+    this.#Callbacks = this.#Callbacks.filter(cb => cb !== callback);
+  }
+
+  emit(entry: IValueType) {
+    this.#Callbacks.forEach(callback => callback(entry));
+  }
 }
 
-export const eventSource = new EventSource();
+export const eventEmitter = new EventEmitter();
 
+export function createSession(){
+  const sessionEvents = eventMap.map(event => event).sort(() => 0.5 - Math.random());
+
+  const getEvent = () => {
+    return sessionEvents.pop();
+  }
+  
+  return {
+    sessionEvents,
+    getEvent
+  }
+}
+
+let timer: NodeJS.Timeout;
+
+export function start(from: number, to: number) {
+  const {
+    sessionEvents,
+    getEvent
+  } = createSession();
+
+  timer = setInterval(() => {
+    const event = getEvent();
+    if(!event) {
+      stop();
+      return;
+    }
+    eventEmitter.emit(event);
+  }, from + Math.random() * (to - from));
+}
+export function stop() {
+  clearTimeout(timer);
+}
