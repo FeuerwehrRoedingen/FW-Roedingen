@@ -87,7 +87,7 @@ function UserContent(user: UserProfile) {
 
   const handleAction = (item: string|number) => {
     if (item === 'logout') {
-      redirect('/api/auth/logout');
+      window.location.replace('/api/auth/logout');
     }
   }
 
@@ -116,7 +116,7 @@ function UserContent(user: UserProfile) {
               <p>{(user!.name || '').split('.').map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}</p>
           </DropdownItem>
           <DropdownItem key="logout">
-              Logout
+            Logout
           </DropdownItem>
         </DropdownMenu>
       </Dropdown>

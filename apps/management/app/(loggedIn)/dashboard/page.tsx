@@ -5,7 +5,7 @@ import { HostInfo } from './hostInfo'
 import { Logs } from './logs'
 import { useAppDispatch } from '@/store'
 import { updateStatus } from '@/store/reducer'
-import { securedPage } from '@/utils/securedPage'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0/client'
 
 type Props = {}
 
@@ -40,4 +40,6 @@ function page({}: Props) {
   )
 }
 
-export default securedPage(page);
+export default withPageAuthRequired(page, {
+  returnTo: '/dashboard',
+});

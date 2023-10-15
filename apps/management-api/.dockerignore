@@ -5,3 +5,5 @@ npm-debug.log
 README.md
 dist
 .git
+.env*
+prisma/dev.db 

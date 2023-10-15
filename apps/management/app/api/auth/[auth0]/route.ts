@@ -22,7 +22,7 @@ const handler = handleAuth({
     console.error(error);
   },
   login: async (req: NextApiRequest, res: NextApiResponse) => {
-    await handleLogin(req, res, {
+    return handleLogin(req, res, {
       returnTo: '/dashboard'
     });
   }

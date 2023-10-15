@@ -68,10 +68,11 @@ class Logger {
 
     this.#seperator = ' ';
 
-    const fileWriteListener = (message: string) => {
-      this.#writeStream.write(`${message}\n`);
-    }
-    this.addListener('all', fileWriteListener);
+    this.addListener('all', (message: string) => this.#writeStream.write(`${message}\n`));
+    this.addListener('log', console.log);
+    this.addListener('error', console.error);
+    this.addListener('warn', console.warn);
+    this.addListener('info', console.info);
 
     this.#writeStream.write(HEADER);
   }

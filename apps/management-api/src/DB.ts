@@ -1,4 +1,6 @@
-import { PrismaClient, Server } from '@prisma/client'
+import { PrismaClient } from '@prisma/client'
+
+import type { Server } from '@prisma/client'
 
 class Database extends PrismaClient {
   constructor() {

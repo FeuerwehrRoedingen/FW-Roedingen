@@ -1,15 +1,50 @@
-FROM node:18 as builder
-WORKDIR /src
-ENV SENTRY_AUTH_TOKEN=""
+FROM node:18-alpine AS base
+
+#----------------------
+# Dependencies
+#----------------------
+FROM base AS deps
+RUN apk add --no-cache libc6-compat python3 make gcc g++
+WORKDIR /app
 COPY package.json ./
 RUN npm install
+
+#----------------------
+# Build
+#----------------------
+FROM base AS builder
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+ENV SENTRY_AUTH_TOKEN=""
+
+RUN npx prisma generate
 RUN npm run build 
 
-FROM node:18
+#----------------------
+# Run
+#----------------------
+FROM base AS runner
 WORKDIR /app
-COPY --from=builder /src/dist ./
+
 ENV NODE_ENV="production"
-ENV DATABASE_URL=""
-ENV LOG_FILE=""
-CMD ["node", "src/index.js"]
+ENV DATABASE_URL="file:./prod.db"
+ENV LOG_FILE="./management-api.log"
+ENV PORT=8080
+ENV SOCKET_PORT=8081
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1002 expressjs
+
+COPY --from=deps --chown=expressjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=expressjs:nodejs /app/dist ./
+COPY --from=builder --chown=expressjs:nodejs /app/package.json ./
+
+USER expressjs
+
 EXPOSE 8080
+EXPOSE 8081
+
+CMD ["node", "/app/src/index.js"]
