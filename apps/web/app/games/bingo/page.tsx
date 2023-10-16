@@ -2,7 +2,10 @@
 import React from 'react'
 import dynamic from 'next/dynamic'
 
-import { eventMap, get25randomEvents } from './events'
+import { get25randomEvents } from './events'
+
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const BingoField = dynamic(() => import('./bingoField'), { ssr: false });
 const EventList = dynamic(() => import('./eventList'), { ssr: false });
@@ -29,6 +32,18 @@ export default function(){
       <div className='w-1/3 h-full'>
         <EventList />
       </div>
+      <ToastContainer 
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
     </div>
   )
 }

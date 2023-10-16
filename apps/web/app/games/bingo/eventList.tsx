@@ -34,8 +34,8 @@ export default function() {
 
   const eventElements = events.map((entry, index) => {
     return (
-      <li key={index} className="flex flex-row mb-2 h-10">
-        <div className="text-2xl flex flex-row items-center justify-center mr-2 w-10">{entry.id}</div>
+      <li key={index} className="flex flex-row mb-2 h-fit">
+        <div className="text-[20px] flex flex-row items-center justify-center mr-2 w-10">{entry.id}</div>
         <div className="flex flex-row items-center w-fit">{entry.name}</div>
       </li>
     )

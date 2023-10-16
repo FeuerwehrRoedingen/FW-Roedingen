@@ -3,11 +3,17 @@ import { IoIosSettings } from "react-icons/io"
 import Popup from "reactjs-popup"
 
 import { start } from "./events"
+import { toast } from "react-toastify";
 
 export default function(){
 
   const [from, setFrom] = React.useState(5_000);
   const [to, setTo] = React.useState(10_000);
+
+  const handleClick = () => {
+    start(from, to);
+    toast.info("Das Spiel wurde gestartet!");
+  }
 
   return (
     <div className="w-full h-20 pt-4 px-20">
@@ -18,7 +24,7 @@ export default function(){
           </Popup>
         </div>
         <div>
-          <button onClick={() => start(from, to)}>
+          <button onClick={handleClick}>
             <p className="text-2xl">Start</p>
           </button>
         </div>
