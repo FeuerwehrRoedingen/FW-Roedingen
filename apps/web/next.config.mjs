@@ -1,5 +1,8 @@
+//imported env to validate the schema at build time
+import { env } from './env.mjs'
+
 /** @type {import('next').NextConfig} */
-module.exports = {
+const config = {
   async rewrites() {
     return [
       {
@@ -9,3 +12,5 @@ module.exports = {
     ]
   }
 }
+
+export default config;

@@ -1,3 +1,4 @@
+"use client"
 import React from "react"
 import { IoIosSettings } from "react-icons/io"
 import Popup from "reactjs-popup"
