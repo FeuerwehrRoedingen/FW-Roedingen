@@ -1,18 +1,41 @@
+"use client"
 import React from "react"
 import { IoIosSettings } from "react-icons/io"
 import Popup from "reactjs-popup"
+import { Id, toast } from "react-toastify";
 
-import { start } from "./events"
-import { toast } from "react-toastify";
+import { start, pause } from "./events"
 
 export default function(){
 
   const [from, setFrom] = React.useState(5_000);
   const [to, setTo] = React.useState(10_000);
 
-  const handleClick = () => {
+  let pauseID: Id | undefined;
+  let startID: Id | undefined;
+  let started: boolean = false;
+
+  const handleStart = () => {
+    if(started)
+      return;
+    started = true;
+
+    if(pauseID)
+      toast.dismiss(pauseID);
+
     start(from, to);
-    toast.info("Das Spiel wurde gestartet!");
+    startID = toast.info("Das Spiel wurde gestartet!");
+  }
+  const handlePause = () => {
+    if(!started)
+      return;
+    started = false;
+
+    if(startID)
+      toast.dismiss(startID);
+
+    pause();
+    pauseID = toast.info("Das Spiel wurde pausiert!", { autoClose: false, hideProgressBar: true });
   }
 
   return (
@@ -24,8 +47,11 @@ export default function(){
           </Popup>
         </div>
         <div>
-          <button onClick={handleClick}>
+          <button onClick={handleStart} className="border border-silver rounded-lg px-4 py-2 mr-6 hover:bg-silver hover:text-[#111827] active:scale-95 duration-200">
             <p className="text-2xl">Start</p>
+          </button>
+          <button onClick={handlePause} className="border border-silver rounded-lg px-4 py-2 hover:bg-silver hover:text-[#111827] active:scale-95 duration-200">
+            <p className="text-2xl">Pause</p>
           </button>
         </div>
       </div>

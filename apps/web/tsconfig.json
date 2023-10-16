@@ -43,6 +43,6 @@
   "exclude": [
     "node_modules",
     ".next",
-    "next.config.js"
+    "next.config.mjs"
   ]
 }

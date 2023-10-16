@@ -1,17 +1,17 @@
-"use client"
 import React from 'react'
 import dynamic from 'next/dynamic'
-
-import { get25randomEvents } from './events'
+import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+
+import { eventMap, get25randomEvents } from './events'
 
 const BingoField = dynamic(() => import('./bingoField'), { ssr: false });
 const EventList = dynamic(() => import('./eventList'), { ssr: false });
 const Settings = dynamic(() => import('./settings'), { ssr: false });
 
-export default function(){
+async function Page(){
 
   const initialEvents = get25randomEvents();
   const initialEntries = initialEvents.map((event, index) => {
@@ -39,11 +39,16 @@ export default function(){
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLoss={false}
         draggable
         pauseOnHover
         theme="dark"
+        toastClassName="top-[10vh]"
       />
     </div>
   )
 }
+
+export default withPageAuthRequired(Page, {
+  returnTo: '/api/auth/login'
+});

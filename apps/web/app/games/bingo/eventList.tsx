@@ -1,14 +1,13 @@
+"use client"
 import React from "react"
 
 import type { IValueType } from "./bingo"
-import { eventEmitter, start, stop } from "./events"
+import { eventEmitter, stop } from "./events"
 
 export default function() {
 
   const [events, setEvents] = React.useState<IValueType[]>([]);
   const listRef = React.useRef<HTMLUListElement>(null);
-
-  let timer: NodeJS.Timer | null = null;
 
   React.useEffect(() => {
     const callback = (entry: IValueType) => {

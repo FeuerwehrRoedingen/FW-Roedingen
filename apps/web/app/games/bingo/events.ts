@@ -98,14 +98,23 @@ export function createSession(){
 }
 
 let timer: NodeJS.Timeout;
+let isPaused: boolean = false;
 
 export function start(from: number, to: number) {
+  isPaused = false;
+
+  if(timer)
+    return;
+
   const {
     sessionEvents,
     getEvent
   } = createSession();
 
   timer = setInterval(() => {
+    if(isPaused)
+      return;
+
     const event = getEvent();
     if(!event) {
       stop();
@@ -116,4 +125,7 @@ export function start(from: number, to: number) {
 }
 export function stop() {
   clearTimeout(timer);
+}
+export function pause() {
+  isPaused = true;
 }
