@@ -57,7 +57,7 @@ type PersonProps = {
   name: string;
   tooltip: string;
 }
-const Person: React.FC<PersonProps> = (props) => {
+const Person = (props: PersonProps) => {
   const [tooltip, showTooltip] = useState(true);
   const id = React.useId();
 
