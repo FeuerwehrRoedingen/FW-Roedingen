@@ -39,10 +39,11 @@ async function Page(){
         newestOnTop={false}
         closeOnClick
         rtl={false}
-        pauseOnFocusLoss
+        pauseOnFocusLoss={false}
         draggable
         pauseOnHover
         theme="dark"
+        toastClassName="top-[10vh]"
       />
     </div>
   )
