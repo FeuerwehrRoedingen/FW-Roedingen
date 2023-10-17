@@ -5,7 +5,6 @@ import React from 'react';
 import { IoHomeOutline } from 'react-icons/io5';
 import { IoIosPeople } from 'react-icons/io';
 import { isBrowser } from 'react-device-detect';
-import { InferProps } from 'prop-types';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { GrGamepad } from 'react-icons/gr';
@@ -37,13 +36,13 @@ export function Header(){
 }
 
 type ItemProps = {
-  exact: boolean;
+  exact?: boolean;
   to: string;
   title: string;
   short?: string;
   children?: React.ReactNode;
 }
-function NavItem(props: InferProps<ItemProps>){
+function NavItem(props: ItemProps){
   const pathname = usePathname();
   const isActive = props.exact ? pathname === props.to : pathname.startsWith(props.to);
   return (

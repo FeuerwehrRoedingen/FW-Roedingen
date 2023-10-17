@@ -20,7 +20,9 @@
       "**/@expo/**",
       "**/react",
       "**/react-dom",
-      "**/react-native-codegen"
+      "**/react-native-codegen",
+      "**/@types/react",
+      "**/@types/react-dom"
     ]
   },
   "scripts": {
@@ -50,7 +52,11 @@
     "typescript": "^5.1.6"
   },
   "engines": {
-    "node": ">=14.0.0"
+    "node": ">=14.0.0",
+    "pnpm": ">=6.0.0"
   },
-  "packageManager": "npm@9.8.0"
+  "resolutions": {
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6"
+  }
 }
