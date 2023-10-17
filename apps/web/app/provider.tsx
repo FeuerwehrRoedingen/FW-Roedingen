@@ -2,7 +2,7 @@
 import { Provider as ReduxProvider } from "react-redux"
 import { UserProvider } from "@auth0/nextjs-auth0/client"
 
-import { store } from "store"
+import { store } from "../src/store"
 
 type IProps = {
   children: React.ReactNode

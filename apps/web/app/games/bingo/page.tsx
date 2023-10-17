@@ -50,5 +50,5 @@ async function Page(){
 }
 
 export default withPageAuthRequired(Page, {
-  returnTo: '/api/auth/login'
+  returnTo: '/api/auth/login?ReturnTo=%2Fgames%2Fbingo'
 });

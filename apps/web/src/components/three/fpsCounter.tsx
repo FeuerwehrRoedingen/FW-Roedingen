@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppSelector } from 'store'
+import { useAppSelector } from '../../src/store'
 
 export default () => {
 

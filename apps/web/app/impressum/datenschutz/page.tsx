@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeButton from '../../../components/HomeButton'
+import HomeButton from 'components/HomeButton'
 
 interface IProps {
 
