@@ -22,12 +22,12 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`w-screen h-[100svh] overflow-hidden ${font.className}`}>
-        <main className='w-full h-full'>
-          <Provider>
+        <Provider>
+          <main className='w-full h-full dark text-foreground bg-background'>
             <Header />
             {children}
-          </Provider>
-        </main>
+          </main>
+        </Provider>
       </body>
     </html>
   )

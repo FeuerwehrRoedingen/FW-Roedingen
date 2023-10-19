@@ -1,6 +1,8 @@
 "use client"
 import { Avatar } from '@nextui-org/avatar'
-import useUser from "hooks/useUser";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@nextui-org/dropdown'
+
+import useUser from "hooks/useUser"
 
 type IProps = {
 
@@ -17,9 +19,17 @@ export default function(props: IProps){
 
   if(user){
     return (
-      <div className='flex flex-row'>
-        <Avatar src={user.picture!} alt={user.name!} size='md' />
-        <a className="border border-silver px-4 py-2 text-silver rounded-2xl text-lg cursor-pointer" href="/api/auth/logout">Logout</a>
+      <div className='flex flex-row w-full items-center justify-center gap-3'>
+        <Dropdown className='dark text-silver'>
+          <DropdownTrigger>
+            <Avatar src={user.picture!} alt={user.name!} size="lg" className='cursor-pointer'/>
+          </DropdownTrigger>
+          <DropdownMenu>
+            <DropdownSection title="logged in as" showDivider>
+              <DropdownItem key="profile">{user.name}</DropdownItem>
+            </DropdownSection>
+          </DropdownMenu>
+        </Dropdown>
       </div>
     )
   } else {

@@ -7,7 +7,7 @@ export default function () {
   return (
     <div className='page flex' >
       <div className='h-[80%]'>
-        <div className="image-container"></div>
+        <div className="w-full h-full bg-[#1d1d1d] bg-fixed bg-center bg-no-repeat bg-w-screen bg-home"></div>
       </div>
       <div className="h-[20%] w-full border-t-4 border-ral-3000 flex flex-row justify-between pl-6">
         <div className='h-full w-fit flex flex-col items-start justify-center'>

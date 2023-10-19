@@ -9,7 +9,7 @@ export default class UnderConstruction extends Component<Props, State> {
 
   render() {
     return (
-      <div className="underConstruction">
+      <div className="ml-4 mt-0 text-silver">
         <h1>Diese Seite befindet sich im Aufbau</h1>
         <div>
           Vielen Dank für Ihren Besuch auf unserer Webseite! <br/>

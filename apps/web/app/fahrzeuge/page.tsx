@@ -16,7 +16,7 @@ type Props = {}
 export default function fahrzeuge({}: Props) {
 
   return (
-    <div className='h-full w-screen'>
+    <div className='w-screen h-[85svh]'>
       <Suspense fallback={null}>
         <Canvas>
           <Sky sunPosition={[100, 100, 20]} />

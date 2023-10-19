@@ -7,7 +7,7 @@ export default () => {
   const fps = useAppSelector(state => state.fps.fps);
 
   return (
-    <div className='relative z-10 top-3 right-3 text-green-400' hidden={!showFPS}>
+    <div className='absolute z-10 top-[15vh] right-3 text-green-400' hidden={!showFPS}>
       <h1>{fps}</h1>
     </div>
   )
