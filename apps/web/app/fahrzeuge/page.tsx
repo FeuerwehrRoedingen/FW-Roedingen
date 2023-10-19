@@ -35,13 +35,13 @@ export default function fahrzeuge({}: Props) {
   )
 }
 
-export const FPV = () => {
+const FPV = () => {
 	const { camera, gl } = useThree()
 
 	return (<PointerLockControls args={[camera, gl.domElement]} />)
 }
 
-export const Renderer = () => {
+const Renderer = () => {
 
   const dispatch = useAppDispatch();
   useFrame((state, delta, frame) => {

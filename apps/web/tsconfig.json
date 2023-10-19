@@ -27,12 +27,15 @@
       "textures/*":   [ "./src/textures/*" ],
       "store":        [ "./src/store/index.ts" ],
       "store/*":      [ "./src/store/*" ],
-      "hooks/*":      [ "./src/hooks/*" ],
+      "hooks/*":      [ "./src/hooks/*" ]
     },
     "plugins": [
       {
         "name": "next"
       }
+    ],
+    "typeRoots": [
+      "./node_modules/@types/*"
     ]
   },
   "include": [

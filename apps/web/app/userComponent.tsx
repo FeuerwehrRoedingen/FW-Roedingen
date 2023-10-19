@@ -19,7 +19,7 @@ export default function(props: IProps){
     return (
       <div className='flex flex-row'>
         <Avatar src={user.picture!} alt={user.name!} size='md' />
-        <a className="border border-silver px-4 py-2">Logout</a>
+        <a className="border border-silver px-4 py-2 text-silver rounded-2xl text-lg cursor-pointer" href="/api/auth/logout">Logout</a>
       </div>
     )
   } else {

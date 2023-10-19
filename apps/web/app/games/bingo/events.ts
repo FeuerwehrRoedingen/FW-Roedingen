@@ -34,7 +34,7 @@ const events = [
   "Der Einsatzmonitor ist mal wieder im ladebildschirm hängen geblieben",
   "Kamerad kommt mitten in de Nacht nur in Unterhose zum Einsatz",
   "Der Melder geht während du auf der Toilette bist",
-  "Der meldet geht während du unter der Dusche stehst",
+  "Der Melder geht während du unter der Dusche stehst",
   "Der Melder geht während du auf der Arbeit bist",
   "Der Melder geht während du im Urlaub bist",
   "Feuerwehrfest der Nachbarwehr -> viel trinken ist wichtig",

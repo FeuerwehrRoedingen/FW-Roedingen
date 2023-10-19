@@ -2,7 +2,6 @@ import React from 'react';
 import { IoHomeOutline } from 'react-icons/io5';
 import { IoIosPeople } from 'react-icons/io';
 import { GrGamepad } from 'react-icons/gr';
-import { UserProfile } from '@auth0/nextjs-auth0/client';
 
 import NavItem from './navItem';
 import UserComponent from './userComponent';
