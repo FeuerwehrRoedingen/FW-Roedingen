@@ -7,9 +7,9 @@ type Props = {}
 
 export default function(props: Props) {
 
-  const { checkSession, isLoading, user } = useUser();
+  const { error, isLoading, user } = useUser();
   
-  checkSession();
+  console.error(error);
 
   if(isLoading) {
     return <div>Loading...</div>

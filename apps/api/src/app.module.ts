@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common'
-import { ConfigModule } from '@nestjs/config'
-import { resolve } from 'path'
 
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
@@ -10,10 +8,6 @@ import { AuthGuard } from '@nestjs/passport'
 
 @Module({
   imports: [
-    ConfigModule.forRoot({
-      envFilePath: resolve(__dirname, '..', '.env'),
-      isGlobal: true,
-    }),
     AuthModule,
     DatabaseModule,
   ],
