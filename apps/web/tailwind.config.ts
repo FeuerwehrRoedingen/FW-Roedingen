@@ -30,7 +30,16 @@ const config: Config = {
   },
   darkMode: 'class',
   plugins: [
-    nextui()
+    nextui({
+      addCommonColors: true,
+      themes: {
+        dark : {
+          colors: {
+            danger: "#A72920"
+          }
+        }
+      },
+    })
   ],
 }
 

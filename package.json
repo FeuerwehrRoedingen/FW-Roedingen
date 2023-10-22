@@ -15,6 +15,7 @@
     "nohoist": [
       "**/@prisma/client",
       "**/@nextui-org/react",
+      "**/@nextui-org/**",
       "**/expo",
       "**/@expo/**",
       "**/react",

@@ -1,8 +1,8 @@
 import React from "react"
 
 export const ranks = {
-  FeuerwehremannAnwärter: {
-    name: 'Feuerwehrmannanwärter',
+  FeuerwehrmannAnwärter: {
+    name: 'FeuerwehrmannAnwärter',
     short: 'FMA',
     stripes: 0,
     color: 'red'
@@ -94,15 +94,13 @@ function Rankstripe(props: RankstripeProps) {
 type RankStripesProps = {
   rank: RankType;
   className?: string;
-  "data-tip"?: boolean;
-  "data-for"?: string;
 }
 export function RankStripes(props: RankStripesProps) {
 
   let stripes: JSX.Element[] = [];
 
   for (let i = 0; i < props.rank.stripes; i++) {
-    stripes.push(<Rankstripe color={props.rank.color} />)
+    stripes.push(<Rankstripe color={props.rank.color} key={`stripe-${i}`}/>)
   }
 
   let color;
@@ -119,9 +117,7 @@ export function RankStripes(props: RankStripesProps) {
 
   return (
     <div 
-      className={`${color} border-3 p-0.5 rounded-lg min-w-[78px] min-h-[34px] ${props.className}`} 
-      data-tip={props["data-tip"]}
-      data-for={props["data-for"]}
+      className={`${color} border-3 p-0.5 rounded-lg min-w-[78px] min-h-[34px] ${props.className}`}
     >
       <div className="bg-gray-900 px-2 py-1 rounded-md m-[-2px] min-h-[28px]">
         {stripes}

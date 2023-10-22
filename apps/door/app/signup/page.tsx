@@ -1,22 +1,67 @@
-import React from 'react'
-import Input from '@mui/material/Input'
+import { Input } from '@nextui-org/input'
+import { Spacer } from '@nextui-org/spacer'
+import { Button } from '@nextui-org/button'
 
-type Props = {}
+import SubmitButton from './submitButton'
+import FileInput from './fileInput'
+import RankSelector from 'components/rankSelector'
+import PasswordInput from 'components/passswordInput'
 
-export default function page({}: Props) {
+export default function () {
+
   return (
-    <div className='h-full w-full flex items-center justify-center'>
-      <form className='h-[90%] w-[95%] border-[2px] border-silver rounded-2xl flex flex-col items-center'>
-        <h1 className='mt-[-28px] text-silver text-5xl bg-[#1f1f1f]'>Signup</h1>
-        <div className='flex flex-col h-full w-full justify-evenly items-center'>
-          <Input placeholder='Vorname'/>
-          <Input placeholder='Nachname'/>
-          <Input placeholder='Email'/>
-          <Input placeholder='Passwort'/>
-          <Input placeholder='Passwort wiederholen'/>
+    <div className='w-screen h-screen flex items-center justify-center'>
+      <form className='w-3/4 h-fit border border-silver rounded-2xl p-8' action={handleAction}>
+        <div className='w-full h-5/6 flex flex-row items-center'>
+          <div className='h-full w-1/2'>
+            <RankSelector />
+          </div>
+          <div className='h-full w-1/2 flex flex-col items-center justify-center'>
+            <div className='w-full h-fit flex flex-row justify-center items-center'>
+              <div className='w-1/4 flex items-center justify-center'>
+                <FileInput name='avatar' />
+              </div>
+              <Spacer x={4} />
+              <div className='w-3/4'>
+                <Input variant='bordered' isRequired label='Vorname' name='surname' />
+                <Spacer y={2} />
+                <Input variant='bordered' isRequired label='Nachname' name='lastname' />
+              </div>
+            </div>
+            <Spacer y={4} />
+            <div className='flex flex-row w-full'>
+              <Input variant='bordered' isRequired label='E-Mail' name='emai' />
+              <Spacer x={4} />
+              <Input variant='bordered' isRequired label='Benutzername' name='username' />
+            </div>
+            <Spacer y={4} />
+            <div className='flex flex-row w-full'>
+              <PasswordInput variant='bordered' />
+            </div>
+          </div>
+        </div>
+        <div className='w-full h-1/6 flex flex-row'>
+          <div className='w-2/3 h-full'>
 
+          </div>
+          <div className='w-1/3 h-full flex flex-row items-center justify-center'>
+            <Button size='lg' color="primary" variant="ghost">
+              Abbrechen
+            </Button>
+            <Spacer x={4} />
+            <SubmitButton />
+          </div>
         </div>
       </form>
     </div>
   )
+}
+
+async function handleAction(data: FormData) {
+  'use server'
+
+  console.log(data.get('username'));
+  await new Promise(resolve => setTimeout(resolve, 5_000));
+  console.log('done')
+  return;
 }

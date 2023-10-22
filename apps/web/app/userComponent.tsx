@@ -33,7 +33,7 @@ export default function(props: IProps){
   if(user){
     //TODO get rank from user metadata 
     //TODO get points from user metadata
-    const rank = ranks.Feuerwehrmann;
+    const rank = ranks.Hauptbrandmeister;
     const points = 200;
     const needed = 1000;
     const progress = points / needed * 100;
@@ -44,13 +44,16 @@ export default function(props: IProps){
           <DropdownTrigger>
             <Avatar src={user.picture!} alt={user.name!} size="lg" className='cursor-pointer'/>
           </DropdownTrigger>
-          <DropdownMenu>
+          <DropdownMenu
+            aria-label='User Menu'
+            onAction={handleAction}
+          >
             <DropdownSection title="Angemeldet als" showDivider>
               <DropdownItem key="profile" variant="light">{user.name}</DropdownItem>
             </DropdownSection>
             <DropdownSection title="Level" showDivider>
               <DropdownItem key="level">{rank.name}</DropdownItem>  
-              <DropdownItem key="points" variant="light">
+              <DropdownItem key="points" variant="light" textValue='level progress'>
                 <Tooltip content={`Du benötigst noch ${needed-points} Punkte`} placement='left' showArrow>
                   <Progress value={progress} label="Punkte bis zum nächsten Level" color="danger" size="sm"/>  
                 </Tooltip>
@@ -58,19 +61,13 @@ export default function(props: IProps){
             </DropdownSection>
             <DropdownSection title="Account">
               <DropdownItem key="settings">
-                <Link href="/settings" color="foreground">
-                  Einstellungen
-                </Link>
+                Einstellungen
               </DropdownItem>
-              <DropdownItem key="profile" href="/profile">
-                <Link href={`${door}/home`} color="foreground">
-                  Profil
-                </Link>
+              <DropdownItem key="profile">
+                Profil
               </DropdownItem>
               <DropdownItem key="logout" color="danger" variant='shadow'>
-                <Link href="/api/auth/logout" color="foreground">
-                  Logout
-                </Link>
+                Abmelden
               </DropdownItem>
             </DropdownSection>
           </DropdownMenu>
@@ -88,10 +85,22 @@ export default function(props: IProps){
         <Button as={Link} href="/api/auth/login" variant='ghost' color="danger">
           Login
         </Button>
-        <Button as={Link} href={`${door}/signup`} variant='solid' color="danger">
+        <Button as={Link} href={`${door}/signup`} variant='shadow' color="danger">
           Registrieren
         </Button>
       </div>
     )
+  }
+}
+
+function handleAction(key: React.Key){
+  if(key === 'settings'){
+    window.open(`${door}/settings`, '_blank');
+  }
+  else if(key === 'profile'){
+    window.open(`${door}/profile`, '_blank');
+  }
+  else if(key === 'logout'){
+    window.open('/api/auth/logout', '_self');
   }
 }
