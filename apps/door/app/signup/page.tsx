@@ -3,7 +3,7 @@ import { Spacer } from '@nextui-org/spacer'
 import { Button } from '@nextui-org/button'
 
 import SubmitButton from './submitButton'
-import FileInput from './fileInput'
+import FileInput from 'components/fileInput'
 import RankSelector from 'components/rankSelector'
 import PasswordInput from 'components/passswordInput'
 

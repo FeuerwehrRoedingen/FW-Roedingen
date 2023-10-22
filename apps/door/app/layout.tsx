@@ -1,8 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
-import Provider from './provider'
-
 import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
@@ -11,19 +9,16 @@ export const metadata: Metadata = {
   description: 'Administrative access to all FWR services',
 }
 
-export default function RootLayout({
-  children,
-}: {
+type IProps = {
   children: React.ReactNode
-}) {
+}
+export default function(props: IProps) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Provider>
-          <main className='dark text-foreground bg-background'>
-            {children}    
-          </main>
-        </Provider>
+        <main className='dark text-foreground bg-gray-950'>
+          {props.children}
+        </main>
       </body>
     </html>
   )

@@ -4,23 +4,24 @@ import { Avatar } from '@nextui-org/avatar'
 
 type IProps = {
   name?: string;
+  value?: string;
+  size?: number;
 }
 export default function(props: IProps) {
 
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const [image, setImage] = React.useState<string | undefined>(undefined);
+  const [image, setImage] = React.useState<string | undefined>(props.value);
 
-  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
-    
-    console.log(event.target.files![0]);
-    
+  const handleImageChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {    
     setImage(URL.createObjectURL(event.target.files![0]));
   }
+
+  const size = props.size || 24;
 
   return (
     <>
       <Avatar 
-        className='w-24 h-24 cursor-pointer'
+        className={`w-${size} h-${size} cursor-pointer`}
         onClick={() => inputRef.current?.click()}
         src={image}
       />
