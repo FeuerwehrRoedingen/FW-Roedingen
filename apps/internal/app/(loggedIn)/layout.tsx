@@ -1,4 +1,5 @@
 
+import Header from "./header";
 import Provider from "./provider"
 
 type IProps = {
@@ -7,7 +8,10 @@ type IProps = {
 export default function(props: IProps){
   return (
     <Provider>
-      {props.children}
+      <Header />
+      <main className="w-screen h-[calc(100vh-65px)] overflow-scroll">
+        {props.children}
+      </main>
     </Provider>
   )
 }
