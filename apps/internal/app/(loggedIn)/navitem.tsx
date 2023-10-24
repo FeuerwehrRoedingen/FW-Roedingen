@@ -16,7 +16,7 @@ export default function(props: IProps) {
     <NavbarItem>
       <Link 
         href={props.href} 
-        color={isActive ? "primary": "foreground"}
+        color={isActive ? "danger": "foreground"}
       >
         {props.label}
       </Link>

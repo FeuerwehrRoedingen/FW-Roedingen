@@ -5,11 +5,17 @@ import { getUserRoles } from "./auth0Api"
 import handleUnauthorized from "./handleUnauthorized";
 import { redirect } from "next/navigation";
 
-type IReturnType = () => Promise<JSX.Element>;
+type IPageProps = {
+  params: {},
+  searchParams: {
+    [key: string]: string
+  }
+}
+type IReturnType = (props: IPageProps) => Promise<JSX.Element>;
 
-export default function(Page: React.ComponentType): IReturnType{
+export default function(Page: React.ComponentType<IPageProps>): IReturnType{
 
-  return async () => {
+  return async (props: IPageProps) => {
     
     const session = await getSession();
     if(!session) 
@@ -19,7 +25,7 @@ export default function(Page: React.ComponentType): IReturnType{
 
     for(const role of roles) {
       if(role.name === "Member")
-        return <Page /> 
+        return <Page {...props}/> 
     }
     
     handleUnauthorized();

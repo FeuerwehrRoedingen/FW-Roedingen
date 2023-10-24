@@ -9,7 +9,7 @@ type IProps = {
 export default function(props: IProps) {
 
   return (
-    <Navbar isBlurred isBordered>
+    <Navbar isBlurred isBordered className="bg-gray-900 text-silver">
       <NavbarBrand>
         <h1>FWR Internal</h1>
       </NavbarBrand>

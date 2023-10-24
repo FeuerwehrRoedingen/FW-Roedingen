@@ -7,7 +7,7 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx,mdx}",
-    "../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -28,7 +28,8 @@ const config: Config = {
       themes: {
         dark : {
           colors: {
-            danger: "#A72920"
+            danger: "#A72920",
+            foreground: "#c0c0c0"
           }
         }
       },
