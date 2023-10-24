@@ -1,11 +1,6 @@
 "use client"
 import React from 'react'
-import { Avatar } from '@nextui-org/avatar'
-import { Button } from '@nextui-org/button'
-import { Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger } from '@nextui-org/dropdown'
-import { Link } from '@nextui-org/link'
-import { Progress } from '@nextui-org/progress'
-import { Tooltip } from '@nextui-org/tooltip'
+import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Link, Progress, Tooltip  } from '@nextui-org/react'
 import dynamic from 'next/dynamic'
 
 import useUser from "hooks/useUser"
