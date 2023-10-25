@@ -17,6 +17,7 @@ export default function(props: IProps) {
       <Link 
         href={props.href} 
         color={isActive ? "danger": "foreground"}
+        size="lg"
       >
         {props.label}
       </Link>

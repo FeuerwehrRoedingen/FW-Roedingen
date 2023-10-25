@@ -1,5 +1,8 @@
 "use client"
 import { UserProvider } from "@auth0/nextjs-auth0/client"
+import { Provider as ReduxProvider } from "react-redux"
+
+import { store } from "store"
 
 type IProps = {
   children: React.ReactNode;
@@ -7,7 +10,9 @@ type IProps = {
 export default function(props: IProps){
   return (
     <UserProvider>
-      {props.children}
+      <ReduxProvider store={store}>
+        {props.children}
+      </ReduxProvider>
     </UserProvider>
   )
 }

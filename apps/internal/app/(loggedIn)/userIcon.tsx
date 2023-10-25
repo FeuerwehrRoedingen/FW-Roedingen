@@ -20,8 +20,7 @@ export default function(props: IProps) {
       <DropdownTrigger>
         <Avatar 
           src={user?.picture!} 
-          size="md"
-          className="cursor-pointer"
+          className="cursor-pointer w-12 h-12"
         />
       </DropdownTrigger>
       <DropdownMenu 
@@ -35,9 +34,7 @@ export default function(props: IProps) {
         <DropdownSection showDivider title="Angemeldet als">
           <DropdownItem key="user">{user?.name}</DropdownItem>
         </DropdownSection>
-        <DropdownSection>
-          <DropdownItem key="logout" color="danger" variant="flat">Logout</DropdownItem>
-        </DropdownSection>
+        <DropdownItem key="logout" color="danger" variant="flat">Logout</DropdownItem>
       </DropdownMenu>
     </Dropdown>
   )

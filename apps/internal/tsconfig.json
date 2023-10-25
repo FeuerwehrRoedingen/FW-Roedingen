@@ -19,14 +19,20 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
-      "env": ["./env.mjs"],
+      "@/*":          ["./*"],
+      "env":          ["./env.mjs"],
       "components/*": ["./src/components/*"],
-      "hooks/*": ["./src/hooks/*"],
-      "utils/*": ["./src/utils/*"],
-      "store":   ["./src/store/index.ts"],
-      "store/*": ["./src/store/*"],
-    }
+      "hooks/*":      ["./src/hooks/*"],
+      "utils/*":      ["./src/utils/*"],
+      "store":        ["./src/store/index.ts"],
+      "store/*":      ["./src/store/*"],
+      "react":        ["./node_modules/@types/react"],
+      "react/*":      ["./node_modules/@types/react/*"]
+    },
+    "types": [
+      "react/experimental",
+      "react-dom/experimental",
+    ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "env.mjs"],
   "exclude": ["node_modules"]

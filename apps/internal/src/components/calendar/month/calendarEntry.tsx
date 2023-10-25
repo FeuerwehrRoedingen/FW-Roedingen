@@ -1,7 +1,8 @@
 import React from "react";
 
 type IProps = {
-  currentMonth: Date;
+  currentMonth: number;
+  currentYear: number;
   date: Date;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
@@ -21,13 +22,13 @@ export default function(props: IProps) {
   }
   function isCurrentMonth(date: Date){
     return (
-      props.currentMonth.getMonth() === date.getMonth() && 
-      props.currentMonth.getFullYear() === date.getFullYear()
+      props.currentMonth === date.getMonth() && 
+      props.currentYear  === date.getFullYear()
     );
   }
 
   return (
-    <td className={`px-1 w-full h-1/6`}>
+    <td className={`px-1 w-full h-1/6`} key={`${React.useId()}`}>
       <div 
         className={`w-full h-full ${border} ${bg}`}
         onClick={props.onClick}

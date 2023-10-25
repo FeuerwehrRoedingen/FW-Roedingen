@@ -1,84 +1,121 @@
 "use client"
-import { useState } from "react"
+import dynamic from "next/dynamic";
 import { IoAddSharp, IoChevronBack, IoChevronForward } from "react-icons/io5"
 
-import CalendarEntry from "./calendarEntry"
-import CalendarHead from "./calendarHead"
-import { addCalendar, addEvent, getCalendars, getEvents } from "@/src/utils/calendar"
+import useSearchParams from "hooks/useSearchParams"
+import SlidingSelector from "components/calendar/slidingSelector"
 
-type IProps = {
-  
-}
-export default function(props: IProps){
+const MonthView = dynamic(() => import('components/calendar/month/calendar'), { ssr: false });
+const WeekView = dynamic(() => import('components/calendar/week/calendar'), { ssr: false });
+const DayView = dynamic(() => import('components/calendar/day/calendar'), { ssr: false });
 
-  const today = new Date();
-  const [thisMonth, setThisMonth] = useState(today);
-  const next = () => {
-    setThisMonth(prev => new Date(prev.getFullYear(), prev.getMonth() + 1, 1));
-  }
-  const current = () => {
-    setThisMonth(today);
-  }
-  const previous = () => {
-    setThisMonth(prev => new Date(prev.getFullYear(), prev.getMonth() - 1, 1));
-  }
+export default function(){
 
-  const entires = generateWeeks(thisMonth).map((week) => {
-    const days = week.map((day) => {
-      return <CalendarEntry date={day} currentMonth={thisMonth}/>
-    });
-    return (
-      <tr>
-        {days}
-      </tr>
-    )
+  const [searchParams, setSearchParams] = useSearchParams({
+    date: (new Date).toISOString().slice(0, 10),
+    view: "month"
   });
 
+  function handleMonthChange(month: number){
+    setSearchParams(prev => {
+      const newDate = new Date(prev.get('date')!);
+      newDate.setMonth(date.getMonth() + month);
+      prev.set('date', newDate.toISOString().slice(0, 10));
+      return prev;
+    });
+  }
+  function handleWeekChange(week: number){
+    setSearchParams(prev => {
+      const newDate = new Date(prev.get('date')!);
+      newDate.setDate(newDate.getDate() + week * 7);
+      prev.set('date', newDate.toISOString().slice(0, 10));
+      return prev;
+    });
+  }
+  function handleDayChange(day: number){
+    setSearchParams(prev => {
+      const newDate = new Date(prev.get('date')!);
+      newDate.setDate(newDate.getDate() + day);
+      prev.set('date', newDate.toISOString().slice(0, 10));
+      return prev;
+    });
+  }
+  function handleCurrent() {
+    setSearchParams(prev => {
+      prev.set('date', (new Date).toISOString().slice(0, 10));
+      return prev;
+    });
+  }
+  function handleSelectionChange(value: string){
+    setSearchParams(prev => {
+      const newValue = value === "Tag" ? "day" : value === "Woche" ? "week" : "month";
+      prev.set('view', newValue);
+      return prev;
+    });
+  }
+
+  const date = new Date(searchParams.get("date")!);
+  let view: JSX.Element;
+  let handlePrevious: () => void;
+  let handleNext:     () => void;
+
+  if(searchParams.get("view") === "day"){
+    view = <DayView/>
+    handlePrevious= () => handleDayChange(-1);
+    handleNext=     () => handleDayChange(1);
+  }
+  else if(searchParams.get("view") === "week"){
+    view = <WeekView/>
+    handlePrevious= () => handleWeekChange(-1);
+    handleNext=     () => handleWeekChange(1);
+  }
+  else {
+    view = <MonthView date={new Date(searchParams.get("date")!)} />
+    handlePrevious= () => handleMonthChange(-1);
+    handleNext=     () => handleMonthChange(1);
+  }
+
   return (
-    <div className="w-full h-full px-2">
-      <div className="w-full h-fit flex flex-row">
+    <div className="w-full h-full"> 
+      <div className="w-full h-[5%] flex flex-row items-center">
         <div className="w-1/3 h-full flex items-center p-2">
           <span className="font-semibold text-2xl mr-4">
-            {months[thisMonth.getMonth()-1]}
+            {getMonthName(date.getMonth())}
           </span>
           <span className="text-2xl text-gray-400">
-            {thisMonth.getFullYear()}
+            {date.getFullYear()}
           </span>
         </div>
-        <div className="w-1/3 h-full">
+        <div className="w-1/3 h-full flex items-center justify-center">
+          <SlidingSelector options={["Tag", "Woche", "Monat"]} onChange={handleSelectionChange}/>
         </div>
         <div className="w-1/3 h-full flex flex-row items-center justify-end text-ral-3000 p-2">
           <IoChevronBack 
-            onClick={previous} 
+            onClick={handlePrevious} 
             size={25}
             className="h-8 cursor-pointer rounded-lg hover:bg-gray-800 active:bg-red-900 duration-300"
           />
           <a 
-            onClick={current} 
+            onClick={handleCurrent} 
             className="mx-0.5 px-2 text-xl flex items-center h-8 cursor-pointer rounded-lg hover:bg-gray-800 active:bg-red-900"
           >
             Heute
           </a>
           <IoChevronForward 
-            onClick={next} 
+            onClick={handleNext} 
             size={25}
             className="h-8 cursor-pointer rounded-lg hover:bg-gray-800 active:bg-red-900 duration-300"
           />
           <IoAddSharp 
-            onclick={()=>{}} 
+            onClick={()=>{}} 
             size={25} 
             className="h-8 ml-4 cursor-pointer rounded-lg hover:bg-gray-800 active:bg-red-900 duration-300"
           />
         </div>
       </div>
-      <table className="w-full h-[95%] table-fixed">
-        <thead className="w-full h-4 min-h-0">
-          <CalendarHead activeDay={today.getDay()}/>
-        </thead>
-        <tbody className="w-full h-[90%]">
-          {entires}
-        </tbody>
-      </table>
+      <div className="w-full h-[95%] px-2">
+        {view}
+      </div>
     </div>
   )
 }
@@ -98,36 +135,9 @@ const months = [
   "Dezember"
 ]
 
-function generateWeeks(thisMonth: Date) {
-  const month = thisMonth.getMonth();
-  const year = thisMonth.getFullYear();
-  const daysInMonth = new Date(thisMonth.getFullYear(), month + 1, 0).getDate();
-  const firstDayInMonth = new Date(thisMonth.getFullYear(), month, 1).getDay();
-  const days: Date[] = [];
-
-  const neededBefore = firstDayInMonth === 0 ? 6 : firstDayInMonth - 1;
-  const neededAfter = (42 - daysInMonth - neededBefore) % 7;
-
-  for(let i=1; i <= neededBefore ; i++){
-    days.push(new Date(thisMonth.getFullYear(), month, i - neededBefore));
+const getMonthName = (month: number) => {
+  if(month === -1){
+    return months[months.length - 1];	
   }
-
-  for(let i = 1; i <= daysInMonth; i++){
-    days.push(new Date(thisMonth.getFullYear(), month, i));
-  }
-
-  for(let i=1; i <= neededAfter; i++){
-    days.push(new Date(thisMonth.getFullYear(), month + 1, i));
-  }
-
-  const weeks: Date[][] = [[]];
-
-  for(let i = 0; i < days.length; i++){
-    if(i % 7 === 0){
-      weeks.push([]);
-    }
-    weeks[weeks.length - 1].push(days[i]);
-  }
-
-  return weeks;
+  return months[month];
 }

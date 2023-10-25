@@ -1,21 +1,32 @@
 
-type Event = {
+export type Event = {
   name: string,
   from: Date,
   to: Date,
   description: string,
   location: string,
+  wholeDay: boolean,
 }
 
-type Calendar = {
-  name: string,
-  events: Event[]
-  sharedWith: string[]
+export type Calendar = {
+  name: string;
+  events: Event[];
+  sharedWith: string[];
 }
 
 const calendars: Calendar[] = [
   {
     name: 'Übungsdienst',
+    events: [],
+    sharedWith: [],
+  },
+  {
+    name: 'Jugendfeuerwehr',
+    events: [],
+    sharedWith: [],
+  },
+  {
+    name: 'Gerätewarte',
     events: [],
     sharedWith: [],
   }
