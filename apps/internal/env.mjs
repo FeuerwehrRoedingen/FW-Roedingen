@@ -12,7 +12,7 @@ export const env = createEnv({
   },
   clientPrefix: 'NEXT_PUBLIC_',
   client: {
-
+    NEXT_PUBLIC_MONITOR_URL: z.string().url(),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,

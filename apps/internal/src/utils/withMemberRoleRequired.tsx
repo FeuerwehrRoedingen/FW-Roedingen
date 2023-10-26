@@ -6,7 +6,9 @@ import handleUnauthorized from "./handleUnauthorized";
 import { redirect } from "next/navigation";
 
 type IPageProps = {
-  params: {},
+  params: {
+    slug: string
+  },
   searchParams: {
     [key: string]: string
   }
