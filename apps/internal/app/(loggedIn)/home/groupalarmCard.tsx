@@ -9,9 +9,11 @@ const ScalableIFrame = dynamic(() => import("components/scalabaleIFrame"), { ssr
 export default function() {
 
   return (
-    <Card>
+    <Card
+      className="w-full h-full"
+    >
       <CardBody
-        className="p-2"
+        className="p-0 w-full h-full"
       >
         <ScalableIFrame 
           src={env.NEXT_PUBLIC_MONITOR_URL} 

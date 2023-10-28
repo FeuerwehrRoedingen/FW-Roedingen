@@ -9,13 +9,6 @@ const apps: App[] = [
     href: 'https://id.ionos.de/identifier'
   },
   {
-    name: 'Door',
-    icon: 'https://feuerwehr-roedingen.de/favicon.ico',
-    href: 'https://door.feuerwehr-roedingen.de',
-    background: 'bg-gray-300',
-    padding: 4
-  },
-  {
     name: 'NextCloud',
     icon: 'https://cdn.icon-icons.com/icons2/2699/PNG/512/nextcloud_logo_icon_168948.png',
     href: 'https://nextcloud.feuerwehr-roedingen.de',
@@ -28,7 +21,14 @@ const apps: App[] = [
     href: 'https://app.groupalarm.com/de/login',
     background: 'bg-gray-300',
     padding: 6
-  }
+  },
+  {
+    name: 'Door',
+    icon: 'https://feuerwehr-roedingen.de/favicon.ico',
+    href: 'https://door.feuerwehr-roedingen.de',
+    background: 'bg-gray-300',
+    padding: 4
+  },
 ]
 
 export default function AppsCard(){

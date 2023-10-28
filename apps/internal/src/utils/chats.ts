@@ -1,11 +1,8 @@
-import { getSession } from '@auth0/nextjs-auth0'
-
 export type IMessage = {
   id: string;
   from: string;
   chatID: string;
   content: string;
-  sender: string;
   sentAt: Date;
   delieveredAt: Date;
   readBy: {
@@ -48,7 +45,7 @@ const chats: IChat[] = [
     id: '1',
     with: '2',
     type: 'user',
-    lastMessage: ''
+    lastMessage: '2'
   },
   {
     id: '2',
@@ -66,15 +63,34 @@ const chats: IChat[] = [
     id: '4',
     users: ['auth0|649467ec877f08093c04c28b', '2', '3', '4'],
     avatar: '',
-    name: 'Kameraden',
+    name: 'Einsatzabteilung',
     admins: ['auth0|649467ec877f08093c04c28b'],
     description: 'Alle Mitglieder der Feuerwehr Rödingen',
     createdAt: new Date(),
     type: 'group',
-    lastMessage: ''
+    lastMessage: '1'
   }
 ];
-const messages: IMessage[] = [];
+const messages: IMessage[] = [
+  {
+    id: '1',
+    from: 'system',
+    chatID: '4',
+    content: 'Die Gruppe wurde erstellt',
+    sentAt: new Date(),
+    delieveredAt: new Date(),
+    readBy: []
+  },
+  {
+    id: '2',
+    from: 'auth0|649467ec877f08093c04c28b',
+    chatID: '1',
+    content: 'Hallo',
+    sentAt: new Date(),
+    delieveredAt: new Date(),
+    readBy: []
+  }
+];
 
 export async function getChats(){
   return chats;
@@ -85,10 +101,16 @@ export async function getMessages(chatID: string){
 export async function getMessage(id: string){
   return messages.find(message => message.id === id);
 }
-export async function getChatPreview(id: string): Promise<IChatPreview> {
+export async function getChatPreview(id: string): Promise<IChatPreview|null> {
   const chat = chats.find(chat => chat.id === id);
   if(!chat) 
     throw new Error('Chat not found');
+
+  console.log(chat.id);
+  console.log(chat.lastMessage);
+
+  if(!chat.lastMessage)
+    return null;
 
   const lastMessageObj = await getMessage(chat.lastMessage);
   if(!lastMessageObj) 
@@ -106,7 +128,8 @@ export async function getChatPreview(id: string): Promise<IChatPreview> {
     picture = '';
   }
   else {
-    lastMessage = `${lastMessageObj.from}: ${lastMessageObj.content}`;
+    const from = lastMessageObj.from === "system"? "": lastMessageObj.from + ': ';
+    lastMessage = `${from}${lastMessageObj.content}`;
     lastMessageAt = lastMessageObj.sentAt;
     name = chat.name;
     picture = chat.avatar;

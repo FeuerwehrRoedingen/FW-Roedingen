@@ -12,10 +12,10 @@ export default async function(props: IProps){
 
   return(
     <div className='w-full h-full flex flex-row'>
-      <div className='w-1/4 h-full border-r border-gray-700 bg-gray-900'>
+      <div className='w-1/3 h-full border-r-3 border-gray-900 bg-gray-950'>
         <ChatList chats={chats}/>
       </div>
-      <div className='w-3/4 h-full'>
+      <div className='w-2/3 h-full'>
         {props.children}
       </div>
     </div>
