@@ -1,0 +1,131 @@
+
+.light1, .light2, .light3 {
+	-webkit-box-shadow: 0px 0px 80vh 60vh #0033FF; 
+  box-shadow: 0px 0px 80vh 60vh #0033FF;
+}
+
+.light1 {
+  animation: flicker1 2s linear infinite;
+}
+
+@keyframes flicker1 {
+  0% {
+    opacity: 0
+  }
+  5% {
+		opacity: 0.5;
+	}
+	7% {
+		opacity: 0;
+	}
+	9% {
+		opacity: 0.5;
+	}
+	11% {
+		opacity: 0;
+	}
+  50% {
+    opacity: 0;
+  }
+	55% {
+		opacity: 0.5;
+	}
+	57% {
+		opacity: 0;
+	}
+	59% {
+		opacity: 0.5;
+	}
+	61% {
+		opacity: 0;
+	}
+  100% {
+    opacity: 0;
+  }
+}
+
+.light2 {
+  animation: flicker2 2s linear infinite;
+}
+
+@keyframes flicker2 {
+  0% {
+    opacity: 0
+  }
+	25% {
+		opacity: 0;
+	}
+  27% {
+		opacity: 0.5;
+	}
+	29% {
+		opacity: 0;
+	}
+	31% {
+		opacity: 0.5;
+	}
+	33% {
+		opacity: 0;
+	}
+  75% {
+    opacity: 0;
+  }
+	77% {
+		opacity: 0.5;
+	}
+	79% {
+		opacity: 0;
+	}
+	81% {
+		opacity: 0.5;
+	}
+	83% {
+		opacity: 0;
+	}
+  100% {
+    opacity: 0;
+  }
+}
+
+.light3 {
+  animation: flicker3 2s linear infinite;
+}
+
+@keyframes flicker3 {
+  0% {
+    opacity: 0
+  }
+	13% {
+		opacity: 0;
+	}
+  15% {
+		opacity: 0.5;
+	}
+	17% {
+		opacity: 0;
+	}
+	19% {
+		opacity: 0.5;
+	}
+	21% {
+		opacity: 0;
+	}
+  60% {
+    opacity: 0;
+  }
+	65% {
+		opacity: 0.5;
+	}
+	67% {
+		opacity: 0;
+	}
+	69% {
+		opacity: 0.5;
+	}
+	71% {
+		opacity: 0;
+	}
+  100% {
+    opacity: 0;
+  }
+}

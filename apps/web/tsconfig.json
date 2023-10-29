@@ -10,8 +10,8 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "ES2015",
-      "esnext"
+      "ES2022",
+      "ESNext"
     ],
     "module": "esnext",
     "moduleResolution": "node",
@@ -28,6 +28,7 @@
       "store":        [ "./src/store/index.ts" ],
       "store/*":      [ "./src/store/*" ],
       "hooks/*":      [ "./src/hooks/*" ],
+      "utils/*":      [ "./src/utils/*" ],
       "react":        [ "./node_modules/@types/react" ],
       "react/*":      [ "./node_modules/@types/react/*" ],
     },
