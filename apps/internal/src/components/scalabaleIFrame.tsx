@@ -35,7 +35,7 @@ export default function ScalableIFrame(props: IProps) {
       <div className={`w-full h-fit aspect-video overflow-hidden p-0 ${props.classNames?.container}`} ref={containerRef}>
         <iframe
           src={props.src}
-          className={`w-[${props.innerWidth}px] h-[${props.innerHeight}px] rounded-md border-none origin-top-left p-0 ${props.classNames?.iframe}`}
+          className={`w-[1920px] h-[1080px] rounded-md border-none origin-top-left p-0 ${props.classNames?.iframe}`}
           style={{transform: `scale(${scale})`}}
         />
     </div>

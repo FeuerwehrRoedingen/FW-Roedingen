@@ -89,6 +89,24 @@ const messages: IMessage[] = [
     sentAt: new Date(),
     delieveredAt: new Date(),
     readBy: []
+  },
+  {
+    id: '3',
+    from: 'auth0|649467ec877f08093c04c28b',
+    chatID: '4',
+    content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+    sentAt: new Date(),
+    delieveredAt: new Date(),
+    readBy: []
+  },
+  {
+    id: '4',
+    from: 'Test Benutzer 1234',
+    chatID: '4',
+    content: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
+    sentAt: new Date(),
+    delieveredAt: new Date(),
+    readBy: []
   }
 ];
 
@@ -105,9 +123,6 @@ export async function getChatPreview(id: string): Promise<IChatPreview|null> {
   const chat = chats.find(chat => chat.id === id);
   if(!chat) 
     throw new Error('Chat not found');
-
-  console.log(chat.id);
-  console.log(chat.lastMessage);
 
   if(!chat.lastMessage)
     return null;

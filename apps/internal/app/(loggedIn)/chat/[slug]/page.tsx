@@ -3,7 +3,9 @@ import { getSession } from "@auth0/nextjs-auth0"
 
 import withMemberRoleRequired from "utils/withMemberRoleRequired"
 import { getMessages } from "utils/chats"
+import { MyMessage, OtherMessage, SystemMessage } from "./message"
 import ChatHeader from "./header"
+import ChatFooter from "./footer"
 
 type IProps = {
   params: {
@@ -19,33 +21,25 @@ async function Page(props: IProps){
   const items = messages.map(message => {
 
     if(message.from === "system"){
-      return (
-        <div>
-          
-        </div>
-      )
-    } else if(message.from === session!.user.sub){
-      return (
-        <div>
-          <p>{message.content}</p>
-        </div>
-      )
+      return <SystemMessage content={message.content} />
+    } 
+    else if(message.from !== session!.user.sub){
+      return <OtherMessage content={message.content} date={'10:23'} name={message.from}/>
     }
     else {
-      return (
-        <div>
-
-        </div>
-      )
+      return <MyMessage content={message.content} date={'10:23'}/>
     }
   });
 
   return (
-    <div>
-      <ChatHeader />
-      <div className="w-full h-full flex flex-col p-2"> 
-        {items}
+    <div className='w-full h-full flex flex-col items-center'>
+      <div className='w-full h-full flex flex-col items-center'>
+        <ChatHeader />
+        <div className="w-full h-fit flex flex-col p-2 max-w-[1000px]"> 
+          {items}
+        </div>
       </div>
+      <ChatFooter />
     </div>
   )
 }

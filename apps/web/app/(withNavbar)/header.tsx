@@ -9,7 +9,7 @@ import UserComponent from './userComponent';
 type IProps = {
 
 }
-export function Header(props: IProps){
+export default function Header(props: IProps){
 
   return(
     <div className="flex flex-col w-screen h-[15svh] sticky top-0 left-0 bg-gray-900 text-2xl">

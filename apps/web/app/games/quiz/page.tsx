@@ -10,5 +10,5 @@ async function Page() {
 }
 
 export default withPageAuthRequired(Page, {
-  returnTo: '/api/auth/login'
+  returnTo: '/games/quiz'
 });

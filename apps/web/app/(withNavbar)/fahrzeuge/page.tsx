@@ -4,8 +4,8 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { PointerLockControls, Sky } from '@react-three/drei'
 import { Physics } from '@react-three/cannon'
 import dynamic from 'next/dynamic'
-import { useAppDispatch } from '../../src/store'
-import { update } from '../../src/store/reducer/fps.slice'
+import { useAppDispatch } from 'store'
+import { update } from 'store/reducer/fps.slice'
 
 const Ground = dynamic(() => import('components/assets/ground'), { ssr: false });
 const Player = dynamic(() => import('components/assets/player'), { ssr: false });

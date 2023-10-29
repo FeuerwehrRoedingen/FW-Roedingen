@@ -1,7 +1,8 @@
+import React from "react"
+import { Provider } from "./provider"
+
 import { Poppins } from 'next/font/google'
 
-import { Provider } from './provider';
-import { Header } from './header'
 import './globals.css'
 
 const font = Poppins({
@@ -24,7 +25,6 @@ export default function RootLayout({
       <body className={`w-screen h-[100svh] overflow-hidden ${font.className}`}>
         <Provider>
           <main className='w-full h-full dark text-foreground bg-background'>
-            <Header />
             {children}
           </main>
         </Provider>
