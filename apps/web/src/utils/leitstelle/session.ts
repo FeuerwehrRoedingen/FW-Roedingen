@@ -7,11 +7,11 @@ type Session = {
   players: string[];
   password: string;   // hashed
   map: string;
-}
+} 
 
-export async function createSession(): Promise<Session>{
-  const res = await APIfetch('/session', { method: 'POST' });
-  return res.json();
+export async function createSession(session: Omit<Session, "id">) {
+  return APIfetch('/session', { method: 'POST', body: JSON.stringify(session) })
+    .then(res => res.json())
 }
 
 export async function joinSession(sid: string, password: string): Promise<Session|null>{

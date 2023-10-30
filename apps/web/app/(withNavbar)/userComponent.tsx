@@ -1,7 +1,6 @@
 "use client"
 import React from 'react'
-import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Link, Progress, Tooltip  } from '@nextui-org/react'
-import dynamic from 'next/dynamic'
+import { Avatar, Button, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Link, Progress, Spinner , Tooltip } from '@nextui-org/react'
 
 import useUser from "hooks/useUser"
 import { ranks, RankStripes } from "components/rank"
@@ -9,8 +8,6 @@ import { ranks, RankStripes } from "components/rank"
 const isDev = process.env.NODE_ENV === 'development';
 
 const door = isDev ? 'http://localhost:3003' : 'https://door.feuerwehr-roedingen.de'
-
-const LoadingIcon = dynamic(() => import('components/loadingIcon'));
 
 type IProps = {
 
@@ -21,7 +18,7 @@ export default function(props: IProps){
 
   if(isLoading) {
     return (
-      <LoadingIcon />
+      <Spinner size='lg' color='danger' />
     )
   }
 

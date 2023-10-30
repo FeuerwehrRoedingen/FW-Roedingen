@@ -2,9 +2,6 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 import { withPageAuthRequired } from '@auth0/nextjs-auth0'
 
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-
 import { eventMap, get25randomEvents } from './events'
 
 const BingoField = dynamic(() => import('./bingoField'), { ssr: false });
@@ -23,7 +20,7 @@ async function Page(){
 
   return (
     <div className="page flex flex-row items-center justify-center">
-      <div className='w-2/3 h-full'>
+      <div className='w-2/3 h-full pt-20'>
         <Settings />
         <div className='w-full h-full flex items-center justify-center'>
           <BingoField initialEntries={initialEntries}/>
@@ -32,19 +29,6 @@ async function Page(){
       <div className='w-1/3 h-full'>
         <EventList />
       </div>
-      <ToastContainer 
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss={false}
-        draggable
-        pauseOnHover
-        theme="dark"
-        toastClassName="top-[10vh]"
-      />
     </div>
   )
 }

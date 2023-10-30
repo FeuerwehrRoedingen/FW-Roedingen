@@ -37,16 +37,17 @@
         "name": "next"
       }
     ],
-    "typeRoots": [
-      "./node_modules/@types/*"
+    "types": [
+      "react/experimental",
+      "react-dom/experimental"
     ]
   },
   "include": [
     "app",
-    "components",
+    "src/components",
     "next-env.d.ts",
     ".next/types/**/*.ts"
-  ],
+, "src/components/form/submitButton.tsx"  ],
   "exclude": [
     "node_modules",
     ".next",

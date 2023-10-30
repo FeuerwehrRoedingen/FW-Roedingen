@@ -35,7 +35,8 @@ const config: Config = {
       themes: {
         dark : {
           colors: {
-            danger: "#A72920"
+            danger: "#A72920",
+            warning: "#FFFF00",
           }
         }
       },

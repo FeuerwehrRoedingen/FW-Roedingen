@@ -1,9 +1,12 @@
 import React from "react"
+import { Poppins } from 'next/font/google'
+import { ToastContainer } from 'react-toastify'
+
 import { Provider } from "./provider"
 
-import { Poppins } from 'next/font/google'
-
 import './globals.css'
+import './flicker.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 const font = Poppins({
   weight: '400',
@@ -24,10 +27,23 @@ export default function RootLayout({
       </head>
       <body className={`w-screen h-[100svh] overflow-hidden ${font.className}`}>
         <Provider>
-          <main className='w-full h-full dark text-foreground bg-background'>
+          <main className='w-screen h-[100svh] dark text-foreground bg-background'>
             {children}
           </main>
         </Provider>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss={false}
+          draggable
+          pauseOnHover
+          theme="dark"
+          toastClassName="top-[10vh]"
+        />
       </body>
     </html>
   )

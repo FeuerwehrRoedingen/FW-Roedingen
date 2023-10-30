@@ -1,10 +1,12 @@
 import { useUser } from '@auth0/nextjs-auth0/client'
+import { handleError } from 'utils/handleError'
 
 export default function() {
   const { user, error, isLoading } = useUser()
   
 
-  //TODO handle Error
+  if(error)
+    handleError(error)
 
   return {
     user,

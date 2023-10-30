@@ -1,6 +1,3 @@
-
-import "./flicker.css"
-
 type IProps = {
   children: React.ReactNode;
 }
