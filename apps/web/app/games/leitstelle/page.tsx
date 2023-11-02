@@ -1,11 +1,11 @@
 
 import { withPageAuthRequired } from "@auth0/nextjs-auth0";
-import { Input, Radio, RadioGroup } from "@nextui-org/react";
+import { Input, Radio, RadioGroup, Tooltip } from "@nextui-org/react";
 
 import Card from './card'
 
 import { createSession, joinSession } from 'utils/leitstelle/session'
-import ControlledForm, { IState } from "components/form/controlledForm";
+import ControlledForm, { IState } from 'components/form/controlledForm';
 
 async function handleCreate(prevState: any, formdata: FormData): Promise<IState> {
   "use server"
@@ -55,7 +55,7 @@ async function Page() {
   return (
     <div className="w-screen h-screen flex items-center justify-center">
       <div
-        className="w-1/2 h-1/2 bg-opacity-50 bg-ral-3001 border-2 border-ral-1026 rounded-2xl p-4"
+        className="w-1/2 h-1/2 min-w-[900px] min-h-[500px] bg-opacity-50 bg-ral-3001 border-2 border-ral-1026 rounded-2xl p-4"
       >
         <div className="w-full h-[12.5%] border-b-2 border-ral-1026 flex items-center justify-center">
           <h1 className="text-ral-1026">Feuerwehr Rödingen</h1>
@@ -73,8 +73,12 @@ async function Page() {
                 defaultValue="TTZ"
               >
                 <Radio value="TTZ">Titz</Radio>
-                <Radio value="JÜL" isDisabled>Jülich</Radio>
-                <Radio value="NRV" isDisabled>Nörvenich</Radio>
+                <Tooltip content="Bald verfügbar" placement="right">
+                  <Radio value="JÜL" isDisabled>Jülich</Radio>
+                </Tooltip>
+                <Tooltip content="Bald verfügbar" placement="right">
+                  <Radio value="NRV" isDisabled>Nörvenich</Radio>
+                </Tooltip>
               </RadioGroup>
             </ControlledForm>
           </Card>

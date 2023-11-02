@@ -9,7 +9,6 @@
       "apps/internal",
       "apps/management",
       "apps/management-api",
-      "apps/mobile",
       "apps/web"
     ],
     "nohoist": [
@@ -24,6 +23,8 @@
       "**/react/**",
       "**/react-dom",
       "**/react-dom/**",
+      "**/react-native",
+      "**/react-native/**",
       "**/react-native-codegen",
       "**/@types/react",
       "**/@types/react/**",

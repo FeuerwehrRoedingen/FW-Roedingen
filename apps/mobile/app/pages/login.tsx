@@ -1,27 +1,13 @@
-import React from "react"
-import { StyleSheet, View } from "react-native"
-import { StatusBar } from 'expo-status-bar';
+import React from "react";
+import { View, Text } from "react-native";
 
-import { LoginButton } from '../components/authButton';
-import type { SecuredComponentProps } from "../router";
+import { LoginButton } from "../components/loginButton";
 
-type ILoginPageProps = SecuredComponentProps & {
-
+export default function Login() {
+	return (
+		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+			<Text>Login</Text>
+			<LoginButton />
+		</View>
+	);
 }
-export function LoginPage(props: ILoginPageProps) {
-  return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <LoginButton returnTo="/home"/>
-    </View>
-  )
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

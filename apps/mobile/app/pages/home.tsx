@@ -1,19 +1,21 @@
-import { Text, View } from "react-native"
+import React from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
 
-import { SecuredComponentProps } from "../router";
-
-type IHomePageProps = SecuredComponentProps & {
-
+export default function Home() {
+	return (
+		<View style={styles.container}>
+			<Text style={styles.text}>Home</Text>
+			<Button title="Go to About" onPress={() => {}} />
+		</View>
+	);
 }
 
-export function HomePage(props: IHomePageProps){
-
-  const text = props.user ? 'secured' : 'unsecured';
-
-  return (
-    <View>
-      <Text>Home Page</Text>
-      <Text>{text}</Text>
-    </View>
-  )
-}
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		backgroundColor: '#fff',
+	},
+	text: {
+		fontSize: 30,
+	},
+});

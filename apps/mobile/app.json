@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "feuerwehr-roedingen-mobile",
-    "slug": "feuerwehr-roedingen-mobile",
+    "name": "mobile",
+    "slug": "mobile",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,42 +15,37 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "de.feuerwehrroedingen.mobile",
-      "googleServicesFile": "./app/firebase/GoogleService-Info.plist"
+      "supportsTablet": false,
+      "bundleIdentifier": "de.fwr.mobile"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "de.feuerwehrroedingen.mobile",
-      "googleServicesFile": "./app/firebase/google-services.json"
+      "package": "de.fwr.mobile"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "sentry org slug, or use the `SENTRY_ORG` environment variable",
+            "project": "sentry project name, or use the `SENTRY_PROJECT` environment variable"
+          }
+        }
+      ]
     },
     "plugins": [
       [
         "react-native-auth0",
         {
-          "domain": "fw-roedingen.eu.auth0.com",
-          "customScheme": "fwr"
+          "domain": "fw-roedingen.eu.auth0.com"
         }
-      ],
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "useFrameworks": "static"
-          }
-        }
-      ],
-      "@react-native-firebase/app",
-      "@react-native-firebase/perf",
-      "@react-native-firebase/crashlytics"
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "6c2087ed-df80-4642-b05a-342f15f5ca9e"
-      }
-    }
+      ]
+    ]
   }
 }
