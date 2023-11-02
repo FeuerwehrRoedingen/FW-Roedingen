@@ -5,6 +5,7 @@ import { useAuth0 } from 'react-native-auth0';
 
 import routes from './routes';
 import Login from './pages/login';
+import { useNotifications } from './notifications';
 
 
 export default function Main() {
@@ -26,7 +27,10 @@ export default function Main() {
     )
 
   if(!user)
-    return <Login />
+    return <Login /> 
+
+
+  const {} = useNotifications();
 
   return (
     <NativeRouter>
