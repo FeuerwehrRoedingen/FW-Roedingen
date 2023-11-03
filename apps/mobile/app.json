@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "mobile",
+    "name": "Feuerwehr Roedingen",
     "slug": "feuerwehr-roedingen-mobile-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -26,16 +26,13 @@
       "package": "de.fwr.mobile",
       "googleServicesFile": "./google-services.json"
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
     "hooks": {
       "postPublish": [
         {
           "file": "sentry-expo/upload-sourcemaps",
           "config": {
-            "organization": "sentry org slug, or use the `SENTRY_ORG` environment variable",
-            "project": "sentry project name, or use the `SENTRY_PROJECT` environment variable"
+            "organization": "duerenindustries",
+            "project": "mobile"
           }
         }
       ]
