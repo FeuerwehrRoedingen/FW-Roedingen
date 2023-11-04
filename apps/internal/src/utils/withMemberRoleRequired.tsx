@@ -1,9 +1,9 @@
 import React from "react";
-import { getSession } from "@auth0/nextjs-auth0"
+import { WithPageAuthRequiredAppRouterOptions, getSession } from "@auth0/nextjs-auth0"
+import { redirect } from "next/navigation";
 
 import { getUserRoles } from "./auth0Api"
 import handleUnauthorized from "./handleUnauthorized";
-import { redirect } from "next/navigation";
 
 type IPageProps = {
   params: {
@@ -15,13 +15,13 @@ type IPageProps = {
 }
 type IReturnType = (props: IPageProps) => Promise<JSX.Element>;
 
-export default function(Page: React.ComponentType<IPageProps>): IReturnType{
+export default function(Page: React.ComponentType<IPageProps>, opts: WithPageAuthRequiredAppRouterOptions): IReturnType{
 
   return async (props: IPageProps) => {
     
     const session = await getSession();
     if(!session) 
-      redirect("/api/auth/login?returnTo=/home");
+      redirect(`/api/auth/login?returnTo=${opts.returnTo}`);
 
     const roles = await getUserRoles(session.user.sub);
 

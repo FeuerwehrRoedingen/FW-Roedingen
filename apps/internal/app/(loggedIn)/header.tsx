@@ -17,6 +17,7 @@ export default function(props: IProps) {
         <Navitem href="/home" label="Home" />
         <Navitem href="/chat" label="Chat" />
         <Navitem href="/calendar" label="Calendar" />
+        <Navitem href="/users" label="Benutzer" />
         <Navitem href="/borrow" label="Leihgaben" />
       </NavbarContent>
       <NavbarContent justify="end">
