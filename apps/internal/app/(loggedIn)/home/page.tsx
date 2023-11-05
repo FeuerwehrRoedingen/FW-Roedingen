@@ -1,6 +1,3 @@
-
-import { Card, CardBody, CardHeader } from "@nextui-org/react"
-
 import withMemberRoleRequired from "utils/withMemberRoleRequired"
 import { env } from "env"
 
@@ -27,4 +24,6 @@ async function Page(props: IProps) {
   )
 }
 
-export default withMemberRoleRequired(Page);
+export default withMemberRoleRequired(Page, {
+  returnTo: '/home'
+});

@@ -1,31 +1,28 @@
 import React from 'react'
-import { Text, View } from 'react-native';
+import { ActivityIndicator } from 'react-native'
 import { NativeRouter } from 'react-router-native'
-import { useAuth0 } from 'react-native-auth0';
+import { useAuth0 } from 'react-native-auth0'
+import * as Sentry from '@sentry/react-native'
 
-import routes from './routes';
-import Login from './pages/login';
-import { useNotifications } from './notifications';
-import Navbar from './components/navbar';
-import { StyledSafeAreaView, StyledText, StyledView } from './components/styled';
+import routes from './routes'
+import Login from './pages/login'
+import Navbar from './components/navbar'
+import { StyledText, StyledView } from './components/styled'
 
 
 export default function Main() {
 
   const { isLoading, user, error } = useAuth0();
-  const {} = useNotifications();
 
   let component;
 
   if(isLoading){
     component = (
-      <StyledText className='text-center text-2xl text-silver'>
-        Loading...
-      </StyledText>
+      <ActivityIndicator size='large' color='#A72920' />
     )
   }
   else if(error){
-    //TODO handle error with sentry
+    Sentry.captureException(error);
     component = (
       <StyledText className='text-center text-2xl text-ral-3000'>
         Error: {error.message}
@@ -50,10 +47,9 @@ export default function Main() {
     )
   }
 
-
   return (
-    <StyledSafeAreaView className='w-screen h-screen flex flex-col bg-gray-950 text-silver'>
+    <StyledView className='w-screen h-screen flex flex-col items-center justify-center'>
       {component}
-    </StyledSafeAreaView>
+    </StyledView>
   )
 }

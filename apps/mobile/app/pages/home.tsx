@@ -1,19 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
+
+import { StyledText, StyledView } from '../components/styled';
 import { useNotifications } from '../notifications';
+
 
 export default function Home() {
 
 	const {expoPushToken, notification} = useNotifications();
 
 	return (
-		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-around' }}>
-      <Text>Your expo push token: {expoPushToken}</Text>
-      <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Title: {notification && notification.request.content.title} </Text>
-        <Text>Body: {notification && notification.request.content.body}</Text>
-        <Text>Data: {notification && JSON.stringify(notification.request.content.data)}</Text>
-      </View>
-    </View>
+		<StyledView className='w-full h-full flex flex-col items-center justify-evenly'>
+      <StyledText className='text-silver'>Your expo push token: {expoPushToken}</StyledText>
+      <StyledView className='h-fit flex flex-col items-center justify-center'>
+        <StyledText className='text-silver'>Title: {notification && notification.request.content.title} </StyledText>
+        <StyledText className='text-silver'>Body: {notification && notification.request.content.body}</StyledText>
+        <StyledText className='text-silver'>Data: {notification && JSON.stringify(notification.request.content.data)}</StyledText>
+      </StyledView>
+    </StyledView>
 	);
 }

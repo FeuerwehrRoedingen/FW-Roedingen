@@ -18,5 +18,7 @@ export async function fetchApi(path: string, init?: RequestInit){
     }
   };
 
+  console.log(_init);
+
   return fetch(url, _init).then(res => res.json());
 }

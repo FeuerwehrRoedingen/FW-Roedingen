@@ -2,8 +2,8 @@ import React from "react";
 import { WithPageAuthRequiredAppRouterOptions, getSession } from "@auth0/nextjs-auth0"
 import { redirect } from "next/navigation";
 
-import { getUserRoles } from "./auth0Api"
 import handleUnauthorized from "./handleUnauthorized";
+import { fetchApi } from "./api";
 
 type IPageProps = {
   params: {
@@ -23,7 +23,11 @@ export default function(Page: React.ComponentType<IPageProps>, opts: WithPageAut
     if(!session) 
       redirect(`/api/auth/login?returnTo=${opts.returnTo}`);
 
-    const roles = await getUserRoles(session.user.sub);
+    const res = await fetchApi(`/user/${session.user.sub}/roles`)
+
+    console.log('from fwr api:',res);
+    
+    const roles: any[] = [];
 
     for(const role of roles) {
       if(role.name === "Member")
