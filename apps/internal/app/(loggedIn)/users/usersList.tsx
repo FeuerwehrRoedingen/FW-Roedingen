@@ -1,37 +1,44 @@
 "use client"
 import React from "react";
-import { Avatar, Card, CardBody, CardHeader, Divider, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow } from "@nextui-org/react";
+import { Card, CardBody, CardHeader, Checkbox, CheckboxGroup, Divider, Input, Spacer, Tab, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, User } from "@nextui-org/react";
+import type { UserProfile } from "@auth0/nextjs-auth0/client";
 
 import { useUserContext } from "./context";
-import { UserProfile } from "@auth0/nextjs-auth0/client";
+import Actions from "./actions";
 
 export default function () {
 
   const { users } = useUserContext();
-  const [selectedUser, setSelectedUser] = React.useState<UserProfile | null>(null);
 
-  const rows = users.map((user, index) => (
-    <TableRow key={index} onClick={() => setSelectedUser(user)}>
+  let i = 0;
+  const renderTableEntry = React.useCallback((user: UserProfile) => (
+    <TableRow key={i++}>
       <TableCell>
-        <Avatar src={user.picture!} />
+        <User 
+          name={user.name}
+          description={user.email}
+          avatarProps={{radius: 'lg', src: user.picture!}}
+        />
       </TableCell>
-      <TableCell>{user.name}</TableCell>
       <TableCell>{user.email}</TableCell>
       <TableCell>  </TableCell>
+      <TableCell>
+        <Actions user={user} />
+      </TableCell>
     </TableRow>
-  ));
+  ), []);
 
   return (
     <div className="flex flex-row h-full w-full">
       <Table aria-label="Users List">
         <TableHeader>
-          <TableColumn>Bild</TableColumn>
-          <TableColumn>Name</TableColumn>
-          <TableColumn>Email</TableColumn>
+          <TableColumn>Info</TableColumn>
+          <TableColumn>Role</TableColumn>
+          <TableColumn>Status</TableColumn>
           <TableColumn>Actions</TableColumn>
         </TableHeader>
-        <TableBody>
-          {rows}
+        <TableBody items={users}>
+          {(item) => renderTableEntry(item)}
         </TableBody>
       </Table>
       <div className="w-1/4 h-full pl-8">
@@ -41,20 +48,14 @@ export default function () {
           </CardHeader>
           <Divider />
           <CardBody>
-            {/** TODO Filter user List */}
+            <Input label="Filter" variant="underlined"/>
+            <Spacer y={4} />
+            <CheckboxGroup label="only show">
+              <Checkbox value="active" color="danger">active users</Checkbox>
+              <Checkbox value="members" color="danger">members</Checkbox>
+            </CheckboxGroup>
           </CardBody>
         </Card>
-        {selectedUser && (
-          <Card>
-            <CardHeader title="User Details">
-              {selectedUser.name}
-            </CardHeader>
-            <Divider />
-            <CardBody>
-              {/** TODO show user details (and maybe make editable) */}
-            </CardBody>
-          </Card>)
-        }
       </div>
     </div>
   )
