@@ -14,11 +14,9 @@ export async function fetchApi(path: string, init?: RequestInit){
     ...init,
     headers: {
       ...init?.headers,
-      Authorization: `Bearer ${session.accessToken}`
+      authorization: `Bearer ${session.accessToken}`
     }
   };
 
-  console.log(_init);
-
-  return fetch(url, _init).then(res => res.json());
+  return fetch(url, _init);
 }

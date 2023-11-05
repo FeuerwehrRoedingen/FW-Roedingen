@@ -5,17 +5,27 @@ import { Provider } from "./context";
 import UsersList from "./usersList";
 
 import { fetchApi } from "utils/api";
+import handleError from "@/src/utils/handleError";
+
+//TODO add input form to add new users
 
 async function Page(){
 
-  const initialUsers: UserProfile[] = []; 
   const res =  await fetchApi('/user');
-  console.log(res);
+  if(res.status !== 200)
+    handleError({
+      message: res.statusText,
+      name: res.status.toString()
+    });
+
+  const initialUsers: UserProfile[] = await res.json(); 
 
   return (
     <Provider initialUsers={initialUsers}>
+      <div className="w-full h-full p-8">
 
-      <UsersList />
+        <UsersList />
+      </div>
     </Provider>
   )
 }

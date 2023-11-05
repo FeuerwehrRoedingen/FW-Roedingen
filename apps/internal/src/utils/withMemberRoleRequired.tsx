@@ -4,6 +4,13 @@ import { redirect } from "next/navigation";
 
 import handleUnauthorized from "./handleUnauthorized";
 import { fetchApi } from "./api";
+import handleError from "./handleError";
+
+type IRole = {
+  id: string,
+  name: string,
+  description: string
+}
 
 type IPageProps = {
   params: {
@@ -25,9 +32,16 @@ export default function(Page: React.ComponentType<IPageProps>, opts: WithPageAut
 
     const res = await fetchApi(`/user/${session.user.sub}/roles`)
 
-    console.log('from fwr api:',res);
+    if(res.status === 401)
+      handleUnauthorized();
+
+    if(res.status !== 200)
+      handleError({
+        message: res.statusText,
+        name: res.status.toString()
+      })
     
-    const roles: any[] = [];
+    const roles: IRole[] = await res.json();
 
     for(const role of roles) {
       if(role.name === "Member")

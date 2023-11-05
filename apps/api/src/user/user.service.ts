@@ -5,16 +5,16 @@ import { callAuth0API } from 'src/auth0_api';
 @Injectable()
 export class UserService {
 
-  getAllUsers(){
-    return callAuth0API({}, 'GET', '/users');
+  async getAllUsers(){
+    return callAuth0API({}, 'GET', 'users').then(res => res.data);
   }
-  getRoles(){
-    return callAuth0API({}, 'GET', '/roles');
+  async getRoles(){
+    return callAuth0API({}, 'GET', 'roles').then(res => res.data);
   }
-  getUser(id: string){
-    return callAuth0API({}, 'GET', `/users/${id}`);
+  async getUser(id: string){
+    return callAuth0API({}, 'GET', `users/${id}`).then(res => res.data);
   }
-  getRolesById(id: string){
-    return callAuth0API({}, 'GET', `/users/${id}/roles`);
+  async getRolesById(id: string){
+    return callAuth0API({}, 'GET', `users/${id}/roles`).then(res => res.data);
   }
 }

@@ -31,7 +31,7 @@ export async function callAuth0API(data: any, method: string, path: string) {
       headers: {
         'authorization': `Bearer ${auth0Token}`
       },
-      url: `${env.AUTH0_ACCESS_AUDIENCE}/${path}`,
+      url: `${env.AUTH0_ACCESS_AUDIENCE}${path}`,
       data
     });
     return res;
