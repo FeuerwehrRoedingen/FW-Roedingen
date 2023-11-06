@@ -29,7 +29,8 @@ const config: Config = {
         dark : {
           colors: {
             danger: "#A72920",
-            foreground: "#c0c0c0"
+            foreground: "#c0c0c0",
+            warning: "#FFFF00",
           }
         }
       },

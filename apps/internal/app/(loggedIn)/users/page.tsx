@@ -1,13 +1,15 @@
 import withMemberRoleRequired from "@/src/utils/withMemberRoleRequired";
 import type { UserProfile } from "@auth0/nextjs-auth0/client";
 
-import { Provider } from "./context";
 import UsersList from "./usersList";
+import AddUser from "./addUser";
+import Filter from "./filter";
 
 import { fetchApi } from "utils/api";
 import handleError from "@/src/utils/handleError";
+import { Provider } from "components/users/context";
+import Modal from "components/users/modal";
 
-//TODO add input form to add new users
 
 async function Page(){
 
@@ -23,9 +25,18 @@ async function Page(){
   return (
     <Provider initialUsers={initialUsers}>
       <div className="w-full h-full p-8">
+        <div className="w-full">
 
-        <UsersList />
+        </div>
+        <div className="w-full h-3/4 flex flex-row">
+          <UsersList />
+          <div className="w-1/4 h-fit ml-8">
+            <Filter />
+            <AddUser />
+          </div>
+        </div>
       </div>
+      <Modal />
     </Provider>
   )
 }

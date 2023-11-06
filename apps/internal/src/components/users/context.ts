@@ -2,33 +2,36 @@
 import React from 'react'
 import type { UserProfile } from '@auth0/nextjs-auth0/client'
 
+import { fetchApi } from 'utils/api'
 
 type IUSerContext = {
   //state
   users: UserProfile[];
-  selectedUser?: string;
+  selectedUser?: UserProfile;
   filter?: string;
   showModal?: boolean;
 
   //setState
   addUser: (user: UserProfile) => void;
   deleteUser: (user: UserProfile) => void;
-  selectUser: (user: string) => void;
+  setUsers: (users: UserProfile[]) => void;
+  selectUser: (user: UserProfile|undefined) => void;
   setFilter: (filter: string) => void;
   setShowModal: (show: boolean) => void;
 }
 const context = React.createContext<IUSerContext>({
-    users: [], 
-    selectedUser: undefined,
-    filter: undefined,
-    showModal: undefined,
+  users: [], 
+  selectedUser: undefined,
+  filter: undefined,
+  showModal: undefined,
 
-    addUser: () => { },
-    deleteUser: () => { },
-    selectUser: () => { },
-    setFilter: () => { },
-    setShowModal: () => { },
-  });
+  addUser: () => { },
+  deleteUser: () => { },
+  setUsers: () => { },
+  selectUser: () => { },
+  setFilter: () => { },
+  setShowModal: () => { },
+});
 
 type IProviderProps = {
   children: React.ReactNode;
@@ -37,21 +40,18 @@ type IProviderProps = {
 export function Provider(props: IProviderProps) {
   
   //State
-  const [user, _setUser] = React.useState(props.initialUsers);
-  const [selectedUser, selectUser] = React.useState<string>();
+  const [users, setUsers] = React.useState(props.initialUsers);
+  const [selectedUser, selectUser] = React.useState<UserProfile>();
   const [filter, setFilter] = React.useState<string>();
   const [showModal, setShowModal] = React.useState<boolean>();
 
   //OptimisticState
-  const [optimisticUsers, setOptimisticUser] = React.useOptimistic(user,reducer);
-  function reducer(state: UserProfile[], action: {type: 'add'|'delete', payload: UserProfile}) {
+  const [optimisticUsers, setOptimisticUser] = React.useOptimistic(users, reducer);
+  function reducer(state: UserProfile[], action: { type: 'add'|'delete', payload: UserProfile }) {
     switch (action.type) {
-      case 'add':
-        return [...state, action.payload];
-      case 'delete':
-        return state.filter(user => user.sub !== action.payload.sub);
-      default:
-        throw new Error();
+      case 'add': return [...state, action.payload];
+      case 'delete': return state.filter(u => u.sub !== action.payload.sub);
+      default: return state;
     }
   }
 
@@ -71,6 +71,7 @@ export function Provider(props: IProviderProps) {
 
     addUser,
     deleteUser,
+    setUsers,
     selectUser,
     setFilter,
     setShowModal,
