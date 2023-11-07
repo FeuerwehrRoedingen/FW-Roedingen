@@ -1,4 +1,4 @@
-import withMemberRoleRequired from "@/src/utils/withMemberRoleRequired";
+import withMemberRoleRequired from "utils/withMemberRoleRequired";
 import type { UserProfile } from "@auth0/nextjs-auth0/client";
 
 import UsersList from "./usersList";
@@ -6,7 +6,7 @@ import AddUser from "./addUser";
 import Filter from "./filter";
 
 import { fetchApi } from "utils/api";
-import handleError from "@/src/utils/handleError";
+import handleError from "utils/handleError";
 import { Provider } from "components/users/context";
 import Modal from "components/users/modal";
 

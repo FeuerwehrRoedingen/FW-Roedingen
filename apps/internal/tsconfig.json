@@ -19,13 +19,13 @@
       }
     ],
     "paths": {
-      "@/*":          ["./*"],
       "env":          ["./env.mjs"],
       "components/*": ["./src/components/*"],
       "hooks/*":      ["./src/hooks/*"],
       "utils/*":      ["./src/utils/*"],
       "store":        ["./src/store/index.ts"],
       "store/*":      ["./src/store/*"],
+      "types/*":      ["../../types/*"],
       "react":        ["./node_modules/@types/react"],
       "react/*":      ["./node_modules/@types/react/*"]
     },

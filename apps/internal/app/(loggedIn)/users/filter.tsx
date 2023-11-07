@@ -5,7 +5,7 @@ export default function () {
   return (
     <Card className="w-full h-fit mb-8 bg-gray-900">
       <CardHeader title="Filter List">
-        Filter
+        Suche
       </CardHeader>
       <Divider />
       <CardBody>

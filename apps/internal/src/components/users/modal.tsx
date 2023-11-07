@@ -46,12 +46,13 @@ export default function () {
         <form action={handler}>
           <ModalBody>
             <div className='w-full h-fit flex flex-row gap-4'>
-              <Input size="lg" variant="underlined" isRequired label="Vorname" name="nickname" value={selectedUser?.nickname!} />
-              <Input size="lg" variant="underlined" isRequired label="Nachname" name="name" value={selectedUser?.name!} />
+              <Input size="lg" variant="underlined" isRequired label="Vorname"  type="text" name="given_name" value={selectedUser?.nickname!} />
+              <Input size="lg" variant="underlined" isRequired label="Nachname" type="text" name="family_name" value={selectedUser?.name!} />
             </div>
-            <Input size="lg" variant="underlined" isRequired label="E-Mail" name="mail" value={selectedUser?.email!} />
-            <Input size="lg" variant="underlined" isRequired label="Passwort" name="password" />
-            <Input size="lg" variant="underlined" isRequired label="Passwort wiederholen" name="passwordConfirm" />
+            <Input size="lg" variant="underlined" isRequired label="E-Mail"   type="email"    name="email" value={selectedUser?.email!} />
+            <Input size="lg" variant="underlined" isRequired label="Telefon"  type="phone"    name="phone_number"/>
+            <Input size="lg" variant="underlined" isRequired label="Passwort" type="password" name="password" />
+            <Input size="lg" variant="underlined" isRequired label="Passwort wiederholen" type="password" name="password_confirm" />
           </ModalBody>
           <ModalFooter>
             <Button variant="bordered" color="danger" onClick={() => setShowModal(false)}>

@@ -14,7 +14,8 @@ export async function fetchApi(path: string, init?: RequestInit){
     ...init,
     headers: {
       ...init?.headers,
-      authorization: `Bearer ${session.accessToken}`
+      'Authorization': `Bearer ${session.accessToken}`,
+      'Content-Type': 'application/json'
     }
   };
 
