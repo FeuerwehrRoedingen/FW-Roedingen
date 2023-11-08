@@ -1,7 +1,7 @@
 import React from "react"
 import { getSession } from "@auth0/nextjs-auth0"
 
-import withMemberRoleRequired from "utils/withMemberRoleRequired"
+import withMemberRoleRequired from "utils/withRoleRequired"
 import { getMessages } from "utils/chats"
 import { MyMessage, OtherMessage, SystemMessage } from "./message"
 import ChatHeader from "./header"

@@ -1,4 +1,4 @@
-import withMemberRoleRequired from "utils/withMemberRoleRequired";
+import { withMemberRoleRequired } from "utils/withRoleRequired"
 import ArticleCards from "components/borrow/articleCards";
 
 import { getArticles } from "utils/borrow";
@@ -22,4 +22,6 @@ async function Page(){
   )
 }
 
-export default withMemberRoleRequired(Page);
+export default withMemberRoleRequired(Page, { 
+  returnTo: '/borrow'
+});

@@ -1,6 +1,7 @@
-
 import Header from "./header";
 import Provider from "./provider"
+
+import 'react-toastify/dist/ReactToastify.css';
 
 type IProps = {
   children: React.ReactNode;

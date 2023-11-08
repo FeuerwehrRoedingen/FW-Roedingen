@@ -1,6 +1,6 @@
 "use client"
 import { Button, Card, CardBody, CardHeader, Divider, Modal } from '@nextui-org/react'
-import { useUserContext } from '../../../src/components/users/context'
+import { useUserContext } from '../../../../src/components/users/context'
 
 export default function () {
 

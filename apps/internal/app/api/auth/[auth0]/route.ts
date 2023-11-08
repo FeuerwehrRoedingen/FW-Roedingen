@@ -6,6 +6,7 @@ const handler = handleAuth({
       audience: "https://api.feuerwehr-roedingen.de/v1",
       scope: "openid profile email",
     },
+    returnTo: "/home",
   }),
   logout: handleLogout({}),
 });

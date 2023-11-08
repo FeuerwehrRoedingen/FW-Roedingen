@@ -1,4 +1,4 @@
-import withMemberRoleRequired from "utils/withMemberRoleRequired"
+import { withMemberRoleRequired } from "utils/withRoleRequired"
 import { env } from "env"
 
 import UserCard from "./userCard"

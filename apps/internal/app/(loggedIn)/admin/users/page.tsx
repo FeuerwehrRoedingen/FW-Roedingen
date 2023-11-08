@@ -1,4 +1,4 @@
-import withMemberRoleRequired from "utils/withMemberRoleRequired";
+import { withAdminRoleRequired } from "utils/withRoleRequired";
 import type { UserProfile } from "@auth0/nextjs-auth0/client";
 
 import UsersList from "./usersList";
@@ -41,6 +41,6 @@ async function Page(){
   )
 }
 
-export default withMemberRoleRequired(Page, {
-  returnTo: '/users'
+export default withAdminRoleRequired(Page, {
+  returnTo: 'admin/users'
 });

@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import { Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip, User } from "@nextui-org/react";
+import { Chip, Table, TableBody, TableCell, TableColumn, TableHeader, TableRow, Tooltip, User } from "@nextui-org/react";
 import { AiOutlineEdit, AiOutlineUsergroupDelete } from 'react-icons/ai'
 import type { UserProfile } from "@auth0/nextjs-auth0/client";
 
@@ -18,8 +18,14 @@ export default function () {
       setShowModal(true);
     }
     function handleDelete() {
-      deleteUser(user);
+      //TODO add confirmation modal
+
+      //then deleteUser(user);
     }
+
+    const status = <Chip color="success">Aktiv</Chip>;
+    //const status = <Chip color="warning">Inaktiv</Chip>;
+    //const status = <Chip color="danger">Blockiert</Chip>;
 
     return (
       <TableRow key={i++}>
@@ -30,8 +36,15 @@ export default function () {
             avatarProps={{ radius: 'lg', src: user.picture! }}
           />
         </TableCell>
-        <TableCell>{user.email}</TableCell>
-        <TableCell>  </TableCell>
+        <TableCell>
+          {user.email}
+        </TableCell>
+        <TableCell>
+          user
+        </TableCell>
+        <TableCell>
+          {status}
+        </TableCell>
         <TableCell>
           <div className='w-full h-full flex flex-row items-center justify-evenly'>
             <Tooltip content="Edit user">
@@ -59,7 +72,8 @@ export default function () {
       >
         <TableHeader className="bg-gray-950">
           <TableColumn>Info</TableColumn>
-          <TableColumn>Role</TableColumn>
+          <TableColumn>Email</TableColumn>
+          <TableColumn>Roles</TableColumn>
           <TableColumn>Status</TableColumn>
           <TableColumn>Actions</TableColumn>
         </TableHeader>

@@ -2,11 +2,12 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/reac
 
 import Navitem from "./navitem"
 import UserIcon from "./userIcon"
+import AdminMenu from "./adminMenu"
 
 type IProps = {
 
 }
-export default function(props: IProps) {
+export default function (props: IProps) {
 
   return (
     <Navbar isBlurred className="bg-gray-900 text-silver" maxWidth="2xl">
@@ -17,8 +18,8 @@ export default function(props: IProps) {
         <Navitem href="/home" label="Home" />
         <Navitem href="/chat" label="Chat" />
         <Navitem href="/calendar" label="Calendar" />
-        <Navitem href="/users" label="Benutzer" />
         <Navitem href="/borrow" label="Leihgaben" />
+        <AdminMenu />
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem>

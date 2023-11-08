@@ -22,8 +22,7 @@ type IPageProps = {
 }
 type IReturnType = (props: IPageProps) => Promise<JSX.Element>;
 
-export default function(Page: React.ComponentType<IPageProps>, opts: WithPageAuthRequiredAppRouterOptions): IReturnType{
-
+function withRoleRequired(requiredRole: string, Page: React.FunctionComponent<IPageProps>, opts: WithPageAuthRequiredAppRouterOptions): IReturnType {
   return async (props: IPageProps) => {
     
     const session = await getSession();
@@ -33,7 +32,7 @@ export default function(Page: React.ComponentType<IPageProps>, opts: WithPageAut
     const res = await fetchApi(`/user/${session.user.sub}/roles`)
 
     if(res.status === 401)
-      handleUnauthorized();
+      handleUnauthorized(session);
 
     if(res.status !== 200)
       handleError({
@@ -44,10 +43,18 @@ export default function(Page: React.ComponentType<IPageProps>, opts: WithPageAut
     const roles: IRole[] = await res.json();
 
     for(const role of roles) {
-      if(role.name === "Member")
+      if(role.name === requiredRole)
         return <Page {...props}/> 
     }
     
-    handleUnauthorized();
+    handleUnauthorized(session);
   };
+}
+
+export function withMemberRoleRequired(Page: React.FunctionComponent<IPageProps>, opts: WithPageAuthRequiredAppRouterOptions): IReturnType{
+  return withRoleRequired("Member", Page, opts);
+}
+
+export function withAdminRoleRequired(Page: React.FunctionComponent<IPageProps>, opts: WithPageAuthRequiredAppRouterOptions): IReturnType{
+  return withRoleRequired("Admin", Page, opts);
 }

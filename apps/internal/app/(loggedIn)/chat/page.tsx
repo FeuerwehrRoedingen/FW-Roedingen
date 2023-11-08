@@ -1,4 +1,4 @@
-import withMemberRoleRequired from "utils/withMemberRoleRequired";
+import { withMemberRoleRequired } from "utils/withRoleRequired"
 
 function Page(){
 
@@ -9,4 +9,6 @@ function Page(){
   )
 }
 
-export default withMemberRoleRequired(Page);
+export default withMemberRoleRequired(Page, {
+  returnTo: '/chat'
+});

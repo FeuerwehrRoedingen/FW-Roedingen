@@ -1,4 +1,4 @@
-import withMemberRoleRequired from "utils/withMemberRoleRequired"
+import { withMemberRoleRequired } from "utils/withRoleRequired"
 import dynamic from "next/dynamic";
 
 const Calendar = dynamic(() => import('./calendar'), { ssr: false });
@@ -21,4 +21,6 @@ function Page(props: IProps) {
   )
 }
 
-export default withMemberRoleRequired(Page);
+export default withMemberRoleRequired(Page, {
+  returnTo: '/calendar'
+});
