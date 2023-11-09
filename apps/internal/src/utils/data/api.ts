@@ -1,5 +1,5 @@
 import { getSession } from "@auth0/nextjs-auth0";
-import handleUnauthorized from "./handleUnauthorized";
+import handleUnauthorized from "../handler/handleUnauthorized";
 
 const isDev = process.env.NODE_ENV !== 'production';
 

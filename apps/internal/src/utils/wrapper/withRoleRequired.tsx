@@ -2,9 +2,9 @@ import React from "react";
 import { WithPageAuthRequiredAppRouterOptions, getSession } from "@auth0/nextjs-auth0"
 import { redirect } from "next/navigation";
 
-import handleUnauthorized from "./handleUnauthorized";
-import { fetchApi } from "./api";
-import handleError from "./handleError";
+import handleUnauthorized from "../handler/handleUnauthorized";
+import { fetchApi } from "../data/api";
+import handleError from "../handler/handleError";
 
 type IRole = {
   id: string,
