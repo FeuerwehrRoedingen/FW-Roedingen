@@ -1,6 +1,7 @@
 "use client"
-
 import { useSearchParams } from "next/navigation";
+
+import Stack from "./stack";
 
 export default function() {
 
@@ -13,11 +14,11 @@ export default function() {
 
   return (
     <div className="h-screen w-screen flex items-center justify-center">
-      <div className="w-1/2 h-1/2 flex flex-col items-center justify-center border border-silver rounded-2xl text-2xl p-10 pb-20">
+      <div className="w-1/2 h-1/2 flex flex-col gap-2 items-center justify-center border border-silver rounded-2xl text-2xl p-10 pb-20">
         <h1 className="text-8xl">{name}</h1>
         <h2 className="text-4xl">{message}</h2>
         {cause && <p>{cause}</p>}
-        {stack && <p>{stack}</p>}
+        <Stack content={stack} />
       </div>
     </div>
   )
