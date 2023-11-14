@@ -1,8 +1,10 @@
 import { initializeApp } from 'firebase/app'
 import { getMessaging, getToken } from 'firebase/messaging'
 
+import { env } from 'env'
+
 const firebaseConfig = {
-  apiKey: "AIzaSyB7mE_aWc4XAoRJtNFPr1_QODe_qbB2JD0",
+  apiKey: env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: "fw-roedingen.firebaseapp.com",
   projectId: "fw-roedingen",
   storageBucket: "fw-roedingen.appspot.com",
@@ -16,6 +18,6 @@ const messaging = getMessaging(firebaseApp);
 
 export function getFCMToken(){
   return getToken(messaging,{
-
+    vapidKey: env.NEXT_PUBLIC_VAPID_KEY
   })
 }

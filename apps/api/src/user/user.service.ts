@@ -49,4 +49,7 @@ export class UserService {
       return new InternalServerErrorException(error);
     }
   }
+  async addToken(token: string, id: string){
+    //TODO implement
+  }
 }
