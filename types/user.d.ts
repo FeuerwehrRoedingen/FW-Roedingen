@@ -27,3 +27,9 @@ export type AppMetadata = {
 }
 
 export type UserCreate = Omit<User, 'user_id' | 'email_verified' | 'phone_verified' | 'blocked' | 'verify_email' | 'nickname' | 'username' | 'name'>
+
+export type Role = (
+  'Admin'  |
+  'Member' |
+  'User'
+);
