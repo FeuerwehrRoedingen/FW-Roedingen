@@ -13,6 +13,10 @@ export const env = createEnv({
     AUTH0_CLIENT_ID:       z.string(),
     AUTH0_CLIENT_SECRET:   z.string(),
 
+    FIREBASE_PROJECT_ID:   z.string(),
+    FIREBASE_CLIENT_EMAIL: z.string().email(),
+    FIREBASE_PRIVATE_KEY:  z.string(),
+
     DATABASE_URL:          z.string().url(),
     PORT:                  z.string().default("3000"),
   },

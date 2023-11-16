@@ -2,8 +2,9 @@ import { Body, Controller, Get, Param, Post, Req } from '@nestjs/common';
 
 import { UserService } from './user.service';
 import type { UserCreate } from 'types/user';
-import type { Request } from 'express';
+import { Admin } from '../auth/auth.decorator';
 
+@Admin()
 @Controller('user')
 export class UserController {
 
@@ -31,9 +32,5 @@ export class UserController {
   @Post()
   createUser(@Body() userCreate: UserCreate){
     return this.userService.createUser(userCreate);
-  }
-  @Post('token')
-  postToken(@Body() token: string, @Req() req: Request){
-    return this.userService.addToken(token, req.user.user_id);
   }
 }

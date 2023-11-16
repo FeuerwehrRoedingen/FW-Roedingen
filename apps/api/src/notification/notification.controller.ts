@@ -1,5 +1,9 @@
-import { Body, Controller, Get, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, InternalServerErrorException, Post, Req } from '@nestjs/common';
 import { NotificationService } from './notification.service';
+
+import { Admin } from '../auth/auth.decorator';
+
+import type { Request } from 'express';
 
 @Controller('notification')
 export class NotificationController {
@@ -7,17 +11,38 @@ export class NotificationController {
     private readonly notificationService: NotificationService
   ) {}
 
+  @Admin()
   @Post()
-  postNotification(){
-    return this.notificationService.sendNotification();
+  postNotification(@Body() body: any){
+
+    console.log(body);
+
+    try {
+
+      //TODO validate body
+
+      return this.notificationService.sendNotification();
+    }
+    catch(error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   @Post('register')
-  postRegister(@Req() req: Request, @Body() body: any){
+  postRegister(@Req() req: Request){
 
-    console.log(req);
+    const body = req.body
+
+    console.log(req.user);
     console.log(body);
 
-    return this.notificationService.register();
+    //TODO validate body
+
+    try {
+
+    }
+    catch(error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 }

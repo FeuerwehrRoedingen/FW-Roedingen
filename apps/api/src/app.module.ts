@@ -7,6 +7,7 @@ import { AuthModule } from './auth/auth.module'
 import { NotificationModule } from './notification/notification.module';
 import { UserModule } from './user/user.module';
 import { JwtAuthGuard } from './auth/auth.guard'
+import { FirebaseModule } from './firebase/firebase.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { JwtAuthGuard } from './auth/auth.guard'
     DatabaseModule,
     NotificationModule,
     UserModule,
+    FirebaseModule,
   ],
   controllers: [AppController],
   providers: [
