@@ -1,4 +1,4 @@
-import { withMemberRoleRequired } from "utils/withRoleRequired"
+import { withMemberRoleRequired } from "utils/wrapper/withRoleRequired"
 import dynamic from "next/dynamic";
 
 const Calendar = dynamic(() => import('./calendar'), { ssr: false });

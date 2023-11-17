@@ -1,5 +1,5 @@
 "use server"
-import { fetchApi } from "utils/api";
+import { fetchApi } from "utils/data/api";
 import type { UserCreate } from "types/user";
 
 export type FormState = {

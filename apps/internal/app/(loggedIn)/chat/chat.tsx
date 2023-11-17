@@ -1,6 +1,6 @@
 import { Avatar } from "@nextui-org/react"
 
-import { getChatPreview } from "utils/chats";
+import { getChatPreview } from "utils/data/chats";
 
 type IProps = {
   chatId: string;

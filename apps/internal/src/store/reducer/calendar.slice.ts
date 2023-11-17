@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
-import { getCalendars } from "utils/calendar"
-import type { Calendar, Event } from 'utils/calendar'
+import { getCalendars } from "utils/data/calendar"
+import type { Calendar, Event } from 'utils/data/calendar'
 
 type CalendarState = {
   calendars: Calendar[]

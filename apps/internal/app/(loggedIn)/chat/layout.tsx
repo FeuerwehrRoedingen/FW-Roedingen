@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ChatList from './chatList';
-import { getChats } from 'utils/chats'
+import { getChats } from 'utils/data/chats'
 
 type IProps = {
   children: React.ReactNode;

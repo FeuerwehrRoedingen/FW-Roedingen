@@ -5,7 +5,7 @@ import { IoIosSearch } from "react-icons/io"
 import { CgSortAz } from "react-icons/cg"
 import { useRouter, usePathname } from 'next/navigation';
 
-import { IChat } from "utils/chats"
+import { IChat } from "utils/data/chats"
 import Chat from './chat'
 
 type IProps = {

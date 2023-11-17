@@ -8,6 +8,7 @@ import { NotificationModule } from './notification/notification.module';
 import { UserModule } from './user/user.module';
 import { JwtAuthGuard } from './auth/auth.guard'
 import { FirebaseModule } from './firebase/firebase.module';
+import { RoleGuard } from './auth/role.guard'
 
 @Module({
   imports: [
@@ -22,7 +23,11 @@ import { FirebaseModule } from './firebase/firebase.module';
     AppService,
     {
       provide: 'APP_GUARD',
-      useClass: JwtAuthGuard,
+      useClass: JwtAuthGuard, 
+    },
+    {
+      provide: 'APP_GUARD',
+      useClass: RoleGuard,
     },
   ],
 })

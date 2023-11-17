@@ -1,8 +1,5 @@
 import { createEnv } from "@t3-oss/env-core"
 import { z } from "zod"
-import { config } from "dotenv"
-
-const runtimeEnv = config().parsed;
 
 export const env = createEnv({
   server: {
@@ -16,6 +13,8 @@ export const env = createEnv({
     FIREBASE_PROJECT_ID:   z.string(),
     FIREBASE_CLIENT_EMAIL: z.string().email(),
     FIREBASE_PRIVATE_KEY:  z.string(),
+
+    HIGHLIGHT_PROJECT_ID:  z.string(),
 
     DATABASE_URL:          z.string().url(),
     PORT:                  z.string().default("3000"),

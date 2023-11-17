@@ -1,7 +1,7 @@
-import { withMemberRoleRequired } from "utils/withRoleRequired"
+import { withMemberRoleRequired } from "utils/wrapper/withRoleRequired"
 import ArticleCards from "components/borrow/articleCards";
 
-import { getArticles } from "utils/borrow";
+import { getArticles } from "utils/data/borrow";
 import Confirm from "./confirm";
 
 async function Page(){

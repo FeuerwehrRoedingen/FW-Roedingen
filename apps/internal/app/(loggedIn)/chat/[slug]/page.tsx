@@ -1,8 +1,8 @@
 import React from "react"
 import { getSession } from "@auth0/nextjs-auth0"
 
-import withMemberRoleRequired from "utils/withRoleRequired"
-import { getMessages } from "utils/chats"
+import { withMemberRoleRequired } from "utils/wrapper/withRoleRequired"
+import { getMessages } from "utils/data/chats"
 import { MyMessage, OtherMessage, SystemMessage } from "./message"
 import ChatHeader from "./header"
 import ChatFooter from "./footer"
@@ -43,4 +43,6 @@ async function Page(props: IProps){
     </div>
   )
 }
-export default withMemberRoleRequired(Page);
+export default withMemberRoleRequired(Page, {
+  returnTo: '/chat'
+});

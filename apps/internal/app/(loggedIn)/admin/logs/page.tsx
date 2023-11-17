@@ -1,4 +1,4 @@
-import { withAdminRoleRequired } from "utils/withRoleRequired"
+import { withAdminRoleRequired } from "utils/wrapper/withRoleRequired"
 
 async function Page(){
 

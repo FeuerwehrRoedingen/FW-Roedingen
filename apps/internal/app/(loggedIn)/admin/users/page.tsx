@@ -1,12 +1,12 @@
-import { withAdminRoleRequired } from "utils/withRoleRequired";
+import { withAdminRoleRequired } from "utils/wrapper/withRoleRequired";
 import type { UserProfile } from "@auth0/nextjs-auth0/client";
 
 import UsersList from "./usersList";
 import AddUser from "./addUser";
 import Filter from "./filter";
 
-import { fetchApi } from "utils/api";
-import handleError from "utils/handleError";
+import { fetchApi } from "utils/data/api";
+import handleError from "utils/handler/handleError";
 import { Provider } from "components/users/context";
 import Modal from "components/users/modal";
 
