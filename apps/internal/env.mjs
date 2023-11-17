@@ -12,9 +12,10 @@ export const env = createEnv({
   },
   clientPrefix: 'NEXT_PUBLIC_',
   client: {
-    NEXT_PUBLIC_MONITOR_URL: z.string().url(),
+    NEXT_PUBLIC_MONITOR_URL:      z.string().url(),
     NEXT_PUBLIC_FIREBASE_API_KEY: z.string(),
-    NEXT_PUBLIC_VAPID_KEY:   z.string(),
+    NEXT_PUBLIC_VAPID_KEY:        z.string(),
+    NEXT_PUBLIC_HIGHLIGHT_ID:     z.string(),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,
