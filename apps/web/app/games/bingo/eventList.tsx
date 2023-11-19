@@ -41,9 +41,9 @@ export default function() {
   });
 
   return (
-    <div className="w-full h-full flex-flex-col items-center px-4 py-20">
-      <div className="w-full h-full border-l border-l-silver flex flex-col items-center">
-        <h1 className="text-2xl font-bold">Events</h1>
+    <div className="w-full h-full flex-flex-col items-center">
+      <div className="w-full h-full flex flex-col items-center bg-gray-900 rounded-3xl pt-4">
+        <h1 className="text-4xl font-bold">Events</h1>
         <ul className="w-full h-full overflow-scroll p-4" ref={listRef}>
           {eventElements}
         </ul>

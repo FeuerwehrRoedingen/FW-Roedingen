@@ -21,7 +21,7 @@ const events = [
   "Der Maschinist hat die Pumpe heiß laufen lassen",
   "Die Schaumzumischanlage ist mal wieder kaputt",
   "Man kommt als erstes HLF am Einsatzort an, will als erster Angriffstrupp rein, aber der neue ist mal wieder langsam und man wird Sicherheitstrupp",
-  "Das MTF ist wieder als zweites Fahrzeug zum Einsatz gefahren ->GW-L2 traurig",
+  "Das MTF ist wieder als zweites Fahrzeug zum Einsatz gefahren -> GW-L2 traurig",
   "C-Dienst kommt in Privatkleidung zum Einsatz",
   "Die Jugendfeuerwehr hat vergessen das Auto zu putzen",
   "Anwohner beschweren sich, was der ganze Lärm soll",

@@ -19,8 +19,8 @@ async function Page(){
   });
 
   return (
-    <div className="page flex flex-row items-center justify-center">
-      <div className='w-2/3 h-full pt-20'>
+    <div className="page p-8 flex flex-row items-center justify-center">
+      <div className='w-2/3 h-full flex items-center flex-col'>
         <Settings />
         <div className='w-full h-full flex items-center justify-center'>
           <BingoField initialEntries={initialEntries}/>

@@ -75,7 +75,7 @@ export default function (props: IProps) {
     )
   });
   return (
-    <div className="bingo">
+    <div className='bg-gray-900 rounded-3xl'>
       {entryElements}
     </div>
   )
