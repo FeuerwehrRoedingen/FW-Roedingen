@@ -12,8 +12,8 @@ type IProps = {
 export default function Header(props: IProps){
 
   return(
-    <div className="flex flex-col w-screen h-[15svh] sticky top-0 left-0 bg-gray-900 text-2xl">
-      <div className='flex flex-row h-[10svh] min-h-[40px] w-screen'>
+    <div className="flex flex-col w-screen h-[15svh] sticky top-0 left-0 bg-gray-950 text-2xl">
+      <div className='flex flex-row h-[10svh] min-h-[50px] w-screen'>
         <nav className="flex flex-row items-center justify-evenly h-full w-5/6">
           <NavItem to="/"          title='Home'   exact><IoHomeOutline/></NavItem>
           <NavItem to="/about"     title='Das sind wir'><IoIosPeople/></NavItem>

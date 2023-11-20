@@ -27,6 +27,7 @@
       "textures/*":   [ "./src/textures/*" ],
       "store":        [ "./src/store/index.ts" ],
       "store/*":      [ "./src/store/*" ],
+      "src/*":        [ "./src/*" ],
       "hooks/*":      [ "./src/hooks/*" ],
       "utils/*":      [ "./src/utils/*" ],
       "react":        [ "./node_modules/@types/react" ],
@@ -45,9 +46,12 @@
   "include": [
     "app",
     "src/components",
+    "src/hooks",
+    "src/store",
+    "src/utils",
     "next-env.d.ts",
-    ".next/types/**/*.ts"
-, "src/components/form/submitButton.tsx"  ],
+    ".next/types/**/*.ts",
+  ],
   "exclude": [
     "node_modules",
     ".next",

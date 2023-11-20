@@ -1,9 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit'
 
-import { optionsReducer } from './options.slice'
-import { fpsReducer } from './fps.slice'
+import settingsReducer from './settings.slice';
 
 export const rootReducer = combineReducers({
-  options: optionsReducer,
-  fps: fpsReducer,
+  settings: settingsReducer,
 });

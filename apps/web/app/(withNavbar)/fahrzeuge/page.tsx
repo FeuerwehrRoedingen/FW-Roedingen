@@ -1,54 +1,64 @@
-"use client" 
+"use client"
 import React, { Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { PointerLockControls, Sky } from '@react-three/drei'
+import { PointerLockControls, Sky, Stats as _Stats } from '@react-three/drei'
 import { Physics } from '@react-three/cannon'
 import dynamic from 'next/dynamic'
-import { useAppDispatch } from 'store'
-import { update } from 'store/reducer/fps.slice'
+
+import { MenuProvider, useMenu } from './menuContext'
+import Menu from './menu'
 
 const Ground = dynamic(() => import('components/assets/ground'), { ssr: false });
-const Player = dynamic(() => import('components/assets/player'), { ssr: false });
-const Menu = dynamic(() => import('./menu'), { ssr: true });
-const FPS = dynamic(() => import('components/three/fpsCounter'), { ssr: false });
+const Player = dynamic(() => import('./player'), { ssr: false });
 
 type Props = {}
-export default function fahrzeuge({}: Props) {
-
+export default function fahrzeuge({ }: Props) {
   return (
     <div className='w-screen h-[85svh]'>
       <Suspense fallback={null}>
-        <Canvas>
-          <Sky sunPosition={[100, 100, 20]} />
-          <ambientLight intensity={0.5} />
-          <FPV />
-          <Physics>
-            <Player />
-            <Ground />
-          </Physics>
-          <Renderer />
-        </Canvas>
-        <FPS />
-        <Menu />
+        <MenuProvider>
+          <Stats/>
+          <Canvas>
+            <Sky sunPosition={[100, 100, 20]} />
+            <ambientLight intensity={0.6} />
+            <FPV />
+            <Physics>
+              <Player />
+              <Ground />
+            </Physics>
+            <Renderer />
+          </Canvas>
+          <Menu/>
+        </MenuProvider>
       </Suspense>
     </div>
   )
 }
 
 const FPV = () => {
-	const { camera, gl } = useThree()
+  const { camera, gl } = useThree()
+  const { setShowMenu, showMenu } = useMenu();
 
-	return (<PointerLockControls args={[camera, gl.domElement]} />)
+  return (
+    <PointerLockControls 
+      camera={camera} 
+      domElement={gl.domElement} 
+      enabled={!showMenu}
+      onLock={() => setShowMenu(false)}
+      onUnlock={() => setShowMenu(true)}
+    />
+  )
 }
 
 const Renderer = () => {
-
-  const dispatch = useAppDispatch();
   useFrame((state, delta, frame) => {
-    dispatch(update(delta));
 
     //TODO add render altering logic
   });
-
   return null;
+}
+
+const Stats = () => {
+  const { showStats } = useMenu();
+  return showStats ? <_Stats /> : null;
 }

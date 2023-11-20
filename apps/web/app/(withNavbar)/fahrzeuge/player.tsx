@@ -1,9 +1,9 @@
 import { useFrame, useThree } from "@react-three/fiber"
-import { Triplet, useSphere } from "@react-three/cannon"
+import { useSphere } from "@react-three/cannon"
 import React from "react"
 import { Mesh, Vector3 } from "three"
 
-import { useKeyboard } from "components/three/hooks/useKeyboard"
+import { useKeyboard } from "./useKeyboard"
 
 export default () => {
 
