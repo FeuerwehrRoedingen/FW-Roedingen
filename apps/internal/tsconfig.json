@@ -27,7 +27,9 @@
       "store/*":      ["./src/store/*"],
       "types/*":      ["../../types/*"],
       "react":        ["./node_modules/@types/react"],
-      "react/*":      ["./node_modules/@types/react/*"]
+      "react/*":      ["./node_modules/@types/react/*"],
+      "next":         ["./node_modules/next"],
+      "next/*":       ["./node_modules/next/*"],
     },
     "types": [
       "react/experimental",

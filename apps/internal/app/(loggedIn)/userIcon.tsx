@@ -2,6 +2,7 @@
 import { Avatar, Dropdown, DropdownItem, DropdownMenu, DropdownSection, DropdownTrigger, Spinner } from "@nextui-org/react"
 
 import useUser from "hooks/useUser"
+import { proxy } from "utils/handler/handleProxy"
 
 type IProps = {
 
@@ -19,7 +20,7 @@ export default function(props: IProps) {
     <Dropdown>
       <DropdownTrigger>
         <Avatar 
-          src={user?.picture!} 
+          src={proxy(user?.picture!)} 
           className="cursor-pointer w-12 h-12"
         />
       </DropdownTrigger>

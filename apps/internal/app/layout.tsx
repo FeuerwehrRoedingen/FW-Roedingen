@@ -18,20 +18,22 @@ type IProps = {
 }
 export default function(props: IProps) {
   return (
-    <html lang="en">
+    <>
       <HighlightInit 
         projectId={env.NEXT_PUBLIC_HIGHLIGHT_ID}
         serviceName='fwr-internal'
         tracingOrigins
         networkRecording={{
-					enabled: true,
-					recordHeadersAndBody: true,
-					urlBlocklist: [],
-				}}
+          enabled: true,
+          recordHeadersAndBody: true,
+          urlBlocklist: [],
+        }}
       />
-      <body className={`dark ${inter.className} bg-gray-950 bg-none`}>
-        {props.children}
-      </body>
-    </html>
+      <html lang="en">
+        <body className={`dark ${inter.className} bg-gray-950 bg-none`}>
+          {props.children}
+        </body>
+      </html>
+    </>
   )
 }
