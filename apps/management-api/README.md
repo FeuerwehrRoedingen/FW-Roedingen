@@ -6,7 +6,15 @@ Development is done. Production is ready. Will go live once the Internel Connect
 
 ## How to
 
-No external dependencies required
+Requires an SQLite Database to run Prisma.
+
+```bash
+npx prisma generate
+```
+
+Needs to be behind an NGINX Proxy to route all Websocket and HTTP Connections properly. (only production)
+
+run with
 
 ```bash
 npm install

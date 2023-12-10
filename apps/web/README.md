@@ -188,8 +188,10 @@ A page.tsx file should have a renderable default export, renderable means a HTML
 as the first line of the tsx file.
 
 #### Why could a component only be rendered by the client?
-- Short answer: I don`t know either, sometimes it throws an error when you try and access the page, adding "use client" fixes this, so... 
-- Long answer: Functional Components can be destructured into atomic elements with anbd without hooks, while Class Components cannot. Some of these atomic Elements and all Class Components cannot be prerendered by NextJS.
+- Some Hooks like useState and functions like createContext can only be used in client components.
+  - They need the window object
+  - They manipulate the DOM
+  - They wouldnt do what you expect them to when used on the server
 
 # Links
 
@@ -198,3 +200,4 @@ as the first line of the tsx file.
 ## [React 18 Docs](https://react.dev/learn)
 ## [NodeJS 18 Docs](https://nodejs.org/docs/latest-v18.x/api/synopsis.html)
 ## [NPM Docs](https://docs.npmjs.com/about-npm)
+
