@@ -1,16 +1,16 @@
 
 export function set(key: string, value: any) {
   try {
-    window.localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(value));
   }
   catch (error) {
     console.error(error);
   }
 }
 
-export function get(key: string) {
+export function get(key: string) :any|null {
   try {
-    const item = window.localStorage.getItem(key);
+    const item = localStorage.getItem(key);
     return item ? JSON.parse(item) : null;
   } 
   catch (error) {

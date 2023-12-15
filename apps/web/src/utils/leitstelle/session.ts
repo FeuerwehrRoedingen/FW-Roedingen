@@ -10,12 +10,12 @@ type Session = {
 } 
 
 export async function createSession(session: Omit<Session, "id">) {
-  return APIfetch('/session', { method: 'POST', body: JSON.stringify(session) })
+  return APIfetch('leistelle/session', { method: 'POST', body: JSON.stringify(session) })
     .then(res => res.json())
 }
 
 export async function joinSession(sid: string, password: string): Promise<Session|null>{
-  const res = await APIfetch(`/session/${sid}`, { method: 'POST', body: JSON.stringify({ password }) });
+  const res = await APIfetch(`leitstelle/session/${sid}`, { method: 'POST', body: JSON.stringify({ password }) });
   if (res.status === 404) 
     handleNotFound();
   return res.json();

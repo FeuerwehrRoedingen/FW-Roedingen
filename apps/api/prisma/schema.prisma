@@ -11,10 +11,22 @@ datasource db {
 model User {
   id        Int      @id //from auth0
   fcmTokens Token[]
+  sessionId Int
+  session   Session  @relation(fields: [sessionId], references: [id])
 }
 
 model Token {
   token  String @id
-  userId Int
+  userId Int    @unique
   user   User   @relation(fields: [userId], references: [id])
+}
+
+model Session {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  expiresAt DateTime
+  handle    String   @unique
+  users     User[]
+  host      String
 }

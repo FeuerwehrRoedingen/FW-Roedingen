@@ -1,5 +1,8 @@
+import { config } from "dotenv"
 import { createEnv } from "@t3-oss/env-core"
 import { z } from "zod"
+
+const runtimeEnv = config().parsed;
 
 export const env = createEnv({
   server: {
@@ -23,6 +26,6 @@ export const env = createEnv({
   client: {
 
   },
-  runtimeEnv: process.env,
+  runtimeEnv,
   emptyStringAsUndefined: true,
 });
