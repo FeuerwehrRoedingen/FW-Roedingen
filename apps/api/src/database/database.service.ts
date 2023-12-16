@@ -32,9 +32,11 @@ export class DatabaseService extends PrismaClient{
   //------------------------------------------------
   // Setter
   //------------------------------------------------
-  async createUser(data: User){
+  async createUser(uid: number){
     return this.user.create({
-      data
+      data: {
+        id: uid
+      }
     });
   }
   async createToken(data: Token){

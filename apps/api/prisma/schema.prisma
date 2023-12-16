@@ -11,8 +11,8 @@ datasource db {
 model User {
   id        Int      @id //from auth0
   fcmTokens Token[]
-  sessionId Int
-  session   Session  @relation(fields: [sessionId], references: [id])
+  session   Session? @relation(fields: [sessionID], references: [id])
+  sessionID Int?
 }
 
 model Token {
@@ -27,6 +27,6 @@ model Session {
   updatedAt DateTime @updatedAt
   expiresAt DateTime
   handle    String   @unique
-  users     User[]
+  users     User[]   
   host      String
 }

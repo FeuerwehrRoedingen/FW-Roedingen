@@ -14,7 +14,7 @@ export class NotificationService {
   async register(token: string, userId: number) {
     const user = await this.databaseService.getUser(userId);
     if(!user) 
-      await this.databaseService.createUser({id: userId});
+      await this.databaseService.createUser(userId);
 
     return this.databaseService.createToken({token, userId});
   }
