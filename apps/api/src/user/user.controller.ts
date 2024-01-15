@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post, Req } from '@nestjs/common';
 
 import { UserService } from './user.service';
-import type { UserCreate } from 'types/user';
+import type { UserCreate } from '../../types/user';
 import { Admin } from '../auth/auth.decorator';
 
 @Admin()

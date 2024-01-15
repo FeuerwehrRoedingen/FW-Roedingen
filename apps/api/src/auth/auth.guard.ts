@@ -5,7 +5,7 @@ import type { Observable } from 'rxjs'
 
 import { PUBLIC_KEY } from './auth.decorator'
 
-import type { Claims } from 'types/user'
+import type { Claims } from '../../types/user'
 
 declare global {
   namespace Express {

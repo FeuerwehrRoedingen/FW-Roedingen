@@ -1,12 +1,16 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
-  "installCommand": "pnpm install --filter fw-roedingen-api",
-  "buildCommand": "turbo run build",
-  "outputDirectory": "dist",
-  "functions": {
-    "dist/main.js": {
-      "runtime": "vercel-node@0.1.1"
+  "builds": [
+    {
+      "src": "src/main.ts",
+      "use": "@vercel/node"
     }
-  }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "src/main.ts"
+    }
+  ]
 }
