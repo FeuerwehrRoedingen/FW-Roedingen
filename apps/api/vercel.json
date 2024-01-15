@@ -1,6 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
+  "installCommand": "pnpm install --filter fw-roedingen-api",
   "builds": [
     {
       "src": "src/main.ts",
@@ -10,7 +11,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/main.js",
+      "dest": "src/main.ts",
       "methods": ["GET", "POST", "PUT", "DELETE"]
     }
   ]
