@@ -10,7 +10,8 @@
     "build": "nest build",
     "dev": "nodemon",
     "start": "node dist/main",
-    "test": "jest"
+    "test": "jest",
+    "kill": "sudo kill -9 $(lsof -t -i:3024)"
   },
   "dependencies": {
     "@highlight-run/nest": "^3.4.2",
@@ -18,7 +19,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/passport": "^10.0.0",
     "@nestjs/platform-express": "^9.0.0",
-    "@prisma/client": "^4.16.2",
+    "@prisma/client": "5.7.0",
     "@t3-oss/env-core": "^0.7.1",
     "dotenv": "^16.3.1",
     "express-http-proxy": "^2.0.0",
