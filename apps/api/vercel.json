@@ -5,8 +5,8 @@
   "buildCommand": "turbo run build",
   "outputDirectory": "dist",
   "functions": {
-    "dist/main.ts": {
-      "runtime": "vercel-node@0.1.1"
+    "dist/main.js": {
+      "runtime": "@vercel/node"
     }
   }
 }
