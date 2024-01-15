@@ -36,9 +36,6 @@ importers:
 
   apps/api:
     dependencies:
-      '@highlight-run/nest':
-        specifier: ^3.4.2
-        version: 3.4.8(@nestjs/core@9.4.3)(rxjs@7.8.1)
       '@nestjs/common':
         specifier: ^9.0.0
         version: 9.4.3(reflect-metadata@0.1.14)(rxjs@7.8.1)
@@ -2886,17 +2883,6 @@ packages:
     transitivePeerDependencies:
       - '@opentelemetry/api'
       - supports-color
-    dev: false
-
-  /@highlight-run/nest@3.4.8(@nestjs/core@9.4.3)(rxjs@7.8.1):
-    resolution: {integrity: sha512-5IkafRPXyZFYq5tT5ijolrY6z0a/9nTJteqOuVR27EeoFdN6o6v8Llis9/2d4cL7aEccwdEEUwVeOf/u0VFTDA==}
-    peerDependencies:
-      '@nestjs/core': '>=8'
-      rxjs: '>=7'
-    dependencies:
-      '@highlight-run/node': 3.7.1
-      '@nestjs/core': 9.4.3(@nestjs/common@9.4.3)(@nestjs/platform-express@9.4.3)(reflect-metadata@0.1.14)(rxjs@7.8.1)
-      rxjs: 7.8.1
     dev: false
 
   /@highlight-run/next@7.3.3(@opentelemetry/api@1.6.0)(next@14.0.1)(react-dom@18.3.0-canary-60a927d04-20240113)(react@18.3.0-canary-60a927d04-20240113):
