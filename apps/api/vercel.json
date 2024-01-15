@@ -6,7 +6,7 @@
   "outputDirectory": "dist",
   "functions": {
     "dist/main.js": {
-      "runtime": "@vercel/node"
+      "runtime": "vercel-node@0.1.1"
     }
   }
 }
