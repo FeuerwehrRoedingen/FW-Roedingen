@@ -37,10 +37,6 @@
       {
         "name": "next"
       }
-    ],
-    "types": [
-      "react/experimental",
-      "react-dom/experimental"
     ]
   },
   "include": [
