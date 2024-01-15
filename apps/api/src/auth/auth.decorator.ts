@@ -1,7 +1,7 @@
 
 import { SetMetadata } from '@nestjs/common'
 
-import type { RoleName } from 'types/user'
+import type { RoleName } from '../../types/user'
 
 export const ROLES_KEY = 'roles'
 export const PUBLIC_KEY = 'public'

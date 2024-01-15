@@ -1,7 +1,7 @@
 import { Injectable, InternalServerErrorException } from '@nestjs/common'
 import { z } from 'zod'
 
-import { callAuth0API } from 'src/auth0_api'
+import { callAuth0API } from '../auth0_api'
 import type { User, UserCreate } from '../../types/user'
 
 const schema = z.custom<UserCreate>();
