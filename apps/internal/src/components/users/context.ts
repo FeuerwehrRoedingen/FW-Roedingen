@@ -2,7 +2,7 @@
 import React from 'react'
 import type { UserProfile } from '@auth0/nextjs-auth0/client'
 
-import { fetchApi } from 'utils/api'
+import { fetchApi } from 'utils/data/api'
 
 type IUSerContext = {
   //state

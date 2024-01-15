@@ -1,5 +1,5 @@
 
-import type { Article } from 'utils/borrow'
+import type { Article } from 'utils/data/borrow'
 import ArticleCard from './articleCard'
 
 type IProps = {

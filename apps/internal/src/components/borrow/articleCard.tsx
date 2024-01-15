@@ -2,7 +2,7 @@
 import React from 'react'
 import { Card, CardBody, CardHeader, CardFooter, Divider, Select, SelectItem, Image } from '@nextui-org/react'
 
-import { Article } from "utils/borrow"
+import { Article } from "utils/data/borrow"
 
 type IProps = {
   article: Article;
