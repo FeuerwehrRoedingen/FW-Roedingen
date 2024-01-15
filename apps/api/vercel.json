@@ -3,17 +3,10 @@
   "version": 2,
   "installCommand": "pnpm install --filter fw-roedingen-api",
   "buildCommand": "turbo run build",
-  "builds": [
-    {
-      "src": "dist/main.js",
-      "use": "@vercel/node"
+  "outputDirectory": "dist",
+  "functions": {
+    "dist/main.ts": {
+      "runtime": "vercel-node@0.1.1"
     }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "dist/main.js",
-      "methods": ["GET", "POST", "PUT", "DELETE"]
-    }
-  ]
+  }
 }
