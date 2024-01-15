@@ -52,7 +52,7 @@
     "concurrently": "^7.4.0",
     "prettier": "latest",
     "rimraf": "^5.0.5",
-    "turbo": "^1.9.3",
+    "turbo": "^1.11.3",
     "turbo-ignore": "latest",
     "typescript": "^5.1.6"
   },
