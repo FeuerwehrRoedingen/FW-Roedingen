@@ -2,35 +2,6 @@
   "name": "fw-roedingen-monorepo",
   "version": "0.0.0",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "apps/api",
-      "apps/door",
-      "apps/internal",
-      "apps/management",
-      "apps/management-api",
-      "apps/web"
-    ],
-    "nohoist": [
-      "**/@prisma/*",
-      "**/@nextui-org/react",
-      "**/@nextui-org/**",
-      "**/expo",
-      "**/@expo/**",
-      "**/next",
-      "**/next/**",
-      "**/react",
-      "**/react/**",
-      "**/react-dom",
-      "**/react-dom/**",
-      "**/@types/react",
-      "**/@types/react/**",
-      "**/@types/react-dom",
-      "**/@types/react-dom/**",
-      "**/react-redux",
-      "**/react-redux/**"
-    ]
-  },
   "scripts": {
     "build:all": "turbo run build",
     "build:api": "turbo run build --filter=fw-roedingen-api",
@@ -45,7 +16,8 @@
     "dev:door": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-door",
     "dev:internal": "turbo run dev --parallel --filter=fw-roedingen-api --filter=fw-roedingen-internal",
     "dev:management": "turbo run dev --parallel --filter=fw-roedingen-management-api --filter=fw-roedingen-management",
-    "dev:web": "turbo run dev --filter=fw-roedingen-web --filter=fw-roedingen-api"
+    "dev:web": "turbo run dev --filter=fw-roedingen-web --filter=fw-roedingen-api",
+    "preinstall": "npx only-allow pnpm"
   },
   "devDependencies": {
     "@sentry/cli": "^2.20.4",

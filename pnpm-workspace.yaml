@@ -1,0 +1,7 @@
+
+packages:
+  - "apps/api"
+  - "apps/internal"
+  - "apps/management"
+  - "apps/management-api"
+  - "apps/web"
