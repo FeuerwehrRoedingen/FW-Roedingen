@@ -1,7 +1,0 @@
-{
-  "dotenv.enableAutocloaking": false,
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "files.associations": {
-    ".env*": "properties"
-  }
-}
