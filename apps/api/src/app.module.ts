@@ -10,6 +10,7 @@ import { JwtAuthGuard } from './auth/auth.guard'
 import { FirebaseModule } from './firebase/firebase.module';
 import { RoleGuard } from './auth/role.guard'
 import { LeitstelleModule } from './leitstelle/leitstelle.module';
+import { QuizModule } from './quiz/quiz.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { LeitstelleModule } from './leitstelle/leitstelle.module';
     UserModule,
     FirebaseModule,
     LeitstelleModule,
+    QuizModule,
   ],
   controllers: [AppController],
   providers: [

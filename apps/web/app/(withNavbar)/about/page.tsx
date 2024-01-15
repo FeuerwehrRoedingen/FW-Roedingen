@@ -1,8 +1,6 @@
-"use client"
-
-import React, { useState } from 'react'
+import React from 'react'
 import { isBrowser } from 'react-device-detect'
-import ReactTooltip from 'react-tooltip'
+import Person from './person'
 
 export default function () {
 
@@ -48,41 +46,5 @@ export default function () {
         <Person dienstgrad='OFM' funktion='IT Admin' name='Thomas Peredery' tooltip='Oberfeuerwehrmann' />
       </table>
     </div>
-  )
-}
-
-type PersonProps = {
-  dienstgrad: string;
-  funktion: string
-  name: string;
-  tooltip: string;
-}
-const Person = (props: PersonProps) => {
-  const [tooltip, showTooltip] = useState(true);
-  const id = React.useId();
-
-  return (
-    <tr className='w-fit my-4'>
-      <td
-        data-tip data-for={id}
-        onMouseLeave={() => {
-          showTooltip(false);
-          setTimeout(() => showTooltip(true), 50);
-        }}
-      >
-        <p className='w-fit pl-4 text-ral-1026 cursor-pointer'>
-          {props.dienstgrad}
-        </p>
-      </td>
-      <td className='w-fit whitespace-nowrap px-1'>
-        {props.name}
-      </td>
-      <td className='w-fit whitespace-nowrap'>
-        {props.funktion}
-      </td>
-      {tooltip && <ReactTooltip id={id} delayHide={1000} effect='solid' place='right'>
-        <span>{props.tooltip}</span>
-      </ReactTooltip>}
-    </tr>
   )
 }

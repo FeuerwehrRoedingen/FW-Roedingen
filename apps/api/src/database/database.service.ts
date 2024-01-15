@@ -28,6 +28,23 @@ export class DatabaseService extends PrismaClient{
       }
     });
   }
+  async getQuestion(level: number){
+    const count = await this.question.count();
+    const skip = Math.floor(Math.random() * count);
+    return this.question.findMany({
+      where: {
+        level: {
+          level: {
+            lte: level
+          }
+        }
+      },
+      include: {
+        level: true
+      },
+      skip
+    });
+  }
 
   //------------------------------------------------
   // Setter

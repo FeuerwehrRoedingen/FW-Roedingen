@@ -1,17 +1,12 @@
 import { NestFactory } from '@nestjs/core'
 import { HighlightInterceptor, HighlightLogger } from '@highlight-run/nest'
 import { exec } from 'child_process'
-import * as proxy from 'express-http-proxy'
 
 import { env } from './env'
 import { AppModule } from './app.module'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
-  app.use('/studio', proxy('localhost:5555', {
-    proxyReqPathResolver: () => '/studio'
-  }))
 
   const gitSha = await getGitSha();
   const highlightConfig = {

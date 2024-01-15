@@ -13,6 +13,7 @@ model User {
   fcmTokens Token[]
   session   Session? @relation(fields: [sessionID], references: [id])
   sessionID Int?
+  quizzes   Quiz[]
 }
 
 model Token {
@@ -29,4 +30,29 @@ model Session {
   handle    String   @unique
   users     User[]   
   host      String
+}
+
+model Question {
+  id       Int       @id @default(autoincrement())
+  question String
+  answer   String
+  points   Int
+  levelId  Int
+  level    QuizLevel @relation(fields: [levelId], references: [id])
+  quizId   Int
+  quiz     Quiz      @relation(fields: [quizId], references: [id])
+}
+
+model QuizLevel {
+  id       Int        @id @default(autoincrement())
+  level    Int        @unique
+  question Question[]
+}
+
+model Quiz {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  userId    Int
+  questions Question[]
+  user      User     @relation(fields: [userId], references: [id])
 }
