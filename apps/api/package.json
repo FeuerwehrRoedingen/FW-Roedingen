@@ -7,10 +7,11 @@
   "license": "MIT",
   "scripts": {
     "build": "nest build",
-    "dev": "kill -9 $(lsof -t -i :3024) && nest start --watch",
+    "dev": "nest start --watch",
     "start": "node dist/main",
     "test": "jest",
-    "kill": "sudo kill -9 $(lsof -t -i:3024)"
+    "kill": "sudo kill -9 $(lsof -t -i:3024)",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@highlight-run/nest": "^3.4.2",
@@ -20,6 +21,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@prisma/client": "5.7.0",
     "@t3-oss/env-core": "^0.7.1",
+    "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "express-http-proxy": "^2.0.0",
     "firebase-admin": "^11.11.0",

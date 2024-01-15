@@ -4,8 +4,9 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider = "mysql"
+  url = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
@@ -14,6 +15,8 @@ model User {
   session   Session? @relation(fields: [sessionID], references: [id])
   sessionID Int?
   quizzes   Quiz[]
+
+  @@index([sessionID])
 }
 
 model Token {
@@ -41,6 +44,9 @@ model Question {
   level    QuizLevel @relation(fields: [levelId], references: [id])
   quizId   Int
   quiz     Quiz      @relation(fields: [quizId], references: [id])
+
+  @@index([levelId])
+  @@index([quizId])
 }
 
 model QuizLevel {
@@ -55,4 +61,6 @@ model Quiz {
   userId    Int
   questions Question[]
   user      User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
