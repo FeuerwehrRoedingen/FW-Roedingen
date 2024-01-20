@@ -17,6 +17,7 @@ export default function () {
       selectUser(user);
       setShowModal(true);
     }
+    
     function handleDelete() {
       //TODO add confirmation modal
 

@@ -30,7 +30,7 @@ export default function(props: IProps) {
         }}
       />
       <html lang="en">
-        <body className={`dark ${inter.className} bg-gray-950 bg-none`}>
+        <body className={`dark ${inter.className} bg-gray-950 bg-none h-screen w-screen`}>
           {props.children}
         </body>
       </html>

@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common'
-import { PrismaClient, Token, User } from '@prisma/client'
+import { PrismaClient, Token, User } from '@prisma/client/edge'
+import { withAccelerate } from '@prisma/extension-accelerate';
 
 @Injectable()
 export class DatabaseService extends PrismaClient{
   constructor() {
     super();
     this.$connect();
+    this.$extends(withAccelerate());
   }
 
   //------------------------------------------------

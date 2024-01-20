@@ -30,6 +30,9 @@ export default function () {
         <DropdownItem href="/admin/logs" textValue="logs">
           <h1 className="text-silver text-lg">Logs</h1>
         </DropdownItem>
+        <DropdownItem href="/admin/borrow" textValue="leihgaben">
+          <h1 className="text-silver text-lg">Leihgaben</h1>
+        </DropdownItem>
       </DropdownMenu>
     </Dropdown>
   )

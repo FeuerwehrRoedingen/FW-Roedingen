@@ -16,7 +16,7 @@ async function Page(props: IProps) {
         <AppsCard />
       </div>
       <div className="w-2/3 h-full pl-2 flex flex-col items-center">
-        <div className="w-full h-fit max-w-[1000px]">
+        <div className="w-full h-full max-w-[1000px]">
           <GroupalarmCard />
         </div>
       </div>

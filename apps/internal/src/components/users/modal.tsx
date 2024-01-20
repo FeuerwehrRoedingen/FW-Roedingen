@@ -1,4 +1,5 @@
 "use client"
+import React from 'react'
 import { Button, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader } from '@nextui-org/react'
 import { useFormState } from 'react-dom'
 
@@ -20,8 +21,12 @@ export default function () {
     setShowModal
   } = useUserContext();
 
-  const title = selectedUser ? 'Benutzer Bearbeiten' : 'Benutzer Hinzufügen';
+  const [name, setName] = React.useState<string>(selectedUser?.name!);
+  const [nickname, setNickname] = React.useState<string>(selectedUser?.nickname!);
+  const [email, setEmail] = React.useState<string>(selectedUser?.email!);
   const [state, handler] = useFormState<FormState, FormData>(selectedUser ? handleUpdate : handleCreate, initalState);
+  
+  const title = selectedUser ? 'Benutzer Bearbeiten' : 'Benutzer Hinzufügen';
 
   if(state.message === 'success') 
     setShowModal(false);
@@ -46,11 +51,10 @@ export default function () {
         <form action={handler}>
           <ModalBody>
             <div className='w-full h-fit flex flex-row gap-4'>
-              <Input size="lg" variant="underlined" isRequired label="Vorname"  type="text" name="given_name" value={selectedUser?.nickname!} />
-              <Input size="lg" variant="underlined" isRequired label="Nachname" type="text" name="family_name" value={selectedUser?.name!} />
+              <Input size="lg" variant="underlined" isRequired label="Vorname"  type="text" name="given_name" value={nickname} onValueChange={setNickname}/>
+              <Input size="lg" variant="underlined" isRequired label="Nachname" type="text" name="family_name" value={name} onValueChange={setName}/>
             </div>
-            <Input size="lg" variant="underlined" isRequired label="E-Mail"   type="email"    name="email" value={selectedUser?.email!} />
-            <Input size="lg" variant="underlined" isRequired label="Telefon"  type="phone"    name="phone_number"/>
+            <Input size="lg" variant="underlined" isRequired label="E-Mail"   type="email"    name="email" value={email} onValueChange={setEmail}/>
             <Input size="lg" variant="underlined" isRequired label="Passwort" type="password" name="password" />
             <Input size="lg" variant="underlined" isRequired label="Passwort wiederholen" type="password" name="password_confirm" />
           </ModalBody>

@@ -6,6 +6,7 @@ generator client {
 datasource db {
   provider = "mysql"
   url = env("DATABASE_URL")
+  directUrl =  env("DIRECT_URL")
   relationMode = "prisma"
 }
 
@@ -15,6 +16,7 @@ model User {
   session   Session? @relation(fields: [sessionID], references: [id])
   sessionID Int?
   quizzes   Quiz[]
+  items     ItemBorrow[]
 
   @@index([sessionID])
 }
@@ -40,9 +42,11 @@ model Question {
   question String
   answer   String
   points   Int
+  
   levelId  Int
-  level    QuizLevel @relation(fields: [levelId], references: [id])
   quizId   Int
+
+  level    QuizLevel @relation(fields: [levelId], references: [id])
   quiz     Quiz      @relation(fields: [quizId], references: [id])
 
   @@index([levelId])
@@ -63,4 +67,39 @@ model Quiz {
   user      User     @relation(fields: [userId], references: [id])
 
   @@index([userId])
+}
+
+model Items {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String
+  image       String
+  amount      Int
+
+  itemBorrow  ItemBorrow[]
+}
+
+model ItemBorrow {
+  id         Int       @id @default(autoincrement())
+  amount     Int
+  returned   Boolean   @default(false)
+  returnedAt DateTime?
+  borrowedAt DateTime
+
+  itemId     Int
+  userId     Int
+  borrowId   Int
+
+  item       Items     @relation(fields: [itemId], references: [id])
+  user       User      @relation(fields: [userId], references: [id])
+  borrow     Borrow    @relation(fields: [borrowId], references: [id])
+
+  @@index([itemId])
+  @@index([userId])
+  @@index([borrowId])
+}
+
+model Borrow {
+  id         Int       @id @default(autoincrement())
+  items      ItemBorrow[]
 }

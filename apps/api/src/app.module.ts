@@ -11,6 +11,7 @@ import { FirebaseModule } from './firebase/firebase.module';
 import { RoleGuard } from './auth/role.guard'
 import { LeitstelleModule } from './leitstelle/leitstelle.module';
 import { QuizModule } from './quiz/quiz.module';
+import { BorrowModule } from './borrow/borrow.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { QuizModule } from './quiz/quiz.module';
     FirebaseModule,
     LeitstelleModule,
     QuizModule,
+    BorrowModule,
   ],
   controllers: [AppController],
   providers: [
