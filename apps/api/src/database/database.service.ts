@@ -16,14 +16,14 @@ export class DatabaseService extends PrismaClient{
   get getAllUsers(){
     return this.user.findMany();
   }
-  async getUser(id: number){
+  async getUser(id: string){
     return this.user.findUnique({
       where: {
         id
       }
     });
   }
-  async getTokens(userId: number){
+  async getTokens(userId: string){
     return this.token.findMany({
       where: {
         userId
@@ -51,7 +51,7 @@ export class DatabaseService extends PrismaClient{
   //------------------------------------------------
   // Setter
   //------------------------------------------------
-  async createUser(uid: number){
+  async createUser(uid: string){
     return this.user.create({
       data: {
         id: uid
@@ -67,7 +67,7 @@ export class DatabaseService extends PrismaClient{
   //------------------------------------------------
   // Deleter
   //------------------------------------------------
-  async deleteUser(id: number){
+  async deleteUser(id: string){
     this.user.delete({
       where: {
         id

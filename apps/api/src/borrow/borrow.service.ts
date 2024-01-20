@@ -9,7 +9,15 @@ export class BorrowService {
   constructor(private readonly databaseService: DatabaseService) {}
 
   getAll() {
-    return this.databaseService.borrow.findMany();
+    return this.databaseService.borrow.findMany({
+      include: {
+        items: {
+          include: {
+            item: true
+          }
+        }
+      }
+    });
   }
   getById(id: string) {
 

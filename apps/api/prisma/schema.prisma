@@ -11,19 +11,19 @@ datasource db {
 }
 
 model User {
-  id        Int      @id //from auth0
+  id        String      @id //from auth0
   fcmTokens Token[]
   session   Session? @relation(fields: [sessionID], references: [id])
   sessionID Int?
   quizzes   Quiz[]
-  items     ItemBorrow[]
+  borrows   Borrow[]
 
   @@index([sessionID])
 }
 
 model Token {
   token  String @id
-  userId Int    @unique
+  userId String    @unique
   user   User   @relation(fields: [userId], references: [id])
 }
 
@@ -62,7 +62,7 @@ model QuizLevel {
 model Quiz {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  userId    Int
+  userId    String
   questions Question[]
   user      User     @relation(fields: [userId], references: [id])
 
@@ -74,7 +74,7 @@ model Items {
   name        String
   description String
   image       String
-  amount      Int
+  quantity    Int
 
   itemBorrow  ItemBorrow[]
 }
@@ -83,23 +83,25 @@ model ItemBorrow {
   id         Int       @id @default(autoincrement())
   amount     Int
   returned   Boolean   @default(false)
-  returnedAt DateTime?
-  borrowedAt DateTime
 
   itemId     Int
-  userId     Int
   borrowId   Int
 
   item       Items     @relation(fields: [itemId], references: [id])
-  user       User      @relation(fields: [userId], references: [id])
   borrow     Borrow    @relation(fields: [borrowId], references: [id])
 
   @@index([itemId])
-  @@index([userId])
   @@index([borrowId])
 }
 
 model Borrow {
-  id         Int       @id @default(autoincrement())
+  id         Int          @id @default(autoincrement()) 
+  returnedAt DateTime?
+  borrowedAt DateTime
+
+  userId     String
+  user       User         @relation(fields: [userId], references: [id])
   items      ItemBorrow[]
+
+  @@index([userId])
 }

@@ -19,7 +19,10 @@ export const env = createEnv({
 
     HIGHLIGHT_PROJECT_ID:  z.string(),
 
+    TEST_USER_ID:          z.string(),
+
     DATABASE_URL:          z.string().url(),
+    DIRECT_URL:            z.string().url(),
     PORT:                  z.string().default("3000"),
   },
   clientPrefix: "PUBLIC_",

@@ -3,6 +3,7 @@ import React from 'react'
 import { Card, CardBody, CardHeader, CardFooter, Divider, Select, SelectItem, Image } from '@nextui-org/react'
 
 import { Article } from "utils/data/borrow"
+import { proxy } from 'utils/handler/handleProxy'
 
 type IProps = {
   article: Article;
@@ -26,7 +27,7 @@ export default function(props: IProps){
       <Divider />
       <CardBody>
         <Image 
-          src={props.article.image}
+          src={proxy(props.article.image)}
           className='mb-2'
         />
         <p>{props.article.description}</p>
