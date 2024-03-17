@@ -1,0 +1,32 @@
+{
+  "name": "fw-roedingen-graphql",
+  "version": "1.0.0",
+  "description": "A simple GraphQL server using Fastify",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "npm run codegen && tsc",
+    "image": "docker build -t fw-roedingen-graphql .",
+    "start": "node dist/index.js",
+    "start:docker": "docker run -d -p 8080:8080 fw-roedingen-graphql",
+    "dev": "./src/index.ts",
+    "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "@apollo/datasource-rest": "^6.2.2",
+    "@apollo/server": "^4.10.1",
+    "@apollo/server-plugin-response-cache": "^4.1.3",
+    "fastify": "^4.26.2",
+    "graphql": "^16.8.1"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/introspection": "^4.0.3",
+    "@graphql-codegen/typescript": "4.0.6",
+    "@graphql-codegen/typescript-resolvers": "4.0.6",
+    "@types/node": "^20.11.25",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  }
+}

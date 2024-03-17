@@ -11,3 +11,13 @@ node_modules
 package-lock.json
 yarn.lock
 .vercel
+
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+pgdata
+
+*-service

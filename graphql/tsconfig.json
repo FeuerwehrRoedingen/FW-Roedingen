@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "lib": [
+            "ES2022",
+        ],
+        "outDir": "dist",
+        "rootDir": "src",
+        "strict": true,
+        "esModuleInterop": true,
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "declaration": true,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "baseUrl": "src",
+        "types": [
+            "node"
+        ]
+    },
+}
