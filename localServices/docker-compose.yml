@@ -2,13 +2,16 @@ version: "3"
 
 services:
   postgres:
-    image: postgres:11
+    image: postgres:16
     ports:
       - 5432:5432
     volumes:
       - ./pgdata:/var/lib/postgresql/data
     environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
       POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: nextcloud
 
   nats-js:
     image: nats:2.10.11
@@ -17,3 +20,21 @@ services:
       - 4222:4222 # client connections
       - 6222:6222 # leaf nodes
       - 8222:8222 # monitoring
+
+  nextcloud:
+    image: nextcloud:26
+    ports:
+      - 8080:80
+    volumes:
+      - ./nextcloud:/var/www/html
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    environment:
+      NEXTCLOUD_ADMIN_USER: admin
+      NEXTCLOUD_ADMIN_PASSWORD: admin
+      POSTGRES_DB: nextcloud
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: postgres

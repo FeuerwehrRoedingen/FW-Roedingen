@@ -18,6 +18,4 @@ yarn.lock
 .env.test
 .env.production
 
-pgdata
-
 *-service
